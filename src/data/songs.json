@@ -2,17 +2,17 @@
   "songs": [
     {
       "id": "song-001",
-      "title": "Fifty Golden Years",
-      "clientName": "The Henderson Family",
-      "description": "A heartfelt anniversary song celebrating 50 years of love",
+      "title": "BulletProof",
+      "clientName": "myself",
+      "description": "A song about the sticks and stone rhyme.",
       "category": "Personal Lyrics",
-      "genre": "Soul",
-      "mood": ["warm", "nostalgic", "celebratory"],
+      "genre": "Cinematic Rap",
+      "mood": ["heavy", "meaningful"],
       "featured": true,
-      "publishedDate": "2024-01-15",
+      "publishedDate": "2026-06-13",
       "audioSource": {
         "type": "mp3",
-        "mp3Url": "",
+        "mp3Url": "https://suno.com/s/dJttZClmBk2Oq9uB",
         "sunoUrl": ""
       },
       "coverImage": null
