@@ -1,0 +1,89 @@
+{
+  "songs": [
+    {
+      "id": "song-001",
+      "title": "Fifty Golden Years",
+      "clientName": "The Henderson Family",
+      "description": "A heartfelt anniversary song celebrating 50 years of love",
+      "category": "Personal Lyrics",
+      "genre": "Soul",
+      "mood": ["warm", "nostalgic", "celebratory"],
+      "featured": true,
+      "publishedDate": "2024-01-15",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
+      "id": "song-002",
+      "title": "Our Forever Begins",
+      "clientName": "Marcus & Danielle Webb",
+      "description": "Custom wedding song for a beautiful ceremony",
+      "category": "Personal Lyrics",
+      "genre": "R&B",
+      "mood": ["romantic", "joyful"],
+      "featured": true,
+      "publishedDate": "2024-02-20",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
+      "id": "song-003",
+      "title": "Rise & Shine Anthem",
+      "clientName": "Apex Marketing Group",
+      "description": "Upbeat corporate theme for their Q2 product launch campaign",
+      "category": "Song Production",
+      "genre": "Upbeat Pop",
+      "mood": ["energetic", "professional", "inspiring"],
+      "featured": true,
+      "publishedDate": "2024-03-10",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
+      "id": "song-004",
+      "title": "Morning Light",
+      "clientName": "Calm Waters Podcast",
+      "description": "Intro and outro theme music for a wellness podcast",
+      "category": "Song Production",
+      "genre": "Ambient",
+      "mood": ["peaceful", "focused"],
+      "featured": false,
+      "publishedDate": "2024-04-05",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
+      "id": "song-005",
+      "title": "Legacy",
+      "clientName": "Riverstone Community Church",
+      "description": "Full EP project — five original worship songs for the congregation",
+      "category": "Comprehensive Services",
+      "genre": "Gospel",
+      "mood": ["uplifting", "powerful", "community"],
+      "featured": false,
+      "publishedDate": "2024-05-18",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    }
+  ]
+}

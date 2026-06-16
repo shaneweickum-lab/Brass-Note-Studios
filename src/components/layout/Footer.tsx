@@ -1,0 +1,90 @@
+import Link from "next/link";
+import { Music2, Instagram, ExternalLink } from "lucide-react";
+import GoldDivider from "@/components/ui/GoldDivider";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/music", label: "Our Work" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Get Your Song" },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-surface border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+          {/* Brand */}
+          <div>
+            <Link href="/" className="flex items-center gap-2.5 group mb-4">
+              <div className="w-9 h-9 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
+                <Music2 className="w-5 h-5 text-background" />
+              </div>
+              <span className="font-display text-lg text-text-base leading-tight">
+                Brass Note<br />
+                <span className="text-gold text-sm">STUDIOS</span>
+              </span>
+            </Link>
+            <p className="text-text-muted text-sm leading-relaxed max-w-xs">
+              Custom songs written and produced for life's meaningful moments, brands, and organizations.
+            </p>
+          </div>
+
+          {/* Nav */}
+          <div>
+            <h4 className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-4">
+              Navigate
+            </h4>
+            <ul className="flex flex-col gap-2">
+              {links.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-text-muted hover:text-gold text-sm transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-4">
+              Connect
+            </h4>
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://suno.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-text-muted hover:text-gold text-sm transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Listen on Suno
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-text-muted hover:text-gold text-sm transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <GoldDivider className="mb-8" />
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-text-subtle text-xs">
+          <p>© {new Date().getFullYear()} Brass Note Studios. All rights reserved.</p>
+          <p>All music written &amp; produced by Brass Note Studios.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}

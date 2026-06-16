@@ -1,0 +1,65 @@
+{
+  "services": [
+    {
+      "id": "personal-lyrics",
+      "name": "Personal Lyrics",
+      "tagline": "Anniversary, Wedding & Memorial Songs",
+      "description": "Life's most meaningful moments deserve a soundtrack. I craft deeply personal songs from your story — the details, memories, and emotions that make your moment unique — then produce them into a professional, ready-to-share recording.",
+      "features": [
+        "Custom lyrics written from your personal story",
+        "Professional AI-powered production via Suno",
+        "Up to 2 revision rounds",
+        "High-quality MP3 & WAV file delivery",
+        "Song added to the Brass Note Studios public portfolio",
+        "Perfect for anniversaries, weddings, birthdays & memorials"
+      ],
+      "priceLabel": "Starting at $149",
+      "turnaround": "5–7 business days",
+      "examples": ["Anniversary tributes", "Wedding ceremony songs", "Memorial songs", "Birthday celebrations", "Graduation songs"],
+      "icon": "Heart",
+      "ctaLabel": "Order a Personal Song",
+      "color": "from-rose-900/20 to-surface"
+    },
+    {
+      "id": "song-production",
+      "name": "Song Production",
+      "tagline": "Theme Songs, Podcasts & Advertising",
+      "description": "Your brand or show needs a sonic identity. I write and produce professional theme songs, jingles, and background music that make your audience remember you. From podcast intros to ad spots, I deliver polished audio that fits your vision.",
+      "features": [
+        "Custom-written lyrics and composition",
+        "Brand-aligned genre and tone",
+        "Short & long versions delivered",
+        "Up to 3 revision rounds",
+        "Commercial usage rights included",
+        "Instrumental version available"
+      ],
+      "priceLabel": "Starting at $299",
+      "turnaround": "7–10 business days",
+      "examples": ["Podcast intro & outro", "YouTube channel themes", "Radio & TV jingles", "App / game music", "Advertising spots"],
+      "icon": "Mic2",
+      "ctaLabel": "Order a Production",
+      "color": "from-amber-900/20 to-surface"
+    },
+    {
+      "id": "comprehensive-services",
+      "name": "Comprehensive Services",
+      "tagline": "Full EPs & Concert Albums",
+      "description": "For organizations, churches, or artists who want a full body of work — I handle the entire creative and production process from concept to delivery. Multiple songs, cohesive themes, and professional output that represents your vision at scale.",
+      "features": [
+        "3–10 original songs per package",
+        "Cohesive album concept and theme",
+        "Full lyric writing and production",
+        "Unlimited revisions per song",
+        "Studio-quality MP3, WAV & stems",
+        "Dedicated project manager communication",
+        "Album art direction guidance"
+      ],
+      "priceLabel": "Custom Quote",
+      "turnaround": "2–6 weeks depending on scope",
+      "examples": ["Church worship EPs", "Corporate event albums", "Artist debut projects", "Non-profit fundraising albums", "School / community projects"],
+      "icon": "Music",
+      "ctaLabel": "Request a Custom Quote",
+      "color": "from-purple-900/20 to-surface"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+import Link from "next/link";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
+
+const highlights = [
+  "Every song written personally — never templated",
+  "Professional-grade production via Suno AI",
+  "Your vision guides every creative decision",
+  "Fast turnaround without sacrificing quality",
+];
+
+export default function AboutSnippet() {
+  return (
+    <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-surface">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Visual side */}
+          <div className="relative order-2 lg:order-1">
+            <div className="aspect-square max-w-md mx-auto rounded-2xl bg-gold-shimmer border border-gold/15 flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="w-20 h-20 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center mx-auto mb-6">
+                  <span className="font-display text-3xl text-gold">BN</span>
+                </div>
+                <p className="font-display text-2xl text-text-base mb-2">
+                  Brass Note Studios
+                </p>
+                <p className="text-gold text-sm italic font-body">
+                  Where Your Story Becomes a Song
+                </p>
+              </div>
+            </div>
+            {/* Decorative corner accent */}
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-gold/30 rounded-br-2xl pointer-events-none" />
+            <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-gold/30 rounded-tl-2xl pointer-events-none" />
+          </div>
+
+          {/* Content side */}
+          <div className="order-1 lg:order-2">
+            <SectionHeading
+              eyebrow="About Brass Note Studios"
+              title="Music Crafted for Your Moment"
+              subtitle="I'm a songwriter and producer who believes every story deserves its own soundtrack. From the first conversation to the final note, I'm with you every step of the way."
+              className="mb-8"
+            />
+
+            <ul className="flex flex-col gap-3 mb-8">
+              {highlights.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-gold mt-0.5 shrink-0" />
+                  <span className="text-text-muted font-body text-sm leading-relaxed">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/about"
+              className="flex items-center gap-2 text-gold hover:text-gold-light font-body font-medium text-sm transition-colors group"
+            >
+              Read our full story{" "}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

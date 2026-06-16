@@ -1,0 +1,32 @@
+{
+  "testimonials": [
+    {
+      "id": "t-001",
+      "quote": "I gave him a handful of memories and he turned them into a song that brought our whole family to tears at the reception. It was the most meaningful gift of our anniversary.",
+      "clientName": "Patricia H.",
+      "clientTitle": "50th Anniversary Commission",
+      "rating": 5
+    },
+    {
+      "id": "t-002",
+      "quote": "Our podcast needed something that captured the energy of our brand and he nailed it on the first draft. We get compliments on our theme song every single episode.",
+      "clientName": "James & Tara K.",
+      "clientTitle": "Podcast Theme Commission",
+      "rating": 5
+    },
+    {
+      "id": "t-003",
+      "quote": "We needed five original worship songs for our congregation and Brass Note Studios delivered something truly special. The music feels both fresh and deeply rooted.",
+      "clientName": "Pastor David M.",
+      "clientTitle": "Church EP Commission",
+      "rating": 5
+    },
+    {
+      "id": "t-004",
+      "quote": "Fast, professional, and genuinely talented. The song he wrote for my daughter's wedding made the whole ceremony unforgettable. Exactly what we were hoping for.",
+      "clientName": "Sandra R.",
+      "clientTitle": "Wedding Song Commission",
+      "rating": 5
+    }
+  ]
+}
