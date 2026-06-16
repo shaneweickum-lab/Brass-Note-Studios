@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Music2, Sparkles, Heart, Users } from "lucide-react";
+import { Music2, Sparkles, Heart, Users, Award, Disc3 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
 
@@ -76,12 +76,17 @@ export default function AboutPage() {
                 <p className="text-gold text-sm italic font-body text-center">
                   Custom Songwriting &amp; Production
                 </p>
-                <div className="mt-8 pt-8 border-t border-white/5 w-full text-center">
-                  <p className="text-text-muted text-xs font-body leading-relaxed">
-                    &ldquo;Music is the shorthand of emotion.&rdquo;
-                    <br />
-                    <span className="text-text-subtle">— Leo Tolstoy</span>
-                  </p>
+                <div className="mt-8 pt-8 border-t border-white/5 w-full grid grid-cols-2 gap-4">
+                  <div className="flex flex-col items-center gap-1.5">
+                    <Award className="w-5 h-5 text-gold" />
+                    <span className="font-display text-2xl text-gold">30+</span>
+                    <span className="text-text-muted text-xs font-body text-center">Years as a Musician &amp; Songwriter</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1.5">
+                    <Disc3 className="w-5 h-5 text-gold" />
+                    <span className="font-display text-2xl text-gold">2</span>
+                    <span className="text-text-muted text-xs font-body text-center">Albums on Spotify</span>
+                  </div>
                 </div>
               </div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-gold/20 rounded-br-2xl pointer-events-none" />
@@ -94,24 +99,30 @@ export default function AboutPage() {
               </h2>
               <div className="flex flex-col gap-4 text-text-muted font-body leading-relaxed">
                 <p>
-                  Brass Note Studios was founded with a simple but powerful
-                  purpose: to give everyone access to custom, professional-quality
-                  music that tells their story. For too long, original
-                  commissioned music was something only the privileged few could
-                  afford — reserved for Hollywood productions and major label
-                  artists.
+                  I&apos;ve been writing and performing music for over 30 years.
+                  That experience — spanning decades of crafting songs, studying
+                  what makes a lyric land, and understanding how music moves
+                  people — is the foundation everything at Brass Note Studios is
+                  built on.
                 </p>
                 <p>
-                  That changed with AI-powered music production. Using Suno — one
-                  of the most advanced music generation platforms available — I can
-                  now produce studio-quality recordings that once required tens of
-                  thousands of dollars and weeks of studio time. But the AI is
-                  just the instrument. The heart of every song is still the
-                  writing — the craft of turning your memories, emotions, and
-                  moments into lyrics that land.
+                  I&apos;ve released two studio-quality albums on Spotify featuring
+                  my original songs, produced using Suno AI. Those albums are a
+                  testament to what&apos;s possible when genuine songwriting craft meets
+                  modern production technology — professional sound, personal
+                  stories, and music that holds up alongside anything on the
+                  platform.
                 </p>
                 <p>
-                  Every song in our portfolio was written personally — not
+                  Brass Note Studios was born from that same combination. I
+                  founded it to give everyone access to custom, professional-quality
+                  music that tells their story — because original commissioned
+                  music shouldn&apos;t be reserved for Hollywood productions and major
+                  label budgets. With Suno handling the production side, I can
+                  focus entirely on what I do best: the writing.
+                </p>
+                <p>
+                  Every song in this portfolio was written personally — not
                   generated, not templated. I write the lyrics, shape the
                   narrative, and produce the final track. The result is music
                   that feels human because it is.
