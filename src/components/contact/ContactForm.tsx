@@ -13,9 +13,10 @@ type FormData = {
 
 const SERVICE_OPTIONS = [
   { value: "", label: "Select a service..." },
-  { value: "Personal Lyrics", label: "Personal Lyrics — Anniversary, Wedding & Memorial" },
-  { value: "Song Production", label: "Song Production — Theme Songs, Podcasts & Ads" },
-  { value: "Comprehensive Services", label: "Comprehensive Services — Full EPs & Albums" },
+  { value: "Individual Commissions", label: "Individual — Birthdays, Anniversaries, Weddings & More (from $149)" },
+  { value: "Organization Commissions", label: "Organization — Churches, Nonprofits, Schools & Businesses (from $199)" },
+  { value: "Content Creator Commissions", label: "Content Creator — Tracks, Podcast Themes & Social Music (from $75)" },
+  { value: "Subscription", label: "Subscription Plan — Ongoing music with priority scheduling" },
   { value: "Other", label: "Not sure / Other" },
 ];
 

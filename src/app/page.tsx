@@ -7,9 +7,8 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import GoldDivider from "@/components/ui/GoldDivider";
 import Link from "next/link";
 import songsData from "@/data/songs.json";
-import servicesData from "@/data/services.json";
 import testimonialsData from "@/data/testimonials.json";
-import type { Song, ServiceFeature, Testimonial } from "@/types";
+import type { Song, Testimonial } from "@/types";
 
 export const metadata: Metadata = {
   title: "Brass Note Studios — Custom Songwriting & Production",
@@ -19,13 +18,12 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const featuredSongs = (songsData.songs as Song[]).filter((s) => s.featured);
-  const services = servicesData.services as ServiceFeature[];
   const testimonials = testimonialsData.testimonials as Testimonial[];
 
   return (
     <>
       <HeroSection />
-      <ServiceCards services={services} />
+      <ServiceCards />
       <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
       <FeaturedMusic songs={featuredSongs} />
       <AboutSnippet />

@@ -1,65 +1,101 @@
 {
-  "services": [
+  "categories": [
     {
-      "id": "personal-lyrics",
-      "name": "Personal Lyrics",
-      "tagline": "Anniversary, Wedding & Memorial Songs",
-      "description": "Life's most meaningful moments deserve a soundtrack. I craft deeply personal songs from your story — the details, memories, and emotions that make your moment unique — then produce them into a professional, ready-to-share recording.",
-      "features": [
-        "Custom lyrics written from your personal story",
-        "Professional AI-powered production via Suno",
-        "Up to 2 revision rounds",
-        "High-quality MP3 & WAV file delivery",
-        "Song added to the Brass Note Studios public portfolio",
-        "Perfect for anniversaries, weddings, birthdays & memorials"
-      ],
-      "priceLabel": "Starting at $149",
-      "turnaround": "5–7 business days",
-      "examples": ["Anniversary tributes", "Wedding ceremony songs", "Memorial songs", "Birthday celebrations", "Graduation songs"],
+      "id": "individual",
+      "name": "Individual Commissions",
+      "tagline": "For Life's Most Meaningful Moments",
+      "description": "Perfect for birthdays, anniversaries, weddings, memorials, proposals, or any occasion worth remembering. Every song is written and produced specifically for you — no templates, no stock music.",
       "icon": "Heart",
-      "ctaLabel": "Order a Personal Song",
-      "color": "from-rose-900/20 to-surface"
+      "delivery": "Delivery within 7–10 business days.",
+      "included": "All individual songs include: custom lyrics, full production, and one revision round.",
+      "packages": [
+        { "name": "First Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion" },
+        { "name": "Subsequent Songs", "price": "$99", "description": "Returning client rate — same craft, loyalty rewarded" },
+        { "name": "EP (3–4 songs)", "price": "$299", "description": "A small collection — perfect for a gift series or personal project" },
+        { "name": "LP (5–7 songs)", "price": "$499", "description": "A deeper collection with thematic continuity" },
+        { "name": "Full Album (8+ songs)", "price": "$799", "description": "A complete album — your story told in full" }
+      ]
     },
     {
-      "id": "song-production",
-      "name": "Song Production",
-      "tagline": "Theme Songs, Podcasts & Advertising",
-      "description": "Your brand or show needs a sonic identity. I write and produce professional theme songs, jingles, and background music that make your audience remember you. From podcast intros to ad spots, I deliver polished audio that fits your vision.",
-      "features": [
-        "Custom-written lyrics and composition",
-        "Brand-aligned genre and tone",
-        "Short & long versions delivered",
-        "Up to 3 revision rounds",
-        "Commercial usage rights included",
-        "Instrumental version available"
-      ],
-      "priceLabel": "Starting at $299",
-      "turnaround": "7–10 business days",
-      "examples": ["Podcast intro & outro", "YouTube channel themes", "Radio & TV jingles", "App / game music", "Advertising spots"],
+      "id": "organization",
+      "name": "Organization Commissions",
+      "tagline": "For Churches, Nonprofits, Schools & Businesses",
+      "description": "We build original music around your mission, your community, and your identity. Your anthem. Your sound. Completely unique to you.",
+      "icon": "Users",
+      "delivery": "Delivery within 10–14 business days.",
+      "included": "Organization packages include a consultation call to understand your mission, values, and intended use.",
+      "packages": [
+        { "name": "Single Anthem / Song", "price": "$199", "description": "One custom song built around your mission, values, or event" },
+        { "name": "EP (3–4 songs)", "price": "$449", "description": "Multiple anthems — great for campaigns, events, or seasonal use" },
+        { "name": "LP (5–7 songs)", "price": "$649", "description": "A full musical identity package for your organization" },
+        { "name": "Full Album (8+ songs)", "price": "$899", "description": "Complete original music library — own your sound entirely" }
+      ]
+    },
+    {
+      "id": "creator",
+      "name": "Content Creator Commissions",
+      "tagline": "For YouTubers, Podcasters, Streamers & Social Creators",
+      "description": "Original music regularly, at creator-friendly rates. Two options: music-only tracks built to your vibe, or your existing words and poems set to a full production.",
       "icon": "Mic2",
-      "ctaLabel": "Order a Production",
-      "color": "from-amber-900/20 to-surface"
-    },
-    {
-      "id": "comprehensive-services",
-      "name": "Comprehensive Services",
-      "tagline": "Full EPs & Concert Albums",
-      "description": "For organizations, churches, or artists who want a full body of work — I handle the entire creative and production process from concept to delivery. Multiple songs, cohesive themes, and professional output that represents your vision at scale.",
-      "features": [
-        "3–10 original songs per package",
-        "Cohesive album concept and theme",
-        "Full lyric writing and production",
-        "Unlimited revisions per song",
-        "Studio-quality MP3, WAV & stems",
-        "Dedicated project manager communication",
-        "Album art direction guidance"
-      ],
-      "priceLabel": "Custom Quote",
-      "turnaround": "2–6 weeks depending on scope",
-      "examples": ["Church worship EPs", "Corporate event albums", "Artist debut projects", "Non-profit fundraising albums", "School / community projects"],
-      "icon": "Music",
-      "ctaLabel": "Request a Custom Quote",
-      "color": "from-purple-900/20 to-surface"
+      "delivery": "Delivery within 5–7 business days.",
+      "included": "Creator tracks are music-only unless you supply lyrics or a poem. Usage rights included for all platforms.",
+      "packages": [
+        { "name": "Single Track (music only)", "price": "$75", "description": "50% off individual rate — original music, no lyrics" },
+        { "name": "Your Words Set to Music", "price": "$75", "description": "Bring your poem or lyrics — we produce the track around them" },
+        { "name": "EP (3–4 tracks)", "price": "$150", "description": "50% off EP rate — consistent sonic identity for your brand" },
+        { "name": "LP (5–7 tracks)", "price": "$250", "description": "50% off LP rate — full original music library" },
+        { "name": "Full Album (8+ tracks)", "price": "$400", "description": "50% off album rate — own your entire sound catalog" }
+      ]
     }
+  ],
+  "subscriptions": {
+    "description": "For clients who need music consistently — content creators, organizations running campaigns, or individuals building a personal catalog. Subscriptions offer the best per-song value, priority scheduling, and a dedicated creative relationship over time.",
+    "perks": [
+      "Best per-song value across all tiers",
+      "Priority scheduling — your projects never go to the back of the queue",
+      "Consistent creative relationship — the longer we work together, the better I understand your sound",
+      "Annual plans save two months versus monthly pricing",
+      "Unused songs in a month roll over once — no waste"
+    ],
+    "note": "Subscriptions begin on the date of first payment. Annual plans are billed upfront. Cancel anytime with 30 days notice.",
+    "tiers": [
+      {
+        "name": "Studio Bronze",
+        "monthly": "$99/mo",
+        "annual": "$990/yr",
+        "included": "3 custom songs per month · Priority turnaround · Revision included on each"
+      },
+      {
+        "name": "Studio Silver",
+        "monthly": "$199/mo",
+        "annual": "$1,990/yr",
+        "included": "4 custom songs per month · 48hr turnaround · 2 revisions each · Stems available"
+      },
+      {
+        "name": "Studio Gold",
+        "monthly": "$349/mo",
+        "annual": "$3,490/yr",
+        "included": "6 custom songs per month · 24hr turnaround · Unlimited revisions · Stems · Priority access"
+      },
+      {
+        "name": "Creator Monthly",
+        "monthly": "$79/mo",
+        "annual": "$790/yr",
+        "included": "6 instrumental tracks per month · Music-only · Perfect for YouTube / podcast / social"
+      },
+      {
+        "name": "Org Retainer",
+        "monthly": "$299/mo",
+        "annual": "$2,990/yr",
+        "included": "4 org songs per month · Dedicated consultation · Unlimited minor revisions · First priority scheduling"
+      }
+    ]
+  },
+  "addons": [
+    { "name": "Additional revision round", "price": "$25", "notes": "Per song, per round" },
+    { "name": "Stems / separated tracks", "price": "$49", "notes": "Vocal, instrumental, individual instruments" },
+    { "name": "Rush delivery (48–72 hrs)", "price": "$75", "notes": "Subject to availability" },
+    { "name": "Extended commercial licensing", "price": "$99", "notes": "Broadcast, film, sync licensing" },
+    { "name": "Lyric video (basic)", "price": "$79", "notes": "Lyrics on screen, branded visuals" }
   ]
 }

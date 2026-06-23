@@ -19,18 +19,21 @@ export interface Song {
   coverImage?: string | null;
 }
 
-export interface ServiceFeature {
+export interface ServicePackage {
+  name: string;
+  price: string;
+  description: string;
+}
+
+export interface ServiceCategory {
   id: string;
   name: string;
   tagline: string;
   description: string;
-  features: string[];
-  priceLabel: string;
-  turnaround: string;
-  examples: string[];
   icon: string;
-  ctaLabel: string;
-  color: string;
+  delivery: string;
+  included: string;
+  packages: ServicePackage[];
 }
 
 export interface Testimonial {
