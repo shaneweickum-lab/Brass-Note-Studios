@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import FloatingParticles from "@/components/ui/FloatingParticles";
-import HeroPingPongVideo from "./HeroPingPongVideo";
 
 // ─── Hero media paths ─────────────────────────────────────────────────────────
 const HERO_VIDEO = "/videos/hero-desktop.mp4";   // desktop looping video
@@ -22,8 +21,16 @@ export default function HeroSection() {
         style={{ objectFit: "cover", objectPosition: "center" }}
       />
 
-      {/* Desktop background — ping-pong video, hidden below md */}
-      <HeroPingPongVideo src={HERO_VIDEO} />
+      {/* Desktop background — looping video, hidden below md */}
+      <video
+        className="hidden md:block absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src={HERO_VIDEO} type="video/mp4" />
+      </video>
 
       {/* Dark overlay so text stays legible */}
       <div className="absolute inset-0 bg-background/60" />
