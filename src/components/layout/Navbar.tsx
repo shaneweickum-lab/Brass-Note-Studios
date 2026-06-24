@@ -33,11 +33,11 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           >
             <Image
-              src="/images/F653DA96-B717-4760-8118-1685D920ED5A.png"
+              src="/images/DBFDD7E0-A0B2-48AC-AB90-A49D689D4644.png"
               alt="Brass Note Studios"
-              width={360}
+              width={400}
               height={80}
-              className="h-14 md:h-[76px] w-auto"
+              className="h-[60px] md:h-[76px] w-auto"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />
