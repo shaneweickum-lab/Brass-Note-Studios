@@ -1,18 +1,51 @@
 import Link from "next/link";
+import Image from "next/image";
 import FloatingParticles from "@/components/ui/FloatingParticles";
+
+// ─── Set this to your image path to enable the hero background ───────────────
+// Drop your photo into public/images/ then set the path here, e.g.:
+//   const HERO_IMAGE = "/images/hero-bg.jpg"
+// Leave empty to use the default gradient background.
+const HERO_IMAGE = "";
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-navy-gradient" />
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 70%)",
-        }}
-      />
+      {/* Background — photo when set, gradient fallback when empty */}
+      {HERO_IMAGE ? (
+        <>
+          <Image
+            src={HERO_IMAGE}
+            alt="Brass Note Studios hero background"
+            fill
+            priority
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+          {/* Dark overlay so text stays legible over the photo */}
+          <div className="absolute inset-0 bg-background/60" />
+          {/* Warm brass glow on top of photo */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,168,67,0.18) 0%, transparent 70%)",
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <div className="absolute inset-0 bg-navy-gradient" />
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 70%)",
+            }}
+          />
+        </>
+      )}
+
       {/* Decorative rings */}
       <div className="absolute top-20 right-10 w-96 h-96 rounded-full border border-gold/5 pointer-events-none" />
       <div className="absolute top-32 right-24 w-64 h-64 rounded-full border border-gold/8 pointer-events-none" />
