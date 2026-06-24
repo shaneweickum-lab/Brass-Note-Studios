@@ -405,20 +405,29 @@ export default function MethodPageClient() {
             Inside Brass Syntax Academy, you'll learn the specific parameters for all ten layers and why the order is not interchangeable. You'll get the complete eight-symbol lyrical syntax reference with full behavioral descriptions, musical equivalents, and combination usage. You'll learn the phonetic instrument description library — the exact vocal language that bypasses training associations for every major instrument category. You'll walk through all three case studies prompt by prompt, decision by decision. And you'll learn how to apply the method from scratch — even if you've never written a song, never used Suno, and don't have a technical background.
           </p>
           <p className="text-text-base font-body font-medium leading-relaxed mb-10">
-            Two paths. Your pace. Every topic has a surface level and a deep dive — you choose how far you go on each one.
+            Three paths. Your pace. Every topic has a surface level and a deep dive — you choose how far you go on each one.
           </p>
 
-          {/* Two path cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-            {[
-              { title: "Songwriting Track", desc: "Lyric structure, narrative arc, chord-emotion mapping, and the prompt language that captures all of it." },
-              { title: "Production Track", desc: "Sound architecture, tension engineering, neural bypass technique, and the complete symbol reference." },
-            ].map((path) => (
-              <div key={path.title} className="bg-surface border border-white/8 rounded-lg p-6">
-                <h4 className="font-display text-lg text-text-base mb-2">{path.title}</h4>
-                <p className="text-text-muted font-body text-sm leading-relaxed">{path.desc}</p>
+          {/* Path cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div className="bg-surface border border-white/8 rounded-lg p-6">
+              <h4 className="font-display text-lg text-text-base mb-2">Songwriting Track</h4>
+              <p className="text-text-muted font-body text-sm leading-relaxed">Lyric structure, narrative arc, chord-emotion mapping, and the prompt language that captures all of it.</p>
+            </div>
+            <div className="bg-surface border border-white/8 rounded-lg p-6">
+              <h4 className="font-display text-lg text-text-base mb-2">Production Track</h4>
+              <p className="text-text-muted font-body text-sm leading-relaxed">Sound architecture, tension engineering, neural bypass technique, and the complete symbol reference.</p>
+            </div>
+          </div>
+          <div className="mb-10">
+            <div className="bg-surface border border-gold/25 rounded-lg p-6 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gold-gradient" />
+              <div className="flex items-start justify-between gap-4 mb-2">
+                <h4 className="font-display text-lg text-text-base">Full Method Track</h4>
+                <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold shrink-0 mt-1">Both Paths</span>
               </div>
-            ))}
+              <p className="text-text-muted font-body text-sm leading-relaxed">Everything in the Songwriting Track and the Production Track — taken together as one complete path through the Brass Note Method. The full picture, from first lyric to final output.</p>
+            </div>
           </div>
 
           {/* Waitlist */}
