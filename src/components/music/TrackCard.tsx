@@ -16,6 +16,7 @@ export default function TrackCard({ song, allSongs }: TrackCardProps) {
   const isCurrentSong = currentSongId === song.id;
   const isPlaying =
     isCurrentSong && (playerState === "playing" || playerState === "loading");
+  const hasError = isCurrentSong && playerState === "error";
   const hasAudio = Boolean(song.audioSource.mp3Url);
   const hasSunoLink = Boolean(song.audioSource.sunoUrl);
 
@@ -89,7 +90,7 @@ export default function TrackCard({ song, allSongs }: TrackCardProps) {
 
       {/* Controls */}
       <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
-        {hasAudio ? (
+        {hasAudio && !hasError ? (
           <button
             onClick={handleToggle}
             className={cn(
