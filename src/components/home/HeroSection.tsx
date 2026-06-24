@@ -46,11 +46,6 @@ export default function HeroSection() {
         </>
       )}
 
-      {/* Decorative rings */}
-      <div className="absolute top-20 right-10 w-96 h-96 rounded-full border border-gold/5 pointer-events-none" />
-      <div className="absolute top-32 right-24 w-64 h-64 rounded-full border border-gold/8 pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full border border-gold/5 pointer-events-none" />
-
       {/* Floating particles */}
       <FloatingParticles />
 
