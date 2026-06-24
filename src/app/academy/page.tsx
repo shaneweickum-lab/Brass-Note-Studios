@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import GoldDivider from "@/components/ui/GoldDivider";
+import SamCartModal, { SAMCART_URLS } from "@/components/ui/SamCartModal";
 import { Music2, Mic2, BookOpen, Award, Zap } from "lucide-react";
 
 /* ─── Data ───────────────────────────────────────────────── */
@@ -112,10 +113,38 @@ function WaitlistForm() {
   );
 }
 
+// Modal config per track
+const MODAL_CONFIGS = {
+  shore: { title: "The Shore", subtitle: "Foundations Track — Enroll or Join Waitlist", key: "shore" },
+  weeds: { title: "In The Weeds", subtitle: "Advanced Track — Enroll or Join Waitlist", key: "weeds" },
+  swamp: { title: "Wading in the Swamp", subtitle: "Elite Track — Enroll or Join Waitlist", key: "swamp" },
+  email: { title: "Join the Waitlist", subtitle: "Early access & founding-member pricing", key: "emailCapture" },
+} as const;
+
+type ModalKey = keyof typeof MODAL_CONFIGS;
+
 /* ─── Page ───────────────────────────────────────────────── */
 export default function AcademyPage() {
+  const [activeModal, setActiveModal] = useState<ModalKey | null>(null);
+
+  const openModal = useCallback((key: ModalKey) => setActiveModal(key), []);
+  const closeModal = useCallback(() => setActiveModal(null), []);
+
+  const activeConfig = activeModal ? MODAL_CONFIGS[activeModal] : null;
+
   return (
     <>
+      {/* SamCart Modals */}
+      {activeConfig && (
+        <SamCartModal
+          isOpen={!!activeModal}
+          onClose={closeModal}
+          title={activeConfig.title}
+          subtitle={activeConfig.subtitle}
+          checkoutUrl={SAMCART_URLS[activeConfig.key]}
+        />
+      )}
+
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <Image
@@ -154,12 +183,12 @@ export default function AcademyPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="#waitlist"
+            <button
+              onClick={() => openModal("email")}
               className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-8 py-4 text-lg transition-colors duration-200 w-full sm:w-auto"
             >
               Join the Waitlist
-            </a>
+            </button>
             <Link
               href="/method"
               className="inline-flex items-center justify-center font-body font-semibold tracking-wide border border-gold text-gold hover:bg-gold/10 rounded-sm px-8 py-4 text-lg transition-colors duration-200 w-full sm:w-auto"
@@ -218,13 +247,12 @@ export default function AcademyPage() {
                 </div>
               </dl>
 
-              {/* CTA — replace href with SamCart product URL when live */}
-              <a
-                href="#waitlist"
+              <button
+                onClick={() => openModal("shore")}
                 className="mt-8 inline-flex items-center justify-center w-full font-body font-semibold tracking-wide border border-gold text-gold hover:bg-gold hover:text-background rounded-sm px-6 py-3 text-sm transition-all duration-200"
               >
                 Join The Shore Waitlist
-              </a>
+              </button>
             </div>
 
             {/* ── Card 2: In The Weeds ──────────────────── */}
@@ -259,13 +287,12 @@ export default function AcademyPage() {
                 </div>
               </dl>
 
-              {/* CTA — replace href with SamCart product URL when live */}
-              <a
-                href="#waitlist"
+              <button
+                onClick={() => openModal("weeds")}
                 className="mt-8 inline-flex items-center justify-center w-full font-body font-semibold tracking-wide border border-teal text-teal hover:bg-teal hover:text-background rounded-sm px-6 py-3 text-sm transition-all duration-200"
               >
                 Join The Weeds Waitlist
-              </a>
+              </button>
             </div>
 
             {/* ── Card 3: Wading in the Swamp — dual gradient border ── */}
@@ -311,14 +338,13 @@ export default function AcademyPage() {
                   </div>
                 </dl>
 
-                {/* CTA — replace href with SamCart product URL when live */}
-                <a
-                  href="#waitlist"
+                <button
+                  onClick={() => openModal("swamp")}
                   className="mt-8 inline-flex items-center justify-center w-full font-body font-semibold tracking-wide rounded-sm px-6 py-3 text-sm text-background transition-all duration-200 hover:opacity-90"
                   style={{ background: "linear-gradient(135deg, #D4A843 0%, #0D9488 100%)" }}
                 >
                   Join The Swamp Waitlist
-                </a>
+                </button>
               </div>
             </div>
 
@@ -468,8 +494,8 @@ export default function AcademyPage() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="#waitlist"
+                <button
+                  onClick={() => openModal("email")}
                   className={`inline-flex items-center justify-center font-body font-semibold tracking-wide rounded-sm px-6 py-3 text-sm transition-colors duration-200 ${
                     tier.accent
                       ? "bg-gold text-background hover:bg-gold-light"
@@ -477,7 +503,7 @@ export default function AcademyPage() {
                   }`}
                 >
                   Join Waitlist
-                </a>
+                </button>
               </div>
             ))}
           </div>
