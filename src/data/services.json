@@ -92,7 +92,10 @@
   "addons": [
     { "name": "Additional revision round", "price": "$25", "notes": "Per song, per round" },
     { "name": "Stems / separated tracks", "price": "$49", "notes": "Vocal, instrumental, individual instruments" },
-    { "name": "Rush delivery (48–72 hrs)", "price": "$75", "notes": "Subject to availability" },
+    { "name": "Expedited Delivery — Single", "price": "$75", "notes": "Cuts to 5–7 days · Subject to availability" },
+    { "name": "Expedited Delivery — EP", "price": "$150", "notes": "Cuts to 7–10 days · Subject to availability" },
+    { "name": "Expedited Delivery — LP", "price": "$250", "notes": "Cuts to 2–3 weeks · Subject to availability" },
+    { "name": "Expedited Delivery — Full Album", "price": "$400", "notes": "Cuts to ~6 weeks · Subject to availability" },
     { "name": "Extended commercial licensing", "price": "$99", "notes": "Broadcast, film, sync licensing" },
     { "name": "Lyric video (basic)", "price": "$79", "notes": "Lyrics on screen, branded visuals" }
   ]
