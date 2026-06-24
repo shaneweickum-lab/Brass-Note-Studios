@@ -35,9 +35,9 @@ export default function Navbar() {
             <Image
               src="/images/F653DA96-B717-4760-8118-1685D920ED5A.png"
               alt="Brass Note Studios"
-              width={180}
-              height={52}
-              className="h-11 w-auto"
+              width={360}
+              height={80}
+              className="h-12 md:h-[72px] w-auto"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />
