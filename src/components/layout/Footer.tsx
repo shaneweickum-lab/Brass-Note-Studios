@@ -3,11 +3,18 @@ import { Music2, Instagram, ExternalLink } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Pricing" },
   { href: "/music", label: "Our Work" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Get Your Song" },
+  { href: "/method", label: "The Method" },
+  { href: "/academy", label: "Academy" },
+  { href: "/contact", label: "Commission a Song" },
+];
+
+const brands = [
+  { href: "/", label: "Brass Note Studios" },
+  { href: "/method", label: "The Brass Note Method" },
+  { href: "/academy", label: "Brass Syntax Academy" },
 ];
 
 export default function Footer() {
@@ -50,7 +57,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Connect */}
           <div>
             <h4 className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-4">
               Connect
@@ -78,7 +85,21 @@ export default function Footer() {
           </div>
         </div>
 
-        <GoldDivider className="mb-8" />
+        <GoldDivider className="mb-6" />
+
+        {/* Brand ecosystem */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-6">
+          {brands.map(({ href, label }, i) => (
+            <span key={href} className="flex items-center gap-6">
+              <Link href={href} className="text-text-subtle hover:text-gold text-xs font-body transition-colors">
+                {label}
+              </Link>
+              {i < brands.length - 1 && (
+                <span className="text-gold/30 text-xs">·</span>
+              )}
+            </span>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-text-subtle text-xs">
           <p>© {new Date().getFullYear()} Brass Note Studios. All rights reserved.</p>

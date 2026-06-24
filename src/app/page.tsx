@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
+import StatsStrip from "@/components/home/StatsStrip";
 import ServiceCards from "@/components/home/ServiceCards";
 import FeaturedMusic from "@/components/home/FeaturedMusic";
 import AboutSnippet from "@/components/home/AboutSnippet";
@@ -23,6 +24,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <StatsStrip />
       <ServiceCards />
       <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
       <FeaturedMusic songs={featuredSongs} />

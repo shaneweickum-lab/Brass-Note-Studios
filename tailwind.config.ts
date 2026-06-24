@@ -9,34 +9,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0D0A0B",
-        surface: "#1A1114",
-        "surface-elevated": "#251820",
+        background: "#0D1B2A",
+        surface: "#142030",
+        "surface-elevated": "#112233",
         gold: {
-          DEFAULT: "#C9921A",
-          light: "#E8B84B",
-          dark: "#9E6E10",
+          DEFAULT: "#C9A84C",
+          light: "#E8C46A",
+          dark: "#9E7830",
           muted: "#8B6914",
         },
+        teal: "#1A6B8A",
+        amber: "#FF9A3C",
         "text-base": "#F5F0E8",
-        "text-muted": "#8B7D6B",
-        "text-subtle": "#5C4F45",
+        "text-muted": "#8A9BB0",
+        "text-subtle": "#556070",
       },
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],
         body: ["var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["Courier New", "Courier", "monospace"],
       },
       backgroundImage: {
         "gold-gradient":
-          "linear-gradient(135deg, #C9921A 0%, #E8B84B 50%, #C9921A 100%)",
-        "dark-gradient": "linear-gradient(180deg, #0D0A0B 0%, #1A1114 100%)",
+          "linear-gradient(135deg, #C9A84C 0%, #E8C46A 50%, #C9A84C 100%)",
+        "dark-gradient": "linear-gradient(180deg, #0D1B2A 0%, #142030 100%)",
+        "navy-gradient": "linear-gradient(180deg, #0D1B2A 0%, #112233 100%)",
         "gold-shimmer":
-          "linear-gradient(135deg, #1A1114 0%, #251820 40%, #2A1D20 60%, #1A1114 100%)",
+          "linear-gradient(135deg, #142030 0%, #1a2d45 40%, #142030 100%)",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out",
         "slide-up": "slideUp 0.5s ease-out",
         "pulse-gold": "pulseGold 2s ease-in-out infinite",
+        "float-particle": "floatParticle linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -48,8 +53,14 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         pulseGold: {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(201, 146, 26, 0)" },
-          "50%": { boxShadow: "0 0 0 8px rgba(201, 146, 26, 0.1)" },
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(201, 168, 76, 0)" },
+          "50%": { boxShadow: "0 0 0 8px rgba(201, 168, 76, 0.1)" },
+        },
+        floatParticle: {
+          "0%": { transform: "translateY(100vh) rotate(0deg)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "0.6" },
+          "100%": { transform: "translateY(-10vh) rotate(360deg)", opacity: "0" },
         },
       },
     },
