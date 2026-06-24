@@ -9,30 +9,6 @@ import { Music2, Mic2, BookOpen, Award, Zap } from "lucide-react";
 
 /* ─── Data ───────────────────────────────────────────────── */
 
-const LEARN_PATHS = [
-  {
-    icon: <Music2 className="w-6 h-6" />,
-    title: "The Songwriting Track",
-    desc: "Master lyric architecture, emotional structure, and narrative songwriting — then learn to translate that craft into AI-readable prompt language.",
-    bullets: [
-      "Lyric structure & narrative arc",
-      "Chord-emotion mapping",
-      "The 10-Layer prompt framework",
-      "Building vocal characters through language",
-    ],
-  },
-  {
-    icon: <Mic2 className="w-6 h-6" />,
-    title: "The Production Track",
-    desc: "Learn how professional producers think about sound — and how to encode that thinking into syntax the model understands perfectly.",
-    bullets: [
-      "Tension arc engineering",
-      "Negative prompting & constraint control",
-      "Vocal replacement techniques",
-      "The 8 undocumented symbols",
-    ],
-  },
-];
 
 const ADVENTURE_PATHS = [
   { step: "1", label: "Choose Your Track", sub: "Songwriter or Producer" },
@@ -194,69 +170,158 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* What You'll Learn */}
+      {/* What You'll Learn — Florida Swamp Meter */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-surface">
         <div className="max-w-7xl mx-auto">
+
+          {/* Section header */}
           <div className="text-center mb-14">
-            <p className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-3">
-              Curriculum
+            <p className="text-teal font-body text-xs uppercase tracking-[0.25em] font-semibold mb-3">
+              The Choose-Your-Depth Tracks
             </p>
-            <h2 className="font-display text-4xl md:text-5xl text-text-base">
-              What You&apos;ll Learn
+            <h2 className="font-display text-4xl md:text-5xl text-gold mb-6">
+              How Deep Are You Willing to Wade?
             </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {LEARN_PATHS.map((path) => (
-              <div
-                key={path.title}
-                className="bg-surface-elevated border border-white/5 rounded-sm p-8"
-              >
-                <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold mb-5">
-                  {path.icon}
-                </div>
-                <h3 className="font-display text-2xl text-text-base mb-3">{path.title}</h3>
-                <p className="text-text-muted font-body leading-relaxed mb-5">{path.desc}</p>
-                <ul className="flex flex-col gap-2">
-                  {path.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-sm font-body text-text-muted">
-                      <span className="text-gold mt-0.5">→</span>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Full Method Track */}
-          <div className="bg-surface-elevated border border-gold/25 rounded-sm p-8 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gold-gradient" />
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold shrink-0">
-                  <Music2 className="w-6 h-6" />
-                </div>
-                <h3 className="font-display text-2xl text-text-base">The Full Method Track</h3>
-              </div>
-              <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold shrink-0 sm:mt-2">Both Paths</span>
-            </div>
-            <p className="text-text-muted font-body leading-relaxed mb-5">
-              Both tracks taken together as one complete path through the Brass Note Method. Songwriting craft and production technique taught simultaneously — the way they work in practice, not in isolation.
+            <p className="text-text-base font-body text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+              Generative audio can feel like an uncharted swamp. The platform documentation says you don&apos;t need to be a musician or an engineer, but reaching professional-grade, repeatable art requires steering the model with intention. We&apos;ve mapped out three distinct pathways through the text matrix. Pick your gear and choose your depth — whether you want to stay dry on The Shore, get your hands dirty In The Weeds, or go full-on Wading in the Swamp to uncover the deepest architectural secrets of the engine.
             </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {[
-                "Everything in the Songwriting Track",
-                "Everything in the Production Track",
-                "Cross-track integration sessions",
-                "Full method applied to a real commission",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-2 text-sm font-body text-text-muted">
-                  <span className="text-gold mt-0.5">→</span>
-                  {b}
-                </li>
-              ))}
-            </ul>
+          </div>
+
+          {/* Three-card grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+
+            {/* ── Card 1: The Shore ─────────────────────── */}
+            <div className="bg-surface-elevated border border-white/8 rounded-lg p-8 flex flex-col relative transition-all duration-300 hover:border-gold/50 hover:shadow-[0_0_24px_rgba(212,168,67,0.18)]">
+              <div className="flex items-center gap-2.5 mb-6">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-gold block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/20 block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/20 block" />
+                </div>
+                <span className="text-teal font-body text-[10px] uppercase tracking-[0.18em] font-semibold">Level 01</span>
+              </div>
+              <h3 className="font-display text-2xl text-gold mb-0.5">The Shore</h3>
+              <p className="text-text-muted font-body text-xs uppercase tracking-[0.12em] font-semibold mb-6">The Lightweight Pass</p>
+
+              <dl className="flex flex-col gap-4 flex-1 text-sm">
+                <div>
+                  <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">Focus</dt>
+                  <dd className="text-text-base font-body leading-relaxed">Foundations of songwriting, basic studio arrangement, and a high-level practical introduction to the 10-layer prompting method.</dd>
+                </div>
+                <div>
+                  <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">For</dt>
+                  <dd className="text-text-muted font-body leading-relaxed">Traditional writers, hobbyists, and creatives who want clean, reliable tracks without getting stuck in the technical mud.</dd>
+                </div>
+                <div>
+                  <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">Homework</dt>
+                  <dd className="text-text-muted font-body">Essential structure and song flow.</dd>
+                </div>
+              </dl>
+
+              {/* CTA — replace href with SamCart product URL when live */}
+              <a
+                href="#waitlist"
+                className="mt-8 inline-flex items-center justify-center w-full font-body font-semibold tracking-wide border border-gold text-gold hover:bg-gold hover:text-background rounded-sm px-6 py-3 text-sm transition-all duration-200"
+              >
+                Join The Shore Waitlist
+              </a>
+            </div>
+
+            {/* ── Card 2: In The Weeds ──────────────────── */}
+            <div className="bg-surface-elevated border border-white/8 rounded-lg p-8 flex flex-col relative transition-all duration-300 hover:border-teal/50 hover:shadow-[0_0_24px_rgba(13,148,136,0.22)]">
+              <span className="absolute top-4 right-4 inline-flex items-center px-2.5 py-1 rounded-full bg-teal/10 border border-teal/30 text-teal font-body text-[10px] font-semibold uppercase tracking-[0.1em]">
+                Advanced Track
+              </span>
+
+              <div className="flex items-center gap-2.5 mb-6">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-gold block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-teal block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/20 block" />
+                </div>
+                <span className="text-teal font-body text-[10px] uppercase tracking-[0.18em] font-semibold">Level 02</span>
+              </div>
+              <h3 className="font-display text-2xl text-gold mb-0.5">In The Weeds</h3>
+              <p className="text-text-muted font-body text-xs uppercase tracking-[0.12em] font-semibold mb-6">The Mid-Tier Pass</p>
+
+              <dl className="flex flex-col gap-4 flex-1 text-sm">
+                <div>
+                  <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">Focus</dt>
+                  <dd className="text-text-base font-body leading-relaxed">Deep dive into text-formatting rules and lyrical syntax. Focuses heavily on inserting bracketed section tags, carets (^), and syllable pacing rules to force breath marks and sudden dynamic adjustments out of the engine.</dd>
+                </div>
+                <div>
+                  <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">For</dt>
+                  <dd className="text-text-muted font-body leading-relaxed">Creators who want to systematically eliminate random variations in vocal cadence and song pacing.</dd>
+                </div>
+                <div>
+                  <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">Homework</dt>
+                  <dd className="text-text-muted font-body">Master the required &ldquo;Syntax Placement&rdquo; labs.</dd>
+                </div>
+              </dl>
+
+              {/* CTA — replace href with SamCart product URL when live */}
+              <a
+                href="#waitlist"
+                className="mt-8 inline-flex items-center justify-center w-full font-body font-semibold tracking-wide border border-teal text-teal hover:bg-teal hover:text-background rounded-sm px-6 py-3 text-sm transition-all duration-200"
+              >
+                Join The Weeds Waitlist
+              </a>
+            </div>
+
+            {/* ── Card 3: Wading in the Swamp — dual gradient border ── */}
+            <div
+              className="rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,168,67,0.2),0_0_30px_rgba(13,148,136,0.2)]"
+              style={{ padding: "1.5px", background: "linear-gradient(135deg, #D4A843 0%, #0D9488 100%)" }}
+            >
+              <div className="bg-surface-elevated rounded-[6px] p-8 flex flex-col h-full relative">
+                <span
+                  className="absolute top-4 right-4 inline-flex items-center px-2.5 py-1 rounded-full font-body text-[10px] font-semibold uppercase tracking-[0.1em]"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(212,168,67,0.12) 0%, rgba(13,148,136,0.12) 100%)",
+                    border: "1px solid rgba(212,168,67,0.4)",
+                    color: "#D4A843",
+                  }}
+                >
+                  Elite Track
+                </span>
+
+                <div className="flex items-center gap-2.5 mb-6">
+                  <div className="flex gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-gold block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-teal block" />
+                    <span className="w-2.5 h-2.5 rounded-full block" style={{ background: "linear-gradient(135deg, #D4A843, #0D9488)" }} />
+                  </div>
+                  <span className="text-teal font-body text-[10px] uppercase tracking-[0.18em] font-semibold">Level 03</span>
+                </div>
+                <h3 className="font-display text-2xl text-gold mb-0.5">Wading in the Swamp</h3>
+                <p className="text-text-muted font-body text-xs uppercase tracking-[0.12em] font-semibold mb-6">The Full-On Depth Pass</p>
+
+                <dl className="flex flex-col gap-4 flex-1 text-sm">
+                  <div>
+                    <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">Focus</dt>
+                    <dd className="text-text-base font-body leading-relaxed">Absolute architectural immersion. Deep in the weeds on both advanced songwriting arrangement and extreme prompt engineering. Unlocks the &ldquo;Blind Replication Labs&rdquo; — learning to reverse-engineer master audio files, isolate hidden mix tokens from complex genre grids, and shatter token matrix blocks to treat the prompt box like a programmable synthesizer.</dd>
+                  </div>
+                  <div>
+                    <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">For</dt>
+                    <dd className="text-text-muted font-body leading-relaxed">Power-users and audio engineers demanding absolute repeatable control over the generative text-matrix.</dd>
+                  </div>
+                  <div>
+                    <dt className="text-teal font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">Homework</dt>
+                    <dd className="text-text-muted font-body">Complete structural reconstruction and reverse-engineering labs.</dd>
+                  </div>
+                </dl>
+
+                {/* CTA — replace href with SamCart product URL when live */}
+                <a
+                  href="#waitlist"
+                  className="mt-8 inline-flex items-center justify-center w-full font-body font-semibold tracking-wide rounded-sm px-6 py-3 text-sm text-background transition-all duration-200 hover:opacity-90"
+                  style={{ background: "linear-gradient(135deg, #D4A843 0%, #0D9488 100%)" }}
+                >
+                  Join The Swamp Waitlist
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
