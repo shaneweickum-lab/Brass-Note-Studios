@@ -42,10 +42,7 @@ export default function MethodPage() {
             </h1>
 
             <p className="text-text-muted font-body text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
-              I didn&apos;t read this in a guide. I didn&apos;t learn it from a
-              tutorial. This is what thirty years of ear training, music theory,
-              and live performance looks like when it&apos;s translated into
-              language a model can understand.
+              I didn&apos;t read this in a guide. I didn&apos;t find it in a forum thread or a YouTube tutorial. I found it by pulling apart the prompts behind my strongest songs — the ones that made rooms go quiet, the ones that made people cry — and asking the same question every time: what do they all have in common? After thirty songs, two albums, and more generations than I can count, the answer was the same. Ten layers. Every time. The Brass Note Method is what I found.
             </p>
 
             {/* Stat pills */}
