@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 
 const iconMap: Record<string, React.ElementType> = { Heart, Mic2, Users, Music };
 
+// Flip to true when subscription plans are ready to offer publicly
+const SHOW_SUBSCRIPTIONS = false;
+
 export default function ServicesPage() {
   const { categories, subscriptions, addons } = servicesData;
 
@@ -123,10 +126,10 @@ export default function ServicesPage() {
         })}
       </div>
 
-      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
+      {SHOW_SUBSCRIPTIONS && <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />}
 
-      {/* Subscription Plans */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface" id="subscriptions">
+      {/* Subscription Plans — hidden until client base is established; set SHOW_SUBSCRIPTIONS = true to restore */}
+      {SHOW_SUBSCRIPTIONS && <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface" id="subscriptions">
         <div className="max-w-7xl mx-auto">
           <div className="mb-10">
             <SectionHeading
@@ -201,7 +204,7 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
 
       <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
 

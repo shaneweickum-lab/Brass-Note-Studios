@@ -6,7 +6,7 @@
       "tagline": "For Life's Most Meaningful Moments",
       "description": "Perfect for birthdays, anniversaries, weddings, memorials, proposals, or any occasion worth remembering. Every song is written and produced specifically for you — no templates, no stock music.",
       "icon": "Heart",
-      "delivery": "Delivery within 7–10 business days.",
+      "delivery": "Single song: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
       "included": "All individual songs include: custom lyrics, full production, and one revision round.",
       "packages": [
         { "name": "Single Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion" },
@@ -21,7 +21,7 @@
       "tagline": "For Churches, Nonprofits, Schools & Businesses",
       "description": "We build original music around your mission, your community, and your identity. Your anthem. Your sound. Completely unique to you.",
       "icon": "Users",
-      "delivery": "Delivery within 10–14 business days.",
+      "delivery": "Single anthem: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
       "included": "Organization packages include a consultation call to understand your mission, values, and intended use.",
       "packages": [
         { "name": "Single Anthem / Song", "price": "$199", "description": "One custom song built around your mission, values, or event" },
@@ -36,11 +36,10 @@
       "tagline": "For YouTubers, Podcasters, Streamers & Social Creators",
       "description": "Original music for your channel, podcast, or brand. Two options: music-only tracks built to your vibe, or your existing words and poems set to a full production.",
       "icon": "Mic2",
-      "delivery": "Delivery within 5–7 business days.",
-      "included": "Creator tracks are music-only unless you supply lyrics or a poem. Usage rights included for all platforms.",
+      "delivery": "Single track: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
+      "included": "Usage rights included for all platforms. Supply your own lyrics or let us handle the writing.",
       "packages": [
-        { "name": "Single Track (music only)", "price": "$149", "description": "Original instrumental — no lyrics, built to your brand's sound" },
-        { "name": "Your Words Set to Music", "price": "$149", "description": "Bring your poem or lyrics — we produce the track around them" },
+        { "name": "Single Track", "price": "$149", "description": "Lyrics or no lyrics — original production built to your brand's sound" },
         { "name": "EP (3–4 tracks)", "price": "$299", "description": "A consistent sonic identity for your brand" },
         { "name": "LP (5–7 tracks)", "price": "$499", "description": "Full original music library for your content" },
         { "name": "Full Album (8+ tracks)", "price": "$799", "description": "Own your entire sound catalog" }
