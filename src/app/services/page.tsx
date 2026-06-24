@@ -33,6 +33,7 @@ export default function ServicesPage() {
             eyebrow="Services & Pricing"
             title="Transparent Pricing. Personal Craft."
             subtitle="Every song is built from scratch — your story, your people, your occasion. With 30 years of musicianship and a ten-layer production framework, we translate real emotion into music that moves people."
+            centered
           />
         </div>
       </section>

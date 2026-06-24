@@ -54,6 +54,7 @@ export default function AboutPage() {
             eyebrow="About Us"
             title="Where Your Story Becomes a Song"
             subtitle="Brass Note Studios was built on one belief: that music is one of the most powerful ways to honor the moments and people that matter most."
+            centered
           />
         </div>
       </section>
@@ -169,7 +170,7 @@ export default function AboutPage() {
 
       {/* Why Suno AI */}
       <section className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto">
           <SectionHeading
             eyebrow="Transparency"
             title="Why Suno AI?"
@@ -177,7 +178,7 @@ export default function AboutPage() {
             centered
             className="mb-8"
           />
-          <div className="text-text-muted font-body leading-relaxed flex flex-col gap-4 text-left">
+          <div className="text-text-muted font-body leading-relaxed flex flex-col gap-4">
             <p>
               Suno AI is the most advanced AI music generation platform
               available today. It can produce full songs with vocals,

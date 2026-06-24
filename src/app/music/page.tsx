@@ -30,8 +30,9 @@ export default function MusicPage() {
             eyebrow="Commissioned Songs"
             title="Our Work"
             subtitle="Every song on this page was written and produced exclusively by Brass Note Studios for the client listed beneath each title."
+            centered
           />
-          <div className="mt-4 flex items-center gap-3">
+          <div className="mt-4 flex items-center justify-center gap-3">
             <div className="w-1.5 h-1.5 rounded-full bg-gold" />
             <p className="text-gold-light text-sm italic font-body">
               All music written &amp; produced by Brass Note Studios

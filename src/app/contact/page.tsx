@@ -48,6 +48,7 @@ export default function ContactPage() {
             eyebrow="Get Your Song"
             title="Let's Create Something"
             subtitle="Tell me about your project. The more detail you share, the better I can bring your vision to life."
+            centered
           />
         </div>
       </section>
