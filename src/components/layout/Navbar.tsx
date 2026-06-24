@@ -19,7 +19,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-white/5">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-gold/20"
+      style={{ background: "linear-gradient(180deg, rgba(24,15,5,0.96) 0%, rgba(18,11,3,0.93) 100%)" }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -76,7 +79,10 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-white/5 bg-background/98 backdrop-blur-md">
+        <div
+          className="md:hidden border-t border-gold/15 backdrop-blur-md"
+          style={{ background: "rgba(18, 11, 3, 0.98)" }}
+        >
           <div className="px-4 py-6 flex flex-col gap-3">
             {links.map(({ href, label, accent }) => (
               <Link
