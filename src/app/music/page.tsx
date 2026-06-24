@@ -29,7 +29,7 @@ export default function MusicPage() {
           <SectionHeading
             eyebrow="Commissioned Songs"
             title="Our Work"
-            subtitle="Every song on this page was written and produced exclusively by Brass Note Studios for the client listed beneath each title."
+            subtitle="Every song on this page was commissioned through Brass Note Studios and produced for the client listed beneath each title."
             centered
           />
           <div className="mt-4 flex items-center justify-center gap-3">

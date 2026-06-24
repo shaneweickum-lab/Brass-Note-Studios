@@ -9,8 +9,7 @@
       "delivery": "Delivery within 7–10 business days.",
       "included": "All individual songs include: custom lyrics, full production, and one revision round.",
       "packages": [
-        { "name": "First Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion" },
-        { "name": "Subsequent Songs", "price": "$99", "description": "Returning client rate — same craft, loyalty rewarded" },
+        { "name": "Single Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion" },
         { "name": "EP (3–4 songs)", "price": "$299", "description": "A small collection — perfect for a gift series or personal project" },
         { "name": "LP (5–7 songs)", "price": "$499", "description": "A deeper collection with thematic continuity" },
         { "name": "Full Album (8+ songs)", "price": "$799", "description": "A complete album — your story told in full" }
@@ -35,16 +34,16 @@
       "id": "creator",
       "name": "Content Creator Commissions",
       "tagline": "For YouTubers, Podcasters, Streamers & Social Creators",
-      "description": "Original music regularly, at creator-friendly rates. Two options: music-only tracks built to your vibe, or your existing words and poems set to a full production.",
+      "description": "Original music for your channel, podcast, or brand. Two options: music-only tracks built to your vibe, or your existing words and poems set to a full production.",
       "icon": "Mic2",
       "delivery": "Delivery within 5–7 business days.",
       "included": "Creator tracks are music-only unless you supply lyrics or a poem. Usage rights included for all platforms.",
       "packages": [
-        { "name": "Single Track (music only)", "price": "$75", "description": "50% off individual rate — original music, no lyrics" },
-        { "name": "Your Words Set to Music", "price": "$75", "description": "Bring your poem or lyrics — we produce the track around them" },
-        { "name": "EP (3–4 tracks)", "price": "$150", "description": "50% off EP rate — consistent sonic identity for your brand" },
-        { "name": "LP (5–7 tracks)", "price": "$250", "description": "50% off LP rate — full original music library" },
-        { "name": "Full Album (8+ tracks)", "price": "$400", "description": "50% off album rate — own your entire sound catalog" }
+        { "name": "Single Track (music only)", "price": "$149", "description": "Original instrumental — no lyrics, built to your brand's sound" },
+        { "name": "Your Words Set to Music", "price": "$149", "description": "Bring your poem or lyrics — we produce the track around them" },
+        { "name": "EP (3–4 tracks)", "price": "$299", "description": "A consistent sonic identity for your brand" },
+        { "name": "LP (5–7 tracks)", "price": "$499", "description": "Full original music library for your content" },
+        { "name": "Full Album (8+ tracks)", "price": "$799", "description": "Own your entire sound catalog" }
       ]
     }
   ],
@@ -53,7 +52,7 @@
     "perks": [
       "Best per-song value across all tiers",
       "Priority scheduling — your projects never go to the back of the queue",
-      "Consistent creative relationship — the longer we work together, the better I understand your sound",
+      "Consistent creative relationship — the longer we work together, the better we understand your sound",
       "Annual plans save two months versus monthly pricing",
       "Unused songs in a month roll over once — no waste"
     ],

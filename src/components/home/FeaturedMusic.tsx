@@ -18,7 +18,7 @@ export default function FeaturedMusic({ songs }: FeaturedMusicProps) {
           <SectionHeading
             eyebrow="Commissioned Songs"
             title="Featured Work"
-            subtitle="Every song I produce is added to this growing playlist — each one a unique story brought to life."
+            subtitle="Every song produced through our studio is added to this growing playlist — each one a unique story brought to life."
           />
           <Link
             href="/music"

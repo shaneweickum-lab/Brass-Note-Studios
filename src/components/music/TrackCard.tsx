@@ -78,7 +78,7 @@ export default function TrackCard({ song, allSongs }: TrackCardProps) {
             {song.clientName}
           </p>
           <p className="text-gold text-xs italic mt-1 font-body">
-            Written &amp; Produced by Brass Note Studios
+            A Brass Note Studios Production
           </p>
           {song.genre && (
             <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-gold/10 text-gold-light font-body">

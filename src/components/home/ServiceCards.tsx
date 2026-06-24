@@ -25,7 +25,7 @@ const cards = [
     name: "Content Creator Commissions",
     tagline: "YouTubers, Podcasters & Social Creators",
     description: "Original music at creator-friendly rates — music-only tracks or your words set to a full production.",
-    startingAt: "From $75",
+    startingAt: "From $149",
   },
 ];
 
