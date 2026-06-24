@@ -37,7 +37,7 @@ export default function Navbar() {
               alt="Brass Note Studios"
               width={360}
               height={80}
-              className="h-12 md:h-[72px] w-auto"
+              className="h-14 md:h-[76px] w-auto"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />
