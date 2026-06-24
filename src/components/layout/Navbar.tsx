@@ -25,7 +25,7 @@ export default function Navbar() {
       style={{ background: "linear-gradient(180deg, rgba(24,15,5,0.96) 0%, rgba(18,11,3,0.93) 100%)" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[120px] md:h-[152px]">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link
             href="/"
@@ -37,7 +37,7 @@ export default function Navbar() {
               alt="Brass Note Studios"
               width={400}
               height={80}
-              className="h-[112px] md:h-[144px] w-auto"
+              className="h-24 md:h-36 w-auto"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />

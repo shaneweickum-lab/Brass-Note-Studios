@@ -47,7 +47,7 @@ export default function RootLayout({
         <ScoreCircuitBackground />
         <PlayerProvider initialSongs={songs}>
           <Navbar />
-          <main className="pt-[120px] md:pt-[152px]">{children}</main>
+          <main className="pt-16 md:pt-20">{children}</main>
           <Footer />
           <PlaylistPlayer />
         </PlayerProvider>
