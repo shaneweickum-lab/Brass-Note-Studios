@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PlayerProvider from "@/components/music/PlayerProvider";
 import PlaylistPlayer from "@/components/music/PlaylistPlayer";
+import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body>
+        <ScoreCircuitBackground />
         <PlayerProvider initialSongs={songs}>
           <Navbar />
           <main className="pt-16 md:pt-20">{children}</main>
