@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Music2, Instagram, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { Instagram, ExternalLink } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
 
 const links = [
@@ -20,14 +21,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2.5 group mb-4">
-              <div className="w-9 h-9 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
-                <Music2 className="w-5 h-5 text-background" />
-              </div>
-              <span className="font-display text-lg text-text-base leading-tight">
-                Brass Note<br />
-                <span className="text-gold text-sm">STUDIOS</span>
-              </span>
+            <Link href="/" className="inline-flex mb-4">
+              <Image
+                src="/images/DBFDD7E0-A0B2-48AC-AB90-A49D689D4644.png"
+                alt="Brass Note Studios"
+                width={280}
+                height={56}
+                className="h-16 w-auto"
+                style={{ objectFit: "contain", objectPosition: "left" }}
+              />
             </Link>
             <p className="text-text-muted text-sm leading-relaxed max-w-xs">
               Custom songs written and produced for life's meaningful moments, brands, and organizations.
