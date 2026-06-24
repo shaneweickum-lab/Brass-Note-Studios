@@ -6,15 +6,11 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Pricing" },
   { href: "/music", label: "Our Work" },
-  { href: "/method", label: "The Method" },
-  { href: "/academy", label: "Academy" },
   { href: "/contact", label: "Commission a Song" },
 ];
 
 const brands = [
   { href: "/", label: "Brass Note Studios" },
-  { href: "/method", label: "The Brass Note Method" },
-  { href: "/academy", label: "Brass Syntax Academy" },
 ];
 
 export default function Footer() {

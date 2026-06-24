@@ -50,7 +50,7 @@ export default function HomePage() {
             Let&rsquo;s Make Your Song
           </h2>
           <p className="text-text-muted font-body leading-relaxed mb-8">
-            Tell me your story and I&apos;ll turn it into music. Every song
+            Tell us your story and we&apos;ll turn it into music. Every song
             starts with a conversation.
           </p>
           <Link

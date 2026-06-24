@@ -10,8 +10,6 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/about", label: "About" },
   { href: "/music", label: "Music" },
-  { href: "/method", label: "The Method", accent: true },
-  { href: "/academy", label: "Academy" },
   { href: "/services", label: "Pricing" },
 ];
 
@@ -45,7 +43,7 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
-            {links.map(({ href, label, accent }) => (
+            {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -53,8 +51,6 @@ export default function Navbar() {
                   "font-body text-sm font-medium tracking-wide transition-colors",
                   pathname === href || pathname.startsWith(href + "/")
                     ? "text-gold border-b border-gold"
-                    : accent
-                    ? "text-gold hover:text-gold-light"
                     : "text-text-muted hover:text-text-base"
                 )}
               >
@@ -87,15 +83,13 @@ export default function Navbar() {
           style={{ background: "rgba(18, 11, 3, 0.98)" }}
         >
           <div className="px-4 py-6 flex flex-col gap-3">
-            {links.map(({ href, label, accent }) => (
+            {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 className={cn(
                   "font-body text-base font-medium py-2 transition-colors",
                   pathname === href || pathname.startsWith(href + "/")
-                    ? "text-gold"
-                    : accent
                     ? "text-gold"
                     : "text-text-muted"
                 )}

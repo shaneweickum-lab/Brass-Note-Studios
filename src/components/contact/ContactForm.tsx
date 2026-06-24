@@ -63,7 +63,7 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
           Message Received!
         </h3>
         <p className="text-text-muted font-body leading-relaxed max-w-sm mx-auto">
-          Thank you for reaching out. I'll review your project and get back to you within 1–2 business days.
+          Thank you for reaching out. We'll review your project and get back to you within 1–2 business days.
         </p>
         <button
           onClick={() => setStatus("idle")}
@@ -149,7 +149,7 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
         <textarea
           id="description"
           rows={5}
-          placeholder="Tell me about your project — who it's for, the occasion, the mood or style you're imagining, any specific stories or lyrics ideas..."
+          placeholder="Tell us about your project — who it's for, the occasion, the mood or style you're imagining, any specific stories or lyric ideas..."
           {...register("description", { required: "Please describe your project" })}
           className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm placeholder:text-text-subtle focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors resize-none"
         />

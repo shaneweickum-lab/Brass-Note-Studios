@@ -263,7 +263,7 @@ export default function ServicesPage() {
             Not Sure Which Package Fits?
           </h2>
           <p className="text-text-muted font-body leading-relaxed mb-8">
-            Reach out and describe your project. I&apos;ll help you figure out the right approach and give you an honest recommendation.
+            Reach out and describe your project. We&apos;ll help you figure out the right approach and give you an honest recommendation.
           </p>
           <Link
             href="/contact"

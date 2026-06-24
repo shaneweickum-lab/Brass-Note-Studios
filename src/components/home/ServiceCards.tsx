@@ -36,7 +36,7 @@ export default function ServiceCards() {
         <SectionHeading
           eyebrow="What We Offer"
           title="Songs for Every Occasion"
-          subtitle="From personal milestones to brand anthems, I bring the music you've been imagining to life."
+          subtitle="From personal milestones to brand anthems, we bring the music you've been imagining to life."
           centered
         />
       </div>

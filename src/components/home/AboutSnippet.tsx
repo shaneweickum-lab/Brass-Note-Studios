@@ -39,7 +39,7 @@ export default function AboutSnippet() {
             <SectionHeading
               eyebrow="About Brass Note Studios"
               title="Music Crafted for Your Moment"
-              subtitle="I'm a songwriter and producer who believes every story deserves its own soundtrack. From the first conversation to the final note, I'm with you every step of the way."
+              subtitle="We're a songwriting and production studio that believes every story deserves its own soundtrack. From the first conversation to the final note, we're with you every step of the way."
               className="mb-8"
             />
 

@@ -9,15 +9,15 @@ const steps = [
   },
   {
     number: "02",
-    title: "I Write & Produce",
+    title: "We Write & Produce",
     description:
-      "I craft original lyrics tailored to your story, then produce a professional recording using Suno AI's cutting-edge music generation platform.",
+      "We craft original lyrics tailored to your story, then produce a professional recording using Suno AI's cutting-edge music generation platform.",
   },
   {
     number: "03",
     title: "Review & Refine",
     description:
-      "You receive your song and can request revisions to make it perfect. I work with you until the final version feels exactly right.",
+      "You receive your song and can request revisions to make it perfect. We work with you until the final version feels exactly right.",
   },
   {
     number: "04",

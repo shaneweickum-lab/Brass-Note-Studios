@@ -23,7 +23,7 @@ const ADVENTURE_PATHS = [
 
 const CREDENTIALS = [
   { icon: <Award className="w-5 h-5" />, label: "30+ Years as a Musician", sub: "Songwriter, performer, arranger" },
-  { icon: <Music2 className="w-5 h-5" />, label: "2 Studio Albums on Spotify", sub: "Original songs produced with Suno AI" },
+  { icon: <Music2 className="w-5 h-5" />, label: "Several Albums on Spotify", sub: "Original songs produced with Suno AI" },
   { icon: <Zap className="w-5 h-5" />, label: "Pioneer in Vocal Prompting", sub: "The method the AI community says is impossible" },
   { icon: <BookOpen className="w-5 h-5" />, label: "Commissions Across Industries", sub: "Personal, nonprofit, brand, creator" },
   { icon: <Mic2 className="w-5 h-5" />, label: "Brass Note Method Creator", sub: "The 10-layer prompting framework" },
@@ -69,7 +69,7 @@ function WaitlistForm() {
     return (
       <div className="text-center py-8">
         <p className="text-gold font-display text-2xl mb-2">You&apos;re on the list.</p>
-        <p className="text-text-muted font-body">I&apos;ll reach out when the Academy opens its doors.</p>
+        <p className="text-text-muted font-body">We&apos;ll reach out when the Academy opens its doors.</p>
       </div>
     );
   }

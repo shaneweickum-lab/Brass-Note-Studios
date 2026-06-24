@@ -53,7 +53,7 @@ export default function HeroSection() {
         </h1>
 
         <p className="text-text-muted font-body text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-slide-up">
-          Bring your story to life through music. I write and produce custom
+          Bring your story to life through music. We write and produce custom
           songs for individuals, organizations, and brands — every song crafted
           with heart and delivered with professional quality.
         </p>

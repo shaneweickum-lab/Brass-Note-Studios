@@ -15,7 +15,7 @@ const expectations = [
     icon: Clock,
     title: "Response in 1–2 Days",
     description:
-      "I'll review your project details and reach out within 1-2 business days to discuss next steps.",
+      "We'll review your project details and reach out within 1–2 business days to discuss next steps.",
   },
   {
     icon: MessageCircle,
@@ -47,7 +47,7 @@ export default function ContactPage() {
           <SectionHeading
             eyebrow="Get Your Song"
             title="Let's Create Something"
-            subtitle="Tell me about your project. The more detail you share, the better I can bring your vision to life."
+            subtitle="Tell us about your project. The more detail you share, the better we can bring your vision to life."
             centered
           />
         </div>

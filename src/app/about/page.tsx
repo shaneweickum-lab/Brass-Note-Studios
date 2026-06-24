@@ -15,25 +15,25 @@ const values = [
     icon: Heart,
     title: "Personal Investment",
     description:
-      "Every song starts with a real conversation. I take time to understand the people, moments, and emotions behind your project before I write a single word.",
+      "Every song starts with a real conversation. We take time to understand the people, moments, and emotions behind your project before writing a single note.",
   },
   {
     icon: Sparkles,
     title: "Creative Quality",
     description:
-      "I don't believe in generic music. Each song is written from scratch with your specific story in mind — because cookie-cutter content can't capture real moments.",
+      "We don't believe in generic music. Each song is written from scratch with your specific story in mind — because cookie-cutter content can't capture real moments.",
   },
   {
     icon: Users,
     title: "Collaborative Spirit",
     description:
-      "Your vision guides the whole process. I work with you through revisions until the song feels exactly right — this is your music, and you should love it.",
+      "Your vision guides the whole process. We work with you through revisions until the song feels exactly right — this is your music, and you should love it.",
   },
   {
     icon: Music2,
     title: "Modern Production",
     description:
-      "Using Suno AI's industry-leading music generation platform, I deliver professional-grade recordings that sound like they came from a full production studio.",
+      "Using Suno AI's industry-leading music generation platform, we deliver professional-grade recordings that sound like they came from a full production studio.",
   },
 ];
 
@@ -85,7 +85,7 @@ export default function AboutPage() {
                   </div>
                   <div className="flex flex-col items-center gap-1.5">
                     <Disc3 className="w-5 h-5 text-gold" />
-                    <span className="font-display text-2xl text-gold">2</span>
+                    <span className="font-display text-lg text-gold">Several</span>
                     <span className="text-text-muted text-xs font-body text-center">Albums on Spotify</span>
                   </div>
                 </div>
@@ -100,32 +100,31 @@ export default function AboutPage() {
               </h2>
               <div className="flex flex-col gap-4 text-text-muted font-body leading-relaxed">
                 <p>
-                  I&apos;ve been writing and performing music for over 30 years.
+                  Our team has been writing and performing music for over 30 years.
                   That experience — spanning decades of crafting songs, studying
                   what makes a lyric land, and understanding how music moves
                   people — is the foundation everything at Brass Note Studios is
                   built on.
                 </p>
                 <p>
-                  I&apos;ve released two studio-quality albums on Spotify featuring
-                  my original songs, produced using Suno AI. Those albums are a
+                  We&apos;ve released several studio-quality albums on Spotify featuring
+                  original songs produced using Suno AI. Those albums are a
                   testament to what&apos;s possible when genuine songwriting craft meets
                   modern production technology — professional sound, personal
                   stories, and music that holds up alongside anything on the
                   platform.
                 </p>
                 <p>
-                  Brass Note Studios was born from that same combination. I
-                  founded it to give everyone access to custom, professional-quality
-                  music that tells their story — because original commissioned
-                  music shouldn&apos;t be reserved for Hollywood productions and major
-                  label budgets. With Suno handling the production side, I can
-                  focus entirely on what I do best: the writing.
+                  Brass Note Studios was built to give everyone access to custom,
+                  professional-quality music that tells their story — because original
+                  commissioned music shouldn&apos;t be reserved for Hollywood productions
+                  and major label budgets. With Suno handling the production side,
+                  we focus entirely on what we do best: the writing.
                 </p>
                 <p>
-                  Every song in this portfolio was written personally — not
-                  generated, not templated. I write the lyrics, shape the
-                  narrative, and produce the final track. The result is music
+                  Every song in this portfolio was written by hand — not
+                  generated, not templated. Our team writes the lyrics, shapes the
+                  narrative, and produces the final track. The result is music
                   that feels human because it is.
                 </p>
               </div>
@@ -174,7 +173,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Transparency"
             title="Why Suno AI?"
-            subtitle="I believe in being upfront about how the music is made."
+            subtitle="We believe in being upfront about how the music is made."
             centered
             className="mb-8"
           />
@@ -186,13 +185,13 @@ export default function AboutPage() {
               — from text prompts and lyrics.
             </p>
             <p>
-              I use Suno because it allows me to deliver studio-quality
+              We use Suno because it allows us to deliver studio-quality
               recordings at a price point that makes custom music accessible to
               everyone — without sacrificing the quality of the writing or the
               emotional depth of the final product.
             </p>
             <p>
-              The lyrics are mine. The story is yours. The production is
+              The lyrics are ours. The story is yours. The production is
               powered by the best tools available. That&apos;s the Brass Note
               Studios model.
             </p>
