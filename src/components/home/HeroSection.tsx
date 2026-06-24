@@ -2,60 +2,47 @@ import Link from "next/link";
 import Image from "next/image";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 
-// ─── Set this to your image path to enable the hero background ───────────────
-// Drop your photo into public/images/ then set the path here, e.g.:
-//   const HERO_IMAGE = "/images/hero-bg.jpg"
-// Leave empty to use the default gradient background.
-const HERO_IMAGE = "/images/3C1AFB4B-943C-4129-A3CC-B6D39517F45A.png";
+// ─── Hero media paths ─────────────────────────────────────────────────────────
+const HERO_VIDEO = "/videos/hero-desktop.mp4";   // desktop looping video
+const HERO_MOBILE = "/images/IMG_5104.png";       // mobile static image
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background — photo when set, gradient fallback when empty */}
-      {HERO_IMAGE ? (
-        <>
-          {/* Mobile hero — portrait 9:16 */}
-          <Image
-            src="/images/IMG_5104.png"
-            alt="Saxophone with smoke rising and transforming into teal digital data streams"
-            fill
-            priority
-            className="md:hidden"
-            style={{ objectFit: "cover", objectPosition: "center" }}
-          />
-          {/* Desktop hero */}
-          <Image
-            src={HERO_IMAGE}
-            alt="Brass Note Studios recording studio at night"
-            fill
-            priority
-            className="hidden md:block"
-            style={{ objectFit: "cover", objectPosition: "center" }}
-          />
-          {/* Dark overlay so text stays legible over the photo */}
-          <div className="absolute inset-0 bg-background/60" />
-          {/* Warm brass glow on top of photo */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,168,67,0.18) 0%, transparent 70%)",
-            }}
-          />
-        </>
-      ) : (
-        <>
-          <div className="absolute inset-0 bg-navy-gradient" />
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 70%)",
-            }}
-          />
-        </>
-      )}
+
+      {/* Mobile background — portrait image, hidden on md+ */}
+      <Image
+        src={HERO_MOBILE}
+        alt="Saxophone with smoke rising and transforming into teal digital data streams"
+        fill
+        priority
+        className="md:hidden"
+        style={{ objectFit: "cover", objectPosition: "center" }}
+      />
+
+      {/* Desktop background — looping video, hidden below md */}
+      <video
+        className="hidden md:block absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src={HERO_VIDEO} type="video/mp4" />
+      </video>
+
+      {/* Dark overlay so text stays legible */}
+      <div className="absolute inset-0 bg-background/60" />
+
+      {/* Warm brass glow */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,168,67,0.18) 0%, transparent 70%)",
+        }}
+      />
 
       {/* Floating particles */}
       <FloatingParticles />
