@@ -10,7 +10,7 @@ export interface Song {
   title: string;
   clientName: string;
   description?: string;
-  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services";
+  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "Method Development";
   genre?: string;
   mood?: string[];
   featured: boolean;

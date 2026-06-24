@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import GoldDivider from "@/components/ui/GoldDivider";
-import { Music2, Mic2, BookOpen, Award, Users, Zap } from "lucide-react";
+import { Music2, Mic2, BookOpen, Award, Zap } from "lucide-react";
 
 /* ─── Data ───────────────────────────────────────────────── */
 
@@ -47,16 +47,10 @@ const CREDENTIALS = [
   { icon: <Award className="w-5 h-5" />, label: "30+ Years as a Musician", sub: "Songwriter, performer, arranger" },
   { icon: <Music2 className="w-5 h-5" />, label: "2 Studio Albums on Spotify", sub: "Original songs produced with Suno AI" },
   { icon: <Zap className="w-5 h-5" />, label: "Pioneer in Vocal Prompting", sub: "The method the AI community says is impossible" },
-  { icon: <Users className="w-5 h-5" />, label: "15K Views · First Drop", sub: "100% view-through retention" },
   { icon: <BookOpen className="w-5 h-5" />, label: "Commissions Across Industries", sub: "Personal, nonprofit, brand, creator" },
   { icon: <Mic2 className="w-5 h-5" />, label: "Brass Note Method Creator", sub: "The 10-layer prompting framework" },
 ];
 
-const PROOF_STATS = [
-  { number: "15,000", label: "YouTube views on first release" },
-  { number: "100%", label: "View-through rate — people stayed the whole song" },
-  { number: "3", label: "Listeners reported tearing up" },
-];
 
 const PRICING_TIERS = [
   {
@@ -211,7 +205,7 @@ export default function AcademyPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {LEARN_PATHS.map((path) => (
               <div
                 key={path.title}
@@ -232,6 +226,36 @@ export default function AcademyPage() {
                 </ul>
               </div>
             ))}
+          </div>
+
+          {/* Full Method Track */}
+          <div className="bg-surface-elevated border border-gold/25 rounded-sm p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gold-gradient" />
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold shrink-0">
+                  <Music2 className="w-6 h-6" />
+                </div>
+                <h3 className="font-display text-2xl text-text-base">The Full Method Track</h3>
+              </div>
+              <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold shrink-0 sm:mt-2">Both Paths</span>
+            </div>
+            <p className="text-text-muted font-body leading-relaxed mb-5">
+              Both tracks taken together as one complete path through the Brass Note Method. Songwriting craft and production technique taught simultaneously — the way they work in practice, not in isolation.
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {[
+                "Everything in the Songwriting Track",
+                "Everything in the Production Track",
+                "Cross-track integration sessions",
+                "Full method applied to a real commission",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2 text-sm font-body text-text-muted">
+                  <span className="text-gold mt-0.5">→</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -323,43 +347,6 @@ export default function AcademyPage() {
           </div>
         </div>
       </section>
-
-      {/* Proof */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-3">
-              Proof of Method
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl text-text-base">
-              The Results Speak
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {PROOF_STATS.map(({ number, label }) => (
-              <div
-                key={label}
-                className="text-center bg-surface border border-white/5 rounded-sm p-8"
-              >
-                <p className="font-display text-5xl text-gold mb-3">{number}</p>
-                <p className="text-text-muted font-body text-sm leading-relaxed">{label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Pull quote */}
-          <blockquote className="max-w-2xl mx-auto text-center border-l-2 border-gold pl-6 py-2">
-            <p className="font-display text-2xl text-text-base italic leading-relaxed mb-3">
-              &ldquo;The community says a full vocal orchestra isn&apos;t achievable through prompting alone.
-              I&apos;ve done it eleven times in a row.&rdquo;
-            </p>
-            <footer className="text-gold font-body text-sm">— Shane Weickum, Brass Note Studios</footer>
-          </blockquote>
-        </div>
-      </section>
-
-      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
 
       {/* Pricing preview */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-surface">

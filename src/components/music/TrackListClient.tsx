@@ -3,6 +3,7 @@
 import { useState } from "react";
 import TrackCard from "./TrackCard";
 import type { Song } from "@/types";
+import { FlaskConical } from "lucide-react";
 
 type Category = "All" | Song["category"];
 
@@ -11,6 +12,7 @@ const CATEGORIES: Category[] = [
   "Personal Lyrics",
   "Song Production",
   "Comprehensive Services",
+  "Method Development",
 ];
 
 interface TrackListClientProps {
@@ -28,7 +30,7 @@ export default function TrackListClient({ songs }: TrackListClientProps) {
   return (
     <div>
       {/* Filter tabs */}
-      <div className="flex overflow-x-auto gap-2 mb-8 pb-1 -mx-1 px-1">
+      <div className="flex overflow-x-auto gap-2 mb-6 pb-1 -mx-1 px-1">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -43,6 +45,21 @@ export default function TrackListClient({ songs }: TrackListClientProps) {
           </button>
         ))}
       </div>
+
+      {/* Method Development banner */}
+      {activeCategory === "Method Development" && (
+        <div className="flex items-start gap-3 bg-surface border border-gold/20 rounded-lg px-5 py-4 mb-8">
+          <FlaskConical className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+          <div>
+            <p className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold mb-1">
+              Method Development
+            </p>
+            <p className="text-text-muted font-body text-sm leading-relaxed">
+              These tracks are technical productions created during the research and development of the Brass Note Method — stress tests, experiments, and proof-of-concept generations used to discover and verify the framework&apos;s capabilities.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Track grid */}
       {filtered.length === 0 ? (
