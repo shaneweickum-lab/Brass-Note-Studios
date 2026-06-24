@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Music2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -28,16 +29,18 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group"
+            className="flex items-center"
             onClick={() => setOpen(false)}
           >
-            <div className="w-8 h-8 rounded-full bg-gold-gradient flex items-center justify-center shrink-0">
-              <Music2 className="w-4 h-4 text-background" />
-            </div>
-            <span className="font-display text-lg leading-tight text-text-base group-hover:text-gold transition-colors">
-              Brass Note<br />
-              <span className="text-gold text-sm">STUDIOS</span>
-            </span>
+            <Image
+              src="/images/F653DA96-B717-4760-8118-1685D920ED5A.png"
+              alt="Brass Note Studios"
+              width={180}
+              height={52}
+              className="h-11 w-auto"
+              style={{ objectFit: "contain", objectPosition: "left" }}
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
