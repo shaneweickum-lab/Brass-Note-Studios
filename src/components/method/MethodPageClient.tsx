@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Lock } from "lucide-react";
 
 /* ─── Tier 1 — Ten Layers ────────────────────────────────── */
@@ -44,16 +45,24 @@ const CASE_STUDIES = [
   {
     num: "Case Study 01",
     title: "The A Cappella Breakthrough",
+    image: "/images/IMG_5099.png",
+    imageAlt: "Eight luminous spheres representing eight vocal parts in the a cappella breakthrough",
     wikiQuote: "Many music producers are struggling to consistently create clean acapella tracks using Suno AI. Even with specific prompts like 'acapella' or 'only vocal,' the results often include background noise or instruments.",
     wikiSource: "Suno AI Wiki, sunoaiwiki.com · June 2024",
     result: "The community's own documentation confirms what every serious Suno user already knows: clean a cappella — voices only, zero instrument bleed — is not reliably achievable through standard prompting. The recommended fix is external post-processing: stem separation tools, vocal isolation software, multiple processing passes. Suno's own technical notes acknowledge that users should expect bleed between stems. Using the Brass Note Method on Suno v5.5, a complete eight-part a cappella arrangement was produced — male tenor lead, female quartet, vocal bass, vocal percussion, mouth clicks — with zero instrument bleed. No external tools. No post-processing. Clean through prompting alone. Consistently, across multiple generations.",
+    detailImage: null,
+    detailImageAlt: "",
   },
   {
     num: "Case Study 02",
     title: "The Vocal Symphony",
+    image: "/images/IMG_5100.png",
+    imageAlt: "Human voice breath transforming into a waveform then into circuit traces — the vocal symphony",
     wikiQuote: "Sometimes, even with the right prompts, you might get a mix of vocals and instruments. Consistent testing and tweaking of prompts are necessary. Version 3 does acapella half of the time but not always. I am yet to get 3.5 to do purely vocals. Highly frustrating.",
     wikiSource: "Suno AI Wiki community documentation · sunoaiwiki.com",
     result: "The frustration documented above is real and widespread. Even experienced producers cannot reliably get Suno to produce purely vocal output — across any version. The Brass Note Method's third tier addresses this at a level the community has not reached: not by restricting the model from using instruments, but by replacing every instrument role with a phonetic vocal description before the model can reach for one. The result on Suno v5.5: a complete vocal symphony. Eleven distinct instrument roles — bass, rhythm guitar, lead guitar, crash cymbal, snare, hi-hat, wah effects — each rendered entirely by human voices. Audible breath and lip sounds throughout, confirming the model produced physically human performance rather than synthesized approximation. Consistent output. Nearly every generation.",
+    detailImage: "/images/IMG_5109.png",
+    detailImageAlt: "Two interlocking loops — one built from musical notation, one from circuit traces — merging at center",
   },
 ];
 
@@ -147,6 +156,8 @@ export default function MethodPageClient() {
       {/* ── Tier 1: Ten Layers ───────────────────────────────── */}
       <section ref={tierRefs.tier1} id="tier1" className="scroll-mt-32 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
+          <div className="lg:flex lg:gap-10 lg:items-start">
+          <div className="flex-1 min-w-0">
           <p className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-2">
             TIER 1 — ARCHITECTURAL DECISIONS
           </p>
@@ -206,6 +217,20 @@ export default function MethodPageClient() {
           <LockBlock>
             The specific parameters, ordering logic, interaction rules, and application methodology for each layer are proprietary to the Brass Note Method and are taught exclusively inside Brass Syntax Academy.
           </LockBlock>
+          </div>
+          {/* Right column image — desktop only */}
+          <div className="hidden lg:block shrink-0 sticky top-32 self-start">
+            <Image
+              src="/images/IMG_5098.png"
+              alt="Ten glowing nodes representing the ten layers of the Brass Note Method"
+              width={280}
+              height={560}
+              loading="lazy"
+              className="rounded-lg"
+              style={{ objectFit: "cover", maxHeight: "600px" }}
+            />
+          </div>
+          </div>
         </div>
       </section>
 
@@ -327,6 +352,17 @@ export default function MethodPageClient() {
         </div>
       </section>
 
+      {/* ── Tier 2 / Tier 3 divider image ───────────────────── */}
+      <div className="relative h-[280px] w-full overflow-hidden">
+        <Image
+          src="/images/IMG_5106.png"
+          alt="Musical staff paper with staff lines morphing into circuit board traces — jazz meets AI"
+          fill
+          loading="lazy"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+
       {/* ── Tier 3: Neural Bypass ─────────────────────────────── */}
       <section ref={tierRefs.tier3} id="tier3" className="scroll-mt-32 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
@@ -372,20 +408,47 @@ export default function MethodPageClient() {
 
           <div className="flex flex-col gap-12">
             {CASE_STUDIES.map((cs) => (
-              <div key={cs.num} className="border-t-[3px] border-gold pt-8">
-                <span className="font-display text-xl text-gold block mb-1">{cs.num}</span>
-                <h3 className="font-display text-2xl text-text-base mb-6">{cs.title}</h3>
+              <div key={cs.num} className="rounded-lg overflow-hidden border border-white/8">
+                {/* Card image */}
+                <div className="relative h-[200px]">
+                  <Image
+                    src={cs.image}
+                    alt={cs.imageAlt}
+                    fill
+                    loading="lazy"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                {/* Content */}
+                <div className="p-8">
+                  <span className="font-display text-xl text-gold block mb-1">{cs.num}</span>
+                  <h3 className="font-display text-2xl text-text-base mb-6">{cs.title}</h3>
 
-                {/* Wiki quote block */}
-                <blockquote className="bg-background border border-white/8 rounded-lg px-6 py-5 mb-6">
-                  <p className="text-text-muted font-body text-sm leading-relaxed italic mb-3">
-                    &ldquo;{cs.wikiQuote}&rdquo;
-                  </p>
-                  <footer className="text-text-subtle font-body text-xs">— {cs.wikiSource}</footer>
-                </blockquote>
+                  {/* Wiki quote block */}
+                  <blockquote className="bg-background border border-white/8 rounded-lg px-6 py-5 mb-6">
+                    <p className="text-text-muted font-body text-sm leading-relaxed italic mb-3">
+                      &ldquo;{cs.wikiQuote}&rdquo;
+                    </p>
+                    <footer className="text-text-subtle font-body text-xs">— {cs.wikiSource}</footer>
+                  </blockquote>
 
-                {/* Result copy */}
-                <p className="text-text-muted font-body leading-relaxed">{cs.result}</p>
+                  {/* CS2 detail image — floated right on desktop */}
+                  {cs.detailImage && (
+                    <div className="sm:float-right sm:ml-6 sm:mb-4 relative rounded-lg overflow-hidden w-full sm:w-[260px] h-[260px] mb-6">
+                      <Image
+                        src={cs.detailImage}
+                        alt={cs.detailImageAlt}
+                        fill
+                        loading="lazy"
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                  )}
+
+                  {/* Result copy */}
+                  <p className="text-text-muted font-body leading-relaxed">{cs.result}</p>
+                  {cs.detailImage && <div className="clear-both" />}
+                </div>
               </div>
             ))}
           </div>

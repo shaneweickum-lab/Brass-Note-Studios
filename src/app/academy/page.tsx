@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import GoldDivider from "@/components/ui/GoldDivider";
 import { Music2, Mic2, BookOpen, Award, Zap } from "lucide-react";
@@ -140,15 +141,15 @@ export default function AcademyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[75vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-navy-gradient" />
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(26,107,138,0.2) 0%, transparent 70%)",
-          }}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <Image
+          src="/images/IMG_5102.png"
+          alt="Empty jazz club stage with a glowing tablet on a music stand and teal holographic notation"
+          fill
+          priority
+          style={{ objectFit: "cover", objectPosition: "center" }}
         />
+        <div className="absolute inset-0" style={{ background: "rgba(10,14,26,0.72)" }} />
         <FloatingParticles />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 text-center">
@@ -329,21 +330,34 @@ export default function AcademyPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {CREDENTIALS.map(({ icon, label, sub }) => (
-              <div
-                key={label}
-                className="flex items-start gap-4 bg-surface-elevated border border-white/5 rounded-sm p-5"
-              >
-                <div className="w-9 h-9 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold shrink-0">
-                  {icon}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-start">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {CREDENTIALS.map(({ icon, label, sub }) => (
+                <div
+                  key={label}
+                  className="flex items-start gap-4 bg-surface-elevated border border-white/5 rounded-sm p-5"
+                >
+                  <div className="w-9 h-9 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold shrink-0">
+                    {icon}
+                  </div>
+                  <div>
+                    <p className="text-text-base font-body font-semibold text-sm">{label}</p>
+                    <p className="text-text-muted font-body text-xs mt-0.5">{sub}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-text-base font-body font-semibold text-sm">{label}</p>
-                  <p className="text-text-muted font-body text-xs mt-0.5">{sub}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="hidden lg:block shrink-0">
+              <Image
+                src="/images/IMG_5105.png"
+                alt="A weathered saxophone under a single warm spotlight — thirty years of musicianship"
+                width={400}
+                height={520}
+                loading="lazy"
+                className="rounded-lg shadow-2xl shadow-black/60"
+                style={{ objectFit: "cover", maxWidth: "400px" }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -406,8 +420,16 @@ export default function AcademyPage() {
       </section>
 
       {/* Waitlist */}
-      <section id="waitlist" className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center">
+      <section id="waitlist" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-[500px] flex items-center">
+        <Image
+          src="/images/IMG_5108.png"
+          alt="A dark hallway with a warm brass light glowing through an open door at the end"
+          fill
+          loading="lazy"
+          style={{ objectFit: "cover" }}
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(10,14,26,0.82)" }} />
+        <div className="max-w-2xl mx-auto text-center relative z-10 w-full">
           <p className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-4">
             Be First
           </p>

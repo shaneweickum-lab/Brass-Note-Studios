@@ -15,11 +15,22 @@ export default function HeroSection() {
       {/* Background — photo when set, gradient fallback when empty */}
       {HERO_IMAGE ? (
         <>
+          {/* Mobile hero — portrait 9:16 */}
           <Image
-            src={HERO_IMAGE}
-            alt="Brass Note Studios hero background"
+            src="/images/IMG_5104.png"
+            alt="Saxophone with smoke rising and transforming into teal digital data streams"
             fill
             priority
+            className="md:hidden"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+          {/* Desktop hero */}
+          <Image
+            src={HERO_IMAGE}
+            alt="Brass Note Studios recording studio at night"
+            fill
+            priority
+            className="hidden md:block"
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
           {/* Dark overlay so text stays legible over the photo */}

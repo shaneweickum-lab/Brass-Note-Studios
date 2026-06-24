@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Star } from "lucide-react";
 import type { Testimonial } from "@/types";
@@ -10,8 +11,16 @@ export default function TestimonialsSection({
   testimonials,
 }: TestimonialsSectionProps) {
   return (
-    <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <Image
+        src="/images/IMG_5107.png"
+        alt="Brass and teal sound frequency waves merging — human emotion meeting AI precision"
+        fill
+        loading="lazy"
+        style={{ objectFit: "cover" }}
+      />
+      <div className="absolute inset-0 bg-background/75" />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <SectionHeading
             eyebrow="Testimonials"

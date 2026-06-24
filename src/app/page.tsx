@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import HeroSection from "@/components/home/HeroSection";
 import StatsStrip from "@/components/home/StatsStrip";
 import ServiceCards from "@/components/home/ServiceCards";
@@ -32,8 +33,16 @@ export default function HomePage() {
       <TestimonialsSection testimonials={testimonials} />
 
       {/* Bottom CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 text-center bg-surface border-t border-white/5">
-        <div className="max-w-2xl mx-auto">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden border-t border-white/5">
+        <Image
+          src="/images/IMG_5103.png"
+          alt="A writing desk with sheet music and a fountain pen, handwritten notes transforming to digital notation"
+          fill
+          loading="lazy"
+          style={{ objectFit: "cover" }}
+        />
+        <div className="absolute inset-0 bg-background/80" />
+        <div className="max-w-2xl mx-auto relative z-10">
           <p className="text-gold font-body text-sm uppercase tracking-[0.2em] font-semibold mb-4">
             Ready to Create?
           </p>
