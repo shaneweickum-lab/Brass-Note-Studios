@@ -6,7 +6,7 @@ import FloatingParticles from "@/components/ui/FloatingParticles";
 // Drop your photo into public/images/ then set the path here, e.g.:
 //   const HERO_IMAGE = "/images/hero-bg.jpg"
 // Leave empty to use the default gradient background.
-const HERO_IMAGE = "";
+const HERO_IMAGE = "/images/3C1AFB4B-943C-4129-A3CC-B6D39517F45A.png";
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
