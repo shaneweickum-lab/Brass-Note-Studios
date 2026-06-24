@@ -28,16 +28,16 @@ export default function TrackListClient({ songs }: TrackListClientProps) {
   return (
     <div>
       {/* Filter tabs */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex overflow-x-auto gap-2 mb-8 pb-1 -mx-1 px-1">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={
+            className={`whitespace-nowrap shrink-0 px-4 py-2 rounded-sm text-sm font-body font-semibold transition-all ${
               activeCategory === cat
-                ? "px-4 py-2 rounded-sm text-sm font-body font-semibold bg-gold text-background"
-                : "px-4 py-2 rounded-sm text-sm font-body font-medium border border-white/10 text-text-muted hover:border-gold/30 hover:text-text-base transition-all"
-            }
+                ? "bg-gold text-background"
+                : "border border-white/10 text-text-muted hover:border-gold/30 hover:text-text-base"
+            }`}
           >
             {cat}
           </button>

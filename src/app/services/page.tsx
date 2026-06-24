@@ -64,15 +64,26 @@ export default function ServicesPage() {
                 </div>
               </div>
 
-              {/* Pricing table */}
-              <div className="rounded-lg border border-white/8 overflow-hidden">
-                {/* Table header */}
+              {/* Pricing — mobile cards */}
+              <div className="flex flex-col gap-3 md:hidden">
+                {cat.packages.map((pkg) => (
+                  <div key={pkg.name} className="bg-surface rounded-lg border border-white/8 p-4">
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <span className="font-body font-semibold text-text-base">{pkg.name}</span>
+                      <span className="font-display text-gold text-xl whitespace-nowrap">{pkg.price}</span>
+                    </div>
+                    <p className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Pricing — desktop table */}
+              <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
                 <div className="grid grid-cols-[1fr_auto_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Package</span>
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold text-center px-8">Price</span>
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">What You Get</span>
                 </div>
-                {/* Rows */}
                 {cat.packages.map((pkg, i) => (
                   <div
                     key={pkg.name}
@@ -80,15 +91,9 @@ export default function ServicesPage() {
                       i % 2 === 0 ? "bg-surface" : "bg-surface/60"
                     }`}
                   >
-                    <span className="font-body font-semibold text-text-base text-sm">
-                      {pkg.name}
-                    </span>
-                    <span className="font-display text-gold text-xl px-8 text-center whitespace-nowrap">
-                      {pkg.price}
-                    </span>
-                    <span className="text-text-muted font-body text-sm leading-relaxed">
-                      {pkg.description}
-                    </span>
+                    <span className="font-body font-semibold text-text-base text-sm">{pkg.name}</span>
+                    <span className="font-display text-gold text-xl px-8 text-center whitespace-nowrap">{pkg.price}</span>
+                    <span className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</span>
                   </div>
                 ))}
               </div>
@@ -211,7 +216,21 @@ export default function ServicesPage() {
             />
           </div>
 
-          <div className="rounded-lg border border-white/8 overflow-hidden">
+          {/* Add-ons — mobile cards */}
+          <div className="flex flex-col gap-3 md:hidden">
+            {addons.map((addon) => (
+              <div key={addon.name} className="bg-surface rounded-lg border border-white/8 p-4">
+                <div className="flex items-start justify-between gap-3 mb-1">
+                  <span className="font-body font-semibold text-text-base">{addon.name}</span>
+                  <span className="font-display text-gold text-xl whitespace-nowrap">{addon.price}</span>
+                </div>
+                <p className="text-text-muted font-body text-sm">{addon.notes}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Add-ons — desktop table */}
+          <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
             <div className="grid grid-cols-[1fr_auto_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
               <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Add-On</span>
               <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold text-center px-8">Price</span>

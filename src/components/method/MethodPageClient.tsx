@@ -174,17 +174,47 @@ export default function MethodPageClient() {
           </p>
 
           {/* Discovery badge */}
-          <div className="inline-flex items-center gap-3 bg-background border border-gold/20 rounded-full px-5 py-2.5 mb-10">
-            <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-            <p className="font-body text-xs text-text-muted">
+          <div className="flex items-start gap-3 bg-background border border-gold/20 rounded-lg sm:rounded-full px-5 py-3 mb-10 max-w-2xl">
+            <div className="w-2 h-2 rounded-full bg-gold animate-pulse shrink-0 mt-1" />
+            <p className="font-body text-xs text-text-muted leading-relaxed">
               <span className="text-gold font-semibold">8 undocumented symbols</span> confirmed through stress testing on Suno v5.5.
               Not found in official documentation or any community resource as of June 23, 2026.
             </p>
           </div>
 
-          {/* Symbol table */}
-          <div className="rounded-lg border border-white/8 overflow-hidden mb-10">
-            {/* Header */}
+          {/* Symbol table — mobile cards */}
+          <div className="flex flex-col gap-3 mb-10 md:hidden">
+            {SYMBOLS.map((sym, i) => (
+              <div key={sym.sym} className={`rounded-lg border border-white/8 overflow-hidden ${i % 2 === 0 ? "bg-surface" : "bg-surface/60"}`}>
+                <button
+                  className="w-full px-4 py-4 text-left hover:bg-gold/5 transition-colors"
+                  onClick={() => setActiveSymbol(activeSymbol === i ? null : i)}
+                >
+                  <div className="flex items-center justify-between gap-3 mb-1">
+                    <code className="font-mono text-lg text-gold font-bold">{sym.sym}</code>
+                    <span className="text-red-400 font-body text-xs font-bold uppercase tracking-wide shrink-0">UNDOC</span>
+                  </div>
+                  <p className="font-body font-semibold text-text-base text-sm mb-1">{sym.name}</p>
+                  <p className="text-text-muted text-sm leading-relaxed">{sym.what}</p>
+                </button>
+                {activeSymbol === i && (
+                  <div className="px-4 pb-4 bg-background/40 border-t border-gold/10 flex flex-col gap-3 pt-3">
+                    <div>
+                      <p className="text-gold font-body text-xs uppercase tracking-[0.12em] font-semibold mb-1">Example in context</p>
+                      <code className="font-mono text-sm text-gold/90 bg-background rounded px-3 py-2 block border border-gold/10 overflow-x-auto">{sym.ex}</code>
+                    </div>
+                    <div>
+                      <p className="text-gold font-body text-xs uppercase tracking-[0.12em] font-semibold mb-1">Deeper explanation</p>
+                      <p className="text-text-muted text-sm leading-relaxed italic">{sym.deeper}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Symbol table — desktop */}
+          <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden mb-10">
             <div className="grid grid-cols-[80px_1fr_1.5fr_auto] bg-surface-elevated px-4 py-3 border-b border-white/8 gap-4">
               <span className="text-gold font-body text-xs uppercase tracking-[0.12em] font-semibold">Symbol</span>
               <span className="text-gold font-body text-xs uppercase tracking-[0.12em] font-semibold">Name</span>
@@ -202,7 +232,6 @@ export default function MethodPageClient() {
                   <span className="text-text-muted text-sm leading-relaxed">{sym.what}</span>
                   <span className="text-red-400 font-body text-xs font-bold uppercase tracking-wide shrink-0 self-start pt-0.5">UNDOC</span>
                 </button>
-                {/* Hover/click expand */}
                 {activeSymbol === i && (
                   <div className="px-4 pb-4 bg-background/40 border-t border-gold/10">
                     <div className="pt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -224,7 +253,7 @@ export default function MethodPageClient() {
           {/* Annotated example */}
           <div className="max-w-3xl">
             <p className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold mb-4">Combination Example — From the A Cappella Case Study</p>
-            <div className="bg-background rounded-lg border border-gold/15 p-6 font-mono text-sm leading-loose">
+            <div className="bg-background rounded-lg border border-gold/15 p-6 font-mono text-sm leading-loose overflow-x-auto">
               <div className="mb-4">
                 <p className="text-gold/90">Now for<span className="text-amber">^</span>ev<span className="text-amber">^</span>er's sleeping upstairs tonight<span className="text-amber">...</span></p>
                 <p className="text-text-subtle text-xs italic font-body mt-1">^ syllable modulation on "forever" · ... full pause at line end</p>
@@ -265,7 +294,8 @@ export default function MethodPageClient() {
           </div>
 
           {/* Before/After table */}
-          <div className="rounded-lg border border-white/8 overflow-hidden overflow-x-auto">
+          <div className="overflow-x-auto">
+          <div className="rounded-lg border border-white/8 overflow-hidden">
             <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="bg-surface-elevated border-b border-white/8">
@@ -288,6 +318,7 @@ export default function MethodPageClient() {
                 ))}
               </tbody>
             </table>
+          </div>
           </div>
         </div>
       </section>
