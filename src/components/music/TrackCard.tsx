@@ -43,9 +43,15 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
   const isPlaying     = isCurrentSong && (playerState === "playing" || playerState === "loading");
   const hasAudio      = Boolean(song.audioSource.mp3Url);
   const hasSunoLink   = Boolean(song.audioSource.sunoUrl);
+  const isPlayable    = hasAudio || hasSunoLink;
 
   const handleToggle = () => {
-    if (!hasAudio) return;
+    if (!isPlayable) return;
+    if (!hasAudio) {
+      // No local MP3 — open Suno in new tab
+      window.open(song.audioSource.sunoUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
     if (isCurrentSong) {
       playerState === "playing" ? pause() : resume();
     } else {
@@ -92,7 +98,7 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
       />
 
       {/* Hover play / active pause button */}
-      {hasAudio && (
+      {isPlayable && (
         <button
           onClick={handleToggle}
           className={cn(

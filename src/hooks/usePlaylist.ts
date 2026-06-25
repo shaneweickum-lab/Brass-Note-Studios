@@ -21,11 +21,14 @@ export function usePlayer(): PlayerContextType {
 export function usePlayerState(songs: Song[]) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [queue, setQueue] = useState<Song[]>(songs);
+  const queueRef = useRef<Song[]>(songs); // always current — avoids stale closure in onEnded
   const [currentSongId, setCurrentSongId] = useState<string | null>(null);
   const [playerState, setPlayerState] = useState<PlayerState>("idle");
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolumeState] = useState(0.8);
+
+  useEffect(() => { queueRef.current = queue; }, [queue]);
 
   useEffect(() => {
     const audio = new Audio();
@@ -36,9 +39,10 @@ export function usePlayerState(songs: Song[]) {
     const onDurationChange = () => setDuration(audio.duration);
     const onEnded = () => {
       setCurrentSongId((id) => {
-        const idx = queue.findIndex((s) => s.id === id);
-        if (idx < queue.length - 1) {
-          const next = queue[idx + 1];
+        const q = queueRef.current;
+        const idx = q.findIndex((s) => s.id === id);
+        if (idx < q.length - 1) {
+          const next = q[idx + 1];
           audio.src = next.audioSource.mp3Url;
           audio.play().catch(() => setPlayerState("error"));
           setPlayerState("playing");
