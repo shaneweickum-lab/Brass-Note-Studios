@@ -4,14 +4,16 @@ import { Instagram, ExternalLink } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
 
 const links = [
-  { href: "/about", label: "About" },
+  { href: "/about",    label: "About" },
+  { href: "/music",    label: "Our Work" },
+  { href: "/labs",     label: "Brass Note Labs" },
   { href: "/services", label: "Pricing" },
-  { href: "/music", label: "Our Work" },
-  { href: "/contact", label: "Commission a Song" },
+  { href: "/contact",  label: "Commission a Song" },
 ];
 
 const brands = [
-  { href: "/", label: "Brass Note Studios" },
+  { href: "/",     label: "Brass Note Studios" },
+  { href: "/labs", label: "Brass Note Labs" },
 ];
 
 export default function Footer() {

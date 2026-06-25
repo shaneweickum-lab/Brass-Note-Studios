@@ -8,9 +8,10 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "/about", label: "About" },
-  { href: "/music", label: "Music" },
-  { href: "/services", label: "Pricing" },
+  { href: "/about",    label: "About",   teal: false },
+  { href: "/music",    label: "Music",   teal: false },
+  { href: "/labs",     label: "Labs",    teal: true  },
+  { href: "/services", label: "Pricing", teal: false },
 ];
 
 export default function Navbar() {
@@ -43,20 +44,22 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
-            {links.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "font-body text-sm font-medium tracking-wide transition-colors",
-                  pathname === href || pathname.startsWith(href + "/")
-                    ? "text-gold border-b border-gold"
-                    : "text-text-muted hover:text-text-base"
-                )}
-              >
-                {label}
-              </Link>
-            ))}
+            {links.map(({ href, label, teal }) => {
+              const isActive = pathname === href || pathname.startsWith(href + "/");
+              const activeColor = teal ? "text-teal border-b border-teal" : "text-gold border-b border-gold";
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={cn(
+                    "font-body text-sm font-medium tracking-wide transition-colors",
+                    isActive ? activeColor : "text-text-muted hover:text-text-base"
+                  )}
+                >
+                  {label}
+                </Link>
+              );
+            })}
             <Link
               href="/contact"
               className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-4 py-2 text-sm transition-all duration-200"
@@ -83,21 +86,24 @@ export default function Navbar() {
           style={{ background: "rgba(18, 11, 3, 0.98)" }}
         >
           <div className="px-4 py-6 flex flex-col gap-3">
-            {links.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "font-body text-base font-medium py-2 transition-colors",
-                  pathname === href || pathname.startsWith(href + "/")
-                    ? "text-gold"
-                    : "text-text-muted"
-                )}
-                onClick={() => setOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
+            {links.map(({ href, label, teal }) => {
+              const isActive = pathname === href || pathname.startsWith(href + "/");
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={cn(
+                    "font-body text-base font-medium py-2 transition-colors",
+                    isActive
+                      ? teal ? "text-teal" : "text-gold"
+                      : "text-text-muted"
+                  )}
+                  onClick={() => setOpen(false)}
+                >
+                  {label}
+                </Link>
+              );
+            })}
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
