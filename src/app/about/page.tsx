@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Music2, Sparkles, Heart, Users, Award, Disc3 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
@@ -68,8 +69,14 @@ export default function AboutPage() {
             {/* Studio visual */}
             <div className="relative">
               <div className="aspect-square rounded-2xl bg-surface border border-gold/10 flex flex-col items-center justify-center p-12">
-                <div className="w-24 h-24 rounded-full bg-gold/10 border-2 border-gold/30 flex items-center justify-center mb-6">
-                  <span className="font-display text-4xl text-gold">BN</span>
+                <div className="w-28 h-28 mx-auto mb-6 flex items-center justify-center">
+                  <Image
+                    src="/images/B6E31839-3169-4CE4-A5D6-A45D2ED27628.png"
+                    alt="Brass Note Studios"
+                    width={112}
+                    height={112}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <p className="font-display text-2xl text-text-base text-center mb-2">
                   Brass Note Studios

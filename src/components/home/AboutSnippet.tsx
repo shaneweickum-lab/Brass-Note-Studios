@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -18,8 +19,14 @@ export default function AboutSnippet() {
           <div className="relative order-2 lg:order-1">
             <div className="aspect-square max-w-md mx-auto rounded-2xl bg-gold-shimmer border border-gold/15 flex items-center justify-center">
               <div className="text-center p-8">
-                <div className="w-20 h-20 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center mx-auto mb-6">
-                  <span className="font-display text-3xl text-gold">BN</span>
+                <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                  <Image
+                    src="/images/B6E31839-3169-4CE4-A5D6-A45D2ED27628.png"
+                    alt="Brass Note Studios"
+                    width={96}
+                    height={96}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <p className="font-display text-2xl text-text-base mb-2">
                   Brass Note Studios
