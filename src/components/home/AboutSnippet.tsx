@@ -17,8 +17,18 @@ export default function AboutSnippet() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Visual side */}
           <div className="relative order-2 lg:order-1">
-            <div className="aspect-square max-w-md mx-auto rounded-2xl bg-gold-shimmer border border-gold/15 flex items-center justify-center">
-              <div className="text-center p-8">
+            <div className="aspect-square max-w-md mx-auto rounded-2xl border border-gold/15 flex items-center justify-center relative overflow-hidden">
+              {/* Background photo */}
+              <Image
+                src="/images/IMG_5103.png"
+                alt=""
+                fill
+                className="object-cover object-center scale-110"
+                aria-hidden="true"
+              />
+              {/* Dark overlay to keep text readable */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+              <div className="text-center p-8 relative z-10">
                 <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
                   <Image
                     src="/images/B6E31839-3169-4CE4-A5D6-A45D2ED27628.png"
