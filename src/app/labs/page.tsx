@@ -101,6 +101,14 @@ const COINED_TERMS = [
     definition:
       "When you overload the lyrical input of a generative audio AI with syntax symbols placed too close together — without giving the model adequate space to process each instruction before receiving the next — you force the model into a chaotic generative state. The output deviates completely from the intended prompt: vocals become random, structure collapses, and elements that were explicitly excluded may appear. The result bears no resemblance to what was directed. Coined from direct observation during production at Brass Note Labs.",
   },
+  {
+    num: "002",
+    term: "Lyrical Bypass",
+    pos: "/noun phrase/",
+    year: "2026",
+    definition:
+      "During a state of Syntax Fatigue — or when the lyrical input exceeds the model's processing capacity — the model abandons the written lyrics entirely. It does not produce a degraded version of the intended lyric. It bypasses the lyrical channel and generates vocal content autonomously, ignoring written words, dynamic syntax instructions, and song structure. The output may sound musically coherent while being completely disconnected from what was directed. Coined from direct observation during production at Brass Note Labs.",
+  },
 ];
 
 // ── Sub-components ────────────────────────────────────────────────────────────
