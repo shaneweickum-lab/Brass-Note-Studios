@@ -27,7 +27,7 @@ function makeStars(W: number, H: number, n = 300): Star[] {
 // Combined: 5 000 ms
 
 const MESSAGE_LINES = [
-  { text: "Sit down and enjoy the ride",     delay: 0,    cls: "text-text-base font-bold text-3xl md:text-4xl" },
+  { text: "Sit back and enjoy the ride",     delay: 0,    cls: "text-text-base font-bold text-3xl md:text-4xl" },
   { text: "as we bring you in",              delay: 1.2,  cls: "text-text-muted text-xl md:text-2xl" },
   { text: "to our",                          delay: 2.3,  cls: "text-text-muted text-xl md:text-2xl" },
   { text: "digital space",                   delay: 3.1,  cls: "text-gold italic text-2xl md:text-3xl" },
