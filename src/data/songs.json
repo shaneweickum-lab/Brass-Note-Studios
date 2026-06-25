@@ -52,6 +52,40 @@
       "coverImage": null
     },
     {
+      "id": "song-005",
+      "title": "String Theory",
+      "clientName": "Brass Note Labs",
+      "description": "A technical breakdown attempting to achieve vocal-only band music — engineering the AI to vocalize all instruments and beats using nothing but the human voice.",
+      "category": "From the Lab",
+      "genre": "Experimental",
+      "mood": ["technical", "experimental", "innovative"],
+      "featured": false,
+      "publishedDate": "2026-06-25",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "/audio/StringTheory.mp3",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
+      "id": "song-006",
+      "title": "Event Horizon",
+      "clientName": "Brass Note Labs",
+      "description": "A lyrical syntax engineering stress test — pushing the boundaries of structural composition and rhythmic complexity.",
+      "category": "From the Lab",
+      "genre": "Experimental",
+      "mood": ["technical", "intense", "boundary-pushing"],
+      "featured": false,
+      "publishedDate": "2026-06-25",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "/audio/Event%20Horizon.mp3",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
       "id": "song-004",
       "title": "Dad Mode Activated",
       "clientName": "The Wizards Playground",
