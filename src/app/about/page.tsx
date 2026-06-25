@@ -68,23 +68,33 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Studio visual */}
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-surface border border-gold/10 flex flex-col items-center justify-center p-12">
-                <div className="w-28 h-28 mx-auto mb-6 flex items-center justify-center">
+              <div className="aspect-square rounded-2xl border border-gold/10 flex flex-col items-center justify-center p-12 relative overflow-hidden">
+                {/* Background photo */}
+                <Image
+                  src="/images/3C1AFB4B-943C-4129-A3CC-B6D39517F45A.png"
+                  alt=""
+                  fill
+                  className="object-cover object-center"
+                  aria-hidden="true"
+                />
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-black/75" />
+                <div className="w-56 h-56 mx-auto mb-6 flex items-center justify-center relative z-10">
                   <Image
                     src="/images/B6E31839-3169-4CE4-A5D6-A45D2ED27628.png"
                     alt="Brass Note Studios"
-                    width={112}
-                    height={112}
+                    width={224}
+                    height={224}
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <p className="font-display text-2xl text-text-base text-center mb-2">
+                <p className="font-display text-2xl text-text-base text-center mb-2 relative z-10">
                   Brass Note Studios
                 </p>
-                <p className="text-gold text-sm italic font-body text-center">
+                <p className="text-gold text-sm italic font-body text-center relative z-10">
                   Custom Songwriting &amp; Production
                 </p>
-                <div className="mt-8 pt-8 border-t border-white/5 w-full grid grid-cols-2 gap-4">
+                <div className="mt-8 pt-8 border-t border-white/10 w-full grid grid-cols-2 gap-4 relative z-10">
                   <div className="flex flex-col items-center gap-1.5">
                     <Award className="w-5 h-5 text-gold" />
                     <span className="font-display text-2xl text-gold">30+</span>
