@@ -5,6 +5,9 @@ import { formatTime } from "@/lib/utils";
 import { SkipBack, SkipForward, Play, Pause, Volume2, VolumeX, Music } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const WAVE_HEIGHTS = [8, 14, 18, 12, 10];
+const WAVE_DELAYS  = [0.18, 0.30, 0.42, 0.30, 0.18];
+
 export default function PlaylistPlayer() {
   const {
     currentSong,
@@ -23,104 +26,107 @@ export default function PlaylistPlayer() {
   if (!currentSong || playerState === "idle") return null;
 
   const isPlaying = playerState === "playing" || playerState === "loading";
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const progress  = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-t border-gold/20 animate-slide-up">
-      <div className="max-w-7xl mx-auto px-4 py-3">
-        <div className="flex items-center gap-4">
-          {/* Track info */}
-          <div className="flex items-center gap-3 min-w-0 w-48 shrink-0">
-            <div className="w-10 h-10 rounded bg-gold-shimmer flex items-center justify-center shrink-0 border border-gold/20">
-              <Music className="w-5 h-5 text-gold/60" />
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-t border-gold/20">
+      {/* Full-width scrubber at the very top of the bar */}
+      <div className="relative h-1 w-full">
+        <div className="absolute inset-0 bg-white/10" />
+        <div
+          className="absolute inset-y-0 left-0 bg-gold transition-none"
+          style={{ width: `${progress}%` }}
+        />
+        <input
+          type="range"
+          min={0}
+          max={duration || 0}
+          value={currentTime}
+          step={0.1}
+          onChange={(e) => seek(Number(e.target.value))}
+          className="absolute inset-0 w-full opacity-0 cursor-pointer h-full"
+          aria-label="Seek"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
+        {/* ── Single row: info · controls · volume ── */}
+        <div className="flex items-center gap-2 sm:gap-4">
+
+          {/* Track info — shrinks on mobile, full on sm+ */}
+          <div className="flex items-center gap-2 min-w-0 flex-1 sm:flex-none sm:w-52">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded bg-gold-shimmer flex items-center justify-center shrink-0 border border-gold/20">
+              <Music className="w-4 h-4 sm:w-5 sm:h-5 text-gold/60" />
             </div>
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <p className="text-text-base text-sm font-medium font-display truncate">
+              <div className="flex items-center gap-1.5">
+                <p className="text-text-base text-xs sm:text-sm font-medium font-display truncate">
                   {currentSong.title}
                 </p>
-                {/* Animated waveform — runs when playing, pauses otherwise */}
-                <div className="flex items-end gap-[2px] h-4 shrink-0">
-                  {[3, 5, 7, 5, 3].map((delay, i) => (
+                {/* Animated waveform */}
+                <div className="flex items-end gap-[2px] h-3.5 shrink-0">
+                  {WAVE_HEIGHTS.map((h, i) => (
                     <div
                       key={i}
-                      className="w-[3px] rounded-full bg-gold"
+                      className="w-[2px] sm:w-[3px] rounded-full bg-gold"
                       style={{
-                        height: [8, 14, 18, 12, 10][i],
-                        animationPlayState: isPlaying ? "running" : "paused",
+                        height: h,
                         animation: "wave-bar 0.7s ease-in-out infinite alternate",
-                        animationDelay: `${delay * 0.06}s`,
+                        animationDelay: `${WAVE_DELAYS[i]}s`,
+                        animationPlayState: isPlaying ? "running" : "paused",
                       }}
                     />
                   ))}
                 </div>
               </div>
-              <p className="text-text-muted text-xs truncate">
+              <p className="text-text-muted text-[10px] sm:text-xs truncate">
                 {currentSong.clientName}
               </p>
             </div>
           </div>
 
-          {/* Controls */}
-          <div className="flex-1 flex flex-col items-center gap-1.5">
-            <div className="flex items-center gap-5">
-              <button
-                onClick={prev}
-                className="text-text-muted hover:text-gold transition-colors"
-                aria-label="Previous track"
-              >
-                <SkipBack className="w-5 h-5" />
-              </button>
-              <button
-                onClick={isPlaying ? pause : resume}
-                className="w-10 h-10 rounded-full bg-gold hover:bg-gold-light flex items-center justify-center transition-colors"
-                aria-label={isPlaying ? "Pause" : "Play"}
-              >
-                {isPlaying ? (
-                  <Pause className="w-5 h-5 text-background" />
-                ) : (
-                  <Play className="w-5 h-5 text-background translate-x-0.5" />
-                )}
-              </button>
-              <button
-                onClick={next}
-                className="text-text-muted hover:text-gold transition-colors"
-                aria-label="Next track"
-              >
-                <SkipForward className="w-5 h-5" />
-              </button>
-            </div>
+          {/* Controls — centered */}
+          <div className="flex items-center gap-3 sm:gap-5 shrink-0 mx-auto sm:mx-0 sm:flex-1 sm:justify-center">
+            {/* Timestamps — hidden on mobile, shown sm+ */}
+            <span className="hidden sm:block text-text-subtle text-xs w-8 text-right shrink-0">
+              {formatTime(currentTime)}
+            </span>
 
-            {/* Progress bar */}
-            <div className="w-full flex items-center gap-2">
-              <span className="text-text-subtle text-xs w-8 text-right shrink-0">
-                {formatTime(currentTime)}
-              </span>
-              <div className="flex-1 relative h-1 group cursor-pointer">
-                <div className="absolute inset-0 bg-white/10 rounded-full" />
-                <div
-                  className="absolute inset-y-0 left-0 bg-gold rounded-full"
-                  style={{ width: `${progress}%` }}
-                />
-                <input
-                  type="range"
-                  min={0}
-                  max={duration || 0}
-                  value={currentTime}
-                  step={0.1}
-                  onChange={(e) => seek(Number(e.target.value))}
-                  className="absolute inset-0 w-full opacity-0 cursor-pointer h-full"
-                  aria-label="Seek"
-                />
-              </div>
-              <span className="text-text-subtle text-xs w-8 shrink-0">
-                {formatTime(duration)}
-              </span>
-            </div>
+            <button
+              onClick={prev}
+              className="text-text-muted hover:text-gold transition-colors"
+              aria-label="Previous track"
+            >
+              <SkipBack className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+
+            <button
+              onClick={isPlaying ? pause : resume}
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gold hover:bg-gold-light flex items-center justify-center transition-colors shrink-0"
+              aria-label={isPlaying ? "Pause" : "Play"}
+            >
+              {isPlaying ? (
+                <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-background" />
+              ) : (
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 text-background translate-x-0.5" />
+              )}
+            </button>
+
+            <button
+              onClick={next}
+              className="text-text-muted hover:text-gold transition-colors"
+              aria-label="Next track"
+            >
+              <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+
+            <span className="hidden sm:block text-text-subtle text-xs w-8 shrink-0">
+              {formatTime(duration)}
+            </span>
           </div>
 
-          {/* Volume */}
-          <div className="hidden sm:flex items-center gap-2 w-32 shrink-0">
+          {/* Volume — hidden on mobile */}
+          <div className="hidden sm:flex items-center gap-2 w-28 shrink-0">
             <button
               onClick={() => setVolume(volume === 0 ? 0.8 : 0)}
               className="text-text-muted hover:text-gold transition-colors"
@@ -150,6 +156,7 @@ export default function PlaylistPlayer() {
               />
             </div>
           </div>
+
         </div>
       </div>
     </div>
