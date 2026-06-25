@@ -90,6 +90,10 @@
     ]
   },
   "addons": [
+    { "name": "Full Ownership Buyout — Single", "price": "$500", "notes": "100% ownership transfer · No royalty split · Perpetual full license" },
+    { "name": "Full Ownership Buyout — EP (3–4 songs)", "price": "$1,500", "notes": "100% ownership transfer · No royalty split · Perpetual full license" },
+    { "name": "Full Ownership Buyout — LP (5–7 songs)", "price": "$2,500", "notes": "100% ownership transfer · No royalty split · Perpetual full license" },
+    { "name": "Full Ownership Buyout — Full Album (8+ songs)", "price": "$3,500+", "notes": "100% ownership transfer · No royalty split · Final price based on project scope" },
     { "name": "Additional revision round", "price": "$25", "notes": "Per song, per round — applies to every round beyond the 3 included" },
     { "name": "Stems / separated tracks", "price": "$49", "notes": "Vocal, instrumental, individual instruments" },
     { "name": "Expedited Delivery — Single", "price": "$75", "notes": "Cuts to 5–7 days · Subject to availability" },

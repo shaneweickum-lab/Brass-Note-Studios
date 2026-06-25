@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Heart, Mic2, Users, Music, Check, Clock, Star, RefreshCw } from "lucide-react";
+import { Heart, Mic2, Users, Music, Check, Clock, Star, RefreshCw, TrendingUp } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
 import ProcessSteps from "@/components/services/ProcessSteps";
@@ -122,6 +122,15 @@ export default function ServicesPage() {
                   <p className="text-text-muted font-body text-sm">
                     Every song includes <span className="text-text-base font-semibold">3 revisions</span>. Additional revisions beyond the 3rd are{" "}
                     <span className="text-text-base font-semibold">$25 per round</span>.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <TrendingUp className="w-4 h-4 text-gold/70 mt-0.5 shrink-0" />
+                  <p className="text-text-muted font-body text-sm">
+                    Songs generating revenue from streaming services are subject to a{" "}
+                    <span className="text-text-base font-semibold">50/50 royalty split</span>{" "}
+                    between you and Brass Note Studios. Want 100% ownership?{" "}
+                    <span className="text-text-base font-semibold">Full Ownership Buyout</span> is available as an add-on.
                   </p>
                 </div>
               </div>
