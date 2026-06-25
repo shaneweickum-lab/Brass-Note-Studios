@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Instagram, ExternalLink } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
+import ReplaySequenceButton from "@/components/ui/ReplaySequenceButton";
 
 const links = [
   { href: "/about",    label: "About" },
@@ -112,6 +113,9 @@ export default function Footer() {
           </Link>
           .
         </p>
+        <div className="mt-3 flex justify-center">
+          <ReplaySequenceButton />
+        </div>
       </div>
     </footer>
   );

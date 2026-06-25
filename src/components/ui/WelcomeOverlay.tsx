@@ -53,19 +53,36 @@ export default function WelcomeOverlay() {
   const playRef     = useRef(play);
   useEffect(() => { playRef.current = play; }, [play]);
 
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const startSequence = (withMusic: boolean, fromModal = false) => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    withMusicRef.current = withMusic;
+    if (fromModal) {
+      setModalFade(true);
+      setTimeout(() => setStage("message"), 300);
+      timerRef.current = setTimeout(() => setStage("jumping"), 5000);
+    } else {
+      setModalFade(false);
+      setStage("message");
+      timerRef.current = setTimeout(() => setStage("jumping"), 5000);
+    }
+  };
+
   // Show on first visit
   useEffect(() => {
     if (!localStorage.getItem(STORAGE_KEY)) setStage("modal");
   }, []);
 
+  // Global replay trigger — fired by the footer button
+  useEffect(() => {
+    const handler = () => startSequence(true);
+    window.addEventListener("bns-replay-sequence", handler);
+    return () => window.removeEventListener("bns-replay-sequence", handler);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Button handler — fades modal out, then shows message
-  const handleEnter = (withMusic: boolean) => {
-    withMusicRef.current = withMusic;
-    setModalFade(true);
-    setTimeout(() => setStage("message"), 300);
-    // 300ms fade-out + 4700ms message phase = 5 000 ms before FTL starts
-    setTimeout(() => setStage("jumping"), 5000);
-  };
+  const handleEnter = (withMusic: boolean) => startSequence(withMusic, true);
 
   // FTL canvas animation
   useEffect(() => {
