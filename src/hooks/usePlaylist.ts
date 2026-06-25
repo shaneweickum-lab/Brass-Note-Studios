@@ -28,6 +28,9 @@ export function usePlayerState(songs: Song[]) {
   const [duration, setDuration] = useState(0);
   const [volume, setVolumeState] = useState(0.8);
 
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
+
   useEffect(() => { queueRef.current = queue; }, [queue]);
 
   useEffect(() => {
@@ -97,6 +100,27 @@ export function usePlayerState(songs: Song[]) {
         return;
       }
 
+      // Set up Web Audio API on first play (must be inside user gesture)
+      if (!audioCtxRef.current) {
+        try {
+          const AudioContextClass =
+            window.AudioContext ||
+            (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+          const ctx = new AudioContextClass();
+          const node = ctx.createAnalyser();
+          node.fftSize = 2048;
+          node.smoothingTimeConstant = 0.85;
+          const source = ctx.createMediaElementSource(audio);
+          source.connect(node);
+          node.connect(ctx.destination);
+          audioCtxRef.current = ctx;
+          setAnalyser(node);
+        } catch {
+          // Web Audio not available — visualizer simply won't draw real data
+        }
+      }
+      audioCtxRef.current?.resume();
+
       setCurrentSongId(songId);
       setPlayerState("loading");
       audio.src = song.audioSource.mp3Url;
@@ -153,5 +177,6 @@ export function usePlayerState(songs: Song[]) {
     seek,
     setVolume,
     currentSong,
+    analyser,
   };
 }

@@ -10,7 +10,7 @@ export interface Song {
   title: string;
   clientName: string;
   description?: string;
-  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "Method Development";
+  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "From the Lab";
   genre?: string;
   mood?: string[];
   featured: boolean;
@@ -61,4 +61,5 @@ export interface PlayerContextType {
   seek: (time: number) => void;
   setVolume: (vol: number) => void;
   currentSong: Song | null;
+  analyser: AnalyserNode | null;
 }

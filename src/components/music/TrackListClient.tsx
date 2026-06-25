@@ -12,7 +12,7 @@ const CATEGORIES: Category[] = [
   "Personal Lyrics",
   "Song Production",
   "Comprehensive Services",
-  "Method Development",
+  "From the Lab",
 ];
 
 interface TrackListClientProps {
@@ -72,16 +72,19 @@ export default function TrackListClient({ songs }: TrackListClientProps) {
         ))}
       </div>
 
-      {/* Method Development info banner */}
-      {activeCategory === "Method Development" && (
-        <div className="flex items-start gap-3 bg-surface border border-gold/20 rounded-lg px-5 py-4 mb-8">
-          <FlaskConical className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+      {/* From the Lab info banner */}
+      {activeCategory === "From the Lab" && (
+        <div className="flex items-start gap-3 bg-surface border border-teal/20 rounded-lg px-5 py-4 mb-8">
+          <FlaskConical className="w-5 h-5 text-teal shrink-0 mt-0.5" />
           <div>
-            <p className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold mb-1">
-              Method Development
+            <p className="text-teal font-body text-xs uppercase tracking-[0.15em] font-semibold mb-1">
+              From the Lab
             </p>
             <p className="text-text-muted font-body text-sm leading-relaxed">
-              These tracks are technical productions created during the research and development of the Brass Note Method — stress tests, experiments, and proof-of-concept generations used to discover and verify the framework&apos;s capabilities.
+              These tracks are technical productions from the Brass Note Labs research archive — stress tests, experiments, and proof-of-concept generations created to develop, verify, and refine the production framework.
+            </p>
+            <p className="text-teal/70 font-body text-xs mt-2">
+              Click play to launch the Lab Visualizer — a real-time signal analysis display.
             </p>
           </div>
         </div>
