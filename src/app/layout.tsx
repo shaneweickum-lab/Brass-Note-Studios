@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import PlayerProvider from "@/components/music/PlayerProvider";
 import PlaylistPlayer from "@/components/music/PlaylistPlayer";
 import LabVisualizer from "@/components/music/LabVisualizer";
+import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
@@ -53,6 +54,7 @@ export default function RootLayout({
           <Footer />
           <PlaylistPlayer />
           <LabVisualizer />
+          <WelcomeOverlay />
         </PlayerProvider>
       </body>
     </html>
