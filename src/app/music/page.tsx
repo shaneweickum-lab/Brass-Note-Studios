@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Music2, Layers, Zap } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
@@ -37,13 +38,17 @@ export default function MusicPage() {
     <div>
       {/* Page hero */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse 60% 50% at 50% 0%, #C9921A33, transparent 70%)",
-          }}
+        {/* Background photo */}
+        <Image
+          src="/images/IMG_5107.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+          aria-hidden="true"
         />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading
             eyebrow="Commissioned Songs"
@@ -68,6 +73,30 @@ export default function MusicPage() {
       </section>
 
       <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-20" />
+
+      {/* Photo strip */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="relative h-64 sm:h-80 rounded-[10px] overflow-hidden border border-white/[0.06]">
+            <Image
+              src="/images/IMG_5098.png"
+              alt="Brass Note Studios"
+              fill
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          </div>
+          <div className="relative h-64 sm:h-80 rounded-[10px] overflow-hidden border border-white/[0.06]">
+            <Image
+              src="/images/IMG_5099.png"
+              alt="Brass Note Studios"
+              fill
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          </div>
+        </div>
+      </section>
 
       {/* Our Method panel */}
       <section className="px-4 sm:px-6 lg:px-8 pb-32 max-w-7xl mx-auto">
