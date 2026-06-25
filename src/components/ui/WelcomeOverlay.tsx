@@ -26,18 +26,18 @@ function makeStars(W: number, H: number, n = 300): Star[] {
 // Combined: 5 000 ms
 
 const MESSAGE_LINES = [
-  { text: "Sit down and enjoy the ride",     delay: 0,   cls: "text-text-base font-bold text-3xl md:text-4xl" },
-  { text: "as we bring you in",              delay: 0.38, cls: "text-text-muted text-xl md:text-2xl" },
-  { text: "to our",                          delay: 0.72, cls: "text-text-muted text-xl md:text-2xl" },
-  { text: "digital space",                   delay: 0.95, cls: "text-gold italic text-2xl md:text-3xl" },
+  { text: "Sit down and enjoy the ride",     delay: 0,    cls: "text-text-base font-bold text-3xl md:text-4xl" },
+  { text: "as we bring you in",              delay: 1.2,  cls: "text-text-muted text-xl md:text-2xl" },
+  { text: "to our",                          delay: 2.3,  cls: "text-text-muted text-xl md:text-2xl" },
+  { text: "digital space",                   delay: 3.1,  cls: "text-gold italic text-2xl md:text-3xl" },
 ];
 
-// FTL timeline (ms) — these sum to 3 400 ms
-const ACCEL_END   = 2300;
-const FLASH_START = 2300;
-const FLASH_END   = 2650;
-const FADE_START  = 2650;
-const FADE_END    = 3400;
+// FTL timeline (ms) — these sum to 4 000 ms
+const ACCEL_END   = 2800;
+const FLASH_START = 2800;
+const FLASH_END   = 3200;
+const FADE_START  = 3200;
+const FADE_END    = 4000;
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
@@ -63,8 +63,8 @@ export default function WelcomeOverlay() {
     withMusicRef.current = withMusic;
     setModalFade(true);
     setTimeout(() => setStage("message"), 300);
-    // After message phase (1 300 ms more), start FTL
-    setTimeout(() => setStage("jumping"), 1600);
+    // 300ms fade-out + 4700ms message phase = 5 000 ms before FTL starts
+    setTimeout(() => setStage("jumping"), 5000);
   };
 
   // FTL canvas animation
@@ -235,7 +235,7 @@ export default function WelcomeOverlay() {
                 className={cls}
                 style={{
                   opacity: 0,
-                  animation: `fade-in-up 0.55s ease forwards`,
+                  animation: `fade-in-up 0.8s ease forwards`,
                   animationDelay: `${delay}s`,
                 }}
               >
