@@ -1,131 +1,263 @@
 "use client";
 
-import { Play, Pause, ExternalLink, Music } from "lucide-react";
+import { Play, Pause, ExternalLink } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 import { cn } from "@/lib/utils";
 import type { Song } from "@/types";
 
+// ── Waveform placeholder ────────────────────────────────────────────────────
+const WAVE_HEIGHTS = [10, 22, 36, 28, 44, 32, 48, 38, 28, 18, 30, 12];
+const WAVE_DELAYS  = [0, 0.1, 0.05, 0.15, 0.08, 0.12, 0.03, 0.18, 0.07, 0.14, 0.09, 0.16];
+
+function Waveform({ color }: { color: string }) {
+  return (
+    <div className="flex items-end justify-center gap-[3px] h-12 relative z-10">
+      {WAVE_HEIGHTS.map((h, i) => (
+        <div
+          key={i}
+          className="w-[3px] rounded-sm"
+          style={{
+            height: h,
+            background: color,
+            opacity: 0.7,
+            animation: "wave-bar 1s ease-in-out infinite alternate",
+            animationDelay: `${WAVE_DELAYS[i]}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ── Props ───────────────────────────────────────────────────────────────────
 interface TrackCardProps {
   song: Song;
   allSongs: Song[];
+  wide?: boolean; // hero/featured layout — side-by-side on md+
 }
 
-export default function TrackCard({ song, allSongs }: TrackCardProps) {
+export default function TrackCard({ song, allSongs, wide = false }: TrackCardProps) {
   const { currentSongId, playerState, play, pause, resume } = usePlayer();
 
   const isCurrentSong = currentSongId === song.id;
-  const isPlaying =
-    isCurrentSong && (playerState === "playing" || playerState === "loading");
-  const hasError = isCurrentSong && playerState === "error";
-  const hasAudio = Boolean(song.audioSource.mp3Url);
-  const hasSunoLink = Boolean(song.audioSource.sunoUrl);
+  const isPlaying     = isCurrentSong && (playerState === "playing" || playerState === "loading");
+  const hasAudio      = Boolean(song.audioSource.mp3Url);
+  const hasSunoLink   = Boolean(song.audioSource.sunoUrl);
 
   const handleToggle = () => {
+    if (!hasAudio) return;
     if (isCurrentSong) {
-      if (playerState === "playing") pause();
-      else resume();
+      playerState === "playing" ? pause() : resume();
     } else {
       play(song.id, allSongs);
     }
   };
 
-  return (
+  // ── Art area (shared between both variants) ─────────────────────────────
+  const artArea = (
     <div
       className={cn(
-        "group relative bg-surface rounded-lg p-5 border transition-all duration-300",
-        isCurrentSong
-          ? "border-gold/50 shadow-lg shadow-gold/10"
-          : "border-white/5 hover:border-gold/25"
+        "relative overflow-hidden flex items-center justify-center shrink-0",
+        wide ? "h-[220px] md:h-auto md:w-[300px]" : "h-[180px]"
       )}
+      style={{ background: "linear-gradient(135deg, #0a1525, #111827)" }}
     >
-      {/* Now playing indicator */}
+      {/* Radial glow pool */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div
+          className="w-48 h-48 rounded-full blur-2xl"
+          style={{ background: wide ? "rgba(13,148,136,0.12)" : "rgba(212,168,67,0.12)" }}
+        />
+      </div>
+
+      {/* Cover image OR waveform */}
+      {song.coverImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={song.coverImage}
+          alt={song.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.04] transition-all duration-500"
+        />
+      ) : (
+        <Waveform color={wide ? "#0D9488" : "#D4A843"} />
+      )}
+
+      {/* Bottom fade overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(8,13,24,0.3) 60%, rgba(8,13,24,0.85) 100%)",
+        }}
+      />
+
+      {/* Hover play / active pause button */}
+      {hasAudio && (
+        <button
+          onClick={handleToggle}
+          className={cn(
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+            "w-[52px] h-[52px] rounded-full flex items-center justify-center z-10",
+            "transition-all duration-250 shadow-[0_4px_20px_rgba(212,168,67,0.4)]",
+            "bg-gold hover:bg-gold-light",
+            isPlaying
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-[0.85] group-hover:opacity-100 group-hover:scale-100"
+          )}
+          aria-label={isPlaying ? `Pause ${song.title}` : `Play ${song.title}`}
+        >
+          {isPlaying ? (
+            <Pause className="w-5 h-5 text-background" />
+          ) : (
+            <Play className="w-5 h-5 text-background ml-0.5" />
+          )}
+        </button>
+      )}
+
+      {/* Now-playing bars (top-right, shown when active) */}
       {isPlaying && (
-        <div className="absolute top-3 right-3 flex gap-0.5 items-end h-4">
-          {[1, 2, 3].map((i) => (
+        <div className="absolute top-3 right-3 flex items-end gap-[2px] h-4 z-10">
+          {[60, 100, 40].map((pct, i) => (
             <div
               key={i}
-              className="w-0.5 bg-gold rounded-full animate-bounce"
+              className="w-[3px] rounded-full bg-gold"
               style={{
-                height: `${[60, 100, 40][i - 1]}%`,
-                animationDelay: `${(i - 1) * 0.15}s`,
+                height: `${pct}%`,
+                animation: "wave-bar 0.6s ease-in-out infinite alternate",
+                animationDelay: `${i * 0.15}s`,
               }}
             />
           ))}
         </div>
       )}
+    </div>
+  );
 
-      <div className="flex gap-4">
-        {/* Cover art */}
-        <div className="w-16 h-16 rounded-md bg-gold-shimmer border border-gold/10 flex items-center justify-center shrink-0 overflow-hidden">
-          {song.coverImage ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={song.coverImage}
-              alt={song.title}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <Music className="w-7 h-7 text-gold/40" />
-          )}
-        </div>
+  // ── Card body (shared between both variants) ────────────────────────────
+  const cardBody = (
+    <div className={cn("relative", wide ? "p-7 md:p-8 flex flex-col justify-center" : "p-5")}>
+      {/* Thin brass / teal rule at top */}
+      <div
+        className="h-px mb-4"
+        style={{
+          background: `linear-gradient(to right, ${
+            wide ? "rgba(13,148,136,0.4)" : "rgba(212,168,67,0.35)"
+          }, transparent)`,
+        }}
+      />
 
-        {/* Info */}
-        <div className="flex-1 min-w-0">
-          <h3 className="font-display text-lg text-text-base leading-tight truncate">
-            {song.title}
-          </h3>
-          <p className="text-text-muted text-sm mt-0.5 truncate">
-            {song.clientName}
-          </p>
-          <p className="text-gold text-xs italic mt-1 font-body">
-            A Brass Note Studios Production
-          </p>
+      {/* Production label */}
+      <div className="flex items-center gap-1.5 mb-2">
+        <div
+          className="w-4 h-px shrink-0"
+          style={{ background: wide ? "rgba(13,148,136,0.7)" : "rgba(212,168,67,0.7)" }}
+        />
+        <p className="text-gold font-body text-[10px] font-semibold uppercase tracking-[0.18em]">
+          A Brass Note Studios Production
+        </p>
+      </div>
+
+      {/* Title */}
+      <h3
+        className={cn(
+          "font-display text-text-base leading-tight",
+          wide ? "text-2xl mb-2" : "text-lg mb-1.5"
+        )}
+      >
+        {song.title}
+      </h3>
+
+      {/* Client name */}
+      <p
+        className={cn(
+          "font-body font-medium text-teal",
+          wide ? "text-base mb-4" : "text-sm mb-3"
+        )}
+      >
+        {song.clientName}
+      </p>
+
+      {/* Description (wide variant only) */}
+      {wide && song.description && (
+        <p className="text-text-muted font-body text-sm leading-relaxed mb-5 max-w-[520px]">
+          {song.description}
+        </p>
+      )}
+
+      {/* Divider */}
+      <div className="h-px bg-white/[0.06] mb-3" />
+
+      {/* Footer: tags + action */}
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex gap-1.5 flex-wrap">
           {song.genre && (
-            <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-gold/10 text-gold-light font-body">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-gold bg-gold/[0.08] border border-gold/[0.25] px-2.5 py-1 rounded-full group-hover:bg-gold/[0.14] group-hover:border-gold/40 transition-colors">
               {song.genre}
             </span>
           )}
+          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-teal bg-teal/[0.08] border border-teal/[0.25] px-2.5 py-1 rounded-full group-hover:bg-teal/[0.14] group-hover:border-teal/40 transition-colors">
+            {song.category}
+          </span>
         </div>
-      </div>
 
-      {/* Controls */}
-      <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/5">
-        {hasAudio && !hasError ? (
-          <button
-            onClick={handleToggle}
-            className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-sm text-sm font-body font-medium transition-all duration-200",
-              isCurrentSong
-                ? "bg-gold text-background hover:bg-gold-light"
-                : "border border-gold/40 text-gold hover:bg-gold/10"
-            )}
-            aria-label={isPlaying ? `Pause ${song.title}` : `Play ${song.title}`}
-          >
-            {isPlaying ? (
-              <Pause className="w-4 h-4" />
-            ) : (
-              <Play className="w-4 h-4" />
-            )}
-            {isPlaying ? "Pause" : "Play"}
-          </button>
-        ) : hasSunoLink ? (
+        {/* Wide: prominent listen button. Standard: subtle Suno link when no audio. */}
+        {wide && hasSunoLink && (
           <a
             href={song.audioSource.sunoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-sm text-sm font-body font-medium border border-gold/40 text-gold hover:bg-gold/10 transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-gold text-background font-body font-bold text-xs uppercase tracking-[0.1em] px-5 py-2.5 rounded-sm hover:bg-gold-light transition-colors"
           >
-            <ExternalLink className="w-4 h-4" />
-            Listen on Suno
+            <Play className="w-3.5 h-3.5" />
+            Listen
           </a>
-        ) : null}
+        )}
 
-        {song.description && (
-          <p className="text-text-subtle text-xs ml-auto text-right max-w-[40%] leading-relaxed hidden sm:block">
-            {song.description}
-          </p>
+        {!wide && !hasAudio && hasSunoLink && (
+          <a
+            href={song.audioSource.sunoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-gold text-xs font-body hover:text-gold-light transition-colors"
+          >
+            <ExternalLink className="w-3 h-3" />
+            Suno
+          </a>
         )}
       </div>
+    </div>
+  );
+
+  // ── Wide (hero) card ────────────────────────────────────────────────────
+  if (wide) {
+    return (
+      <div
+        className="group relative rounded-[10px] overflow-hidden border border-white/[0.06] transition-all duration-300 hover:border-teal/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_32px_rgba(13,148,136,0.1)] flex flex-col md:grid md:grid-cols-[300px_1fr]"
+        style={{ background: "linear-gradient(160deg, #0d1f2a 0%, #0d1a22 60%, #080e15 100%)" }}
+      >
+        {/* Teal top accent stripe */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-teal z-10" />
+        {artArea}
+        {cardBody}
+      </div>
+    );
+  }
+
+  // ── Standard card ───────────────────────────────────────────────────────
+  return (
+    <div
+      className={cn(
+        "group relative rounded-[10px] overflow-hidden border border-white/[0.06] transition-all duration-300",
+        "hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_28px_rgba(212,168,67,0.08)]",
+        isCurrentSong && !isPlaying && "border-gold/30 shadow-[0_0_16px_rgba(212,168,67,0.1)]",
+        isPlaying && "border-gold/50 shadow-[0_0_24px_rgba(212,168,67,0.18)]"
+      )}
+      style={{ background: "linear-gradient(160deg, #131d30 0%, #0F172A 60%, #080d18 100%)" }}
+    >
+      {/* Gold top accent stripe */}
+      <div className="h-[2px] w-full bg-gold" />
+      {artArea}
+      {cardBody}
     </div>
   );
 }
