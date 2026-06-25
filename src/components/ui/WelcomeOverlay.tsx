@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 
-const ANTHEM_ID = "song-007";
+const ANTHEM_ID  = "song-007";
 const STORAGE_KEY = "bns-welcome-seen";
+
+// ── FTL star field ────────────────────────────────────────────────────────────
 
 interface Star { x: number; y: number; z: number; pz: number }
 
@@ -18,15 +20,37 @@ function makeStars(W: number, H: number, n = 300): Star[] {
   }));
 }
 
-type Stage = "modal" | "jumping" | "gone";
+// ── Message lines ─────────────────────────────────────────────────────────────
+// Total message phase: ~1 600 ms (fade-out 300 + lines stagger + hold)
+// FTL phase: ~3 400 ms
+// Combined: 5 000 ms
+
+const MESSAGE_LINES = [
+  { text: "Sit down and enjoy the ride",     delay: 0,   cls: "text-text-base font-bold text-3xl md:text-4xl" },
+  { text: "as we bring you in",              delay: 0.38, cls: "text-text-muted text-xl md:text-2xl" },
+  { text: "to our",                          delay: 0.72, cls: "text-text-muted text-xl md:text-2xl" },
+  { text: "digital space",                   delay: 0.95, cls: "text-gold italic text-2xl md:text-3xl" },
+];
+
+// FTL timeline (ms) — these sum to 3 400 ms
+const ACCEL_END   = 2300;
+const FLASH_START = 2300;
+const FLASH_END   = 2650;
+const FADE_START  = 2650;
+const FADE_END    = 3400;
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
+type Stage = "modal" | "message" | "jumping" | "gone";
 
 export default function WelcomeOverlay() {
-  const [stage, setStage] = useState<Stage>("gone");
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef<number>(0);
+  const [stage, setStage]       = useState<Stage>("gone");
+  const [modalFade, setModalFade] = useState(false);   // triggers CSS fade-out
+  const canvasRef   = useRef<HTMLCanvasElement>(null);
+  const rafRef      = useRef<number>(0);
   const withMusicRef = useRef(false);
-  const { play } = usePlayer();
-  const playRef = useRef(play);
+  const { play }    = usePlayer();
+  const playRef     = useRef(play);
   useEffect(() => { playRef.current = play; }, [play]);
 
   // Show on first visit
@@ -34,14 +58,23 @@ export default function WelcomeOverlay() {
     if (!localStorage.getItem(STORAGE_KEY)) setStage("modal");
   }, []);
 
-  // FTL jump animation
+  // Button handler — fades modal out, then shows message
+  const handleEnter = (withMusic: boolean) => {
+    withMusicRef.current = withMusic;
+    setModalFade(true);
+    setTimeout(() => setStage("message"), 300);
+    // After message phase (1 300 ms more), start FTL
+    setTimeout(() => setStage("jumping"), 1600);
+  };
+
+  // FTL canvas animation
   useEffect(() => {
     if (stage !== "jumping") return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const W = (canvas.width = canvas.offsetWidth);
+    const W = (canvas.width  = canvas.offsetWidth);
     const H = (canvas.height = canvas.offsetHeight);
     const ctx = canvas.getContext("2d")!;
     const cx = W / 2;
@@ -49,16 +82,9 @@ export default function WelcomeOverlay() {
 
     const stars = makeStars(W, H);
     let elapsed = 0;
-    let last = performance.now();
+    let last    = performance.now();
 
-    // Timeline (ms)
-    const ACCEL_END   = 2000; // ramping phase ends, full FTL speed
-    const FLASH_START = 2000;
-    const FLASH_END   = 2350;
-    const FADE_START  = 2350;
-    const FADE_END    = 2850;
-
-    // Start from the same dark bg as the modal — no flash cut
+    // Match the dark background — seamless cut
     ctx.fillStyle = "rgb(13,10,11)";
     ctx.fillRect(0, 0, W, H);
 
@@ -67,38 +93,33 @@ export default function WelcomeOverlay() {
       last = now;
       elapsed += dt;
 
-      const t = Math.min(elapsed / ACCEL_END, 1);
+      const t     = Math.min(elapsed / ACCEL_END, 1);
       const speed = 0.003 + Math.pow(t, 2.5) * 0.14;
 
-      // Partial clear — keeps streaks trailing
+      // Trail
       ctx.fillStyle = "rgba(0,0,0,0.35)";
       ctx.fillRect(0, 0, W, H);
 
-      // Draw stars as stretching lines
+      // Stars
       for (const s of stars) {
         s.pz = s.z;
         s.z -= speed;
-
         if (s.z <= 0) {
-          s.x = (Math.random() - 0.5) * W * 2.5;
-          s.y = (Math.random() - 0.5) * H * 2.5;
-          s.z = 1;
+          s.x  = (Math.random() - 0.5) * W * 2.5;
+          s.y  = (Math.random() - 0.5) * H * 2.5;
+          s.z  = 1;
           s.pz = 1;
           continue;
         }
-
-        const sx = s.x / s.z + cx;
-        const sy = s.y / s.z + cy;
-        const px = s.x / s.pz + cx;
-        const py = s.y / s.pz + cy;
-
+        const sx = s.x / s.z + cx, sy = s.y / s.z + cy;
+        const px = s.x / s.pz + cx, py = s.y / s.pz + cy;
         if (sx < -60 || sx > W + 60 || sy < -60 || sy > H + 60) continue;
 
         const nearness = 1 - s.z;
-        const alpha = Math.min(1, nearness * 1.5 + 0.15);
-        const thick = 0.4 + nearness * 2.8;
+        const alpha    = Math.min(1, nearness * 1.5 + 0.15);
+        const thick    = 0.4 + nearness * 2.8;
 
-        // Colour ramp: blue-white (far) → teal (mid) → gold (close)
+        // Blue-white → teal → gold as stars approach
         let r: number, g: number, b: number;
         if (nearness < 0.5) {
           const u = nearness / 0.5;
@@ -113,7 +134,7 @@ export default function WelcomeOverlay() {
         }
 
         ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
-        ctx.lineWidth = thick;
+        ctx.lineWidth   = thick;
         ctx.beginPath();
         ctx.moveTo(px, py);
         ctx.lineTo(sx, sy);
@@ -127,12 +148,11 @@ export default function WelcomeOverlay() {
         ctx.fillRect(0, 0, W, H);
       }
 
-      // Fade to black → reveal site
+      // Fade to black → done
       if (elapsed >= FADE_START) {
         const ft = Math.min((elapsed - FADE_START) / (FADE_END - FADE_START), 1);
         ctx.fillStyle = `rgba(0,0,0,${ft})`;
         ctx.fillRect(0, 0, W, H);
-
         if (ft >= 1) {
           localStorage.setItem(STORAGE_KEY, "1");
           if (withMusicRef.current) playRef.current(ANTHEM_ID);
@@ -150,11 +170,6 @@ export default function WelcomeOverlay() {
 
   if (stage === "gone") return null;
 
-  const handleEnter = (withMusic: boolean) => {
-    withMusicRef.current = withMusic;
-    setStage("jumping");
-  };
-
   return (
     <div className="fixed inset-0 z-[300]" style={{ background: "rgb(13,10,11)" }}>
 
@@ -165,15 +180,13 @@ export default function WelcomeOverlay() {
         style={{ display: stage === "jumping" ? "block" : "none" }}
       />
 
-      {/* Welcome modal */}
+      {/* ── Stage: modal ── */}
       {stage === "modal" && (
         <div
-          className="absolute inset-0 flex items-center justify-center px-6"
-          style={{ backdropFilter: "blur(6px)" }}
+          className="absolute inset-0 flex items-center justify-center px-6 transition-opacity duration-300"
+          style={{ opacity: modalFade ? 0 : 1, backdropFilter: "blur(6px)" }}
         >
           <div className="text-center max-w-sm mx-auto">
-
-            {/* Pulsing volume icon */}
             <div className="relative w-20 h-20 mx-auto mb-8">
               <span
                 className="absolute inset-0 rounded-full bg-gold/20 animate-ping"
@@ -202,17 +215,37 @@ export default function WelcomeOverlay() {
               <Volume2 className="w-4 h-4" />
               I&apos;m Ready — Turn It Up
             </button>
-
             <button
               onClick={() => handleEnter(false)}
               className="block mx-auto mt-4 text-text-subtle/50 text-xs font-body hover:text-text-subtle transition-colors"
             >
               Skip
             </button>
-
           </div>
         </div>
       )}
+
+      {/* ── Stage: message ── */}
+      {stage === "message" && (
+        <div className="absolute inset-0 flex items-center justify-center px-6">
+          <div className="text-center max-w-xl mx-auto font-display space-y-2">
+            {MESSAGE_LINES.map(({ text, delay, cls }) => (
+              <p
+                key={text}
+                className={cls}
+                style={{
+                  opacity: 0,
+                  animation: `fade-in-up 0.55s ease forwards`,
+                  animationDelay: `${delay}s`,
+                }}
+              >
+                {text}
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
