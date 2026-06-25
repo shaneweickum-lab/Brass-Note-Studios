@@ -4,7 +4,8 @@ import { Heart, Mic2, Users, Music, Check, Clock, Star, RefreshCw, TrendingUp } 
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
 import ProcessSteps from "@/components/services/ProcessSteps";
-import servicesData from "@/data/services.json";
+import servicesDataRaw from "@/data/services.json";
+import type { ServiceCategory } from "@/types";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
@@ -16,6 +17,8 @@ const iconMap: Record<string, React.ElementType> = { Heart, Mic2, Users, Music }
 
 // Flip to true when subscription plans are ready to offer publicly
 const SHOW_SUBSCRIPTIONS = false;
+
+const servicesData = servicesDataRaw as { categories: ServiceCategory[]; subscriptions: typeof servicesDataRaw.subscriptions; addons: typeof servicesDataRaw.addons };
 
 export default function ServicesPage() {
   const { categories, subscriptions, addons } = servicesData;
@@ -77,22 +80,40 @@ export default function ServicesPage() {
                         {pkg.price}<span className="text-gold/60 text-base">+</span>
                       </span>
                     </div>
-                    <p className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</p>
+                    <p className="text-text-muted font-body text-sm leading-relaxed mb-3">{pkg.description}</p>
+                    {pkg.checkoutUrl ? (
+                      <a
+                        href={pkg.checkoutUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-full font-body font-semibold text-sm bg-gold text-background hover:bg-gold-light rounded-sm px-4 py-2.5 transition-colors duration-200"
+                      >
+                        Order Now
+                      </a>
+                    ) : (
+                      <Link
+                        href={`/contact?service=${encodeURIComponent(cat.name)}`}
+                        className="inline-flex items-center justify-center w-full font-body font-semibold text-sm border border-gold/40 text-gold hover:border-gold rounded-sm px-4 py-2.5 transition-colors duration-200"
+                      >
+                        Inquire
+                      </Link>
+                    )}
                   </div>
                 ))}
               </div>
 
               {/* Pricing — desktop table */}
               <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
-                <div className="grid grid-cols-[1fr_auto_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
+                <div className="grid grid-cols-[1fr_auto_1fr_auto] bg-surface-elevated px-6 py-3 border-b border-white/8">
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Package</span>
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold text-center px-8">Price</span>
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">What You Get</span>
+                  <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold pl-8"></span>
                 </div>
                 {cat.packages.map((pkg, i) => (
                   <div
                     key={pkg.name}
-                    className={`grid grid-cols-[1fr_auto_1fr] items-center px-6 py-4 border-b border-white/5 last:border-0 transition-colors hover:bg-gold/5 ${
+                    className={`grid grid-cols-[1fr_auto_1fr_auto] items-center px-6 py-4 border-b border-white/5 last:border-0 transition-colors hover:bg-gold/5 ${
                       i % 2 === 0 ? "bg-surface" : "bg-surface/60"
                     }`}
                   >
@@ -101,6 +122,25 @@ export default function ServicesPage() {
                       {pkg.price}<span className="text-gold/60 text-base">+</span>
                     </span>
                     <span className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</span>
+                    <div className="pl-8">
+                      {pkg.checkoutUrl ? (
+                        <a
+                          href={pkg.checkoutUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center font-body font-semibold text-xs bg-gold text-background hover:bg-gold-light rounded-sm px-4 py-2 whitespace-nowrap transition-colors duration-200"
+                        >
+                          Order Now
+                        </a>
+                      ) : (
+                        <Link
+                          href={`/contact?service=${encodeURIComponent(cat.name)}`}
+                          className="inline-flex items-center justify-center font-body font-semibold text-xs border border-gold/40 text-gold hover:border-gold rounded-sm px-4 py-2 whitespace-nowrap transition-colors duration-200"
+                        >
+                          Inquire
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

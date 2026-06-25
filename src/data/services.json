@@ -9,10 +9,10 @@
       "delivery": "Single song: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
       "included": "All individual songs include: custom lyrics, full production, and 3 revision rounds.",
       "packages": [
-        { "name": "Single Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion" },
-        { "name": "EP (3–4 songs)", "price": "$299", "description": "A small collection — perfect for a gift series or personal project" },
-        { "name": "LP (5–7 songs)", "price": "$499", "description": "A deeper collection with thematic continuity" },
-        { "name": "Full Album (8+ songs)", "price": "$799", "description": "A complete album — your story told in full" }
+        { "name": "Single Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion", "checkoutUrl": "https://mystore6154.samcart.com/products/single-song-creationindividual" },
+        { "name": "EP (3–4 songs)", "price": "$299", "description": "A small collection — perfect for a gift series or personal project", "checkoutUrl": "https://mystore6154.samcart.com/products/ep-34-songs-individual" },
+        { "name": "LP (5–7 songs)", "price": "$499", "description": "A deeper collection with thematic continuity", "checkoutUrl": "https://mystore6154.samcart.com/products/lp-5-7-songs-individual" },
+        { "name": "Full Album (8+ songs)", "price": "$799", "description": "A complete album — your story told in full", "checkoutUrl": "https://mystore6154.samcart.com/products/full-album-8-songsindividual" }
       ]
     },
     {

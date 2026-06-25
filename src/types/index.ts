@@ -23,6 +23,7 @@ export interface ServicePackage {
   name: string;
   price: string;
   description: string;
+  checkoutUrl?: string;
 }
 
 export interface ServiceCategory {
