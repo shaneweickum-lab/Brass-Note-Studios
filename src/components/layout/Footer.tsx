@@ -105,6 +105,13 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Brass Note Studios. All rights reserved.</p>
           <p>All music written &amp; produced by Brass Note Studios.</p>
         </div>
+        <p className="mt-3 text-center font-body text-text-subtle/40 text-xs">
+          Website designed &amp; built by{" "}
+          <Link href="/labs" className="hover:text-teal transition-colors">
+            Brass Note Labs
+          </Link>
+          .
+        </p>
       </div>
     </footer>
   );
