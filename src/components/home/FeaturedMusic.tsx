@@ -17,7 +17,7 @@ export default function FeaturedMusic({ songs }: FeaturedMusicProps) {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <SectionHeading
             eyebrow="Commissioned Songs"
-            title="Featured Work"
+            title="Featured Songs"
             subtitle="Many of the songs produced through our studio are featured in this growing portfolio — each one a unique story brought to life."
           />
           <Link

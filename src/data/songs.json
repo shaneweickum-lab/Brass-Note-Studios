@@ -2,9 +2,9 @@
   "songs": [
     {
       "id": "song-001",
-      "title": "BulletProof",
-      "clientName": "myself",
-      "description": "A song about the sticks and stone rhyme.",
+      "title": "Bulletproof",
+      "clientName": "Brass Note Studios Team",
+      "description": "Sticks and stones may break your bones — but what if they couldn't? A cinematic reimagining of the childhood phrase most people dismissed, Bulletproof flips the narrative into something harder, darker, and unshakeable. Hip-hop with an artistic edge, scored like a film.",
       "category": "Personal Lyrics",
       "genre": "Cinematic Rap",
       "mood": ["heavy", "meaningful"],
@@ -13,20 +13,20 @@
       "audioSource": {
         "type": "mp3",
         "mp3Url": "/audio/Bulletproof.mp3",
-        "sunoUrl": ""
+        "sunoUrl": "https://suno.com/s/dJttZClmBk2Oq9uB"
       },
       "coverImage": null
     },
     {
       "id": "song-002",
-      "title": "Our Forever Begins",
-      "clientName": "Marcus & Danielle Webb",
-      "description": "Custom wedding song for a beautiful ceremony",
+      "title": "Dejanae's Song (The Most Beautiful Woman in the World)",
+      "clientName": "Shane W.",
+      "description": "A birthday gift celebrating her birthday and their life together.",
       "category": "Personal Lyrics",
       "genre": "R&B",
-      "mood": ["romantic", "joyful"],
+      "mood": ["romantic", "celebratory"],
       "featured": true,
-      "publishedDate": "2024-02-20",
+      "publishedDate": "2026-06-13",
       "audioSource": {
         "type": "mp3",
         "mp3Url": "",
@@ -36,48 +36,14 @@
     },
     {
       "id": "song-003",
-      "title": "Rise & Shine Anthem",
-      "clientName": "Apex Marketing Group",
-      "description": "Upbeat corporate theme for their Q2 product launch campaign",
-      "category": "Song Production",
-      "genre": "Upbeat Pop",
-      "mood": ["energetic", "professional", "inspiring"],
-      "featured": true,
-      "publishedDate": "2024-03-10",
-      "audioSource": {
-        "type": "mp3",
-        "mp3Url": "",
-        "sunoUrl": ""
-      },
-      "coverImage": null
-    },
-    {
-      "id": "song-004",
-      "title": "Morning Light",
-      "clientName": "Calm Waters Podcast",
-      "description": "Intro and outro theme music for a wellness podcast",
-      "category": "Song Production",
-      "genre": "Ambient",
-      "mood": ["peaceful", "focused"],
-      "featured": false,
-      "publishedDate": "2024-04-05",
-      "audioSource": {
-        "type": "mp3",
-        "mp3Url": "",
-        "sunoUrl": ""
-      },
-      "coverImage": null
-    },
-    {
-      "id": "song-005",
-      "title": "Legacy",
-      "clientName": "Riverstone Community Church",
-      "description": "Full EP project — five original worship songs for the congregation",
+      "title": "Welcome to the Holy of Holies",
+      "clientName": "HHT (Holy of Holies Tabernacle) Church",
+      "description": "An organization anthem that showcases who they are and their mission as an organization.",
       "category": "Comprehensive Services",
       "genre": "Gospel",
       "mood": ["uplifting", "powerful", "community"],
-      "featured": false,
-      "publishedDate": "2024-05-18",
+      "featured": true,
+      "publishedDate": "2026-06-13",
       "audioSource": {
         "type": "mp3",
         "mp3Url": "",
