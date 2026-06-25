@@ -7,7 +7,7 @@
       "description": "Perfect for birthdays, anniversaries, weddings, memorials, proposals, or any occasion worth remembering. Every song is written and produced specifically for you — no templates, no stock music.",
       "icon": "Heart",
       "delivery": "Single song: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
-      "included": "All individual songs include: custom lyrics, full production, and one revision round.",
+      "included": "All individual songs include: custom lyrics, full production, and 3 revision rounds.",
       "packages": [
         { "name": "Single Song", "price": "$149", "description": "One fully custom song — your story, your occasion, your emotion" },
         { "name": "EP (3–4 songs)", "price": "$299", "description": "A small collection — perfect for a gift series or personal project" },
@@ -22,7 +22,7 @@
       "description": "We build original music around your mission, your community, and your identity. Your anthem. Your sound. Completely unique to you.",
       "icon": "Users",
       "delivery": "Single anthem: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
-      "included": "Organization packages include a consultation call to understand your mission, values, and intended use.",
+      "included": "Organization packages include a consultation call to understand your mission, values, and intended use — plus 3 revision rounds per song.",
       "packages": [
         { "name": "Single Anthem / Song", "price": "$199", "description": "One custom song built around your mission, values, or event" },
         { "name": "EP (3–4 songs)", "price": "$449", "description": "Multiple anthems — great for campaigns, events, or seasonal use" },
@@ -37,7 +37,7 @@
       "description": "Original music for your channel, podcast, or brand. Two options: music-only tracks built to your vibe, or your existing words and poems set to a full production.",
       "icon": "Mic2",
       "delivery": "Single track: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
-      "included": "Usage rights included for all platforms. Supply your own lyrics or let us handle the writing.",
+      "included": "Usage rights included for all platforms. Supply your own lyrics or let us handle the writing. 3 revision rounds per song included.",
       "packages": [
         { "name": "Single Track", "price": "$149", "description": "Lyrics or no lyrics — original production built to your brand's sound" },
         { "name": "EP (3–4 tracks)", "price": "$299", "description": "A consistent sonic identity for your brand" },
@@ -90,7 +90,7 @@
     ]
   },
   "addons": [
-    { "name": "Additional revision round", "price": "$25", "notes": "Per song, per round" },
+    { "name": "Additional revision round", "price": "$25", "notes": "Per song, per round — applies to every round beyond the 3 included" },
     { "name": "Stems / separated tracks", "price": "$49", "notes": "Vocal, instrumental, individual instruments" },
     { "name": "Expedited Delivery — Single", "price": "$75", "notes": "Cuts to 5–7 days · Subject to availability" },
     { "name": "Expedited Delivery — EP", "price": "$150", "notes": "Cuts to 7–10 days · Subject to availability" },

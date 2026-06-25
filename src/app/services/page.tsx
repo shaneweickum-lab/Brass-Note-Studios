@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Heart, Mic2, Users, Music, Check, Clock, Star } from "lucide-react";
+import { Heart, Mic2, Users, Music, Check, Clock, Star, RefreshCw } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
 import ProcessSteps from "@/components/services/ProcessSteps";
@@ -73,7 +73,9 @@ export default function ServicesPage() {
                   <div key={pkg.name} className="bg-surface rounded-lg border border-white/8 p-4">
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <span className="font-body font-semibold text-text-base">{pkg.name}</span>
-                      <span className="font-display text-gold text-xl whitespace-nowrap">{pkg.price}</span>
+                      <span className="font-display text-gold text-xl whitespace-nowrap">
+                        {pkg.price}<span className="text-gold/60 text-base">+</span>
+                      </span>
                     </div>
                     <p className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</p>
                   </div>
@@ -95,21 +97,32 @@ export default function ServicesPage() {
                     }`}
                   >
                     <span className="font-body font-semibold text-text-base text-sm">{pkg.name}</span>
-                    <span className="font-display text-gold text-xl px-8 text-center whitespace-nowrap">{pkg.price}</span>
+                    <span className="font-display text-gold text-xl px-8 text-center whitespace-nowrap">
+                      {pkg.price}<span className="text-gold/60 text-base">+</span>
+                    </span>
                     <span className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Included note + delivery */}
-              <div className="mt-4 flex flex-col sm:flex-row gap-4 sm:gap-8">
-                <div className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-gold mt-0.5 shrink-0" />
-                  <p className="text-text-muted font-body text-sm">{cat.included}</p>
+              {/* Included note + delivery + revision policy */}
+              <div className="mt-4 flex flex-col gap-3">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+                    <p className="text-text-muted font-body text-sm">{cat.included}</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Clock className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+                    <p className="text-text-muted font-body text-sm">{cat.delivery}</p>
+                  </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Clock className="w-4 h-4 text-gold mt-0.5 shrink-0" />
-                  <p className="text-text-muted font-body text-sm">{cat.delivery}</p>
+                  <RefreshCw className="w-4 h-4 text-gold/70 mt-0.5 shrink-0" />
+                  <p className="text-text-muted font-body text-sm">
+                    Every song includes <span className="text-text-base font-semibold">3 revisions</span>. Additional revisions beyond the 3rd are{" "}
+                    <span className="text-text-base font-semibold">$25 per round</span>.
+                  </p>
                 </div>
               </div>
 
