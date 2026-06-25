@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Music2, Mic2, Volume2, Ruler, Repeat2, Target } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
@@ -112,14 +113,17 @@ export default function LabsPage() {
 
       {/* ── 01 Hero ──────────────────────────────────────────────────────── */}
       <section className="relative py-24 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Teal glow pool */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 50% at 50% -10%, rgba(13,148,136,0.18) 0%, transparent 65%)",
-          }}
+        {/* Background photo */}
+        <Image
+          src="/images/IMG_5117.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+          aria-hidden="true"
         />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           {/* Eyebrow */}
