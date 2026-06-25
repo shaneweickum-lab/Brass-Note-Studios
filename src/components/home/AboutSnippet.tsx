@@ -29,12 +29,12 @@ export default function AboutSnippet() {
               {/* Dark overlay to keep text readable */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
               <div className="text-center p-8 relative z-10">
-                <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                <div className="w-48 h-48 mx-auto mb-6 flex items-center justify-center">
                   <Image
                     src="/images/B6E31839-3169-4CE4-A5D6-A45D2ED27628.png"
                     alt="Brass Note Studios"
-                    width={96}
-                    height={96}
+                    width={192}
+                    height={192}
                     className="w-full h-full object-contain"
                   />
                 </div>
