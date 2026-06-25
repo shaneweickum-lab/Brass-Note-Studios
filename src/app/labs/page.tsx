@@ -92,6 +92,17 @@ const FINDINGS = [
   },
 ];
 
+const COINED_TERMS = [
+  {
+    num: "001",
+    term: "Syntax Fatigue",
+    pos: "/noun phrase/",
+    year: "2026",
+    definition:
+      "When you overload the lyrical input of a generative audio AI with syntax symbols placed too close together — without giving the model adequate space to process each instruction before receiving the next — you force the model into a chaotic generative state. The output deviates completely from the intended prompt: vocals become random, structure collapses, and elements that were explicitly excluded may appear. The result bears no resemblance to what was directed. Coined from direct observation during production at Brass Note Labs.",
+  },
+];
+
 // ── Sub-components ────────────────────────────────────────────────────────────
 
 function TealEyebrow({ children }: { children: React.ReactNode }) {
@@ -345,7 +356,69 @@ export default function LabsPage() {
         </div>
       </section>
 
-      {/* ── 06 The Standard We Hold ──────────────────────────────────────── */}
+      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0" />
+
+      {/* ── 06 Coined Terms from the Lab ─────────────────────────────────── */}
+      <section className="px-4 sm:px-6 lg:px-8 py-24" id="coined-terms">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <TealEyebrow>From the Lab · Coined Terminology</TealEyebrow>
+            <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-5">
+              Terms we named because they{" "}
+              <em className="not-italic italic">needed names.</em>
+            </h2>
+            <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
+              At Brass Note Labs, we document everything — including the phenomena we encounter
+              that don&apos;t yet have names. When a behavior is observed, confirmed through
+              repeated testing, and distinct enough to matter, we coin a term for it. These are ours.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {COINED_TERMS.map(({ num, term, pos, year, definition }) => (
+              <div
+                key={num}
+                className="rounded-[10px] border border-white/[0.06] border-t-2 border-t-teal max-w-3xl mx-auto w-full"
+                style={{
+                  background: "linear-gradient(160deg, #0d1f2a 0%, #0a141f 60%, #080d18 100%)",
+                  padding: "36px 40px",
+                }}
+              >
+                {/* Badge */}
+                <div className="mb-5">
+                  <span className="inline-block bg-teal text-white font-body font-semibold uppercase rounded-full px-3 py-1"
+                    style={{ fontSize: "0.62rem", letterSpacing: "0.15em" }}>
+                    Term {num} · Coined by Brass Note Labs · {year}
+                  </span>
+                </div>
+
+                {/* Term name */}
+                <h3
+                  className="font-display font-bold text-text-base leading-[1.1] mb-1.5"
+                  style={{ fontSize: "2.4rem" }}
+                >
+                  {term}
+                </h3>
+
+                {/* Part of speech */}
+                <p className="font-body italic text-text-muted text-sm mb-6">{pos}</p>
+
+                {/* Teal rule */}
+                <div className="h-px bg-teal/40 mb-6" />
+
+                {/* Definition — verbatim */}
+                <p className="font-body text-text-base leading-[1.8]" style={{ fontSize: "0.92rem" }}>
+                  {definition}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0" />
+
+      {/* ── 07 The Standard We Hold ──────────────────────────────────────── */}
       <section className="relative px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
@@ -369,7 +442,7 @@ export default function LabsPage() {
         </div>
       </section>
 
-      {/* ── 07 Labs CTA ──────────────────────────────────────────────────── */}
+      {/* ── 08 Labs CTA ──────────────────────────────────────────────────── */}
       <section className="px-4 sm:px-6 lg:px-8 pb-32 max-w-7xl mx-auto">
         <div
           className="relative rounded-[10px] overflow-hidden border border-white/[0.06] border-t-2 border-t-teal p-10 md:p-14 text-center"
