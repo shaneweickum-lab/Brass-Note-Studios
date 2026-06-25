@@ -111,9 +111,8 @@ export default function LabsPage() {
   return (
     <div>
 
-      {/* ── 01 Hero ──────────────────────────────────────────────────────── */}
+      {/* ── 01 Hero — IMG_5117 ───────────────────────────────────────────── */}
       <section className="relative py-24 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background photo */}
         <Image
           src="/images/IMG_5117.png"
           alt=""
@@ -122,11 +121,9 @@ export default function LabsPage() {
           priority
           aria-hidden="true"
         />
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          {/* Eyebrow */}
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-6 h-px bg-teal shrink-0" />
             <p className="text-teal font-body text-[11px] font-semibold uppercase tracking-[0.22em]">
@@ -134,28 +131,18 @@ export default function LabsPage() {
             </p>
             <div className="w-6 h-px bg-teal shrink-0" />
           </div>
-
-          {/* Headline */}
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-text-base font-bold leading-[1.1] mb-6">
             We don&apos;t guess.
             <br />
             <em className="text-teal not-italic italic">We measure.</em>
           </h1>
-
-          {/* Subheadline */}
           <p className="text-text-muted font-body text-lg leading-relaxed max-w-2xl mx-auto mb-12">
             Brass Note Labs is the research division behind every Brass Note Studios production.
             Every generation is evaluated. Every result is documented. Every insight raises the
             floor on the next one.
           </p>
-
-          {/* Stat pills */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {[
-              "Every Generation Analyzed",
-              "Documented Production Pipeline",
-              "Continuously Refined",
-            ].map((pill) => (
+            {["Every Generation Analyzed", "Documented Production Pipeline", "Continuously Refined"].map((pill) => (
               <span
                 key={pill}
                 className="border border-teal/40 text-teal bg-teal/[0.06] font-body font-semibold text-xs uppercase tracking-[0.14em] px-5 py-2.5 rounded-full"
@@ -169,7 +156,7 @@ export default function LabsPage() {
 
       <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16" />
 
-      {/* ── 02 What We Do Here ───────────────────────────────────────────── */}
+      {/* ── 02 What We Do Here — IMG_5120 right column ───────────────────── */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
           {/* Left — copy */}
@@ -199,173 +186,177 @@ export default function LabsPage() {
             </div>
           </div>
 
-          {/* Right — animated bar chart */}
-          <div className="pt-2 lg:pt-14">
+          {/* Right — IMG_5120 photo (no overlay) + bar chart */}
+          <div className="pt-2 lg:pt-10 flex flex-col gap-5">
+            <div className="relative h-52 rounded-[8px] overflow-hidden border border-white/[0.06]">
+              <Image
+                src="/images/IMG_5120.png"
+                alt="Brass Note Labs research desk"
+                fill
+                className="object-cover object-center"
+              />
+            </div>
             <LabsBarChart />
           </div>
         </div>
       </section>
 
-      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24" />
+      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0" />
 
-      {/* ── 03 Production Pipeline ───────────────────────────────────────── */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24">
-        <div className="text-center mb-14">
-          <TealEyebrow>Our Process</TealEyebrow>
-          <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-4">
-            Five stages. Every song. No exceptions.
-          </h2>
-          <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
-            Every track produced at Brass Note Studios passes through the same five-stage production
-            pipeline before it leaves the Labs. Not every stage is visible in the final product. All
-            of them are present in it.
-          </p>
-        </div>
+      {/* ── 03 Production Pipeline — IMG_5118 background ─────────────────── */}
+      <section className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
+        <Image
+          src="/images/IMG_5118.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(10,14,26,0.85)" }} />
 
-        {/* Desktop: horizontal flow. Mobile: vertical stack. */}
-        <div className="flex flex-col md:flex-row items-stretch gap-0">
-          {PIPELINE.map((stage, i) => (
-            <div key={stage.num} className="flex flex-col md:flex-row items-stretch flex-1 min-w-0">
-              {/* Stage card */}
-              <div
-                className="group flex-1 rounded-[8px] border border-white/[0.06] border-l-2 border-l-teal p-5 transition-all duration-250 hover:-translate-y-1 hover:border-teal/50 hover:shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(13,148,136,0.08)]"
-                style={{ background: "linear-gradient(160deg, #0d1f2a 0%, #0a141f 60%, #080d18 100%)" }}
-              >
-                <p className="text-teal font-body text-xs font-bold tracking-[0.2em] mb-2">
-                  {stage.num}
-                </p>
-                <h3 className="font-display text-text-base text-base font-bold mb-3">
-                  {stage.name}
-                </h3>
-                <p className="text-text-muted font-body text-[12px] leading-[1.75]">
-                  {stage.desc}
-                </p>
-              </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-14">
+            <TealEyebrow>Our Process</TealEyebrow>
+            <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-4">
+              Five stages. Every song. No exceptions.
+            </h2>
+            <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
+              Every track produced at Brass Note Studios passes through the same five-stage production
+              pipeline before it leaves the Labs. Not every stage is visible in the final product. All
+              of them are present in it.
+            </p>
+          </div>
 
-              {/* Arrow connector — right on desktop, down on mobile */}
-              {i < PIPELINE.length - 1 && (
-                <>
-                  {/* Desktop arrow */}
-                  <div className="hidden md:flex items-center px-1 shrink-0">
-                    <div className="flex items-center">
+          <div className="flex flex-col md:flex-row items-stretch gap-0">
+            {PIPELINE.map((stage, i) => (
+              <div key={stage.num} className="flex flex-col md:flex-row items-stretch flex-1 min-w-0">
+                <div
+                  className="group flex-1 rounded-[8px] border border-white/[0.06] border-l-2 border-l-teal p-5 transition-all duration-250 hover:-translate-y-1 hover:border-teal/50 hover:shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(13,148,136,0.08)]"
+                  style={{ background: "linear-gradient(160deg, rgba(13,31,42,0.9) 0%, rgba(10,20,31,0.9) 60%, rgba(8,13,24,0.9) 100%)" }}
+                >
+                  <p className="text-teal font-body text-xs font-bold tracking-[0.2em] mb-2">{stage.num}</p>
+                  <h3 className="font-display text-text-base text-base font-bold mb-3">{stage.name}</h3>
+                  <p className="text-text-muted font-body text-[12px] leading-[1.75]">{stage.desc}</p>
+                </div>
+                {i < PIPELINE.length - 1 && (
+                  <>
+                    <div className="hidden md:flex items-center px-1 shrink-0">
                       <div className="w-4 h-px bg-gold/40" />
-                      <div
-                        className="w-0 h-0"
-                        style={{
-                          borderTop: "4px solid transparent",
-                          borderBottom: "4px solid transparent",
-                          borderLeft: "6px solid rgba(212,168,67,0.4)",
-                        }}
-                      />
+                      <div className="w-0 h-0" style={{ borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: "6px solid rgba(212,168,67,0.4)" }} />
                     </div>
-                  </div>
-                  {/* Mobile arrow */}
-                  <div className="flex md:hidden justify-center py-2">
-                    <div className="flex flex-col items-center">
-                      <div className="w-px h-4 bg-gold/40" />
-                      <div
-                        className="w-0 h-0"
-                        style={{
-                          borderLeft: "4px solid transparent",
-                          borderRight: "4px solid transparent",
-                          borderTop: "6px solid rgba(212,168,67,0.4)",
-                        }}
-                      />
+                    <div className="flex md:hidden justify-center py-2">
+                      <div className="flex flex-col items-center">
+                        <div className="w-px h-4 bg-gold/40" />
+                        <div className="w-0 h-0" style={{ borderLeft: "4px solid transparent", borderRight: "4px solid transparent", borderTop: "6px solid rgba(212,168,67,0.4)" }} />
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24" />
-
-      {/* ── 04 Metrics We Track ──────────────────────────────────────────── */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24">
-        <div className="text-center mb-14">
-          <TealEyebrow>What We Measure</TealEyebrow>
-          <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-4">
-            If we can&apos;t measure it, we can&apos;t improve it.
-          </h2>
-          <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
-            Every generation produced at Brass Note Labs is evaluated across a consistent set of
-            dimensions. These aren&apos;t subjective opinions. They are documented observations
-            measured against a defined standard — the same standard, every time.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {METRICS.map(({ Icon, name, desc }) => (
-            <div
-              key={name}
-              className="border border-white/[0.06] border-l-2 border-l-teal rounded-r-[6px] p-5 transition-colors hover:border-teal/30"
-              style={{ background: "linear-gradient(160deg, #0d1f2a 0%, #0a141f 60%, #080d18 100%)" }}
-            >
-              <div className="w-9 h-9 rounded-lg bg-teal/10 flex items-center justify-center mb-3">
-                <Icon className="w-5 h-5 text-teal" />
+                  </>
+                )}
               </div>
-              <h3 className="font-display text-text-base text-base font-semibold mb-2">{name}</h3>
-              <p className="text-text-muted font-body text-[13px] leading-[1.7]">{desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24" />
+      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0" />
 
-      {/* ── 05 Findings & Observations ───────────────────────────────────── */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24">
-        <div className="text-center mb-14">
-          <TealEyebrow>From the Lab</TealEyebrow>
-          <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-4">
-            What we&apos;ve learned by paying attention.
-          </h2>
-          <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
-            These are observations from the Brass Note Labs production archive — documented findings
-            from the analysis of hundreds of generations. They are not theories. They are results.
-          </p>
+      {/* ── 04 Metrics We Track — IMG_5121 background ────────────────────── */}
+      <section className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
+        <Image
+          src="/images/IMG_5121.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(10,14,26,0.82)" }} />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-14">
+            <TealEyebrow>What We Measure</TealEyebrow>
+            <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-4">
+              If we can&apos;t measure it, we can&apos;t improve it.
+            </h2>
+            <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
+              Every generation produced at Brass Note Labs is evaluated across a consistent set of
+              dimensions. These aren&apos;t subjective opinions. They are documented observations
+              measured against a defined standard — the same standard, every time.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {METRICS.map(({ Icon, name, desc }) => (
+              <div
+                key={name}
+                className="border border-white/[0.08] border-l-2 border-l-teal rounded-r-[6px] p-5 transition-colors hover:border-teal/30"
+                style={{ background: "rgba(13,31,42,0.85)" }}
+              >
+                <div className="w-9 h-9 rounded-lg bg-teal/10 flex items-center justify-center mb-3">
+                  <Icon className="w-5 h-5 text-teal" />
+                </div>
+                <h3 className="font-display text-text-base text-base font-semibold mb-2">{name}</h3>
+                <p className="text-text-muted font-body text-[13px] leading-[1.7]">{desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {FINDINGS.map(({ num, title, body }) => (
-            <div
-              key={num}
-              className="border border-white/[0.06] border-t-2 border-t-gold rounded-b-[6px] p-6"
-              style={{ background: "linear-gradient(160deg, #131d30 0%, #0F172A 60%, #080d18 100%)" }}
-            >
-              <p className="text-teal font-body text-[10px] font-bold uppercase tracking-[0.2em] mb-3">
-                Finding {num}
-              </p>
-              <h3 className="font-display text-text-base text-lg font-bold mb-3">{title}</h3>
-              <p className="text-text-muted font-body text-sm leading-[1.8]">{body}</p>
-            </div>
-          ))}
+      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0" />
+
+      {/* ── 05 Findings & Observations — IMG_5119 background ─────────────── */}
+      <section className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
+        <Image
+          src="/images/IMG_5119.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(10,14,26,0.80)" }} />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-14">
+            <TealEyebrow>From the Lab</TealEyebrow>
+            <h2 className="font-display text-3xl md:text-4xl text-text-base font-bold mb-4">
+              What we&apos;ve learned by paying attention.
+            </h2>
+            <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
+              These are observations from the Brass Note Labs production archive — documented findings
+              from the analysis of hundreds of generations. They are not theories. They are results.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {FINDINGS.map(({ num, title, body }) => (
+              <div
+                key={num}
+                className="border border-white/[0.08] border-t-2 border-t-gold rounded-b-[6px] p-6"
+                style={{ background: "rgba(19,29,48,0.9)" }}
+              >
+                <p className="text-teal font-body text-[10px] font-bold uppercase tracking-[0.2em] mb-3">
+                  Finding {num}
+                </p>
+                <h3 className="font-display text-text-base text-lg font-bold mb-3">{title}</h3>
+                <p className="text-text-muted font-body text-sm leading-[1.8]">{body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── 06 The Standard We Hold ──────────────────────────────────────── */}
       <section className="relative px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
-        {/* Brass glow */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,168,67,0.04) 0%, transparent 70%)",
-          }}
+          style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,168,67,0.04) 0%, transparent 70%)" }}
         />
         <div className="max-w-3xl mx-auto relative z-10 text-center">
-          {/* Brass rule */}
-          <div
-            className="h-px w-32 mx-auto mb-10"
-            style={{ background: "linear-gradient(to right, transparent, #D4A843, transparent)" }}
-          />
+          <div className="h-px w-32 mx-auto mb-10" style={{ background: "linear-gradient(to right, transparent, #D4A843, transparent)" }} />
           <h2 className="font-display text-2xl md:text-3xl text-text-base font-bold leading-[1.3] mb-8">
             The standard at Brass Note Labs is simple:{" "}
             <em className="text-gold not-italic italic">
-              if we wouldn&apos;t be proud to put our name on it, it doesn&apos;t leave the
-              pipeline.
+              if we wouldn&apos;t be proud to put our name on it, it doesn&apos;t leave the pipeline.
             </em>
           </h2>
           <p className="text-text-muted font-body text-sm leading-[1.85]">
@@ -374,11 +365,7 @@ export default function LabsPage() {
             delivery meets the same standard — not because we got lucky, but because we built a
             system that makes luck unnecessary.
           </p>
-          {/* Brass rule */}
-          <div
-            className="h-px w-32 mx-auto mt-10"
-            style={{ background: "linear-gradient(to right, transparent, #D4A843, transparent)" }}
-          />
+          <div className="h-px w-32 mx-auto mt-10" style={{ background: "linear-gradient(to right, transparent, #D4A843, transparent)" }} />
         </div>
       </section>
 
