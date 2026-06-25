@@ -29,7 +29,7 @@
       "publishedDate": "2026-06-13",
       "audioSource": {
         "type": "mp3",
-        "mp3Url": "",
+        "mp3Url": "/audio/Dejanae%E2%80%99s%20Song.mp3",
         "sunoUrl": ""
       },
       "coverImage": null
@@ -46,7 +46,24 @@
       "publishedDate": "2026-06-13",
       "audioSource": {
         "type": "mp3",
-        "mp3Url": "",
+        "mp3Url": "/audio/welcome-to-the-holy-of-holies.mp3",
+        "sunoUrl": ""
+      },
+      "coverImage": null
+    },
+    {
+      "id": "song-004",
+      "title": "Dad Mode Activated",
+      "clientName": "Brass Note Studios Team",
+      "description": "A Father's Day anthem celebrating dads on Father's Day. Debuted on YouTube.",
+      "category": "Song Production",
+      "genre": "Anthem",
+      "mood": ["celebratory", "fun", "heartfelt"],
+      "featured": false,
+      "publishedDate": "2026-06-13",
+      "audioSource": {
+        "type": "mp3",
+        "mp3Url": "/audio/Dad%20Mode%20Activated.mp3",
         "sunoUrl": ""
       },
       "coverImage": null
