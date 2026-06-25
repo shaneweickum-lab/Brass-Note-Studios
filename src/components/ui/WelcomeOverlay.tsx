@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Volume2 } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 
@@ -44,14 +45,18 @@ const FADE_END    = 4000;
 type Stage = "modal" | "message" | "jumping" | "gone";
 
 export default function WelcomeOverlay() {
-  const [stage, setStage]       = useState<Stage>("gone");
-  const [modalFade, setModalFade] = useState(false);   // triggers CSS fade-out
-  const canvasRef   = useRef<HTMLCanvasElement>(null);
-  const rafRef      = useRef<number>(0);
+  const [stage, setStage]        = useState<Stage>("gone");
+  const [modalFade, setModalFade] = useState(false);
+  const canvasRef    = useRef<HTMLCanvasElement>(null);
+  const rafRef       = useRef<number>(0);
   const withMusicRef = useRef(false);
-  const { play }    = usePlayer();
-  const playRef     = useRef(play);
+  const isReplayRef  = useRef(false);   // true when triggered from footer button
+  const { play }     = usePlayer();
+  const playRef      = useRef(play);
   useEffect(() => { playRef.current = play; }, [play]);
+  const router    = useRouter();
+  const routerRef = useRef(router);
+  useEffect(() => { routerRef.current = router; }, [router]);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -76,7 +81,10 @@ export default function WelcomeOverlay() {
 
   // Global replay trigger — fired by the footer button
   useEffect(() => {
-    const handler = () => startSequence(true);
+    const handler = () => {
+      isReplayRef.current = true;
+      startSequence(true);
+    };
     window.addEventListener("bns-replay-sequence", handler);
     return () => window.removeEventListener("bns-replay-sequence", handler);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -173,6 +181,11 @@ export default function WelcomeOverlay() {
         if (ft >= 1) {
           localStorage.setItem(STORAGE_KEY, "1");
           if (withMusicRef.current) playRef.current(ANTHEM_ID);
+          if (isReplayRef.current) {
+            isReplayRef.current = false;
+            routerRef.current.push("/");
+            window.scrollTo({ top: 0, behavior: "instant" });
+          }
           setStage("gone");
           return;
         }
