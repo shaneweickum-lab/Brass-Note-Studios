@@ -1,6 +1,6 @@
 "use client";
 
-import { Play, Pause, ExternalLink } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 import { cn } from "@/lib/utils";
 import type { Song } from "@/types";
@@ -48,7 +48,6 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
   const handleToggle = () => {
     if (!isPlayable) return;
     if (!hasAudio) {
-      // No local MP3 — open Suno in new tab
       window.open(song.audioSource.sunoUrl, "_blank", "noopener,noreferrer");
       return;
     }
@@ -97,13 +96,27 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
         }}
       />
 
+      {/* Description hover overlay — standard cards only */}
+      {!wide && song.description && (
+        <div className="absolute inset-0 flex items-end p-4 z-10 pointer-events-none">
+          <div
+            className="w-full translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+            style={{ background: "linear-gradient(to top, rgba(8,13,24,0.97) 0%, rgba(8,13,24,0.85) 70%, transparent 100%)" }}
+          >
+            <p className="text-text-muted font-body text-xs leading-relaxed line-clamp-4 pt-6">
+              {song.description}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Hover play / active pause button */}
       {isPlayable && (
         <button
           onClick={handleToggle}
           className={cn(
             "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-            "w-[52px] h-[52px] rounded-full flex items-center justify-center z-10",
+            "w-[52px] h-[52px] rounded-full flex items-center justify-center z-20",
             "transition-all duration-250 shadow-[0_4px_20px_rgba(212,168,67,0.4)]",
             "bg-gold hover:bg-gold-light",
             isPlaying
@@ -183,7 +196,7 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
         {song.clientName}
       </p>
 
-      {/* Description (wide variant only) */}
+      {/* Description — wide variant only (standard cards show it on art hover) */}
       {wide && song.description && (
         <p className="text-text-muted font-body text-sm leading-relaxed mb-5 max-w-[520px]">
           {song.description}
@@ -193,43 +206,16 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
       {/* Divider */}
       <div className="h-px bg-white/[0.06] mb-3" />
 
-      {/* Footer: tags + action */}
-      <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex gap-1.5 flex-wrap">
-          {song.genre && (
-            <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-gold bg-gold/[0.08] border border-gold/[0.25] px-2.5 py-1 rounded-full group-hover:bg-gold/[0.14] group-hover:border-gold/40 transition-colors">
-              {song.genre}
-            </span>
-          )}
-          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-teal bg-teal/[0.08] border border-teal/[0.25] px-2.5 py-1 rounded-full group-hover:bg-teal/[0.14] group-hover:border-teal/40 transition-colors">
-            {song.category}
+      {/* Footer: tags only — no Suno link */}
+      <div className="flex gap-1.5 flex-wrap">
+        {song.genre && (
+          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-gold bg-gold/[0.08] border border-gold/[0.25] px-2.5 py-1 rounded-full group-hover:bg-gold/[0.14] group-hover:border-gold/40 transition-colors">
+            {song.genre}
           </span>
-        </div>
-
-        {/* Wide: prominent listen button. Standard: subtle Suno link when no audio. */}
-        {wide && hasSunoLink && (
-          <a
-            href={song.audioSource.sunoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gold text-background font-body font-bold text-xs uppercase tracking-[0.1em] px-5 py-2.5 rounded-sm hover:bg-gold-light transition-colors"
-          >
-            <Play className="w-3.5 h-3.5" />
-            Listen
-          </a>
         )}
-
-        {!wide && !hasAudio && hasSunoLink && (
-          <a
-            href={song.audioSource.sunoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-gold text-xs font-body hover:text-gold-light transition-colors"
-          >
-            <ExternalLink className="w-3 h-3" />
-            Suno
-          </a>
-        )}
+        <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-teal bg-teal/[0.08] border border-teal/[0.25] px-2.5 py-1 rounded-full group-hover:bg-teal/[0.14] group-hover:border-teal/40 transition-colors">
+          {song.category}
+        </span>
       </div>
     </div>
   );
