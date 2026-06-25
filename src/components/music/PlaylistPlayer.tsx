@@ -35,9 +35,26 @@ export default function PlaylistPlayer() {
               <Music className="w-5 h-5 text-gold/60" />
             </div>
             <div className="min-w-0">
-              <p className="text-text-base text-sm font-medium font-display truncate">
-                {currentSong.title}
-              </p>
+              <div className="flex items-center gap-2">
+                <p className="text-text-base text-sm font-medium font-display truncate">
+                  {currentSong.title}
+                </p>
+                {/* Animated waveform — runs when playing, pauses otherwise */}
+                <div className="flex items-end gap-[2px] h-4 shrink-0">
+                  {[3, 5, 7, 5, 3].map((delay, i) => (
+                    <div
+                      key={i}
+                      className="w-[3px] rounded-full bg-gold"
+                      style={{
+                        height: [8, 14, 18, 12, 10][i],
+                        animationPlayState: isPlaying ? "running" : "paused",
+                        animation: "wave-bar 0.7s ease-in-out infinite alternate",
+                        animationDelay: `${delay * 0.06}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
               <p className="text-text-muted text-xs truncate">
                 {currentSong.clientName}
               </p>
