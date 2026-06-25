@@ -380,6 +380,12 @@ export default function LabsPage() {
               that don&apos;t yet have names. When a behavior is observed, confirmed through
               repeated testing, and distinct enough to matter, we coin a term for it. These are ours.
             </p>
+            <p
+              className="font-body italic text-center mx-auto mt-4 max-w-2xl"
+              style={{ fontSize: "0.78rem", color: "#8A9BB0", marginBottom: "32px" }}
+            >
+              All coined terms on this page were observed and confirmed exclusively on Suno AI. Suno AI is the only generative audio platform used by Brass Note Studios and Brass Note Labs.
+            </p>
           </div>
 
           <div className="flex flex-col gap-6">
