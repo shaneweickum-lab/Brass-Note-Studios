@@ -1,13 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { CheckCircle, AlertCircle, Send } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CheckCircle, AlertCircle, Send, ShoppingCart } from "lucide-react";
 
 type FormData = {
   name: string;
   email: string;
   serviceType: string;
+  packageName: string;
   description: string;
 };
 
@@ -22,10 +23,13 @@ const SERVICE_OPTIONS = [
 
 interface ContactFormProps {
   defaultService?: string;
+  packageName?: string;
+  checkoutUrl?: string;
 }
 
-export default function ContactForm({ defaultService = "" }: ContactFormProps) {
+export default function ContactForm({ defaultService = "", packageName = "", checkoutUrl = "" }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [countdown, setCountdown] = useState(3);
 
   const {
     register,
@@ -33,8 +37,19 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
     formState: { errors },
     reset,
   } = useForm<FormData>({
-    defaultValues: { serviceType: defaultService },
+    defaultValues: { serviceType: defaultService, packageName },
   });
+
+  // Countdown + redirect after successful submit when a checkout URL is present
+  useEffect(() => {
+    if (status !== "success" || !checkoutUrl) return;
+    if (countdown <= 0) {
+      window.location.href = checkoutUrl;
+      return;
+    }
+    const t = setTimeout(() => setCountdown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [status, checkoutUrl, countdown]);
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
@@ -56,6 +71,30 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
   };
 
   if (status === "success") {
+    if (checkoutUrl) {
+      return (
+        <div className="bg-surface border border-gold/20 rounded-lg p-10 text-center">
+          <ShoppingCart className="w-12 h-12 text-gold mx-auto mb-4" />
+          <h3 className="font-display text-2xl text-text-base mb-3">
+            Request Received!
+          </h3>
+          <p className="text-text-muted font-body leading-relaxed max-w-sm mx-auto mb-6">
+            Your project details have been sent. We'll follow up within 1–2 business days.
+            Taking you to checkout now…
+          </p>
+          <div className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 rounded-sm px-6 py-3 text-gold font-body text-sm font-semibold">
+            <span className="w-6 h-6 rounded-full bg-gold text-background text-xs flex items-center justify-center font-bold">{countdown}</span>
+            Redirecting to checkout in {countdown}s
+          </div>
+          <div className="mt-4">
+            <a href={checkoutUrl} className="text-gold/60 hover:text-gold font-body text-xs underline transition-colors">
+              Click here if not redirected automatically
+            </a>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="bg-surface border border-gold/20 rounded-lg p-10 text-center">
         <CheckCircle className="w-12 h-12 text-gold mx-auto mb-4" />
@@ -77,6 +116,17 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5" noValidate>
+      {/* Selected package banner */}
+      {packageName && (
+        <div className="flex items-center gap-3 bg-gold/8 border border-gold/20 rounded-sm px-4 py-3">
+          <ShoppingCart className="w-4 h-4 text-gold shrink-0" />
+          <div>
+            <p className="text-gold font-body text-xs font-semibold uppercase tracking-wide">Selected Package</p>
+            <p className="text-text-base font-body text-sm">{packageName}{defaultService ? ` — ${defaultService}` : ""}</p>
+          </div>
+        </div>
+      )}
+
       {/* Name */}
       <div>
         <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="name">
@@ -141,6 +191,9 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
         )}
       </div>
 
+      {/* Hidden package name — sent to Formspree so Shane sees which tier */}
+      <input type="hidden" {...register("packageName")} />
+
       {/* Description */}
       <div>
         <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="description">
@@ -173,8 +226,14 @@ export default function ContactForm({ defaultService = "" }: ContactFormProps) {
         className="flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold px-8 py-4 rounded-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
       >
         <Send className="w-4 h-4" />
-        {status === "submitting" ? "Sending…" : "Send My Request"}
+        {status === "submitting" ? "Sending…" : checkoutUrl ? "Submit & Proceed to Checkout" : "Send My Request"}
       </button>
+
+      {checkoutUrl && (
+        <p className="text-text-subtle font-body text-xs text-center leading-relaxed">
+          You'll be redirected to complete your purchase after submitting.
+        </p>
+      )}
     </form>
   );
 }
