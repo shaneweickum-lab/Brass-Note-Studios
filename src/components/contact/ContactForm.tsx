@@ -2,7 +2,17 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { CheckCircle, AlertCircle, Send, ShoppingCart } from "lucide-react";
+import { CheckCircle, AlertCircle, Send, ShoppingCart, ChevronRight } from "lucide-react";
+import servicesDataRaw from "@/data/services.json";
+
+// Build a flat lookup of all packages keyed by "category|packageName"
+type PackageMeta = { price: string; checkoutUrl?: string; description: string };
+const PACKAGE_MAP: Record<string, PackageMeta> = {};
+for (const cat of servicesDataRaw.categories) {
+  for (const pkg of cat.packages as Array<{ name: string; price: string; description: string; checkoutUrl?: string }>) {
+    PACKAGE_MAP[`${cat.name}|${pkg.name}`] = { price: pkg.price, checkoutUrl: pkg.checkoutUrl, description: pkg.description };
+  }
+}
 
 type FormData = {
   name: string;
@@ -18,14 +28,11 @@ type FormData = {
   vocalStyle: string;
 };
 
-const SERVICE_OPTIONS = [
-  { value: "", label: "Select a service..." },
-  { value: "Individual Commissions", label: "Individual — Birthdays, Anniversaries, Weddings & More (from $149)" },
-  { value: "Organization Commissions", label: "Organization — Churches, Nonprofits, Schools & Businesses (from $199)" },
-  { value: "Content Creator Commissions", label: "Content Creator — Tracks, Podcast Themes & Social Music (from $75)" },
-  { value: "Subscription", label: "Subscription Plan — Ongoing music with priority scheduling" },
-  { value: "Other", label: "Not sure / Other" },
-];
+const CATEGORIES = servicesDataRaw.categories.map((c) => ({
+  name: c.name,
+  tagline: c.tagline,
+  packages: (c.packages as Array<{ name: string; price: string; description: string; checkoutUrl?: string }>),
+}));
 
 const WHO_OPTIONS = [
   { value: "Self", label: "Myself" },
@@ -36,38 +43,26 @@ const WHO_OPTIONS = [
 ];
 
 const LENGTH_OPTIONS = [
-  {
-    value: "short",
-    label: "Short",
-    structure: "Intro · 2 Verses · Chorus · Outro",
-  },
-  {
-    value: "medium",
-    label: "Medium",
-    structure: "Intro · 2 Verses · Chorus · Bridge · Outro",
-  },
-  {
-    value: "long",
-    label: "Long",
-    structure: "Intro · 3 Verses · Chorus · Bridge · Outro",
-  },
+  { value: "short",  label: "Short",  structure: "Intro · 2 Verses · Chorus · Outro" },
+  { value: "medium", label: "Medium", structure: "Intro · 2 Verses · Chorus · Bridge · Outro" },
+  { value: "long",   label: "Long",   structure: "Intro · 3 Verses · Chorus · Bridge · Outro" },
 ];
 
 const VOCAL_TYPE_OPTIONS = [
-  { value: "Male", label: "Male" },
+  { value: "Male",   label: "Male" },
   { value: "Female", label: "Female" },
 ];
 
 const VOCAL_STYLE_OPTIONS = [
-  { value: "Pop", label: "Pop" },
-  { value: "R&B", label: "R&B" },
-  { value: "Rock", label: "Rock" },
-  { value: "Intimate", label: "Intimate / Love Song" },
-  { value: "Spoken Word", label: "Spoken Word" },
-  { value: "Punk", label: "Punk" },
-  { value: "Metal", label: "Metal" },
-  { value: "Operatic", label: "Operatic" },
-  { value: "Mixture", label: "Mixture / Blend" },
+  { value: "Pop",          label: "Pop" },
+  { value: "R&B",          label: "R&B" },
+  { value: "Rock",         label: "Rock" },
+  { value: "Intimate",     label: "Intimate / Love Song" },
+  { value: "Spoken Word",  label: "Spoken Word" },
+  { value: "Punk",         label: "Punk" },
+  { value: "Metal",        label: "Metal" },
+  { value: "Operatic",     label: "Operatic" },
+  { value: "Mixture",      label: "Mixture / Blend" },
 ];
 
 interface ContactFormProps {
@@ -76,7 +71,6 @@ interface ContactFormProps {
   checkoutUrl?: string;
 }
 
-// Shared radio pill class builders
 function pillBase(selected: boolean) {
   return `cursor-pointer select-none rounded-sm px-4 py-2.5 font-body text-sm font-medium border transition-colors duration-150 ${
     selected
@@ -85,9 +79,34 @@ function pillBase(selected: boolean) {
   }`;
 }
 
-export default function ContactForm({ defaultService = "", packageName = "", checkoutUrl = "" }: ContactFormProps) {
+export default function ContactForm({ defaultService = "", packageName: defaultPackage = "", checkoutUrl: propCheckoutUrl = "" }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [countdown, setCountdown] = useState(3);
+
+  // Cascading category → package state
+  const [selectedCategory, setSelectedCategory] = useState(defaultService);
+  const [selectedPackage,  setSelectedPackage]  = useState(defaultPackage);
+  // Checkout URL sourced from either the query-param prop (pricing page link) or in-form selection
+  const [formCheckoutUrl,  setFormCheckoutUrl]  = useState(propCheckoutUrl);
+
+  const effectiveCheckoutUrl = propCheckoutUrl || formCheckoutUrl;
+
+  const categoryPackages = CATEGORIES.find((c) => c.name === selectedCategory)?.packages ?? [];
+
+  const handleCategoryChange = (catName: string) => {
+    setSelectedCategory(catName);
+    setSelectedPackage("");
+    setFormCheckoutUrl("");
+    setValue("serviceType",  catName, { shouldValidate: true });
+    setValue("packageName",  "",      { shouldValidate: false });
+  };
+
+  const handlePackageChange = (pkgName: string) => {
+    setSelectedPackage(pkgName);
+    const meta = PACKAGE_MAP[`${selectedCategory}|${pkgName}`];
+    setFormCheckoutUrl(meta?.checkoutUrl ?? "");
+    setValue("packageName", pkgName, { shouldValidate: true });
+  };
 
   const {
     register,
@@ -98,15 +117,15 @@ export default function ContactForm({ defaultService = "", packageName = "", che
     reset,
   } = useForm<FormData>({
     defaultValues: {
-      serviceType: defaultService,
-      packageName,
-      whoIsItFor: "",
-      songLength: "",
-      vocalType: "",
-      vocalStyle: "",
-      songTitle: "",
-      genreOrReference: "",
-      storyOrLyrics: "",
+      serviceType:     defaultService,
+      packageName:     defaultPackage,
+      whoIsItFor:      "",
+      songLength:      "",
+      vocalType:       "",
+      vocalStyle:      "",
+      songTitle:       "",
+      genreOrReference:"",
+      storyOrLyrics:   "",
     },
   });
 
@@ -115,16 +134,16 @@ export default function ContactForm({ defaultService = "", packageName = "", che
   const vocalType   = watch("vocalType");
   const vocalStyle  = watch("vocalStyle");
 
-  // Countdown + redirect after successful submit when a checkout URL is present
+  // Countdown + redirect after successful submit
   useEffect(() => {
-    if (status !== "success" || !checkoutUrl) return;
+    if (status !== "success" || !effectiveCheckoutUrl) return;
     if (countdown <= 0) {
-      window.location.href = checkoutUrl;
+      window.location.href = effectiveCheckoutUrl;
       return;
     }
     const t = setTimeout(() => setCountdown((c) => c - 1), 1000);
     return () => clearTimeout(t);
-  }, [status, checkoutUrl, countdown]);
+  }, [status, effectiveCheckoutUrl, countdown]);
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
@@ -145,8 +164,10 @@ export default function ContactForm({ defaultService = "", packageName = "", che
     }
   };
 
+  // ── Success screens ───────────────────────────────────────────────────────────
+
   if (status === "success") {
-    if (checkoutUrl) {
+    if (effectiveCheckoutUrl) {
       return (
         <div className="bg-surface border border-gold/20 rounded-lg p-10 text-center">
           <ShoppingCart className="w-12 h-12 text-gold mx-auto mb-4" />
@@ -162,7 +183,7 @@ export default function ContactForm({ defaultService = "", packageName = "", che
             Redirecting to checkout in {countdown}s
           </div>
           <div className="mt-4">
-            <a href={checkoutUrl} className="text-gold/60 hover:text-gold font-body text-xs underline transition-colors">
+            <a href={effectiveCheckoutUrl} className="text-gold/60 hover:text-gold font-body text-xs underline transition-colors">
               Click here if not redirected automatically
             </a>
           </div>
@@ -187,16 +208,18 @@ export default function ContactForm({ defaultService = "", packageName = "", che
     );
   }
 
+  // ── Form ─────────────────────────────────────────────────────────────────────
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-7" noValidate>
 
-      {/* Selected package banner */}
-      {packageName && (
+      {/* Selected package banner (when arriving from pricing page) */}
+      {propCheckoutUrl && defaultPackage && (
         <div className="flex items-center gap-3 bg-gold/8 border border-gold/20 rounded-sm px-4 py-3">
           <ShoppingCart className="w-4 h-4 text-gold shrink-0" />
           <div>
             <p className="text-gold font-body text-xs font-semibold uppercase tracking-wide">Selected Package</p>
-            <p className="text-text-base font-body text-sm">{packageName}{defaultService ? ` — ${defaultService}` : ""}</p>
+            <p className="text-text-base font-body text-sm">{defaultPackage}{defaultService ? ` — ${defaultService}` : ""}</p>
           </div>
         </div>
       )}
@@ -246,29 +269,6 @@ export default function ContactForm({ defaultService = "", packageName = "", che
           )}
         </div>
 
-        {/* Service Type */}
-        <div>
-          <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="serviceType">
-            Service Type <span className="text-gold">*</span>
-          </label>
-          <select
-            id="serviceType"
-            {...register("serviceType", { required: "Please select a service type" })}
-            className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors appearance-none"
-          >
-            {SERVICE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value} disabled={opt.value === ""}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          {errors.serviceType && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.serviceType.message}
-            </p>
-          )}
-        </div>
-
         {/* Who is this for */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-2">
@@ -293,6 +293,106 @@ export default function ContactForm({ defaultService = "", packageName = "", che
             </p>
           )}
         </div>
+      </fieldset>
+
+      <div className="border-t border-white/5" />
+
+      {/* ── Section: Service & Package ── */}
+      <fieldset className="flex flex-col gap-5">
+        <legend className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-1">Service & Package</legend>
+
+        {/* Step 1 — Category */}
+        <div>
+          <label className="block text-text-muted font-body text-sm font-medium mb-2">
+            Commission Type <span className="text-gold">*</span>
+          </label>
+          {/* Hidden field wired to RHF */}
+          <input type="hidden" {...register("serviceType", { required: "Please select a commission type" })} />
+          <div className="flex flex-col gap-2">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.name}
+                type="button"
+                onClick={() => handleCategoryChange(cat.name)}
+                className={`flex items-center justify-between w-full rounded-sm border px-4 py-3 text-left transition-colors duration-150 ${
+                  selectedCategory === cat.name
+                    ? "bg-gold/10 border-gold"
+                    : "bg-surface border-white/10 hover:border-gold/40"
+                }`}
+              >
+                <div>
+                  <p className={`font-body font-semibold text-sm ${selectedCategory === cat.name ? "text-gold" : "text-text-base"}`}>
+                    {cat.name}
+                  </p>
+                  <p className="font-body text-xs text-text-subtle mt-0.5">{cat.tagline}</p>
+                </div>
+                <ChevronRight className={`w-4 h-4 shrink-0 transition-colors ${selectedCategory === cat.name ? "text-gold" : "text-text-subtle"}`} />
+              </button>
+            ))}
+          </div>
+          {errors.serviceType && (
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" /> {errors.serviceType.message}
+            </p>
+          )}
+        </div>
+
+        {/* Step 2 — Package (revealed after category selected) */}
+        {selectedCategory && (
+          <div>
+            <label className="block text-text-muted font-body text-sm font-medium mb-2">
+              Package <span className="text-gold">*</span>
+            </label>
+            <input type="hidden" {...register("packageName", { required: "Please select a package" })} />
+            <div className="flex flex-col gap-2">
+              {categoryPackages.map((pkg) => {
+                const isSelected = selectedPackage === pkg.name;
+                const hasCheckout = !!pkg.checkoutUrl;
+                return (
+                  <button
+                    key={pkg.name}
+                    type="button"
+                    onClick={() => handlePackageChange(pkg.name)}
+                    className={`flex items-center justify-between w-full rounded-sm border px-4 py-3 text-left transition-colors duration-150 ${
+                      isSelected
+                        ? "bg-gold/10 border-gold"
+                        : "bg-surface border-white/10 hover:border-gold/40"
+                    }`}
+                  >
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className={`font-body font-semibold text-sm ${isSelected ? "text-gold" : "text-text-base"}`}>
+                          {pkg.name}
+                        </p>
+                        {hasCheckout && (
+                          <span className="text-[10px] font-body font-semibold uppercase tracking-wide bg-gold/15 text-gold px-1.5 py-0.5 rounded-sm">
+                            Order Now
+                          </span>
+                        )}
+                      </div>
+                      <p className="font-body text-xs text-text-subtle mt-0.5">{pkg.description}</p>
+                    </div>
+                    <span className={`font-display text-base ml-4 whitespace-nowrap shrink-0 ${isSelected ? "text-gold" : "text-text-muted"}`}>
+                      {pkg.price}+
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            {errors.packageName && (
+              <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" /> {errors.packageName.message}
+              </p>
+            )}
+            {/* Checkout intent notice */}
+            {formCheckoutUrl && !propCheckoutUrl && (
+              <p className="mt-2 text-text-subtle font-body text-xs flex items-center gap-1.5">
+                <ShoppingCart className="w-3 h-3 text-gold shrink-0" />
+                After submitting your brief you'll be taken directly to checkout for this package.
+              </p>
+            )}
+          </div>
+        )}
       </fieldset>
 
       <div className="border-t border-white/5" />
@@ -443,9 +543,6 @@ export default function ContactForm({ defaultService = "", packageName = "", che
         </div>
       </fieldset>
 
-      {/* Hidden fields sent to Formspree */}
-      <input type="hidden" {...register("packageName")} />
-
       <div className="border-t border-white/5 pt-2" />
 
       {status === "error" && (
@@ -461,10 +558,14 @@ export default function ContactForm({ defaultService = "", packageName = "", che
         className="flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold px-8 py-4 rounded-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         <Send className="w-4 h-4" />
-        {status === "submitting" ? "Sending…" : checkoutUrl ? "Submit & Proceed to Checkout" : "Send My Request"}
+        {status === "submitting"
+          ? "Sending…"
+          : effectiveCheckoutUrl
+            ? "Submit & Proceed to Checkout"
+            : "Send My Request"}
       </button>
 
-      {checkoutUrl && (
+      {effectiveCheckoutUrl && (
         <p className="text-text-subtle font-body text-xs text-center leading-relaxed">
           You'll be redirected to complete your purchase after submitting.
         </p>
