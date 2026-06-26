@@ -159,9 +159,9 @@ export default function ServicesPage() {
                 <div className="flex items-start gap-2">
                   <TrendingUp className="w-4 h-4 text-gold/70 mt-0.5 shrink-0" />
                   <p className="text-text-muted font-body text-sm">
-                    Songs generating revenue from streaming services are subject to a{" "}
-                    <span className="text-text-base font-semibold">50/50 royalty split</span>{" "}
-                    between you and Brass Note Studios. Want 100% ownership?{" "}
+                    Songs generating revenue from streaming services are subject to an{" "}
+                    <span className="text-text-base font-semibold">82/18 royalty split</span>{" "}
+                    — 82% to you, 18% to Brass Note Studios. Want 100% ownership?{" "}
                     <span className="text-text-base font-semibold">Full Ownership Buyout</span> is available as an add-on.
                   </p>
                 </div>
