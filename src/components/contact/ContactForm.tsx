@@ -158,16 +158,22 @@ export default function ContactForm({
 
   const isMixture = vocalStyle === "Mixture";
 
+  // If any field is still undecided, skip the checkout redirect — we'll
+  // send the link manually after narrowing down the details with the client.
+  const hasUnsure = songLength === UNSURE || vocalType === UNSURE || vocalStyle === UNSURE;
+  const activeCheckoutUrl = hasUnsure ? "" : effectiveCheckoutUrl;
+
   // Countdown + redirect after successful submit
   useEffect(() => {
-    if (status !== "success" || !effectiveCheckoutUrl) return;
+    if (status !== "success" || !activeCheckoutUrl) return;
     if (countdown <= 0) {
-      window.location.href = effectiveCheckoutUrl;
+      window.location.href = activeCheckoutUrl;
       return;
     }
     const t = setTimeout(() => setCountdown((c) => c - 1), 1000);
     return () => clearTimeout(t);
-  }, [status, effectiveCheckoutUrl, countdown]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, activeCheckoutUrl, countdown]);
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
@@ -197,7 +203,7 @@ export default function ContactForm({
   // ── Success screens ───────────────────────────────────────────────────────────
 
   if (status === "success") {
-    if (effectiveCheckoutUrl) {
+    if (activeCheckoutUrl) {
       return (
         <div className="bg-surface border border-gold/20 rounded-lg p-10 text-center">
           <ShoppingCart className="w-12 h-12 text-gold mx-auto mb-4" />
@@ -213,7 +219,7 @@ export default function ContactForm({
             Redirecting to checkout in {countdown}s
           </div>
           <div className="mt-4">
-            <a href={effectiveCheckoutUrl} className="text-gold/60 hover:text-gold font-body text-xs underline transition-colors">
+            <a href={activeCheckoutUrl} className="text-gold/60 hover:text-gold font-body text-xs underline transition-colors">
               Click here if not redirected automatically
             </a>
           </div>
@@ -593,14 +599,20 @@ export default function ContactForm({
         <Send className="w-4 h-4" />
         {status === "submitting"
           ? "Sending…"
-          : effectiveCheckoutUrl
+          : activeCheckoutUrl
             ? "Submit & Proceed to Checkout"
             : "Send My Request"}
       </button>
 
-      {effectiveCheckoutUrl && (
+      {activeCheckoutUrl && (
         <p className="text-text-subtle font-body text-xs text-center leading-relaxed">
           You'll be redirected to complete your purchase after submitting.
+        </p>
+      )}
+
+      {effectiveCheckoutUrl && hasUnsure && (
+        <p className="text-text-subtle font-body text-xs text-center leading-relaxed">
+          Since some details are still being worked out, we'll send you the checkout link directly after we nail down the perfect options together.
         </p>
       )}
     </form>
