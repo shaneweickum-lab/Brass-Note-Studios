@@ -160,6 +160,7 @@ export default function ServicesPage() {
                       <span className="text-text-muted font-semibold">What counts as 1 revision:</span>{" "}
                       One session of lyrical changes (as many edits as needed within that session) plus one production revision for style or performance — together that's 1 revision round.
                       If no lyrical changes are needed, one production or performance change on its own still counts as 1 revision.
+                      Likewise, if no production changes are needed, one session of lyrical changes on its own also counts as 1 revision.
                     </p>
                   </div>
                 </div>
