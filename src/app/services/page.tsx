@@ -151,10 +151,17 @@ export default function ServicesPage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <RefreshCw className="w-4 h-4 text-gold/70 mt-0.5 shrink-0" />
-                  <p className="text-text-muted font-body text-sm">
-                    Every song includes <span className="text-text-base font-semibold">3 revisions</span>. Additional revisions beyond the 3rd are{" "}
-                    <span className="text-text-base font-semibold">$25 per round</span>.
-                  </p>
+                  <div>
+                    <p className="text-text-muted font-body text-sm mb-1.5">
+                      Every song includes <span className="text-text-base font-semibold">3 revisions</span>. Additional revisions beyond the 3rd are{" "}
+                      <span className="text-text-base font-semibold">$25 per round</span>.
+                    </p>
+                    <p className="text-text-subtle font-body text-xs leading-relaxed">
+                      <span className="text-text-muted font-semibold">What counts as 1 revision:</span>{" "}
+                      One session of lyrical changes (as many edits as needed within that session) plus one production revision for style or performance — together that's 1 revision round.
+                      If no lyrical changes are needed, one production or performance change on its own still counts as 1 revision.
+                    </p>
+                  </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <TrendingUp className="w-4 h-4 text-gold/70 mt-0.5 shrink-0" />
