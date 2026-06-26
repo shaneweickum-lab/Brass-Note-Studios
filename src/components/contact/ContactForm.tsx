@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { CheckCircle, AlertCircle, Send, ShoppingCart, ChevronRight } from "lucide-react";
+import { CheckCircle, AlertCircle, Send, ShoppingCart, ChevronRight, HelpCircle } from "lucide-react";
 import servicesDataRaw from "@/data/services.json";
 
 // Build a flat lookup of all packages keyed by "category|packageName"
@@ -35,11 +35,11 @@ const CATEGORIES = servicesDataRaw.categories.map((c) => ({
 }));
 
 const WHO_OPTIONS = [
-  { value: "Self", label: "Myself" },
-  { value: "Gift", label: "A gift for someone" },
-  { value: "Campaign", label: "A campaign" },
+  { value: "Self",       label: "Myself" },
+  { value: "Gift",       label: "A gift for someone" },
+  { value: "Campaign",   label: "A campaign" },
   { value: "Commercial", label: "Commercial use" },
-  { value: "Content", label: "Content creation" },
+  { value: "Content",    label: "Content creation" },
 ];
 
 const LENGTH_OPTIONS = [
@@ -51,19 +51,22 @@ const LENGTH_OPTIONS = [
 const VOCAL_TYPE_OPTIONS = [
   { value: "Male",   label: "Male" },
   { value: "Female", label: "Female" },
+  { value: "Both",   label: "Both" },
+];
+
+// Styles available for individual selection (shown when Mixture is chosen)
+const MIXABLE_STYLES = [
+  "Pop", "R&B", "Rock", "Intimate / Love Song",
+  "Spoken Word", "Punk", "Metal", "Operatic",
 ];
 
 const VOCAL_STYLE_OPTIONS = [
-  { value: "Pop",          label: "Pop" },
-  { value: "R&B",          label: "R&B" },
-  { value: "Rock",         label: "Rock" },
-  { value: "Intimate",     label: "Intimate / Love Song" },
-  { value: "Spoken Word",  label: "Spoken Word" },
-  { value: "Punk",         label: "Punk" },
-  { value: "Metal",        label: "Metal" },
-  { value: "Operatic",     label: "Operatic" },
-  { value: "Mixture",      label: "Mixture / Blend" },
+  ...MIXABLE_STYLES.map((s) => ({ value: s, label: s })),
+  { value: "Mixture", label: "Mixture / Blend" },
 ];
+
+const UNSURE = "Not Sure";
+const UNSURE_NOTE = "No worries — we can discuss and narrow down the perfect options for your song.";
 
 interface ContactFormProps {
   defaultService?: string;
@@ -79,17 +82,30 @@ function pillBase(selected: boolean) {
   }`;
 }
 
-export default function ContactForm({ defaultService = "", packageName: defaultPackage = "", checkoutUrl: propCheckoutUrl = "" }: ContactFormProps) {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+function unsurePill(selected: boolean) {
+  return `cursor-pointer select-none rounded-sm px-4 py-2.5 font-body text-sm font-medium border transition-colors duration-150 flex items-center gap-1.5 ${
+    selected
+      ? "bg-white/10 text-text-base border-white/30"
+      : "bg-surface border-white/8 text-text-subtle hover:border-white/20 hover:text-text-muted"
+  }`;
+}
+
+export default function ContactForm({
+  defaultService = "",
+  packageName: defaultPackage = "",
+  checkoutUrl: propCheckoutUrl = "",
+}: ContactFormProps) {
+  const [status, setStatus]       = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [countdown, setCountdown] = useState(3);
 
-  // Cascading category → package state
+  // Cascading category → package selection
   const [selectedCategory, setSelectedCategory] = useState(defaultService);
   const [selectedPackage,  setSelectedPackage]  = useState(defaultPackage);
-  // Checkout URL sourced from either the query-param prop (pricing page link) or in-form selection
   const [formCheckoutUrl,  setFormCheckoutUrl]  = useState(propCheckoutUrl);
-
   const effectiveCheckoutUrl = propCheckoutUrl || formCheckoutUrl;
+
+  // Mixture sub-style multi-select
+  const [mixStyles, setMixStyles] = useState<string[]>([]);
 
   const categoryPackages = CATEGORIES.find((c) => c.name === selectedCategory)?.packages ?? [];
 
@@ -97,8 +113,8 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
     setSelectedCategory(catName);
     setSelectedPackage("");
     setFormCheckoutUrl("");
-    setValue("serviceType",  catName, { shouldValidate: true });
-    setValue("packageName",  "",      { shouldValidate: false });
+    setValue("serviceType", catName, { shouldValidate: true });
+    setValue("packageName", "",      { shouldValidate: false });
   };
 
   const handlePackageChange = (pkgName: string) => {
@@ -106,6 +122,12 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
     const meta = PACKAGE_MAP[`${selectedCategory}|${pkgName}`];
     setFormCheckoutUrl(meta?.checkoutUrl ?? "");
     setValue("packageName", pkgName, { shouldValidate: true });
+  };
+
+  const toggleMixStyle = (style: string) => {
+    setMixStyles((prev) =>
+      prev.includes(style) ? prev.filter((s) => s !== style) : [...prev, style]
+    );
   };
 
   const {
@@ -117,15 +139,15 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
     reset,
   } = useForm<FormData>({
     defaultValues: {
-      serviceType:     defaultService,
-      packageName:     defaultPackage,
-      whoIsItFor:      "",
-      songLength:      "",
-      vocalType:       "",
-      vocalStyle:      "",
-      songTitle:       "",
-      genreOrReference:"",
-      storyOrLyrics:   "",
+      serviceType:      defaultService,
+      packageName:      defaultPackage,
+      whoIsItFor:       "",
+      songLength:       "",
+      vocalType:        "",
+      vocalStyle:       "",
+      songTitle:        "",
+      genreOrReference: "",
+      storyOrLyrics:    "",
     },
   });
 
@@ -133,6 +155,8 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
   const songLength  = watch("songLength");
   const vocalType   = watch("vocalType");
   const vocalStyle  = watch("vocalStyle");
+
+  const isMixture = vocalStyle === "Mixture";
 
   // Countdown + redirect after successful submit
   useEffect(() => {
@@ -147,15 +171,21 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
+    // Compose final vocal style string for Formspree
+    let finalVocalStyle = data.vocalStyle;
+    if (isMixture && mixStyles.length > 0) {
+      finalVocalStyle = `Mixture: ${mixStyles.join(", ")}`;
+    }
     try {
       const res = await fetch("https://formspree.io/f/xkoljkey", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, vocalStyle: finalVocalStyle }),
       });
       if (res.ok) {
         setStatus("success");
         reset();
+        setMixStyles([]);
       } else {
         setStatus("error");
       }
@@ -213,7 +243,7 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-7" noValidate>
 
-      {/* Selected package banner (when arriving from pricing page) */}
+      {/* Selected package banner (arriving from pricing page) */}
       {propCheckoutUrl && defaultPackage && (
         <div className="flex items-center gap-3 bg-gold/8 border border-gold/20 rounded-sm px-4 py-3">
           <ShoppingCart className="w-4 h-4 text-gold shrink-0" />
@@ -224,11 +254,10 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
         </div>
       )}
 
-      {/* ── Section: About You ── */}
+      {/* ── About You ── */}
       <fieldset className="flex flex-col gap-5">
         <legend className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-1">About You</legend>
 
-        {/* Name */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="name">
             Full Name <span className="text-gold">*</span>
@@ -241,13 +270,10 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
             className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm placeholder:text-text-subtle focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors"
           />
           {errors.name && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.name.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.name.message}</p>
           )}
         </div>
 
-        {/* Email */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="email">
             Email Address <span className="text-gold">*</span>
@@ -263,67 +289,49 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
             className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm placeholder:text-text-subtle focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors"
           />
           {errors.email && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.email.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.email.message}</p>
           )}
         </div>
 
-        {/* Who is this for */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-2">
             Who is this song for? <span className="text-gold">*</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {WHO_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                type="button"
+              <button key={opt.value} type="button"
                 onClick={() => setValue("whoIsItFor", opt.value, { shouldValidate: true })}
                 className={pillBase(whoIsItFor === opt.value)}
-              >
-                {opt.label}
-              </button>
+              >{opt.label}</button>
             ))}
           </div>
           <input type="hidden" {...register("whoIsItFor", { required: "Please select who this song is for" })} />
           {errors.whoIsItFor && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.whoIsItFor.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.whoIsItFor.message}</p>
           )}
         </div>
       </fieldset>
 
       <div className="border-t border-white/5" />
 
-      {/* ── Section: Service & Package ── */}
+      {/* ── Service & Package ── */}
       <fieldset className="flex flex-col gap-5">
         <legend className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-1">Service & Package</legend>
 
-        {/* Step 1 — Category */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-2">
             Commission Type <span className="text-gold">*</span>
           </label>
-          {/* Hidden field wired to RHF */}
           <input type="hidden" {...register("serviceType", { required: "Please select a commission type" })} />
           <div className="flex flex-col gap-2">
             {CATEGORIES.map((cat) => (
-              <button
-                key={cat.name}
-                type="button"
-                onClick={() => handleCategoryChange(cat.name)}
+              <button key={cat.name} type="button" onClick={() => handleCategoryChange(cat.name)}
                 className={`flex items-center justify-between w-full rounded-sm border px-4 py-3 text-left transition-colors duration-150 ${
-                  selectedCategory === cat.name
-                    ? "bg-gold/10 border-gold"
-                    : "bg-surface border-white/10 hover:border-gold/40"
+                  selectedCategory === cat.name ? "bg-gold/10 border-gold" : "bg-surface border-white/10 hover:border-gold/40"
                 }`}
               >
                 <div>
-                  <p className={`font-body font-semibold text-sm ${selectedCategory === cat.name ? "text-gold" : "text-text-base"}`}>
-                    {cat.name}
-                  </p>
+                  <p className={`font-body font-semibold text-sm ${selectedCategory === cat.name ? "text-gold" : "text-text-base"}`}>{cat.name}</p>
                   <p className="font-body text-xs text-text-subtle mt-0.5">{cat.tagline}</p>
                 </div>
                 <ChevronRight className={`w-4 h-4 shrink-0 transition-colors ${selectedCategory === cat.name ? "text-gold" : "text-text-subtle"}`} />
@@ -331,13 +339,10 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
             ))}
           </div>
           {errors.serviceType && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.serviceType.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.serviceType.message}</p>
           )}
         </div>
 
-        {/* Step 2 — Package (revealed after category selected) */}
         {selectedCategory && (
           <div>
             <label className="block text-text-muted font-body text-sm font-medium mb-2">
@@ -347,27 +352,17 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
             <div className="flex flex-col gap-2">
               {categoryPackages.map((pkg) => {
                 const isSelected = selectedPackage === pkg.name;
-                const hasCheckout = !!pkg.checkoutUrl;
                 return (
-                  <button
-                    key={pkg.name}
-                    type="button"
-                    onClick={() => handlePackageChange(pkg.name)}
+                  <button key={pkg.name} type="button" onClick={() => handlePackageChange(pkg.name)}
                     className={`flex items-center justify-between w-full rounded-sm border px-4 py-3 text-left transition-colors duration-150 ${
-                      isSelected
-                        ? "bg-gold/10 border-gold"
-                        : "bg-surface border-white/10 hover:border-gold/40"
+                      isSelected ? "bg-gold/10 border-gold" : "bg-surface border-white/10 hover:border-gold/40"
                     }`}
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className={`font-body font-semibold text-sm ${isSelected ? "text-gold" : "text-text-base"}`}>
-                          {pkg.name}
-                        </p>
-                        {hasCheckout && (
-                          <span className="text-[10px] font-body font-semibold uppercase tracking-wide bg-gold/15 text-gold px-1.5 py-0.5 rounded-sm">
-                            Order Now
-                          </span>
+                        <p className={`font-body font-semibold text-sm ${isSelected ? "text-gold" : "text-text-base"}`}>{pkg.name}</p>
+                        {pkg.checkoutUrl && (
+                          <span className="text-[10px] font-body font-semibold uppercase tracking-wide bg-gold/15 text-gold px-1.5 py-0.5 rounded-sm">Order Now</span>
                         )}
                       </div>
                       <p className="font-body text-xs text-text-subtle mt-0.5">{pkg.description}</p>
@@ -380,11 +375,8 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
               })}
             </div>
             {errors.packageName && (
-              <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" /> {errors.packageName.message}
-              </p>
+              <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.packageName.message}</p>
             )}
-            {/* Checkout intent notice */}
             {formCheckoutUrl && !propCheckoutUrl && (
               <p className="mt-2 text-text-subtle font-body text-xs flex items-center gap-1.5">
                 <ShoppingCart className="w-3 h-3 text-gold shrink-0" />
@@ -397,34 +389,28 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
 
       <div className="border-t border-white/5" />
 
-      {/* ── Section: The Song ── */}
+      {/* ── The Song ── */}
       <fieldset className="flex flex-col gap-5">
         <legend className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-1">The Song</legend>
 
-        {/* Song Title (optional) */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="songTitle">
-            Song Title{" "}
-            <span className="text-text-subtle font-normal">(optional — can be decided after)</span>
+            Song Title <span className="text-text-subtle font-normal">(optional — can be decided after)</span>
           </label>
           <input
-            id="songTitle"
-            type="text"
+            id="songTitle" type="text"
             placeholder="Leave blank if you'd like us to title it"
             {...register("songTitle")}
             className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm placeholder:text-text-subtle focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors"
           />
         </div>
 
-        {/* Genre / Sound Reference */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="genreOrReference">
-            Genre or Sound Reference{" "}
-            <span className="text-text-subtle font-normal">(optional)</span>
+            Genre or Sound Reference <span className="text-text-subtle font-normal">(optional)</span>
           </label>
           <input
-            id="genreOrReference"
-            type="text"
+            id="genreOrReference" type="text"
             placeholder='e.g. "Soul / R&B" or "Sounds like Adele meets John Legend"'
             {...register("genreOrReference")}
             className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm placeholder:text-text-subtle focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors"
@@ -434,22 +420,18 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
           </p>
         </div>
 
-        {/* Story / Memory / Lyrics */}
         <div>
           <label className="block text-text-muted font-body text-sm font-medium mb-1.5" htmlFor="storyOrLyrics">
             Story, Memory, or Your Own Lyrics <span className="text-gold">*</span>
           </label>
           <textarea
-            id="storyOrLyrics"
-            rows={7}
+            id="storyOrLyrics" rows={7}
             placeholder="Share the story or memory you want captured — who it's about, what happened, what you want to feel when you hear it. Or, if you have your own writing (a poem, diary entry, song draft, or anything else), paste it right here and we'll set it to music."
             {...register("storyOrLyrics", { required: "Please share the story, memory, or lyrics for this song" })}
             className="w-full bg-surface border border-white/10 rounded-sm px-4 py-3 text-text-base font-body text-sm placeholder:text-text-subtle focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-colors resize-none"
           />
           {errors.storyOrLyrics && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.storyOrLyrics.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.storyOrLyrics.message}</p>
           )}
         </div>
 
@@ -460,35 +442,40 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
             {LENGTH_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                type="button"
+              <button key={opt.value} type="button"
                 onClick={() => setValue("songLength", opt.value, { shouldValidate: true })}
                 className={`flex-1 rounded-sm border px-4 py-3 text-left transition-colors duration-150 cursor-pointer ${
                   songLength === opt.value
-                    ? "bg-gold/10 border-gold text-text-base"
-                    : "bg-surface border-white/10 text-text-muted hover:border-gold/40"
+                    ? "bg-gold/10 border-gold"
+                    : "bg-surface border-white/10 hover:border-gold/40"
                 }`}
               >
-                <p className={`font-body font-semibold text-sm mb-1 ${songLength === opt.value ? "text-gold" : ""}`}>
-                  {opt.label}
-                </p>
+                <p className={`font-body font-semibold text-sm mb-1 ${songLength === opt.value ? "text-gold" : "text-text-base"}`}>{opt.label}</p>
                 <p className="font-body text-xs text-text-subtle leading-relaxed">{opt.structure}</p>
               </button>
             ))}
           </div>
+          {/* I'm Not Sure */}
+          <button type="button"
+            onClick={() => setValue("songLength", UNSURE, { shouldValidate: true })}
+            className={unsurePill(songLength === UNSURE) + " mt-2"}
+          >
+            <HelpCircle className="w-3.5 h-3.5" />
+            I&apos;m Not Sure
+          </button>
+          {songLength === UNSURE && (
+            <p className="mt-2 text-text-subtle font-body text-xs italic leading-relaxed">{UNSURE_NOTE}</p>
+          )}
           <input type="hidden" {...register("songLength", { required: "Please select a song length" })} />
           {errors.songLength && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.songLength.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.songLength.message}</p>
           )}
         </div>
       </fieldset>
 
       <div className="border-t border-white/5" />
 
-      {/* ── Section: Vocals ── */}
+      {/* ── Vocals ── */}
       <fieldset className="flex flex-col gap-5">
         <legend className="text-gold font-body text-xs uppercase tracking-[0.2em] font-semibold mb-1">Vocals</legend>
 
@@ -497,23 +484,27 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
           <label className="block text-text-muted font-body text-sm font-medium mb-2">
             Vocal Type <span className="text-gold">*</span>
           </label>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-2">
             {VOCAL_TYPE_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                type="button"
+              <button key={opt.value} type="button"
                 onClick={() => setValue("vocalType", opt.value, { shouldValidate: true })}
-                className={pillBase(vocalType === opt.value) + " flex-1 justify-center flex"}
-              >
-                {opt.label}
-              </button>
+                className={pillBase(vocalType === opt.value) + " flex-1 justify-center"}
+              >{opt.label}</button>
             ))}
+            <button type="button"
+              onClick={() => setValue("vocalType", UNSURE, { shouldValidate: true })}
+              className={unsurePill(vocalType === UNSURE) + " flex-1 justify-center"}
+            >
+              <HelpCircle className="w-3.5 h-3.5" />
+              I&apos;m Not Sure
+            </button>
           </div>
+          {vocalType === UNSURE && (
+            <p className="mt-2 text-text-subtle font-body text-xs italic leading-relaxed">{UNSURE_NOTE}</p>
+          )}
           <input type="hidden" {...register("vocalType", { required: "Please select a vocal type" })} />
           {errors.vocalType && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.vocalType.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.vocalType.message}</p>
           )}
         </div>
 
@@ -524,24 +515,66 @@ export default function ContactForm({ defaultService = "", packageName: defaultP
           </label>
           <div className="flex flex-wrap gap-2">
             {VOCAL_STYLE_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                type="button"
-                onClick={() => setValue("vocalStyle", opt.value, { shouldValidate: true })}
+              <button key={opt.value} type="button"
+                onClick={() => {
+                  setValue("vocalStyle", opt.value, { shouldValidate: true });
+                  if (opt.value !== "Mixture") setMixStyles([]);
+                }}
                 className={pillBase(vocalStyle === opt.value)}
-              >
-                {opt.label}
-              </button>
+              >{opt.label}</button>
             ))}
+            <button type="button"
+              onClick={() => {
+                setValue("vocalStyle", UNSURE, { shouldValidate: true });
+                setMixStyles([]);
+              }}
+              className={unsurePill(vocalStyle === UNSURE)}
+            >
+              <HelpCircle className="w-3.5 h-3.5" />
+              I&apos;m Not Sure
+            </button>
           </div>
+
+          {/* Mixture sub-selector */}
+          {isMixture && (
+            <div className="mt-3 rounded-sm border border-gold/20 bg-gold/5 px-4 py-4">
+              <p className="text-gold font-body text-xs font-semibold uppercase tracking-wide mb-3">
+                Select styles to blend
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {MIXABLE_STYLES.map((style) => {
+                  const picked = mixStyles.includes(style);
+                  return (
+                    <button key={style} type="button" onClick={() => toggleMixStyle(style)}
+                      className={`cursor-pointer select-none rounded-sm px-3 py-2 font-body text-sm border transition-colors duration-150 ${
+                        picked
+                          ? "bg-gold text-background border-gold"
+                          : "bg-surface border-white/10 text-text-muted hover:border-gold/40 hover:text-text-base"
+                      }`}
+                    >{style}</button>
+                  );
+                })}
+              </div>
+              {mixStyles.length > 0 && (
+                <p className="mt-2.5 text-text-subtle font-body text-xs">
+                  Selected: <span className="text-gold">{mixStyles.join(", ")}</span>
+                </p>
+              )}
+            </div>
+          )}
+
+          {vocalStyle === UNSURE && (
+            <p className="mt-2 text-text-subtle font-body text-xs italic leading-relaxed">{UNSURE_NOTE}</p>
+          )}
           <input type="hidden" {...register("vocalStyle", { required: "Please select a vocal style" })} />
           {errors.vocalStyle && (
-            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.vocalStyle.message}
-            </p>
+            <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.vocalStyle.message}</p>
           )}
         </div>
       </fieldset>
+
+      {/* Hidden fields */}
+      <input type="hidden" {...register("packageName")} />
 
       <div className="border-t border-white/5 pt-2" />
 
