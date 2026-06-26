@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { CheckCircle, AlertCircle, Send, ShoppingCart, ChevronRight, HelpCircle } from "lucide-react";
 import servicesDataRaw from "@/data/services.json";
+import DeliveryDatePicker, { type DeliveryWindows } from "./DeliveryDatePicker";
 
 // Build a flat lookup of all packages keyed by "category|packageName"
 type PackageMeta = { price: string; checkoutUrl?: string; description: string };
@@ -26,7 +27,26 @@ type FormData = {
   songLength: string;
   vocalType: string;
   vocalStyle: string;
+  requestedDate: string;
 };
+
+// Map package name patterns to delivery windows
+function getDeliveryWindows(packageName: string): DeliveryWindows | null {
+  const n = packageName.toLowerCase();
+  if (n.includes("single") || n.includes("track") || n.includes("anthem")) {
+    return { standard: [10, 14], expedited: [5, 7],  label: { standard: "10–14 days", expedited: "5–7 days",   expeditedCost: "$75" } };
+  }
+  if (n.includes("ep")) {
+    return { standard: [14, 21], expedited: [7, 10], label: { standard: "2–3 weeks",  expedited: "7–10 days",  expeditedCost: "$150" } };
+  }
+  if (n.includes("lp")) {
+    return { standard: [35, 42], expedited: [14, 21],label: { standard: "5–6 weeks",  expedited: "2–3 weeks",  expeditedCost: "$250" } };
+  }
+  if (n.includes("album")) {
+    return { standard: [70, 84], expedited: [35, 42],label: { standard: "10–12 weeks", expedited: "~6 weeks",  expeditedCost: "$400" } };
+  }
+  return null;
+}
 
 const CATEGORIES = servicesDataRaw.categories.map((c) => ({
   name: c.name,
@@ -107,6 +127,11 @@ export default function ContactForm({
   // Mixture sub-style multi-select
   const [mixStyles, setMixStyles] = useState<string[]>([]);
 
+  // Requested delivery date
+  const [requestedDate, setRequestedDate] = useState("");
+
+  const deliveryWindows = getDeliveryWindows(selectedPackage);
+
   const categoryPackages = CATEGORIES.find((c) => c.name === selectedCategory)?.packages ?? [];
 
   const handleCategoryChange = (catName: string) => {
@@ -148,6 +173,7 @@ export default function ContactForm({
       songTitle:        "",
       genreOrReference: "",
       storyOrLyrics:    "",
+      requestedDate:    "",
     },
   });
 
@@ -180,12 +206,13 @@ export default function ContactForm({
       const res = await fetch("https://formspree.io/f/xkoljkey", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...data, vocalStyle: finalVocalStyle }),
+        body: JSON.stringify({ ...data, vocalStyle: finalVocalStyle, requestedDate }),
       });
       if (res.ok) {
         setStatus("success");
         reset();
         setMixStyles([]);
+        setRequestedDate("");
       } else {
         setStatus("error");
       }
@@ -470,6 +497,20 @@ export default function ContactForm({
           {errors.songLength && (
             <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.songLength.message}</p>
           )}
+        </div>
+        {/* Requested Delivery Date */}
+        <div>
+          <label className="block text-text-muted font-body text-sm font-medium mb-1.5">
+            Requested Delivery Date <span className="text-text-subtle font-normal">(optional)</span>
+          </label>
+          <p className="text-text-subtle font-body text-xs mb-3 leading-relaxed">
+            Pick a date you&apos;re hoping for. Gold dates fall within standard delivery — teal dates require expedited delivery (add-on at checkout).
+          </p>
+          <DeliveryDatePicker
+            value={requestedDate}
+            onChange={setRequestedDate}
+            windows={deliveryWindows}
+          />
         </div>
       </fieldset>
 
