@@ -7,14 +7,14 @@ import ReplaySequenceButton from "@/components/ui/ReplaySequenceButton";
 const links = [
   { href: "/about",    label: "About" },
   { href: "/music",    label: "Our Work" },
-  { href: "/labs",     label: "Brass Note Labs" },
+  { href: "/labs",     label: "Preludio Labs" },
   { href: "/services", label: "Pricing" },
   { href: "/contact",  label: "Commission a Song" },
 ];
 
 const brands = [
   { href: "/",     label: "Brass Note Studios" },
-  { href: "/labs", label: "Brass Note Labs" },
+  { href: "/labs", label: "Preludio Labs" },
 ];
 
 export default function Footer() {
@@ -109,7 +109,7 @@ export default function Footer() {
         <p className="mt-3 text-center font-body text-text-subtle/40 text-xs">
           Website designed &amp; built by{" "}
           <Link href="/labs" className="hover:text-teal transition-colors">
-            Brass Note Labs
+            Preludio Labs
           </Link>
           .
         </p>
