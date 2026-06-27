@@ -6,7 +6,7 @@ import GoldDivider from "@/components/ui/GoldDivider";
 import LabsBarChart from "@/components/labs/LabsBarChart";
 
 export const metadata: Metadata = {
-  title: "Brass Note Labs — Research & Development",
+  title: "Preludio Labs — Research & Development",
   description:
     "The research division behind every Brass Note Studios production. Every generation analyzed. Every result documented. Every insight raises the floor.",
 };
