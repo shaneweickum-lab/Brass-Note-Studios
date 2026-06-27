@@ -66,23 +66,30 @@ export default function DeliveryDatePicker({ value, onChange, windows }: Props) 
   for (let i = 0; i < firstDow; i++) cells.push(null);
   for (let d = 1; d <= daysInMonth; d++) cells.push(d);
 
+  function isSelectable(day: number): boolean {
+    const date = new Date(viewYear, viewMonth, day);
+    if (date < today) return false;
+    if (!windows) return false;
+    const inStandard  = standardStart  && standardEnd  && date >= standardStart  && date <= standardEnd;
+    const inExpedited = expeditedStart && expeditedEnd && date >= expeditedStart && date <= expeditedEnd;
+    return !!(inStandard || inExpedited);
+  }
+
   function classForDay(day: number): string {
     const date = new Date(viewYear, viewMonth, day);
     const iso  = toISO(date);
-    const isPast      = date < today;
     const isSelected  = iso === value;
-    const isToday     = iso === toISO(today);
     const inStandard  = standardStart  && standardEnd  && date >= standardStart  && date <= standardEnd;
     const inExpedited = expeditedStart && expeditedEnd && date >= expeditedStart && date <= expeditedEnd;
+    const selectable  = isSelectable(day);
 
     const base = "flex items-center justify-center w-8 h-8 rounded-sm text-xs font-body font-medium transition-colors duration-100 select-none ";
 
-    if (isPast)       return base + "text-white/15 cursor-default";
-    if (isSelected)   return base + "bg-gold text-background font-bold cursor-pointer";
-    if (inStandard)   return base + "bg-gold/25 text-gold hover:bg-gold/50 cursor-pointer";
-    if (inExpedited)  return base + "bg-teal/25 text-teal hover:bg-teal/50 cursor-pointer";
-    if (isToday)      return base + "border border-white/20 text-text-base hover:bg-white/5 cursor-pointer";
-    return base + "text-text-muted hover:bg-white/5 cursor-pointer";
+    if (isSelected)          return base + "bg-gold text-background font-bold cursor-pointer";
+    if (inStandard)          return base + "bg-gold/25 text-gold hover:bg-gold/50 cursor-pointer";
+    if (inExpedited)         return base + "bg-teal/25 text-teal hover:bg-teal/50 cursor-pointer";
+    if (!selectable)         return base + "text-white/15 cursor-not-allowed";
+    return base + "text-text-muted cursor-not-allowed";
   }
 
   const todayISO = toISO(today);
@@ -121,7 +128,7 @@ export default function DeliveryDatePicker({ value, onChange, windows }: Props) 
             {day !== null ? (
               <button
                 type="button"
-                disabled={new Date(viewYear, viewMonth, day) < today}
+                disabled={!isSelectable(day)}
                 onClick={() => {
                   const iso = toISO(new Date(viewYear, viewMonth, day));
                   if (iso === value) onChange(""); // deselect
