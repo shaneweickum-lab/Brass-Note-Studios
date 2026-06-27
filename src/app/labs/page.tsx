@@ -148,10 +148,9 @@ export default function LabsPage() {
             <Image
               src="/images/F644EE5A-35E8-4FB4-8FD3-742566693C59.png"
               alt="Brass Note Labs"
-              width={550}
-              height={200}
+              width={1024}
+              height={1024}
               className="h-40 w-auto"
-              style={{ objectFit: "contain" }}
             />
           </div>
           <div className="flex items-center justify-center gap-3 mb-6">
