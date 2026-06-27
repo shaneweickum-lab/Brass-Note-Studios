@@ -148,9 +148,9 @@ export default function LabsPage() {
             <Image
               src="/images/preludio.png"
               alt="Preludio Labs"
-              width={220}
-              height={80}
-              className="h-16 w-auto"
+              width={550}
+              height={200}
+              className="h-40 w-auto"
               style={{ objectFit: "contain" }}
             />
           </div>
@@ -477,9 +477,9 @@ export default function LabsPage() {
             <Image
               src="/images/preludio_favicon.png"
               alt="Preludio Labs"
-              width={48}
-              height={48}
-              className="w-12 h-12 object-contain opacity-80"
+              width={120}
+              height={120}
+              className="w-[7.5rem] h-[7.5rem] object-contain opacity-80"
             />
           </div>
           <TealEyebrow>Work With Us</TealEyebrow>
