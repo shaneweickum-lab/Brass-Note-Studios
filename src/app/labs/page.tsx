@@ -146,7 +146,7 @@ export default function LabsPage() {
           {/* Brass Note Labs logo */}
           <div className="flex justify-center mb-8">
             <Image
-              src="/images/A5827119-71F4-4719-800E-C883F231E80B.png"
+              src="/images/F644EE5A-35E8-4FB4-8FD3-742566693C59.png"
               alt="Brass Note Labs"
               width={550}
               height={200}
