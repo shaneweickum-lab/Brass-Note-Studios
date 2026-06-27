@@ -3,8 +3,8 @@
     {
       "id": "song-007",
       "title": "Brass Note Studios",
-      "clientName": "Preludio Labs",
-      "description": "The official Brass Note Studios and Preludio Labs anthem — a sonic statement of who we are and what we build.",
+      "clientName": "Brass Note Labs",
+      "description": "The official Brass Note Studios and Brass Note Labs anthem — a sonic statement of who we are and what we build.",
       "category": "Personal Lyrics",
       "genre": "Anthem",
       "mood": ["bold", "cinematic", "identity"],
@@ -70,7 +70,7 @@
     {
       "id": "song-005",
       "title": "String Theory",
-      "clientName": "Preludio Labs",
+      "clientName": "Brass Note Labs",
       "description": "A technical breakdown attempting to achieve vocal-only band music — engineering the AI to vocalize all instruments and beats using nothing but the human voice.",
       "category": "From the Lab",
       "genre": "Experimental",
@@ -87,7 +87,7 @@
     {
       "id": "song-006",
       "title": "Event Horizon",
-      "clientName": "Preludio Labs",
+      "clientName": "Brass Note Labs",
       "description": "A lyrical syntax engineering stress test — pushing the boundaries of structural composition and rhythmic complexity.",
       "category": "From the Lab",
       "genre": "Experimental",

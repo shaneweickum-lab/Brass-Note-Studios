@@ -81,7 +81,7 @@ export default function TrackListClient({ songs }: TrackListClientProps) {
               From the Lab
             </p>
             <p className="text-text-muted font-body text-sm leading-relaxed">
-              These tracks are technical productions from the Preludio Labs research archive — stress tests, experiments, and proof-of-concept generations created to develop, verify, and refine the production framework.
+              These tracks are technical productions from the Brass Note Labs research archive — stress tests, experiments, and proof-of-concept generations created to develop, verify, and refine the production framework.
             </p>
             <p className="text-teal/70 font-body text-xs mt-2">
               Click play to launch the Lab Visualizer — a real-time signal analysis display.

@@ -6,7 +6,7 @@ import GoldDivider from "@/components/ui/GoldDivider";
 import LabsBarChart from "@/components/labs/LabsBarChart";
 
 export const metadata: Metadata = {
-  title: "Preludio Labs — Research & Development",
+  title: "Brass Note Labs — Research & Development",
   description:
     "The research division behind every Brass Note Studios production. Every generation analyzed. Every result documented. Every insight raises the floor.",
 };
@@ -99,7 +99,7 @@ const COINED_TERMS = [
     pos: "/noun phrase/",
     year: "2026",
     definition:
-      "When you overload the lyrical input of a generative audio AI with syntax symbols placed too close together — without giving the model adequate space to process each instruction before receiving the next — you force the model into a chaotic generative state. The output deviates completely from the intended prompt: vocals become random, structure collapses, and elements that were explicitly excluded may appear. The result bears no resemblance to what was directed. Coined from direct observation during production at Preludio Labs.",
+      "When you overload the lyrical input of a generative audio AI with syntax symbols placed too close together — without giving the model adequate space to process each instruction before receiving the next — you force the model into a chaotic generative state. The output deviates completely from the intended prompt: vocals become random, structure collapses, and elements that were explicitly excluded may appear. The result bears no resemblance to what was directed. Coined from direct observation during production at Brass Note Labs.",
   },
   {
     num: "002",
@@ -107,7 +107,7 @@ const COINED_TERMS = [
     pos: "/noun phrase/",
     year: "2026",
     definition:
-      "During a state of Syntax Fatigue — or when the lyrical input exceeds the model's processing capacity — the model abandons the written lyrics entirely. It does not produce a degraded version of the intended lyric. It bypasses the lyrical channel and generates vocal content autonomously, ignoring written words, dynamic syntax instructions, and song structure. The output may sound musically coherent while being completely disconnected from what was directed. Coined from direct observation during production at Preludio Labs.",
+      "During a state of Syntax Fatigue — or when the lyrical input exceeds the model's processing capacity — the model abandons the written lyrics entirely. It does not produce a degraded version of the intended lyric. It bypasses the lyrical channel and generates vocal content autonomously, ignoring written words, dynamic syntax instructions, and song structure. The output may sound musically coherent while being completely disconnected from what was directed. Coined from direct observation during production at Brass Note Labs.",
   },
 ];
 
@@ -143,11 +143,11 @@ export default function LabsPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          {/* Preludio Labs logo */}
+          {/* Brass Note Labs logo */}
           <div className="flex justify-center mb-8">
             <Image
-              src="/images/79A66371-44F2-48A4-91F8-83B5FA775519.png"
-              alt="Preludio Labs"
+              src="/images/A5827119-71F4-4719-800E-C883F231E80B.png"
+              alt="Brass Note Labs"
               width={550}
               height={200}
               className="h-40 w-auto"
@@ -157,7 +157,7 @@ export default function LabsPage() {
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-6 h-px bg-teal shrink-0" />
             <p className="text-teal font-body text-[11px] font-semibold uppercase tracking-[0.22em]">
-              Preludio Labs · A Division of Brass Note Studios
+              Brass Note Labs · A Division of Brass Note Studios
             </p>
             <div className="w-6 h-px bg-teal shrink-0" />
           </div>
@@ -167,7 +167,7 @@ export default function LabsPage() {
             <em className="text-teal not-italic italic">We measure.</em>
           </h1>
           <p className="text-text-muted font-body text-lg leading-relaxed max-w-2xl mx-auto mb-12">
-            Preludio Labs is the research division behind every Brass Note Studios production.
+            Brass Note Labs is the research division behind every Brass Note Studios production.
             Every generation is evaluated. Every result is documented. Every insight raises the
             floor on the next one.
           </p>
@@ -200,7 +200,7 @@ export default function LabsPage() {
             <div className="flex flex-col gap-5 text-text-muted font-body text-sm leading-[1.85]">
               <p>
                 Most music production — even AI-assisted production — relies on intuition and
-                iteration. Try something. Listen. Adjust. Try again. At Preludio Labs, we do
+                iteration. Try something. Listen. Adjust. Try again. At Brass Note Labs, we do
                 something different. We treat every generation as a data point. We ask not just
                 whether it sounds good, but <em className="text-text-base not-italic">why</em> it
                 sounds good, what conditions produced it, and whether those conditions can be
@@ -221,7 +221,7 @@ export default function LabsPage() {
             <div className="relative h-52 rounded-[8px] overflow-hidden border border-white/[0.06]">
               <Image
                 src="/images/IMG_5120.png"
-                alt="Preludio Labs research desk"
+                alt="Brass Note Labs research desk"
                 fill
                 className="object-cover object-center"
               />
@@ -308,7 +308,7 @@ export default function LabsPage() {
               If we can&apos;t measure it, we can&apos;t improve it.
             </h2>
             <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
-              Every generation produced at Preludio Labs is evaluated across a consistent set of
+              Every generation produced at Brass Note Labs is evaluated across a consistent set of
               dimensions. These aren&apos;t subjective opinions. They are documented observations
               measured against a defined standard — the same standard, every time.
             </p>
@@ -352,7 +352,7 @@ export default function LabsPage() {
               What we&apos;ve learned by paying attention.
             </h2>
             <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
-              These are observations from the Preludio Labs production archive — documented findings
+              These are observations from the Brass Note Labs production archive — documented findings
               from the analysis of hundreds of generations. They are not theories. They are results.
             </p>
           </div>
@@ -387,7 +387,7 @@ export default function LabsPage() {
               <em className="not-italic italic">needed names.</em>
             </h2>
             <p className="text-text-muted font-body text-sm leading-relaxed max-w-2xl mx-auto">
-              At Preludio Labs, we document everything — including the phenomena we encounter
+              At Brass Note Labs, we document everything — including the phenomena we encounter
               that don&apos;t yet have names. When a behavior is observed, confirmed through
               repeated testing, and distinct enough to matter, we coin a term for it. These are ours.
             </p>
@@ -395,7 +395,7 @@ export default function LabsPage() {
               className="font-body italic text-center mx-auto mt-4 max-w-2xl"
               style={{ fontSize: "0.78rem", color: "#8A9BB0", marginBottom: "32px" }}
             >
-              All coined terms on this page were observed and confirmed exclusively on Suno AI. Suno AI is the only generative audio platform used by Brass Note Studios and Preludio Labs.
+              All coined terms on this page were observed and confirmed exclusively on Suno AI. Suno AI is the only generative audio platform used by Brass Note Studios and Brass Note Labs.
             </p>
           </div>
 
@@ -413,7 +413,7 @@ export default function LabsPage() {
                 <div className="mb-5">
                   <span className="inline-block bg-teal text-white font-body font-semibold uppercase rounded-full px-3 py-1"
                     style={{ fontSize: "0.62rem", letterSpacing: "0.15em" }}>
-                    Term {num} · Coined by Preludio Labs · {year}
+                    Term {num} · Coined by Brass Note Labs · {year}
                   </span>
                 </div>
 
@@ -452,7 +452,7 @@ export default function LabsPage() {
         <div className="max-w-3xl mx-auto relative z-10 text-center">
           <div className="h-px w-32 mx-auto mb-10" style={{ background: "linear-gradient(to right, transparent, #D4A843, transparent)" }} />
           <h2 className="font-display text-2xl md:text-3xl text-text-base font-bold leading-[1.3] mb-8">
-            The standard at Preludio Labs is simple:{" "}
+            The standard at Brass Note Labs is simple:{" "}
             <em className="text-gold not-italic italic">
               if we wouldn&apos;t be proud to put our name on it, it doesn&apos;t leave the pipeline.
             </em>
@@ -476,7 +476,7 @@ export default function LabsPage() {
           <div className="flex justify-center mb-6">
             <Image
               src="/images/B105D6C3-C2CB-4649-901E-8168621F29C1.png"
-              alt="Preludio Labs"
+              alt="Brass Note Labs"
               width={120}
               height={120}
               className="w-[7.5rem] h-[7.5rem] object-contain opacity-80"

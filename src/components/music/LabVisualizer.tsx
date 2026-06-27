@@ -196,7 +196,7 @@ export default function LabVisualizer() {
           {currentSong?.title}
         </p>
         <p className="font-body text-teal/70 text-sm mt-1">
-          {currentSong?.clientName} &mdash; Written &amp; Produced by Preludio Labs
+          {currentSong?.clientName} &mdash; Written &amp; Produced by Brass Note Labs
         </p>
       </div>
 
