@@ -287,7 +287,13 @@ export default function ServicesPage() {
               <div key={addon.name} className="bg-surface rounded-lg border border-white/8 p-4">
                 <div className="flex items-start justify-between gap-3 mb-1">
                   <span className="font-body font-semibold text-text-base">{addon.name}</span>
-                  <span className="font-display text-gold text-xl whitespace-nowrap">{addon.price}</span>
+                  {"comingSoon" in addon && addon.comingSoon ? (
+                    <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-teal border border-teal/40 rounded-sm px-2 py-0.5 whitespace-nowrap">
+                      Coming Soon
+                    </span>
+                  ) : (
+                    <span className="font-display text-gold text-xl whitespace-nowrap">{addon.price}</span>
+                  )}
                 </div>
                 <p className="text-text-muted font-body text-sm">{addon.notes}</p>
               </div>
@@ -309,7 +315,15 @@ export default function ServicesPage() {
                 }`}
               >
                 <span className="font-body font-semibold text-text-base text-sm">{addon.name}</span>
-                <span className="font-display text-gold text-xl px-8 text-center">{addon.price}</span>
+                <div className="px-8 flex justify-center">
+                  {"comingSoon" in addon && addon.comingSoon ? (
+                    <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-teal border border-teal/40 rounded-sm px-2 py-0.5 whitespace-nowrap">
+                      Coming Soon
+                    </span>
+                  ) : (
+                    <span className="font-display text-gold text-xl">{addon.price}</span>
+                  )}
+                </div>
                 <span className="text-text-muted font-body text-sm">{addon.notes}</span>
               </div>
             ))}
