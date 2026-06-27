@@ -146,7 +146,7 @@ export default function LabsPage() {
           {/* Preludio Labs logo */}
           <div className="flex justify-center mb-8">
             <Image
-              src="/images/preludio.png"
+              src="/images/79A66371-44F2-48A4-91F8-83B5FA775519.png"
               alt="Preludio Labs"
               width={550}
               height={200}
@@ -475,7 +475,7 @@ export default function LabsPage() {
         >
           <div className="flex justify-center mb-6">
             <Image
-              src="/images/preludio_favicon.png"
+              src="/images/B105D6C3-C2CB-4649-901E-8168621F29C1.png"
               alt="Preludio Labs"
               width={120}
               height={120}
