@@ -304,7 +304,7 @@ export default function ServicesPage() {
           <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
             <div className="grid grid-cols-[1fr_auto_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
               <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Add-On</span>
-              <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold text-center px-8">Price</span>
+              <div className="px-8 flex justify-center text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Price</div>
               <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Notes</span>
             </div>
             {addons.map((addon, i) => (
