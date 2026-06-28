@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
 import ReplaySequenceButton from "@/components/ui/ReplaySequenceButton";
 
@@ -65,22 +65,13 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-3">
               <a
-                href="https://suno.com"
+                href="https://suno.com/@brassnotelabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-text-muted hover:text-gold text-sm transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
                 Listen on Suno
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-text-muted hover:text-gold text-sm transition-colors"
-              >
-                <Instagram className="w-4 h-4" />
-                Instagram
               </a>
             </div>
           </div>

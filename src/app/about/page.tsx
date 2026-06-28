@@ -98,7 +98,7 @@ export default function AboutPage() {
                   <div className="flex flex-col items-center gap-1.5">
                     <Award className="w-5 h-5 text-gold" />
                     <span className="font-display text-2xl text-gold">30+</span>
-                    <span className="text-text-muted text-xs font-body text-center">Years as a Musician &amp; Songwriter</span>
+                    <span className="text-text-muted text-xs font-body text-center">Years as Musicians &amp; Songwriters</span>
                   </div>
                   <div className="flex flex-col items-center gap-1.5">
                     <Disc3 className="w-5 h-5 text-gold" />
