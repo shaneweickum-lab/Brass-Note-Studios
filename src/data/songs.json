@@ -13,7 +13,11 @@
       "published": false,
       "dateAdded": "2026-06-25",
       "category": "Personal Lyrics",
-      "mood": ["bold", "cinematic", "identity"],
+      "mood": [
+        "bold",
+        "cinematic",
+        "identity"
+      ],
       "coverImage": null
     },
     {
@@ -29,7 +33,10 @@
       "published": true,
       "dateAdded": "2026-06-13",
       "category": "Personal Lyrics",
-      "mood": ["heavy", "meaningful"],
+      "mood": [
+        "heavy",
+        "meaningful"
+      ],
       "coverImage": null
     },
     {
@@ -45,7 +52,10 @@
       "published": true,
       "dateAdded": "2026-06-13",
       "category": "Personal Lyrics",
-      "mood": ["romantic", "celebratory"],
+      "mood": [
+        "romantic",
+        "celebratory"
+      ],
       "coverImage": null
     },
     {
@@ -61,7 +71,11 @@
       "published": true,
       "dateAdded": "2026-06-13",
       "category": "Comprehensive Services",
-      "mood": ["uplifting", "powerful", "community"],
+      "mood": [
+        "uplifting",
+        "powerful",
+        "community"
+      ],
       "coverImage": null
     },
     {
@@ -77,7 +91,11 @@
       "published": false,
       "dateAdded": "2026-06-25",
       "category": "From the Lab",
-      "mood": ["technical", "experimental", "innovative"],
+      "mood": [
+        "technical",
+        "experimental",
+        "innovative"
+      ],
       "coverImage": null
     },
     {
@@ -93,7 +111,11 @@
       "published": false,
       "dateAdded": "2026-06-25",
       "category": "From the Lab",
-      "mood": ["technical", "intense", "boundary-pushing"],
+      "mood": [
+        "technical",
+        "intense",
+        "boundary-pushing"
+      ],
       "coverImage": null
     },
     {
@@ -109,7 +131,30 @@
       "published": false,
       "dateAdded": "2026-06-13",
       "category": "Song Production",
-      "mood": ["celebratory", "fun", "heartfelt"],
+      "mood": [
+        "celebratory",
+        "fun",
+        "heartfelt"
+      ],
+      "coverImage": null
+    },
+    {
+      "id": "song-008",
+      "title": "Just Dance",
+      "clientName": "Whispers of the Mystics",
+      "genre": "Jazz",
+      "subgenre": "Funk",
+      "description": "A song about being joyful and just dancing to the rhythm of your own tune.",
+      "audioFile": "/audio/Just dance.mp3",
+      "sunoUrl": "",
+      "spotifyLink": "",
+      "published": true,
+      "dateAdded": "2026-06-28",
+      "category": "Collaboration",
+      "mood": [
+        "energetic",
+        "uplifting"
+      ],
       "coverImage": null
     }
   ]
