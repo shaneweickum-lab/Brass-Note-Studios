@@ -24,10 +24,10 @@
       "delivery": "Single anthem: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
       "included": "Organization packages include a consultation call to understand your mission, values, and intended use — plus 3 revision rounds per song.",
       "packages": [
-        { "name": "Single Anthem / Song", "price": "$199", "description": "One custom song built around your mission, values, or event" },
-        { "name": "EP (3–4 songs)", "price": "$449", "description": "Multiple anthems — great for campaigns, events, or seasonal use" },
-        { "name": "LP (5–7 songs)", "price": "$649", "description": "A full musical identity package for your organization" },
-        { "name": "Full Album (8+ songs)", "price": "$899", "description": "Complete original music library — own your sound entirely" }
+        { "name": "Single Anthem / Song", "price": "$199", "description": "One custom song built around your mission, values, or event", "checkoutUrl": "https://mystore6154.samcart.com/products/single-anthem" },
+        { "name": "EP (3–4 songs)", "price": "$449", "description": "Multiple anthems — great for campaigns, events, or seasonal use", "checkoutUrl": "https://mystore6154.samcart.com/products/ep-3-4-songsorganization" },
+        { "name": "LP (5–7 songs)", "price": "$649", "description": "A full musical identity package for your organization", "checkoutUrl": "https://mystore6154.samcart.com/products/lp-5-7-songsorganization" },
+        { "name": "Full Album (8+ songs)", "price": "$899", "description": "Complete original music library — own your sound entirely", "checkoutUrl": "https://mystore6154.samcart.com/products/full-album-8-songsorganization" }
       ]
     },
     {
@@ -39,10 +39,10 @@
       "delivery": "Single track: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
       "included": "Usage rights included for all platforms. Supply your own lyrics or let us handle the writing. 3 revision rounds per song included.",
       "packages": [
-        { "name": "Single Track", "price": "$149", "description": "Lyrics or no lyrics — original production built to your brand's sound" },
-        { "name": "EP (3–4 tracks)", "price": "$299", "description": "A consistent sonic identity for your brand" },
-        { "name": "LP (5–7 tracks)", "price": "$499", "description": "Full original music library for your content" },
-        { "name": "Full Album (8+ tracks)", "price": "$799", "description": "Own your entire sound catalog" }
+        { "name": "Single Track", "price": "$149", "description": "Lyrics or no lyrics — original production built to your brand's sound", "checkoutUrl": "https://mystore6154.samcart.com/products/single-trackcontent-creator" },
+        { "name": "EP (3–4 tracks)", "price": "$299", "description": "A consistent sonic identity for your brand", "checkoutUrl": "https://mystore6154.samcart.com/products/ep-3-4-trackscontent-creator" },
+        { "name": "LP (5–7 tracks)", "price": "$499", "description": "Full original music library for your content", "checkoutUrl": "https://mystore6154.samcart.com/products/lp-5-7-trackscontent-creator" },
+        { "name": "Full Album (8+ tracks)", "price": "$799", "description": "Own your entire sound catalog", "checkoutUrl": "https://mystore6154.samcart.com/products/full-album-8-trackscontent-creator" }
       ]
     }
   ],

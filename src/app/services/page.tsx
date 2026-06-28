@@ -277,7 +277,7 @@ export default function ServicesPage() {
             <SectionHeading
               eyebrow="Add-Ons"
               title="Enhance Any Order"
-              subtitle="Pair any commission or subscription with these optional extras."
+              subtitle="Pair any commission or subscription with these optional extras. All add-ons are available as order bumps during checkout — simply check the ones you want before completing your purchase."
             />
           </div>
 
