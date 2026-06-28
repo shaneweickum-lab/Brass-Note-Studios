@@ -125,11 +125,10 @@ export default function AboutPage() {
                 </p>
                 <p>
                   We&apos;ve released several studio-quality albums on Spotify featuring
-                  original songs produced using Suno AI. Those albums are a
-                  testament to what&apos;s possible when genuine songwriting craft meets
-                  modern production technology — professional sound, personal
-                  stories, and music that holds up alongside anything on the
-                  platform.
+                  original songs produced using Suno AI. Those albums are a testament
+                  to what&apos;s possible when genuine songwriting craft meets modern
+                  production technology — professional sound, personal stories, and
+                  music that holds up alongside anything on the platform.
                 </p>
                 <p>
                   Brass Note Studios was built to give everyone access to custom,
@@ -139,10 +138,19 @@ export default function AboutPage() {
                   we focus entirely on what we do best: the writing.
                 </p>
                 <p>
-                  Every song in this portfolio was written by hand — not
-                  generated, not templated. Our team writes the lyrics, shapes the
-                  narrative, and produces the final track. The result is music
-                  that feels human because it is.
+                  What sets our productions apart goes deeper than craft. Every song
+                  we deliver has passed through the Brass Note Labs production
+                  pipeline — our internal research and development division dedicated
+                  to understanding exactly what makes AI-generated music work at a
+                  professional level. We don&apos;t rely on intuition alone. We measure,
+                  document, and refine every production decision so that the quality
+                  you hear isn&apos;t an accident. It&apos;s a standard.
+                </p>
+                <p>
+                  Every song in this portfolio was written by hand — not generated,
+                  not templated. Our team writes the lyrics, shapes the narrative,
+                  and directs the production from the first word to the final note.
+                  The result is music that feels human because it is.
                 </p>
               </div>
             </div>
