@@ -222,21 +222,17 @@ export default function AboutPage() {
           />
           <div className="text-text-muted font-body leading-relaxed flex flex-col gap-4">
             <p>
-              Suno AI is the most advanced AI music generation platform
-              available today. It can produce full songs with vocals,
-              instrumentation, and professional mixing — in virtually any genre
-              — from text prompts and lyrics.
+              Suno AI gives us a degree of control over the generative process
+              that most platforms simply don&apos;t offer — precise enough to execute
+              our proprietary production framework at the level our clients expect.
+              That control, combined with genuine songwriting craft, is what
+              separates a Brass Note Studios production from anything else in this
+              space.
             </p>
             <p>
-              We use Suno because it allows us to deliver studio-quality
-              recordings at a price point that makes custom music accessible to
-              everyone — without sacrificing the quality of the writing or the
-              emotional depth of the final product.
-            </p>
-            <p>
-              The lyrics are ours. The story is yours. The production is
-              powered by the best tools available. That&apos;s the Brass Note
-              Studios model.
+              The lyrics are ours. The story is yours. The production is powered
+              by the most precise tool available for the job. That&apos;s the Brass
+              Note Studios model.
             </p>
           </div>
         </div>
