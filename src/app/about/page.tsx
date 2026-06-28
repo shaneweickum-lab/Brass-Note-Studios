@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Music2, Sparkles, Heart, Users, Award, Disc3 } from "lucide-react";
+import { Music2, Sparkles, Heart, Users, Award, Disc3, FlaskConical } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
 
@@ -34,7 +34,7 @@ const values = [
     icon: Music2,
     title: "Modern Production",
     description:
-      "Using Suno AI's industry-leading music generation platform, we deliver professional-grade recordings that sound like they came from a full production studio.",
+      "Our production process is built on a proprietary framework developed through years of research and refinement — delivering recordings that sound like they came from a full production studio, every time.",
   },
 ];
 
@@ -188,6 +188,24 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Fifth card — full-width anchor */}
+          <div className="mt-6 flex justify-center">
+            <div className="w-full max-w-2xl bg-surface-elevated rounded-lg p-8 border border-white/5 hover:border-gold/20 transition-colors">
+              <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mb-4">
+                <FlaskConical className="w-5 h-5 text-gold" />
+              </div>
+              <h3 className="font-display text-lg text-text-base mb-2">
+                Measured Standards
+              </h3>
+              <p className="text-text-muted font-body text-sm leading-relaxed">
+                Behind every Brass Note Studios production is Brass Note Labs — our R&amp;D division dedicated
+                to ensuring every song meets the same professional standard. We don&apos;t rely on intuition
+                alone. We measure, document, and refine so that quality isn&apos;t something you hope for.
+                It&apos;s something we guarantee.
+              </p>
+            </div>
           </div>
         </div>
       </section>
