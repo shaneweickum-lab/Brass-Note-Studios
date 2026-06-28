@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featuredSongs = (songsData.songs as Song[]).filter((s) => s.featured);
+  const featuredSongs = (songsData.songs as Song[]).filter((s) => s.published);
   const testimonials = testimonialsData.testimonials as Testimonial[];
 
   return (

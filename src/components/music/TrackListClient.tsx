@@ -23,7 +23,7 @@ export default function TrackListClient({ songs }: TrackListClientProps) {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
 
   // First featured song gets the wide hero treatment
-  const heroSong = songs.find((s) => s.featured) ?? null;
+  const heroSong = songs.find((s) => s.published) ?? null;
 
   const filtered =
     activeCategory === "All"

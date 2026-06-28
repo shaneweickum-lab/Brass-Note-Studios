@@ -48,7 +48,7 @@ export function usePlayerState(songs: Song[]) {
         const idx = q.findIndex((s) => s.id === id);
         if (idx < q.length - 1) {
           const next = q[idx + 1];
-          audio.src = next.audioSource.mp3Url;
+          audio.src = next.audioFile;
           audio.play().catch(() => setPlayerState("error"));
           setPlayerState("playing");
           return next.id;
@@ -95,9 +95,9 @@ export function usePlayerState(songs: Song[]) {
       const song = targetQueue.find((s) => s.id === songId);
       if (!song) return;
 
-      if (!song.audioSource.mp3Url) {
-        if (song.audioSource.sunoUrl) {
-          window.open(song.audioSource.sunoUrl, "_blank");
+      if (!song.audioFile) {
+        if (song.sunoUrl) {
+          window.open(song.sunoUrl, "_blank");
         }
         return;
       }
@@ -129,7 +129,7 @@ export function usePlayerState(songs: Song[]) {
 
       setCurrentSongId(songId);
       setPlayerState("loading");
-      audio.src = song.audioSource.mp3Url;
+      audio.src = song.audioFile;
       audio.play().catch(() => setPlayerState("error"));
     },
     [queue]

@@ -1,9 +1,11 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import Link from "next/link";
+import matter from "gray-matter";
 import { Calendar, Tag } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
-import postsDataRaw from "@/data/posts.json";
 import type { Post } from "@/types";
 
 export const metadata: Metadata = {
@@ -12,7 +14,25 @@ export const metadata: Metadata = {
     "Insights, stories, and behind-the-scenes content from Brass Note Studios — the craft of custom songwriting and what makes music matter.",
 };
 
-const posts = postsDataRaw.posts as Post[];
+function getAllPosts(): Post[] {
+  const postsDir = path.join(process.cwd(), "src/data/posts");
+  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
+  return files
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(postsDir, file), "utf-8");
+      const { data } = matter(raw);
+      return {
+        slug: data.slug as string,
+        title: data.title as string,
+        excerpt: data.excerpt as string,
+        category: data.category as string,
+        date: data.date as string,
+        published: data.published as boolean,
+      };
+    })
+    .filter((p) => p.published)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -23,9 +43,9 @@ function formatDate(dateStr: string) {
 }
 
 const categoryColors: Record<string, string> = {
-  "Insights": "text-gold border-gold/40",
+  Insights: "text-gold border-gold/40",
   "Behind the Process": "text-teal border-teal/40",
-  "Craft": "text-gold-light border-gold-light/40",
+  Craft: "text-gold-light border-gold-light/40",
 };
 
 function categoryClass(cat: string) {
@@ -33,9 +53,7 @@ function categoryClass(cat: string) {
 }
 
 export default function BlogPage() {
-  const sorted = [...posts].sort(
-    (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-  );
+  const posts = getAllPosts();
 
   return (
     <div>
@@ -63,15 +81,15 @@ export default function BlogPage() {
       {/* Posts grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {sorted.length === 0 ? (
+          {posts.length === 0 ? (
             <p className="text-text-muted font-body text-center py-16">
               No posts yet — check back soon.
             </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sorted.map((post) => (
+              {posts.map((post) => (
                 <Link
-                  key={post.id}
+                  key={post.slug}
                   href={`/blog/${post.slug}`}
                   className="group flex flex-col bg-surface rounded-lg border border-white/8 hover:border-gold/25 transition-colors overflow-hidden"
                 >
@@ -89,7 +107,7 @@ export default function BlogPage() {
                       </span>
                       <span className="flex items-center gap-1 text-text-subtle font-body text-xs">
                         <Calendar className="w-3 h-3" />
-                        {formatDate(post.publishedDate)}
+                        {formatDate(post.date)}
                       </span>
                     </div>
 

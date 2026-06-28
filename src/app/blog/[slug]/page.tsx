@@ -1,15 +1,43 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import matter from "gray-matter";
 import { Calendar, Tag, ChevronLeft } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
-import postsDataRaw from "@/data/posts.json";
-import type { Post, ContentBlock } from "@/types";
 
-const posts = postsDataRaw.posts as Post[];
+const POSTS_DIR = path.join(process.cwd(), "src/data/posts");
+
+interface PostData {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  published: boolean;
+  content: string;
+}
+
+function getPost(slug: string): PostData | null {
+  const filePath = path.join(POSTS_DIR, `${slug}.md`);
+  if (!fs.existsSync(filePath)) return null;
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(raw);
+  return {
+    slug,
+    title: data.title as string,
+    excerpt: data.excerpt as string,
+    category: data.category as string,
+    date: data.date as string,
+    published: data.published as boolean,
+    content,
+  };
+}
 
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
+  return files.map((f) => ({ slug: f.replace(".md", "") }));
 }
 
 export function generateMetadata({
@@ -17,7 +45,7 @@ export function generateMetadata({
 }: {
   params: { slug: string };
 }): Metadata {
-  const post = posts.find((p) => p.slug === params.slug);
+  const post = getPost(params.slug);
   if (!post) return {};
   return {
     title: `${post.title} — Brass Note Studios Blog`,
@@ -33,64 +61,110 @@ function formatDate(dateStr: string) {
   });
 }
 
-function renderBlock(block: ContentBlock, i: number) {
-  switch (block.type) {
-    case "paragraph":
-      return (
-        <p key={i} className="text-text-muted font-body leading-relaxed">
-          {block.text}
-        </p>
-      );
-    case "heading":
-      return (
-        <h2
-          key={i}
-          className="font-display text-2xl text-text-base mt-10 mb-2"
-        >
-          {block.text}
+// Simple markdown renderer — handles the specific patterns used in our posts
+function renderMarkdown(markdown: string): React.ReactNode {
+  const lines = markdown.split("\n");
+  const elements: React.ReactNode[] = [];
+  let i = 0;
+  let key = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    if (!line.trim()) { i++; continue; }
+
+    // ## Heading
+    if (line.startsWith("## ")) {
+      elements.push(
+        <h2 key={key++} className="font-display text-2xl text-text-base mt-10 mb-2">
+          {line.slice(3).trim()}
         </h2>
       );
-    case "subheading":
-      return (
-        <h3
-          key={i}
-          className="font-display text-xl text-text-base mt-8 mb-2"
-        >
-          {block.text}
+      i++;
+      continue;
+    }
+
+    // ### Subheading
+    if (line.startsWith("### ")) {
+      elements.push(
+        <h3 key={key++} className="font-display text-xl text-text-base mt-8 mb-2">
+          {line.slice(4).trim()}
         </h3>
       );
-    case "quote":
-      return (
-        <blockquote
-          key={i}
-          className="my-6 border-l-2 border-gold pl-6"
-        >
+      i++;
+      continue;
+    }
+
+    // > Blockquote — collect all consecutive > lines
+    if (line.startsWith("> ") || line === ">") {
+      const quoteLines: string[] = [];
+      while (i < lines.length && (lines[i].startsWith("> ") || lines[i] === ">")) {
+        quoteLines.push(lines[i] === ">" ? "" : lines[i].slice(2));
+        i++;
+      }
+      const attrIdx = quoteLines.findIndex((l) => l.startsWith("— "));
+      const quoteText = quoteLines
+        .slice(0, attrIdx >= 0 ? attrIdx : undefined)
+        .filter((l) => l.trim() !== "")
+        .join(" ");
+      const attribution = attrIdx >= 0 ? quoteLines[attrIdx].slice(2) : null;
+      elements.push(
+        <blockquote key={key++} className="my-6 border-l-2 border-gold pl-6">
           <p className="font-display text-xl text-text-base italic leading-relaxed">
-            &ldquo;{block.text}&rdquo;
+            &ldquo;{quoteText}&rdquo;
           </p>
-          {block.attribution && (
+          {attribution && (
             <cite className="block mt-2 text-gold text-sm font-body not-italic">
-              — {block.attribution}
+              — {attribution}
             </cite>
           )}
         </blockquote>
       );
-    case "list":
-      return (
-        <ul key={i} className="flex flex-col gap-2 my-2">
-          {block.items.map((item, j) => (
+      continue;
+    }
+
+    // - Unordered list — collect consecutive - lines
+    if (line.startsWith("- ")) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].startsWith("- ")) {
+        items.push(lines[i].slice(2).trim());
+        i++;
+      }
+      elements.push(
+        <ul key={key++} className="flex flex-col gap-2 my-2">
+          {items.map((item, j) => (
             <li key={j} className="flex items-start gap-3">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
-              <span className="text-text-muted font-body leading-relaxed">
-                {item}
-              </span>
+              <span className="text-text-muted font-body leading-relaxed">{item}</span>
             </li>
           ))}
         </ul>
       );
-    default:
-      return null;
+      continue;
+    }
+
+    // Paragraph — collect lines until a blank line or a block-level marker
+    const paraLines: string[] = [];
+    while (
+      i < lines.length &&
+      lines[i].trim() !== "" &&
+      !lines[i].startsWith("#") &&
+      !lines[i].startsWith(">") &&
+      !lines[i].startsWith("- ")
+    ) {
+      paraLines.push(lines[i].trim());
+      i++;
+    }
+    if (paraLines.length > 0) {
+      elements.push(
+        <p key={key++} className="text-text-muted font-body leading-relaxed">
+          {paraLines.join(" ")}
+        </p>
+      );
+    }
   }
+
+  return <>{elements}</>;
 }
 
 export default function BlogPostPage({
@@ -98,7 +172,7 @@ export default function BlogPostPage({
 }: {
   params: { slug: string };
 }) {
-  const post = posts.find((p) => p.slug === params.slug);
+  const post = getPost(params.slug);
   if (!post) notFound();
 
   return (
@@ -130,7 +204,7 @@ export default function BlogPostPage({
             </span>
             <span className="flex items-center gap-1 text-text-subtle font-body text-xs">
               <Calendar className="w-3 h-3" />
-              {formatDate(post.publishedDate)}
+              {formatDate(post.date)}
             </span>
           </div>
 
@@ -151,7 +225,7 @@ export default function BlogPostPage({
       {/* Content */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto flex flex-col gap-5">
-          {post.content.map((block, i) => renderBlock(block, i))}
+          {renderMarkdown(post.content)}
         </div>
       </section>
 

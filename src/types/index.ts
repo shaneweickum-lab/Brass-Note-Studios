@@ -1,22 +1,27 @@
-export interface AudioSource {
-  type: "mp3" | "suno_embed";
-  mp3Url: string;
-  sunoId?: string;
-  sunoUrl?: string;
-}
-
 export interface Song {
   id: string;
   title: string;
   clientName: string;
-  description?: string;
-  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "From the Lab";
   genre?: string;
+  subgenre?: string | null;
+  description?: string;
+  audioFile: string;
+  sunoUrl?: string;
+  spotifyLink?: string;
+  published: boolean;
+  dateAdded: string;
+  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "From the Lab";
   mood?: string[];
-  featured: boolean;
-  publishedDate: string;
-  audioSource: AudioSource;
   coverImage?: string | null;
+}
+
+export interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  published: boolean;
 }
 
 export interface ServicePackage {
@@ -35,24 +40,6 @@ export interface ServiceCategory {
   delivery: string;
   included: string;
   packages: ServicePackage[];
-}
-
-export type ContentBlock =
-  | { type: "paragraph"; text: string }
-  | { type: "heading"; text: string }
-  | { type: "subheading"; text: string }
-  | { type: "quote"; text: string; attribution?: string }
-  | { type: "list"; items: string[] };
-
-export interface Post {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  publishedDate: string;
-  featured: boolean;
-  content: ContentBlock[];
 }
 
 export interface Testimonial {

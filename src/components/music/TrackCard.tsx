@@ -41,14 +41,14 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
 
   const isCurrentSong = currentSongId === song.id;
   const isPlaying     = isCurrentSong && (playerState === "playing" || playerState === "loading");
-  const hasAudio      = Boolean(song.audioSource.mp3Url);
-  const hasSunoLink   = Boolean(song.audioSource.sunoUrl);
+  const hasAudio      = Boolean(song.audioFile);
+  const hasSunoLink   = Boolean(song.sunoUrl);
   const isPlayable    = hasAudio || hasSunoLink;
 
   const handleToggle = () => {
     if (!isPlayable) return;
     if (!hasAudio) {
-      window.open(song.audioSource.sunoUrl, "_blank", "noopener,noreferrer");
+      window.open(song.sunoUrl, "_blank", "noopener,noreferrer");
       return;
     }
     if (isCurrentSong) {
