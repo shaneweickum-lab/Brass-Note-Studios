@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/about",    label: "About",   teal: false },
   { href: "/music",    label: "Music",   teal: false },
+  { href: "/blog",     label: "Blog",    teal: false },
   { href: "/labs",     label: "Labs",    teal: true  },
   { href: "/services", label: "Pricing", teal: false },
 ];

@@ -7,6 +7,7 @@ import ReplaySequenceButton from "@/components/ui/ReplaySequenceButton";
 const links = [
   { href: "/about",    label: "About" },
   { href: "/music",    label: "Our Work" },
+  { href: "/blog",     label: "Blog" },
   { href: "/labs",     label: "Brass Note Labs" },
   { href: "/services", label: "Pricing" },
   { href: "/contact",  label: "Commission a Song" },

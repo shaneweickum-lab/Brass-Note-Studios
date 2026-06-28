@@ -37,6 +37,24 @@ export interface ServiceCategory {
   packages: ServicePackage[];
 }
 
+export type ContentBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "subheading"; text: string }
+  | { type: "quote"; text: string; attribution?: string }
+  | { type: "list"; items: string[] };
+
+export interface Post {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  publishedDate: string;
+  featured: boolean;
+  content: ContentBlock[];
+}
+
 export interface Testimonial {
   id: string;
   quote: string;
