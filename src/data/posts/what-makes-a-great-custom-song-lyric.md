@@ -1,9 +1,11 @@
 ---
-title: "What Makes a Great Custom Song Lyric"
-date: "2025-02-07"
-slug: "what-makes-a-great-custom-song-lyric"
-excerpt: "Generic lyrics feel generic. Specific lyrics feel true. Here's what separates a song that moves people from one that just fills the air."
-category: "Craft"
+title: What Makes a Great Custom Song Lyric
+slug: what-makes-a-great-custom-song-lyric
+date: '2025-02-07'
+excerpt: >-
+  Generic lyrics feel generic. Specific lyrics feel true. Here's what separates
+  a song that moves people from one that just fills the air.
+category: Craft
 published: true
 ---
 
@@ -13,7 +15,7 @@ The hardest part of writing custom songs isn't the rhyme scheme or the melody. I
 
 Great lyrics don't tell you how to feel. They give you the detail that makes you feel it on your own. "She always burned the toast but somehow made it perfect" lands differently than "she was always there for me." The first one is true. The second one is generic. True details produce genuine emotion. Generic statements produce nothing.
 
-This is why the intake process matters. Every specific you share — the name, the place, the habit, the joke — is potential ammunition for a lyric that hits. The more you give us, the more we have to work with. We can't invent your story. We can only write it.
+This is why the intake process matters. Everything specific you share — the name, the place, the habit, the joke — is potential ammunition for a lyric that hits. The more you give us, the more we have to work with. We can't invent your story. We can only write it.
 
 > True details produce genuine emotion. Generic statements produce nothing.
 >
