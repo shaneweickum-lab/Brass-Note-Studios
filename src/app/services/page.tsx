@@ -100,9 +100,9 @@ export default function ServicesPage() {
 
               {/* Pricing — desktop table */}
               <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
-                <div className="grid grid-cols-[1fr_auto_1fr_auto] bg-surface-elevated px-6 py-3 border-b border-white/8">
+                <div className="grid grid-cols-[1fr_150px_1fr_auto] bg-surface-elevated px-6 py-3 border-b border-white/8">
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Package</span>
-                  <div className="px-8 flex justify-center text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Price</div>
+                  <div className="flex justify-center text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Price</div>
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">What You Get</span>
                   <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold pl-8"></span>
                 </div>
@@ -111,12 +111,12 @@ export default function ServicesPage() {
                   return (
                     <div
                       key={pkg.name}
-                      className={`grid grid-cols-[1fr_auto_1fr_auto] items-center px-6 py-4 border-b border-white/5 last:border-0 transition-colors hover:bg-gold/5 ${
+                      className={`grid grid-cols-[1fr_150px_1fr_auto] items-center px-6 py-4 border-b border-white/5 last:border-0 transition-colors hover:bg-gold/5 ${
                         i % 2 === 0 ? "bg-surface" : "bg-surface/60"
                       }`}
                     >
                       <span className="font-body font-semibold text-text-base text-sm">{pkg.name}</span>
-                      <div className="px-8 flex justify-center whitespace-nowrap">
+                      <div className="flex justify-center whitespace-nowrap">
                         <span className="font-display text-gold text-xl">
                           {pkg.price}<span className="text-gold/60 text-base">+</span>
                         </span>
@@ -304,20 +304,20 @@ export default function ServicesPage() {
 
           {/* Add-ons — desktop table */}
           <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
-            <div className="grid grid-cols-[1fr_auto_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
+            <div className="grid grid-cols-[1fr_150px_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
               <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Add-On</span>
-              <div className="px-8 flex justify-center text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Price</div>
+              <div className="flex justify-center text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Price</div>
               <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Notes</span>
             </div>
             {addons.map((addon, i) => (
               <div
                 key={addon.name}
-                className={`grid grid-cols-[1fr_auto_1fr] items-center px-6 py-4 border-b border-white/5 last:border-0 hover:bg-gold/5 transition-colors ${
+                className={`grid grid-cols-[1fr_150px_1fr] items-center px-6 py-4 border-b border-white/5 last:border-0 hover:bg-gold/5 transition-colors ${
                   i % 2 === 0 ? "bg-surface" : "bg-surface/60"
                 }`}
               >
                 <span className="font-body font-semibold text-text-base text-sm">{addon.name}</span>
-                <div className="px-8 flex justify-center">
+                <div className="flex justify-center">
                   {"comingSoon" in addon && addon.comingSoon ? (
                     <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-teal border border-teal/40 rounded-sm px-2 py-0.5 whitespace-nowrap">
                       Coming Soon
