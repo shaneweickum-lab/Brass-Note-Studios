@@ -29,6 +29,8 @@ export function usePlayerState(songs: Song[]) {
   const [volume, setVolumeState] = useState(0.8);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
+  const volumeRef = useRef(0.8);
   const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
 
   useEffect(() => { queueRef.current = queue; }, [queue]);
@@ -110,8 +112,12 @@ export function usePlayerState(songs: Song[]) {
           const node = ctx.createAnalyser();
           node.fftSize = 2048;
           node.smoothingTimeConstant = 0.85;
+          const gainNode = ctx.createGain();
+          gainNode.gain.value = volumeRef.current;
+          gainNodeRef.current = gainNode;
           const source = ctx.createMediaElementSource(audio);
-          source.connect(node);
+          source.connect(gainNode);
+          gainNode.connect(node);
           node.connect(ctx.destination);
           audioCtxRef.current = ctx;
           setAnalyser(node);
@@ -158,8 +164,10 @@ export function usePlayerState(songs: Song[]) {
   }, []);
 
   const setVolume = useCallback((vol: number) => {
+    volumeRef.current = vol;
     setVolumeState(vol);
     if (audioRef.current) audioRef.current.volume = vol;
+    if (gainNodeRef.current) gainNodeRef.current.gain.value = vol;
   }, []);
 
   return {

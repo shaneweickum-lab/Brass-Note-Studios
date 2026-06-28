@@ -138,10 +138,10 @@ export default function PlaylistPlayer() {
                 <Volume2 className="w-4 h-4" />
               )}
             </button>
-            <div className="flex-1 relative h-1">
-              <div className="absolute inset-0 bg-white/10 rounded-full" />
+            <div className="flex-1 relative h-5 flex items-center">
+              <div className="absolute inset-x-0 h-1 bg-white/10 rounded-full" />
               <div
-                className="absolute inset-y-0 left-0 bg-gold/60 rounded-full"
+                className="absolute inset-x-0 h-1 left-0 bg-gold/60 rounded-full pointer-events-none"
                 style={{ width: `${volume * 100}%` }}
               />
               <input
@@ -151,7 +151,7 @@ export default function PlaylistPlayer() {
                 step={0.02}
                 value={volume}
                 onChange={(e) => setVolume(Number(e.target.value))}
-                className={cn("absolute inset-0 w-full opacity-0 cursor-pointer h-full")}
+                className="absolute inset-0 w-full opacity-0 cursor-pointer"
                 aria-label="Volume"
               />
             </div>
