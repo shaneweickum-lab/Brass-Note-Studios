@@ -156,6 +156,25 @@
         "uplifting"
       ],
       "coverImage": null
+    },
+    {
+      "id": "song-009",
+      "title": "Limitless(A Heroes Journey)",
+      "clientName": "Whispers of the Mystics",
+      "genre": "Power Metal",
+      "subgenre": null,
+      "description": "A Song describing that everyone has limitless potential. ",
+      "audioFile": "/audio/A hero’s Journey (limitless).mp3",
+      "sunoUrl": "",
+      "spotifyLink": "",
+      "published": true,
+      "dateAdded": "2026-06-29",
+      "category": "Collaboration",
+      "mood": [
+        "energetic",
+        "powerful"
+      ],
+      "coverImage": null
     }
   ]
 }
