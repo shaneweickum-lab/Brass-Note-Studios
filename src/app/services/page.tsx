@@ -20,6 +20,10 @@ const SHOW_SUBSCRIPTIONS = false;
 
 const servicesData = servicesDataRaw as { categories: ServiceCategory[]; subscriptions: typeof servicesDataRaw.subscriptions; addons: typeof servicesDataRaw.addons };
 
+function articleFor(word: string) {
+  return /^[aeiou]/i.test(word) ? "an" : "a";
+}
+
 export default function ServicesPage() {
   const { categories, subscriptions, addons } = servicesData;
 
@@ -38,7 +42,7 @@ export default function ServicesPage() {
           <SectionHeading
             eyebrow="Services & Pricing"
             title="Transparent Pricing. Personal Craft."
-            subtitle="Every song is built from scratch — your story, your people, your occasion. With 30 years of musicianship and a ten-layer production framework, we translate real emotion into music that moves people."
+            subtitle="Every song is built from scratch — your story, your people, your occasion. With 30 years of musicianship and our production framework, we translate real emotion into music that moves people."
             centered
           />
         </div>
@@ -182,7 +186,7 @@ export default function ServicesPage() {
                   href={`/contact?service=${encodeURIComponent(cat.name)}`}
                   className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-6 py-3 text-sm transition-colors duration-200"
                 >
-                  Order a {cat.name.split(" ")[0]} Commission
+                  Order {articleFor(cat.name.split(" ")[0])} {cat.name.split(" ")[0]} Commission
                 </Link>
               </div>
             </section>

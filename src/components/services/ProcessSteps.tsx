@@ -23,7 +23,7 @@ const steps = [
     number: "04",
     title: "Your Song Is Delivered",
     description:
-      "You receive high-quality MP3 and WAV files ready to share, play, or use however you need. Your song also joins the Brass Note Studios public portfolio.",
+      "You receive high-quality MP3 and WAV files ready to share, play, or use however you need. Your song may be added to the Brass Note Studios public portfolio with your permission.",
   },
 ];
 

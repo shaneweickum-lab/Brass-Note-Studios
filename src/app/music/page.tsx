@@ -56,10 +56,15 @@ export default function MusicPage() {
             subtitle="A portfolio of songs commissioned through Brass Note Studios — each one produced for the client listed beneath the title. Not all commissions are included."
             centered
           />
-          <div className="mt-4 flex items-center justify-center gap-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-            <p className="text-gold-light text-sm italic font-body">
-              All songs in this portfolio produced through Brass Note Studios
+          <div className="mt-4 flex flex-col items-center gap-2">
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+              <p className="text-gold-light text-sm italic font-body">
+                All songs in this portfolio produced through Brass Note Studios
+              </p>
+            </div>
+            <p className="text-text-muted/70 font-body text-xs">
+              Client privacy is respected — commissions are only featured with explicit permission.
             </p>
           </div>
         </div>
