@@ -1,0 +1,24 @@
+{
+  "contentTypes": [
+    {
+      "id": "blog-posts",
+      "name": "blog posts",
+      "icon": "📄",
+      "path": "src / data / posts",
+      "format": "markdown-files",
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "type": "markdown"
+        }
+      ]
+    }
+  ]
+}
