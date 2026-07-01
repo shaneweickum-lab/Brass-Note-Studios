@@ -61,7 +61,7 @@ export default function RootLayout({
         <CustomCursor />
         <PlayerProvider initialSongs={songs}>
           <Navbar />
-          <main className="pt-[150px] md:pt-[174px]">{children}</main>
+          <main className="pt-14">{children}</main>
           <Footer />
           <PlaylistPlayer />
           <LabVisualizer />

@@ -24,26 +24,28 @@ export default function Navbar() {
       style={{ background: "rgba(10,10,10,0.94)" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-3">
-          {/* Atelier Logo */}
+        {/* Bar is h-14; logo overflows below via self-start */}
+        <div className="h-14 flex items-start justify-between">
+
+          {/* Atelier Logo — anchored to top, floats below the bar */}
           <Link
             href="/"
-            className="flex items-center"
+            className="flex items-start"
             onClick={() => setOpen(false)}
           >
             <Image
               src="/images/0B0ACD04-F24F-42EE-B65E-4B07CB4ADC11.png"
               alt="Brass Note Studios"
               width={480}
-              height={144}
-              className="h-[120px] md:h-[144px] w-auto"
+              height={108}
+              className="h-[90px] md:h-[108px] w-auto"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />
           </Link>
 
-          {/* Desktop Nav — centered */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Nav — centered within bar height */}
+          <div className="hidden md:flex items-center gap-8 self-center">
             {navLinks.map(({ href, label, teal }) => {
               const isActive = pathname === href || pathname.startsWith(href + "/");
               return (
@@ -65,8 +67,8 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right: Commission CTA */}
-          <div className="hidden md:flex items-center">
+          {/* Right: Commission CTA — centered within bar height */}
+          <div className="hidden md:flex items-center self-center">
             <Link
               href="/contact"
               className="btn-gold-glow font-body text-[11px] font-normal tracking-[0.2em] uppercase border border-gold/50 text-gold hover:bg-gold/8 hover:border-gold px-5 py-2.5 transition-all duration-200"
@@ -75,9 +77,9 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger — centered within bar height */}
           <button
-            className="md:hidden text-text-subtle hover:text-text-base p-2"
+            className="md:hidden text-text-muted hover:text-text-base p-2 self-center"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
