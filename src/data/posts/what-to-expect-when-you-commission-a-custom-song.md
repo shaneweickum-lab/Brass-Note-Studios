@@ -1,10 +1,13 @@
 ---
-title: "What to Expect When You Commission a Custom Song"
-date: "2025-01-24"
-slug: "what-to-expect-when-you-commission-a-custom-song"
-excerpt: "A step-by-step look at what happens from the moment you reach out to the moment the finished song lands in your inbox."
-category: "Behind the Process"
+title: What to Expect When You Commission a Custom Song
+date: '2025-01-24'
+slug: what-to-expect-when-you-commission-a-custom-song
+excerpt: >-
+  A step-by-step look at what happens from the moment you reach out to the
+  moment the finished song lands in your inbox.
+category: Behind the Process
 published: true
+sha: 8c4a5bcb1ae48c97987b35193e10884b6c5b8555
 ---
 
 Commissioning a custom song is something most people have never done before. There's no standard expectation for how it works — and that can make the whole thing feel more uncertain than it needs to be. This is a clear, honest look at what the process looks like at Brass Note Studios, from first inquiry to final delivery.
@@ -35,7 +38,7 @@ Every order includes three revision rounds. When you hear the first version, you
 - A PDF or document of the full lyrics
 - 3 revision rounds included in every order
 - Optional stems (individual tracks) available as an add-on
-- Full ownership or streaming license depending on your package
+
 
 ## How Long Does It Take?
 
