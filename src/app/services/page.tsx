@@ -350,7 +350,7 @@ export default function ServicesPage() {
             Reach out and describe your project. We&apos;ll help you figure out the right approach and give you an honest recommendation.
           </p>
           <Link
-            href="/contact"
+            href="/contact#questions"
             className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-8 py-4 text-lg transition-colors duration-200"
           >
             Let&apos;s Talk
