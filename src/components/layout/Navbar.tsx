@@ -27,18 +27,18 @@ export default function Navbar() {
         {/* Bar is h-14; logo overflows below via self-start */}
         <div className="h-14 flex items-start justify-between">
 
-          {/* Atelier Logo — anchored to top, floats below the bar */}
+          {/* Atelier Logo — centered in bar, floats slightly below */}
           <Link
             href="/"
-            className="flex items-start"
+            className="self-center block"
             onClick={() => setOpen(false)}
           >
             <Image
               src="/images/0B0ACD04-F24F-42EE-B65E-4B07CB4ADC11.png"
               alt="Brass Note Studios"
-              width={480}
-              height={108}
-              className="h-[90px] md:h-[108px] w-auto"
+              width={420}
+              height={84}
+              className="h-[70px] md:h-[84px] w-auto block"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />
