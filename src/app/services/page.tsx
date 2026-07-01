@@ -18,14 +18,14 @@ const iconMap: Record<string, React.ElementType> = { Heart, Mic2, Users, Music }
 // Flip to true when subscription plans are ready to offer publicly
 const SHOW_SUBSCRIPTIONS = false;
 
-const servicesData = servicesDataRaw as { categories: ServiceCategory[]; subscriptions: typeof servicesDataRaw.subscriptions; addons: typeof servicesDataRaw.addons };
+const servicesData = servicesDataRaw as { categories: ServiceCategory[]; subscriptions: typeof servicesDataRaw.subscriptions };
 
 function articleFor(word: string) {
   return /^[aeiou]/i.test(word) ? "an" : "a";
 }
 
 export default function ServicesPage() {
-  const { categories, subscriptions, addons } = servicesData;
+  const { categories, subscriptions } = servicesData;
 
   return (
     <div>
@@ -175,8 +175,7 @@ export default function ServicesPage() {
                   <p className="text-text-muted font-body text-sm">
                     Songs generating revenue from streaming services are subject to an{" "}
                     <span className="text-text-base font-semibold">80/20 royalty split</span>{" "}
-                    — 80% to you, 20% to Brass Note Studios. Want 100% ownership?{" "}
-                    <span className="text-text-base font-semibold">Full Ownership Buyout</span> is available as an add-on.
+                    — 80% to you, 20% to Brass Note Studios.
                   </p>
                 </div>
               </div>
@@ -273,69 +272,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>}
-
-      <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
-
-      {/* Add-Ons */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8" id="addons">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-10">
-            <SectionHeading
-              eyebrow="Add-Ons"
-              title="Enhance Any Order"
-              subtitle="Pair any commission with these optional extras. All add-ons are available during checkout — simply check the ones you want before completing your purchase."
-            />
-          </div>
-
-          {/* Add-ons — mobile cards */}
-          <div className="flex flex-col gap-3 md:hidden">
-            {addons.map((addon) => (
-              <div key={addon.name} className="bg-surface rounded-lg border border-white/8 p-4">
-                <div className="flex items-start justify-between gap-3 mb-1">
-                  <span className="font-body font-semibold text-text-base">{addon.name}</span>
-                  {"comingSoon" in addon && addon.comingSoon ? (
-                    <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-teal border border-teal/40 rounded-sm px-2 py-0.5 whitespace-nowrap">
-                      Coming Soon
-                    </span>
-                  ) : (
-                    <span className="font-display text-gold text-xl whitespace-nowrap">{addon.price}</span>
-                  )}
-                </div>
-                <p className="text-text-muted font-body text-sm">{addon.notes}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Add-ons — desktop table */}
-          <div className="hidden md:block rounded-lg border border-white/8 overflow-hidden">
-            <div className="grid grid-cols-[1fr_150px_1fr] bg-surface-elevated px-6 py-3 border-b border-white/8">
-              <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Add-On</span>
-              <div className="flex justify-center text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Price</div>
-              <span className="text-gold font-body text-xs uppercase tracking-[0.15em] font-semibold">Notes</span>
-            </div>
-            {addons.map((addon, i) => (
-              <div
-                key={addon.name}
-                className={`grid grid-cols-[1fr_150px_1fr] items-center px-6 py-4 border-b border-white/5 last:border-0 hover:bg-gold/5 transition-colors ${
-                  i % 2 === 0 ? "bg-surface" : "bg-surface/60"
-                }`}
-              >
-                <span className="font-body font-semibold text-text-base text-sm">{addon.name}</span>
-                <div className="flex justify-center">
-                  {"comingSoon" in addon && addon.comingSoon ? (
-                    <span className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-teal border border-teal/40 rounded-sm px-2 py-0.5 whitespace-nowrap">
-                      Coming Soon
-                    </span>
-                  ) : (
-                    <span className="font-display text-gold text-xl">{addon.price}</span>
-                  )}
-                </div>
-                <span className="text-text-muted font-body text-sm">{addon.notes}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <GoldDivider className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" />
 

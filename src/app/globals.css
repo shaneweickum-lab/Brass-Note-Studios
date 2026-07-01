@@ -5,7 +5,6 @@
 @layer base {
   body {
     @apply bg-background text-text-base font-body antialiased;
-    cursor: none;
   }
 
   h1, h2, h3, h4, h5 {
@@ -44,12 +43,7 @@
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
-    cursor: none;
-  }
-
-  /* Interactive elements follow custom cursor */
-  a, button, [role="button"], input, select, textarea, label {
-    cursor: none;
+    cursor: pointer;
   }
 }
 

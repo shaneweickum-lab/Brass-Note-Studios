@@ -8,7 +8,6 @@ import PlaylistPlayer from "@/components/music/PlaylistPlayer";
 import LabVisualizer from "@/components/music/LabVisualizer";
 import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
-import CustomCursor from "@/components/ui/CustomCursor";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
@@ -58,7 +57,6 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${cormorantSC.variable} ${inter.variable}`}>
       <body>
         <ScoreCircuitBackground />
-        <CustomCursor />
         <PlayerProvider initialSongs={songs}>
           <Navbar />
           <main className="pt-14">{children}</main>
