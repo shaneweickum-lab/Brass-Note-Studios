@@ -24,7 +24,7 @@ export default function Navbar() {
       style={{ background: "rgba(10,10,10,0.94)" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between py-3">
           {/* Atelier Logo */}
           <Link
             href="/"
@@ -34,9 +34,9 @@ export default function Navbar() {
             <Image
               src="/images/0B0ACD04-F24F-42EE-B65E-4B07CB4ADC11.png"
               alt="Brass Note Studios"
-              width={240}
-              height={64}
-              className="h-10 md:h-12 w-auto"
+              width={480}
+              height={144}
+              className="h-[120px] md:h-[144px] w-auto"
               style={{ objectFit: "contain", objectPosition: "left" }}
               priority
             />

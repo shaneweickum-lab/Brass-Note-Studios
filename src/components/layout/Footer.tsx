@@ -28,7 +28,7 @@ export default function Footer() {
               alt="Brass Note Studios"
               width={280}
               height={80}
-              className="h-14 w-auto mx-auto"
+              className="h-[168px] w-auto mx-auto"
               style={{ objectFit: "contain" }}
             />
           </Link>
