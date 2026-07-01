@@ -33,31 +33,35 @@ export default function HomePage() {
       <TestimonialsSection testimonials={testimonials} />
 
       {/* Bottom CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden border-t border-white/5">
+      <section className="py-28 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden border-t border-border-subtle">
         <Image
           src="/images/IMG_5103.png"
-          alt="A writing desk with sheet music and a fountain pen, handwritten notes transforming to digital notation"
+          alt="A writing desk with sheet music and a fountain pen"
           fill
           loading="lazy"
           style={{ objectFit: "cover" }}
         />
-        <div className="absolute inset-0 bg-background/80" />
-        <div className="max-w-2xl mx-auto relative z-10">
-          <p className="text-gold font-body text-sm uppercase tracking-[0.2em] font-semibold mb-4">
-            Ready to Create?
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl text-text-base mb-6">
-            Let&rsquo;s Make Your Song
+        <div className="absolute inset-0 bg-background/82" />
+        <div className="max-w-xl mx-auto relative z-10">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <span className="h-px w-8 bg-gold/35" />
+            <p className="font-display-sc text-gold text-[10px] uppercase tracking-[0.3em]">Begin Your Commission</p>
+            <span className="h-px w-8 bg-gold/35" />
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl text-text-base font-light mb-4 leading-tight">
+            Every story deserves
+            <br />
+            <em className="text-gold italic font-light">its own sound.</em>
           </h2>
-          <p className="text-text-muted font-body leading-relaxed mb-8">
-            Tell us your story and we&apos;ll turn it into music. Every song
+          <p className="text-text-muted font-body text-sm leading-[1.8] mb-10">
+            Tell us your story and we&apos;ll turn it into music. Every commission
             starts with a conversation.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-8 py-4 text-lg transition-colors duration-200"
+            className="btn-gold-glow inline-flex items-center justify-center font-body font-normal tracking-[0.2em] uppercase border border-gold/60 text-gold hover:bg-gold/8 hover:border-gold px-10 py-4 text-[11px] transition-all duration-200"
           >
-            Get Your Song
+            Commission Your Song
           </Link>
         </div>
       </section>

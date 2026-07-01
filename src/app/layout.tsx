@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cormorant_Garamond, Cormorant_SC, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -8,18 +8,28 @@ import PlaylistPlayer from "@/components/music/PlaylistPlayer";
 import LabVisualizer from "@/components/music/LabVisualizer";
 import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
+import CustomCursor from "@/components/ui/CustomCursor";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const cormorantSC = Cormorant_SC({
+  subsets: ["latin"],
+  variable: "--font-cormorant-sc",
+  weight: ["500"],
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -45,9 +55,10 @@ export default function RootLayout({
   const songs = songsData.songs as Song[];
 
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${cormorantSC.variable} ${inter.variable}`}>
       <body>
         <ScoreCircuitBackground />
+        <CustomCursor />
         <PlayerProvider initialSongs={songs}>
           <Navbar />
           <main className="pt-16 md:pt-20">{children}</main>

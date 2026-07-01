@@ -12,6 +12,7 @@ const CATEGORIES: Category[] = [
   "Personal Lyrics",
   "Song Production",
   "Comprehensive Services",
+  "Collaboration",
   "From the Lab",
 ];
 

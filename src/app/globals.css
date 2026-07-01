@@ -5,24 +5,38 @@
 @layer base {
   body {
     @apply bg-background text-text-base font-body antialiased;
+    cursor: none;
   }
 
   h1, h2, h3, h4, h5 {
     @apply font-display;
   }
 
-  /* Custom scrollbar */
+  /* Selection color */
+  ::selection {
+    background: rgba(201, 168, 76, 0.25);
+    color: #F5F0E8;
+  }
+
+  /* Custom scrollbar — 4px, gold thumb */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-surface;
+    background: #0A0A0A;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-gold/30 rounded-full;
+    background: rgba(201, 168, 76, 0.35);
+    border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gold/50;
+    background: rgba(201, 168, 76, 0.55);
+  }
+
+  /* Focus states — 1px gold outline */
+  :focus-visible {
+    outline: 1px solid rgba(201, 168, 76, 0.65);
+    outline-offset: 2px;
   }
 
   /* Range input reset */
@@ -30,6 +44,12 @@
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
+    cursor: none;
+  }
+
+  /* Interactive elements follow custom cursor */
+  a, button, [role="button"], input, select, textarea, label {
+    cursor: none;
   }
 }
 
@@ -43,6 +63,49 @@
     scrollbar-width: none;
   }
   .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom cursor dot */
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: #C9A84C;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 80ms ease, opacity 150ms ease;
+    will-change: transform;
+  }
+
+  /* Scroll reveal base state */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button gold glow */
+  .btn-gold-glow:hover {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .custom-cursor-dot {
     display: none;
   }
 }

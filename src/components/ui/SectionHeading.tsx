@@ -18,15 +18,19 @@ export default function SectionHeading({
   return (
     <div className={cn(centered && "text-center", className)}>
       {eyebrow && (
-        <p className="text-gold font-body text-sm uppercase tracking-[0.2em] font-semibold mb-3">
-          {eyebrow}
-        </p>
+        <div className={cn("flex items-center gap-3 mb-6", centered && "justify-center")}>
+          <span className="h-px w-8 bg-gold/35 shrink-0" />
+          <p className="font-display-sc text-gold text-[10px] uppercase tracking-[0.3em] font-medium whitespace-nowrap">
+            {eyebrow}
+          </p>
+          <span className="h-px w-8 bg-gold/35 shrink-0" />
+        </div>
       )}
-      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-text-base leading-tight">
+      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-text-base leading-tight font-light">
         {title}
       </h2>
       {subtitle && (
-        <p className={cn("mt-4 text-text-muted font-body text-lg leading-relaxed max-w-2xl", centered && "mx-auto")}>
+        <p className={cn("mt-4 text-text-muted font-body text-base leading-relaxed max-w-2xl", centered && "mx-auto")}>
           {subtitle}
         </p>
       )}

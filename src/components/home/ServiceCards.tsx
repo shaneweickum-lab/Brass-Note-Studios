@@ -34,45 +34,45 @@ export default function ServiceCards() {
     <section className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <SectionHeading
-          eyebrow="What We Offer"
-          title="Songs for Every Occasion"
-          subtitle="From personal milestones to brand anthems, we bring the music you've been imagining to life."
+          eyebrow="A Dedicated Atelier"
+          title="A New Era of Music"
+          subtitle="We write, arrange, and produce original compositions — for personal milestones, brand identities, and organizations that understand the power of sound."
           centered
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-x divide-border-subtle border border-border-subtle">
         {cards.map((card) => {
           const Icon = card.icon;
           return (
             <div
               key={card.id}
-              className="group relative bg-surface rounded-lg p-8 border border-white/5 hover:border-gold/25 transition-all duration-300 flex flex-col"
+              className="group relative bg-background p-8 hover:bg-surface-elevated transition-all duration-500 flex flex-col border-t-2 border-t-transparent hover:border-t-gold"
             >
-              <div className="absolute top-0 left-8 right-8 h-px bg-gold-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center mb-5">
-                <Icon className="w-6 h-6 text-gold" />
+              <div className="w-9 h-9 border border-gold/20 flex items-center justify-center mb-6 group-hover:border-gold/45 transition-colors duration-300">
+                <Icon className="w-4 h-4 text-gold/60 group-hover:text-gold transition-colors duration-300" />
               </div>
 
-              <h3 className="font-display text-xl text-text-base mb-1">
+              <h3 className="font-display text-xl text-text-base mb-1 font-medium">
                 {card.name}
               </h3>
-              <p className="text-gold text-sm font-body mb-4">{card.tagline}</p>
-              <p className="text-text-muted text-sm leading-relaxed flex-1">
+              <p className="text-gold/60 text-[10px] font-body tracking-[0.2em] uppercase mb-4">
+                {card.tagline}
+              </p>
+              <p className="text-text-muted text-sm leading-relaxed flex-1 font-body">
                 {card.description}
               </p>
 
-              <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
-                <span className="text-gold-light font-body text-sm font-semibold">
+              <div className="mt-6 pt-5 border-t border-border-subtle flex items-center justify-between">
+                <span className="text-gold font-display text-lg font-medium">
                   {card.startingAt}
                 </span>
                 <Link
                   href={`/services#${card.id}`}
-                  className="flex items-center gap-1 text-text-muted hover:text-gold text-sm font-body transition-colors group/link"
+                  className="flex items-center gap-1.5 text-text-muted/60 hover:text-gold text-[10px] font-body tracking-[0.18em] uppercase transition-colors group/link"
                 >
                   See pricing{" "}
-                  <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>

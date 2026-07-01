@@ -1,18 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const links = [
-  { href: "/about",    label: "About",   teal: false },
-  { href: "/music",    label: "Music",   teal: false },
-  { href: "/blog",     label: "Blog",    teal: false },
-  { href: "/labs",     label: "Labs",    teal: true  },
-  { href: "/services", label: "Pricing", teal: false },
+const navLinks = [
+  { href: "/about",    label: "The Studio" },
+  { href: "/music",    label: "Music"       },
+  { href: "/blog",     label: "Journal"     },
+  { href: "/labs",     label: "Labs",  teal: true },
 ];
 
 export default function Navbar() {
@@ -21,49 +19,50 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-gold/20"
-      style={{ background: "linear-gradient(180deg, rgba(24,15,5,0.96) 0%, rgba(18,11,3,0.93) 100%)" }}
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border-subtle"
+      style={{ background: "rgba(10,10,10,0.94)" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
+          {/* BNS Monogram */}
           <Link
             href="/"
             className="flex items-center"
             onClick={() => setOpen(false)}
           >
-            <Image
-              src="/images/DBFDD7E0-A0B2-48AC-AB90-A49D689D4644.png"
-              alt="Brass Note Studios"
-              width={400}
-              height={80}
-              className="h-24 md:h-36 w-auto"
-              style={{ objectFit: "contain", objectPosition: "left" }}
-              priority
-            />
+            <span className="font-display text-gold text-2xl font-semibold tracking-[0.08em] leading-none">
+              BNS
+            </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {links.map(({ href, label, teal }) => {
+          {/* Desktop Nav — centered */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map(({ href, label, teal }) => {
               const isActive = pathname === href || pathname.startsWith(href + "/");
-              const activeColor = teal ? "text-teal border-b border-teal" : "text-gold border-b border-gold";
               return (
                 <Link
                   key={href}
                   href={href}
                   className={cn(
-                    "font-body text-sm font-medium tracking-wide transition-colors",
-                    isActive ? activeColor : "text-text-muted hover:text-text-base"
+                    "font-body text-[11px] font-normal tracking-[0.2em] uppercase transition-colors",
+                    isActive
+                      ? teal ? "text-teal" : "text-gold"
+                      : teal
+                        ? "text-text-muted hover:text-teal"
+                        : "text-text-muted hover:text-text-base"
                   )}
                 >
                   {label}
                 </Link>
               );
             })}
+          </div>
+
+          {/* Right: Commission CTA */}
+          <div className="hidden md:flex items-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-4 py-2 text-sm transition-all duration-200"
+              className="btn-gold-glow font-body text-[11px] font-normal tracking-[0.2em] uppercase border border-gold/50 text-gold hover:bg-gold/8 hover:border-gold px-5 py-2.5 transition-all duration-200"
             >
               Commission a Song
             </Link>
@@ -71,11 +70,11 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-text-muted hover:text-text-base p-2"
+            className="md:hidden text-text-subtle hover:text-text-base p-2"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -83,21 +82,21 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div
-          className="md:hidden border-t border-gold/15 backdrop-blur-md"
-          style={{ background: "rgba(18, 11, 3, 0.98)" }}
+          className="md:hidden border-t border-border-subtle"
+          style={{ background: "rgba(10,10,10,0.98)" }}
         >
-          <div className="px-4 py-6 flex flex-col gap-3">
-            {links.map(({ href, label, teal }) => {
+          <div className="px-4 py-6 flex flex-col gap-4">
+            {navLinks.map(({ href, label, teal }) => {
               const isActive = pathname === href || pathname.startsWith(href + "/");
               return (
                 <Link
                   key={href}
                   href={href}
                   className={cn(
-                    "font-body text-base font-medium py-2 transition-colors",
+                    "font-body text-xs font-normal tracking-[0.2em] uppercase py-1.5 transition-colors",
                     isActive
                       ? teal ? "text-teal" : "text-gold"
-                      : "text-text-muted"
+                      : "text-text-muted hover:text-text-base"
                   )}
                   onClick={() => setOpen(false)}
                 >
@@ -108,7 +107,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center font-body font-semibold tracking-wide bg-gold text-background hover:bg-gold-light rounded-sm px-6 py-3 text-base transition-all duration-200 w-full mt-2"
+              className="font-body text-xs font-normal tracking-[0.2em] uppercase border border-gold/50 text-gold px-5 py-3 text-center transition-all duration-200 w-full mt-2"
             >
               Commission a Song
             </Link>

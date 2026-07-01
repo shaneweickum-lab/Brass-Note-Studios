@@ -10,7 +10,7 @@ export interface Song {
   spotifyLink?: string;
   published: boolean;
   dateAdded: string;
-  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "From the Lab";
+  category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "From the Lab" | "Collaboration";
   mood?: string[];
   coverImage?: string | null;
 }

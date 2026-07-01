@@ -3,16 +3,14 @@ import Image from "next/image";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import HeroDesktopVideo from "./HeroDesktopVideo";
 
-// ─── Hero media paths ─────────────────────────────────────────────────────────
-const HERO_VIDEO = "/videos/hero-desktop.mp4";   // desktop looping video
-const HERO_MOBILE = "/images/IMG_5104.png";       // mobile static image
-// ─────────────────────────────────────────────────────────────────────────────
+const HERO_VIDEO = "/videos/hero-desktop.mp4";
+const HERO_MOBILE = "/images/IMG_5104.png";
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-      {/* Mobile background — portrait image, hidden on md+ */}
+      {/* Mobile background */}
       <Image
         src={HERO_MOBILE}
         alt="Saxophone with smoke rising and transforming into teal digital data streams"
@@ -22,18 +20,18 @@ export default function HeroSection() {
         style={{ objectFit: "cover", objectPosition: "center" }}
       />
 
-      {/* Desktop background — only rendered in the DOM on md+, never on mobile */}
+      {/* Desktop background */}
       <HeroDesktopVideo src={HERO_VIDEO} />
 
-      {/* Dark overlay so text stays legible */}
-      <div className="absolute inset-0 bg-background/60" />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-background/65" />
 
       {/* Warm brass glow */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,168,67,0.18) 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 50% at 50% 35%, rgba(201,168,76,0.10) 0%, transparent 70%)",
         }}
       />
 
@@ -42,34 +40,39 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 text-center">
-        <p className="text-gold font-body text-sm uppercase tracking-[0.3em] font-semibold mb-6 animate-fade-in">
-          Custom Songwriting &amp; Production
-        </p>
 
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-text-base leading-[1.05] mb-6 animate-slide-up">
-          Brass Note
-          <br />
-          <span className="text-gold italic">Studios</span>
+        {/* Eyebrow with flanking rules */}
+        <div className="flex items-center justify-center gap-4 mb-10 animate-fade-in">
+          <span className="h-px w-12 bg-gold/40" />
+          <p className="font-display-sc text-gold text-[10px] uppercase tracking-[0.35em]">
+            Brass Note Studios · Est. 2026
+          </p>
+          <span className="h-px w-12 bg-gold/40" />
+        </div>
+
+        {/* Split headline */}
+        <h1 className="font-display leading-[1.0] mb-12 animate-slide-up">
+          <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] text-text-base font-bold">
+            Your Story.
+          </span>
+          <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] text-gold italic font-light">
+            Preserved.
+          </span>
         </h1>
 
-        <p className="text-text-muted font-body text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-slide-up">
-          Bring your story to life through music. We write and produce custom
-          songs for individuals, organizations, and brands — every song crafted
-          with heart and delivered with professional quality.
-        </p>
-
+        {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center font-body font-semibold tracking-wide transition-all duration-200 bg-gold text-background hover:bg-gold-light rounded-sm px-8 py-4 text-lg w-full sm:w-auto"
+            className="btn-gold-glow inline-flex items-center justify-center font-body font-normal tracking-[0.2em] uppercase transition-all duration-200 border border-gold/60 text-gold hover:bg-gold/8 hover:border-gold px-10 py-4 text-[11px] w-full sm:w-auto"
           >
-            Commission a Song
+            Commission Your Song
           </Link>
           <Link
             href="/music"
-            className="inline-flex items-center justify-center font-body font-semibold tracking-wide transition-all duration-200 border border-gold text-gold hover:bg-gold/10 rounded-sm px-8 py-4 text-lg w-full sm:w-auto"
+            className="inline-flex items-center justify-center font-body font-normal tracking-[0.2em] uppercase text-text-muted/60 hover:text-gold transition-colors duration-200 text-[11px] py-4"
           >
-            Hear Our Work
+            Explore the Collection ↓
           </Link>
         </div>
       </div>

@@ -9,33 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0A0E1A",         // Signal Black — was #0D1B2A
-        surface: "#0F172A",             // Midnight Blue — was #142030
-        "surface-elevated": "#0F172A",  // Midnight Blue — was #112233
+        background: "#0A0A0A",
+        surface: "#111111",
+        "surface-elevated": "#1A1510",
+        "border-subtle": "#2A2218",
         gold: {
-          DEFAULT: "#D4A843",           // Living Brass — was #C9A84C
-          light: "#E8C46A",             // unchanged
+          DEFAULT: "#C9A84C",
+          light: "#E8C96A",
+          bright: "#E8C96A",
           dark: "#9E7830",
           muted: "#8B6914",
         },
-        teal: "#0D9488",               // Electric Teal — was #1A6B8A
-        amber: "#92400E",              // Deep Amber — was #FF9A3C
-        "text-base": "#FAF3E0",        // Warm Cream — was #F5F0E8
-        "text-muted": "#8A9BB0",       // unchanged
-        "text-subtle": "#556070",
+        teal: "#00B4B4",
+        "teal-dim": "#006666",
+        amber: "#92400E",
+        "text-base": "#F5F0E8",
+        "text-secondary": "#A89880",
+        "text-muted": "#A89880",
+        "text-subtle": "#5A4E3A",
       },
       fontFamily: {
-        display: ["var(--font-playfair)", "Georgia", "serif"],
+        display: ["var(--font-cormorant)", "Georgia", "serif"],
+        "display-sc": ["var(--font-cormorant-sc)", "Georgia", "serif"],
         body: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["Courier New", "Courier", "monospace"],
       },
       backgroundImage: {
         "gold-gradient":
-          "linear-gradient(135deg, #D4A843 0%, #E8C46A 50%, #D4A843 100%)",
-        "dark-gradient": "linear-gradient(180deg, #0A0E1A 0%, #0F172A 100%)",
-        "navy-gradient": "linear-gradient(180deg, #0A0E1A 0%, #0F172A 100%)",
+          "linear-gradient(135deg, #C9A84C 0%, #E8C96A 50%, #C9A84C 100%)",
+        "dark-gradient": "linear-gradient(180deg, #0A0A0A 0%, #111111 100%)",
+        "navy-gradient": "linear-gradient(180deg, #0A0A0A 0%, #111111 100%)",
         "gold-shimmer":
-          "linear-gradient(135deg, #0F172A 0%, #162035 40%, #0F172A 100%)",
+          "linear-gradient(135deg, #111111 0%, #1A1510 40%, #111111 100%)",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out",
