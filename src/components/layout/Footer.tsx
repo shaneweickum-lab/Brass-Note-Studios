@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import GoldDivider from "@/components/ui/GoldDivider";
 import ReplaySequenceButton from "@/components/ui/ReplaySequenceButton";
@@ -19,14 +20,19 @@ export default function Footer() {
     <footer className="bg-background border-t border-border-subtle">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
 
-        {/* BNS Monogram + Tagline */}
+        {/* Atelier Logo + Tagline */}
         <div className="text-center mb-14">
           <Link href="/" className="inline-block">
-            <span className="font-display text-gold font-semibold tracking-[0.1em]" style={{ fontSize: "2rem", lineHeight: 1 }}>
-              BNS
-            </span>
+            <Image
+              src="/images/0B0ACD04-F24F-42EE-B65E-4B07CB4ADC11.png"
+              alt="Brass Note Studios"
+              width={280}
+              height={80}
+              className="h-14 w-auto mx-auto"
+              style={{ objectFit: "contain" }}
+            />
           </Link>
-          <p className="text-text-subtle font-display text-sm italic mt-2 tracking-wide">
+          <p className="text-text-subtle font-display text-sm italic mt-3 tracking-wide">
             Your Story. Preserved.
           </p>
         </div>

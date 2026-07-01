@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -24,15 +25,21 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* BNS Monogram */}
+          {/* Atelier Logo */}
           <Link
             href="/"
             className="flex items-center"
             onClick={() => setOpen(false)}
           >
-            <span className="font-display text-gold text-2xl font-semibold tracking-[0.08em] leading-none">
-              BNS
-            </span>
+            <Image
+              src="/images/0B0ACD04-F24F-42EE-B65E-4B07CB4ADC11.png"
+              alt="Brass Note Studios"
+              width={240}
+              height={64}
+              className="h-10 md:h-12 w-auto"
+              style={{ objectFit: "contain", objectPosition: "left" }}
+              priority
+            />
           </Link>
 
           {/* Desktop Nav — centered */}
