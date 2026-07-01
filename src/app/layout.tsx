@@ -42,7 +42,6 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Brass Note Studios",
     type: "website",
-    images: [{ url: "/images/IMG_5110.png", width: 1200, height: 400 }],
   },
 };
 
