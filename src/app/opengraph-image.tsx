@@ -10,12 +10,8 @@ export default function Image() {
   const bgBuffer = fs.readFileSync(
     path.join(process.cwd(), "public/images/IMG_5110.png")
   );
-  const logoBuffer = fs.readFileSync(
-    path.join(process.cwd(), "public/images/0B0ACD04-F24F-42EE-B65E-4B07CB4ADC11.png")
-  );
 
   const bgSrc = `data:image/png;base64,${bgBuffer.toString("base64")}`;
-  const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -54,20 +50,6 @@ export default function Image() {
             bottom: 0,
             background:
               "linear-gradient(160deg, rgba(10,10,10,0.30) 0%, rgba(10,10,10,0.72) 100%)",
-          }}
-        />
-
-        {/* Atelier logo — bottom left */}
-        <img
-          src={logoSrc}
-          width={380}
-          height={108}
-          style={{
-            position: "absolute",
-            bottom: 48,
-            left: 56,
-            objectFit: "contain",
-            objectPosition: "left center",
           }}
         />
       </div>
