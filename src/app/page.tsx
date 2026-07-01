@@ -41,7 +41,7 @@ export default function HomePage() {
           loading="lazy"
           style={{ objectFit: "cover" }}
         />
-        <div className="absolute inset-0 bg-background/82" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.88) 60%, rgba(10,10,10,0.95) 100%)" }} />
         <div className="max-w-xl mx-auto relative z-10">
           <div className="flex items-center justify-center gap-3 mb-8">
             <span className="h-px w-8 bg-gold/35" />
