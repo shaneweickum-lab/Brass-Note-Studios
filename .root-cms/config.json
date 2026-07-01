@@ -1,3 +1,53 @@
 {
-  "contentTypes": []
+  "contentTypes": [
+    {
+      "id": "blog-posts",
+      "name": "Blog Posts",
+      "icon": "✍️",
+      "path": "src/data/posts",
+      "format": "markdown-files",
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true,
+          "placeholder": "Post title"
+        },
+        {
+          "key": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "excerpt",
+          "label": "Short Summary",
+          "type": "textarea",
+          "placeholder": "A one-sentence description shown in listings"
+        },
+        {
+          "key": "category",
+          "label": "Category",
+          "type": "text",
+          "placeholder": "e.g. News, Tutorial"
+        },
+        {
+          "key": "coverImage",
+          "label": "Cover Image",
+          "type": "image"
+        },
+        {
+          "key": "published",
+          "label": "Published",
+          "type": "toggle"
+        },
+        {
+          "key": "body",
+          "label": "Content",
+          "type": "markdown"
+        }
+      ]
+    }
+  ]
 }
