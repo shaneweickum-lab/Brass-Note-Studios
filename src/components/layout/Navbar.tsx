@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/about",    label: "The Studio" },
   { href: "/music",    label: "Music"       },
   { href: "/blog",     label: "Journal"     },
+  { href: "/services", label: "Pricing"     },
   { href: "/labs",     label: "Labs",  teal: true },
 ];
 
