@@ -7,6 +7,8 @@ const nextConfig = {
       { source: "/method/:path*", destination: "/", permanent: false },
       { source: "/academy", destination: "/", permanent: false },
       { source: "/academy/:path*", destination: "/", permanent: false },
+      { source: "/heirloom", destination: "/", permanent: false },
+      { source: "/heirloom/:path*", destination: "/", permanent: false },
     ];
   },
   images: {
