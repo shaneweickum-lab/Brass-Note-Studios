@@ -203,7 +203,29 @@ export default function HeirloomPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            {/* Details — left on this card for visual variety */}
+            {/* Image — first in DOM so it sits at top on mobile; pushed right on desktop */}
+            <div className="relative lg:order-2">
+              <div className="relative rounded-lg overflow-hidden border border-gold/10 bg-surface aspect-[4/3]">
+                <Image
+                  src="/images/13F03C12-DB14-430C-8A8E-8550F84597C8.png"
+                  alt="The Brass Verse — Brass Note Studios Heirloom Collection"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: "linear-gradient(135deg, rgba(10,10,10,0.10) 0%, transparent 50%, rgba(10,10,10,0.20) 100%)" }}
+                />
+              </div>
+              <div
+                className="absolute -bottom-px left-8 right-8 h-[2px]"
+                style={{ background: "linear-gradient(90deg, transparent, #C9A84C, transparent)" }}
+              />
+              <div className="absolute -bottom-4 -left-4 w-20 h-20 border-b-2 border-l-2 border-gold/20 rounded-bl-lg pointer-events-none" />
+            </div>
+
+            {/* Details — left on desktop */}
             <div className="flex flex-col gap-8 lg:order-1">
               <div>
                 <p className="font-display-sc text-gold text-[10px] uppercase tracking-[0.35em] mb-3">
@@ -270,23 +292,6 @@ export default function HeirloomPage() {
               </div>
             </div>
 
-            {/* Image — right on this card */}
-            <div className="relative lg:order-2">
-              <div className="rounded-lg overflow-hidden border border-gold/10 bg-surface">
-                <Image
-                  src="/images/13F03C12-DB14-430C-8A8E-8550F84597C8.png"
-                  alt="The Brass Verse — Brass Note Studios Heirloom Collection"
-                  width={1536}
-                  height={1024}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <div
-                className="absolute -bottom-px left-8 right-8 h-[2px]"
-                style={{ background: "linear-gradient(90deg, transparent, #C9A84C, transparent)" }}
-              />
-              <div className="absolute -bottom-4 -left-4 w-20 h-20 border-b-2 border-l-2 border-gold/20 rounded-bl-lg pointer-events-none" />
-            </div>
           </div>
         </div>
       </section>
