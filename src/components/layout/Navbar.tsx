@@ -8,11 +8,12 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/about",    label: "The Studio" },
-  { href: "/music",    label: "Music"       },
-  { href: "/blog",     label: "Journal"     },
-  { href: "/services", label: "Pricing"     },
-  { href: "/labs",     label: "Labs",  teal: true },
+  { href: "/about",     label: "The Studio"  },
+  { href: "/music",     label: "Music"        },
+  { href: "/heirloom",  label: "Collection"   },
+  { href: "/blog",      label: "Journal"      },
+  { href: "/services",  label: "Pricing"      },
+  { href: "/labs",      label: "Labs", teal: true },
 ];
 
 export default function Navbar() {
