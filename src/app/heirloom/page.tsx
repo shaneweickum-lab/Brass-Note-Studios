@@ -162,6 +162,12 @@ export default function HeirloomPage() {
                 </dl>
               </div>
 
+              {/* Price */}
+              <div className="border-t border-white/6 pt-6 flex items-baseline gap-3">
+                <span className="font-display text-4xl text-gold">$499</span>
+                <span className="font-body text-text-muted text-sm">· made to order</span>
+              </div>
+
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link
