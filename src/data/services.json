@@ -39,10 +39,10 @@
       "delivery": "Single track: 10–14 days · EP: 2–3 weeks · LP: 5–6 weeks · Full album: up to 12 weeks",
       "included": "Usage rights included for all platforms. Supply your own lyrics or let us handle the writing. 3 revision rounds per song included.",
       "packages": [
-        { "name": "Single Track", "price": "$149", "description": "Lyrics or no lyrics — original production built to your brand's sound", "checkoutUrl": "https://mystore6154.samcart.com/products/single-trackcontent-creator" },
-        { "name": "EP (3–4 tracks)", "price": "$299", "description": "A consistent sonic identity for your brand", "checkoutUrl": "https://mystore6154.samcart.com/products/ep-3-4-trackscontent-creator" },
-        { "name": "LP (5–7 tracks)", "price": "$499", "description": "Full original music library for your content", "checkoutUrl": "https://mystore6154.samcart.com/products/lp-5-7-trackscontent-creator" },
-        { "name": "Full Album (8+ tracks)", "price": "$799", "description": "Own your entire sound catalog. Tracks beyond 8 add $99 each.", "checkoutUrl": "https://mystore6154.samcart.com/products/full-album-8-trackscontent-creator" }
+        { "name": "Single Track", "price": "$199", "description": "Lyrics or no lyrics — original production built to your brand's sound", "checkoutUrl": "https://mystore6154.samcart.com/products/single-trackcontent-creator" },
+        { "name": "EP (3–4 tracks)", "price": "$349", "description": "A consistent sonic identity for your brand", "checkoutUrl": "https://mystore6154.samcart.com/products/ep-3-4-trackscontent-creator" },
+        { "name": "LP (5–7 tracks)", "price": "$549", "description": "Full original music library for your content", "checkoutUrl": "https://mystore6154.samcart.com/products/lp-5-7-trackscontent-creator" },
+        { "name": "Full Album (8+ tracks)", "price": "$849", "description": "Own your entire sound catalog. Tracks beyond 8 add $99 each.", "checkoutUrl": "https://mystore6154.samcart.com/products/full-album-8-trackscontent-creator" }
       ]
     }
   ],

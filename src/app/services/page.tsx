@@ -83,7 +83,7 @@ export default function ServicesPage() {
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <span className="font-body font-semibold text-text-base">{pkg.name}</span>
                         <span className="font-display text-gold text-xl whitespace-nowrap">
-                          {pkg.price}<span className="text-gold/60 text-base">+</span>
+                          {pkg.price}{pkg.name.startsWith("Full Album") && <span className="text-gold/60 text-base">+</span>}
                         </span>
                       </div>
                       <p className="text-text-muted font-body text-sm leading-relaxed mb-3">{pkg.description}</p>
@@ -122,7 +122,7 @@ export default function ServicesPage() {
                       <span className="font-body font-semibold text-text-base text-sm">{pkg.name}</span>
                       <div className="flex justify-center whitespace-nowrap">
                         <span className="font-display text-gold text-xl">
-                          {pkg.price}<span className="text-gold/60 text-base">+</span>
+                          {pkg.price}{pkg.name.startsWith("Full Album") && <span className="text-gold/60 text-base">+</span>}
                         </span>
                       </div>
                       <span className="text-text-muted font-body text-sm leading-relaxed">{pkg.description}</span>
