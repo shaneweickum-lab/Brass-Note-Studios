@@ -41,10 +41,10 @@ export const metadata: Metadata = {
     "Custom songs written and produced for individuals, organizations, and brands. From personal milestones to brand anthems — every song crafted with heart.",
   icons: {
     icon: [
-      { url: "/favicon.ico?v=2", sizes: "32x32", type: "image/x-icon" },
-      { url: "/favicon-64.png?v=2", sizes: "64x64", type: "image/png" },
+      { url: "/favicon.ico?v=3", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon.png?v=3", sizes: "180x180", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     siteName: "Brass Note Studios",
