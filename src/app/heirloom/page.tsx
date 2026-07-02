@@ -272,17 +272,13 @@ export default function HeirloomPage() {
 
             {/* Image — right on this card */}
             <div className="relative lg:order-2">
-              <div className="relative rounded-lg overflow-hidden border border-gold/10 bg-surface aspect-[4/3]">
+              <div className="rounded-lg overflow-hidden border border-gold/10 bg-surface">
                 <Image
                   src="/images/13F03C12-DB14-430C-8A8E-8550F84597C8.png"
                   alt="The Brass Verse — Brass Note Studios Heirloom Collection"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ background: "linear-gradient(135deg, rgba(10,10,10,0.10) 0%, transparent 50%, rgba(10,10,10,0.20) 100%)" }}
+                  width={1536}
+                  height={1024}
+                  className="w-full h-auto object-cover"
                 />
               </div>
               <div
