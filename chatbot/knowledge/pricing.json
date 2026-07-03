@@ -1,0 +1,32 @@
+{
+  "individual": {
+    "label": "Individual Commission",
+    "tiers": [
+      { "name": "Single", "price": "$199", "tracks": 1 },
+      { "name": "EP", "price": "$349", "tracks": 3 },
+      { "name": "LP", "price": "$549", "tracks": 6 },
+      { "name": "Full Album", "price": "$849+", "tracks": 8, "overage": "$99/song beyond 8" }
+    ],
+    "startingAt": "$199"
+  },
+  "organization": {
+    "label": "Organization Commission",
+    "tiers": [
+      { "name": "Single", "price": "$299", "tracks": 1 },
+      { "name": "EP", "price": "$449", "tracks": 3 },
+      { "name": "LP", "price": "$649", "tracks": 6 },
+      { "name": "Full Album", "price": "$899+", "tracks": 8, "overage": "$99/song beyond 8" }
+    ],
+    "startingAt": "$299"
+  },
+  "creator": {
+    "label": "Content Creator Commission",
+    "tiers": [
+      { "name": "Single", "price": "$199", "tracks": 1 },
+      { "name": "EP", "price": "$349", "tracks": 3 },
+      { "name": "LP", "price": "$549", "tracks": 6 },
+      { "name": "Full Album", "price": "$849+", "tracks": 8, "overage": "$99/song beyond 8" }
+    ],
+    "startingAt": "$199"
+  }
+}

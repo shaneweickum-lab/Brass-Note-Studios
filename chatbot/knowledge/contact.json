@@ -1,0 +1,8 @@
+{
+  "contact": {
+    "commissionUrl": "/contact",
+    "email": "hello@brassnotestudios.com",
+    "responseTime": "We respond to all inquiries within 1 business day.",
+    "formFields": ["Name", "Email", "Service Type", "Project Description"]
+  }
+}

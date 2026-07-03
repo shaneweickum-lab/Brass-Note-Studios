@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>WHERE CAN I HEAR YOUR MUSIC</pattern>
+    <template>You can explore our full commissioned song portfolio on the Music page.
+      <nav-card label="Music Portfolio" href="/music" description="Our commissioned works"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>LISTEN TO YOUR MUSIC</pattern>
+    <template>Our full portfolio of commissioned works is available on our Music page.
+      <nav-card label="Music Portfolio" href="/music"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>MUSIC</pattern>
+    <template>Our commissioned music portfolio lives on our Music page — browse the full catalog of original songs we've created for clients.
+      <nav-card label="Explore Our Music" href="/music"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>PORTFOLIO</pattern>
+    <template>You can browse our full portfolio of commissioned songs on the Music page.
+      <nav-card label="Music Portfolio" href="/music"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHERE IS THE PRICING PAGE</pattern>
+    <template>Full pricing details for all commission tiers are on our Services page.
+      <nav-card label="Pricing &amp; Services" href="/services"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SERVICES PAGE</pattern>
+    <template>Our Services page has detailed pricing for all commission types and tiers, plus our full process breakdown.
+      <nav-card label="Pricing &amp; Services" href="/services"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHERE IS THE CONTACT PAGE</pattern>
+    <template>You can reach us or start a commission inquiry on our Contact page.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>BLOG</pattern>
+    <template>Our Journal is where we share stories, studio updates, and insights into the world of commissioned music.
+      <nav-card label="The Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>JOURNAL</pattern>
+    <template>Our Journal is where we write about the stories behind our commissions, music production, and the Brass Note Studios philosophy.
+      <nav-card label="The Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOME PAGE</pattern>
+    <template>The Brass Note Studios home page is at brassnotestudios.com.
+      <nav-card label="Home" href="/"/>
+    </template>
+  </category>
+
+</aiml>

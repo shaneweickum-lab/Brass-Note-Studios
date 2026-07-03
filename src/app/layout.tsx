@@ -8,6 +8,7 @@ import PlaylistPlayer from "@/components/music/PlaylistPlayer";
 import LabVisualizer from "@/components/music/LabVisualizer";
 import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
+import AtelierConcierge from "@/components/chatbot/AtelierConcierge";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
@@ -70,6 +71,7 @@ export default function RootLayout({
           <PlaylistPlayer />
           <LabVisualizer />
           <WelcomeOverlay />
+          <AtelierConcierge />
         </PlayerProvider>
       </body>
     </html>

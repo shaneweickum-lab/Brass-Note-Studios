@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>HOW DO I COMMISSION A SONG</pattern>
+    <template>Starting a commission is simple: fill out our inquiry form, we'll schedule a discovery call to hear your story, then we craft your song and deliver broadcast-ready files. Ready to begin?
+      <nav-card label="Start Your Commission" href="/contact" description="Fill out our inquiry form"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO COMMISSIONS WORK</pattern>
+    <template>Here is how a commission works: 1) Submit your inquiry, 2) We schedule a discovery call, 3) We craft lyrics and share a draft for your review, 4) You give feedback over up to 3 revision rounds, 5) We produce the final arrangement, 6) You receive broadcast-ready audio files and full commercial rights. Total delivery is typically 2–4 weeks.
+      <nav-card label="Commission Form" href="/contact"/>
+      <quick-replies><reply>How long does it take?</reply><reply>What is the revision policy?</reply><reply>What are the royalties?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>START A COMMISSION</pattern>
+    <template>Wonderful! Let's get your story into music. Our inquiry form takes just a few minutes — you'll share a bit about yourself and the song you have in mind, and we'll take it from there.
+      <nav-card label="Commission Form" href="/contact" description="Begin your inquiry"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I WANT TO COMMISSION A SONG</pattern>
+    <template>We'd love to create something for you. Our commission process starts with a simple inquiry form — tell us about your story and what you're looking for, and we'll schedule a discovery call.
+      <nav-card label="Start Your Commission" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I WANT A CUSTOM SONG</pattern>
+    <template>A custom song is a beautiful gift — to yourself, someone you love, or your community. Let's begin! Our inquiry form is the first step, and we'll handle everything from there.
+      <nav-card label="Commission Form" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU WRITE A SONG FOR MY * WEDDING</pattern>
+    <template>A wedding song commission is one of our most meaningful projects. We'll write and produce an original song around your vows, your love story, or a theme you choose — delivered in time for your big day. Ready to begin?
+      <nav-card label="Individual Commissions" href="/contact?service=individual" description="Start your wedding song commission"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WEDDING SONG</pattern>
+    <template>A wedding song commission is one of our most meaningful projects. We'll craft original lyrics around your love story and produce a full arrangement just for you. Starting at $199.
+      <nav-card label="Commission a Wedding Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>ANNIVERSARY SONG</pattern>
+    <template>An anniversary song is a stunning way to honor your journey together. We write original lyrics from your story and produce a full arrangement — a keepsake that lasts forever. Starting at $199.
+      <nav-card label="Start Your Commission" href="/contact?service=individual"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>BIRTHDAY SONG</pattern>
+    <template>A custom birthday song is a gift like no other — entirely original, written for and about the person you're celebrating. Starting at $199 for a single track.
+      <nav-card label="Commission a Birthday Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR MY *</pattern>
+    <template>We'd love to create something special for your <star/>. Let's start with an inquiry — tell us a bit about them and the feeling you want the song to carry.
+      <nav-card label="Start Your Commission" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CHURCH SONG</pattern>
+    <template>A church anthem commission helps you build a sound that's entirely your congregation's own. We write mission-driven lyrics and produce a full arrangement. Organization commissions start at $299.
+      <nav-card label="Organization Commissions" href="/contact?service=organization"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CHURCH ANTHEM</pattern>
+    <template>We specialize in original church anthems — built around your congregation's mission, community, and spirit. Organization commissions start at $299.
+      <nav-card label="Commission a Church Anthem" href="/contact?service=organization"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG DOES IT TAKE</pattern>
+    <template>Typical delivery for a single-track commission is 2–4 weeks. Multi-track packages (EP, LP, Full Album) run 4–8 weeks. Rush delivery options are available — just mention your deadline in your inquiry.</template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG DOES THE PROCESS TAKE</pattern>
+    <template>Typical delivery is 2–4 weeks for a single, 4–8 weeks for multi-track commissions. Rush options are available for time-sensitive projects — just note your deadline in your inquiry form.</template>
+  </category>
+
+  <category>
+    <pattern>TURNAROUND TIME</pattern>
+    <template>Our typical turnaround is 2–4 weeks for a single track, and 4–8 weeks for EP, LP, or Full Album packages. Need it sooner? Mention your deadline and we'll discuss rush options.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT GENRES DO YOU WORK IN</pattern>
+    <template>We work across a wide range of genres — pop, R&amp;B, soul, gospel, country, folk, worship, cinematic, and more. When you submit your inquiry, we'll ask about your style preferences and craft something that feels authentically yours.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT STYLES DO YOU WORK IN</pattern>
+    <template>We work across pop, R&amp;B, soul, gospel, country, folk, worship, acoustic, cinematic, and more. Just share your vision and we'll match the style to your story.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT FORMAT ARE THE FILES</pattern>
+    <template>We deliver broadcast-ready WAV and MP3 masters. Stems (individual track layers) are available upon request for productions where you'd like maximum flexibility.</template>
+  </category>
+
+  <category>
+    <pattern>DO I OWN THE SONG</pattern>
+    <template>Yes — upon delivery, you receive full commercial rights to your commissioned song, covering streaming, sync licensing, broadcast, social media, and live performance. You keep 80% of all royalties generated. Brass Note Studios retains 20% as a publishing royalty.</template>
+  </category>
+
+  <category>
+    <pattern>DO I GET THE RIGHTS</pattern>
+    <template>Yes. You receive full commercial rights upon delivery — streaming, sync, broadcast, social media, and live performance. Royalties split 80% to you, 20% to Brass Note Studios (standard for bespoke production houses).</template>
+  </category>
+
+  <category>
+    <pattern>WHAT INFORMATION DO YOU NEED</pattern>
+    <template>When you start your commission, we'll want to know: who the song is for and why, the occasion or purpose, any specific lyrics, phrases, or themes that matter, your preferred style or genre, and your timeline. You can share all of this through our inquiry form.
+      <nav-card label="Commission Form" href="/contact"/>
+    </template>
+  </category>
+
+</aiml>

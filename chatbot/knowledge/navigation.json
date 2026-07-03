@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "home": "/",
+    "about": "/about",
+    "music": "/music",
+    "services": "/services",
+    "contact": "/contact",
+    "labs": "/labs",
+    "blog": "/blog"
+  }
+}

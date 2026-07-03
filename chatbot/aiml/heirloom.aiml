@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>HEIRLOOM</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>HEIRLOOM COLLECTION</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>* HEIRLOOM *</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>MUSIC COLLECTOR</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>BRASS VERSE</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>PHYSICAL PRODUCT</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>VINYL</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+  <category>
+    <pattern>* VINYL *</pattern>
+    <template>That's something special we're preparing — stay close to brassnotestudios.com for an announcement you won't want to miss.</template>
+  </category>
+
+</aiml>

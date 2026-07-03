@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>PRICING</pattern>
+    <template>Our commissions start at $199 for individuals and content creators, and $299 for organizations. We offer Single, EP, LP, and Full Album packages. Which type of commission interests you?
+      <nav-card label="Full Pricing" href="/services" description="All tiers and packages"/>
+      <quick-replies><reply>Individual pricing</reply><reply>Organization pricing</reply><reply>Creator pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH DOES IT COST</pattern>
+    <template>Commissions start at $199 for a single track (individuals and creators) or $299 for organizations. We offer four packages: Single, EP (3 tracks), LP (6 tracks), and Full Album (8+ tracks). Want details on a specific type?
+      <nav-card label="View All Pricing" href="/services"/>
+      <quick-replies><reply>Individual pricing</reply><reply>Organization pricing</reply><reply>Creator pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE PRICE</pattern>
+    <template>Commissions start at $199 for individuals and content creators, and $299 for organizations. Want me to walk you through a specific tier?
+      <quick-replies><reply>Individual pricing</reply><reply>Organization pricing</reply><reply>Creator pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE YOUR PRICES</pattern>
+    <template>Commissions start at $199 for individuals and content creators, and $299 for organizations. We offer four packages: Single, EP (3 tracks), LP (6 tracks), and Full Album (8+ tracks). Want details on a specific type?
+      <nav-card label="View All Pricing" href="/services"/>
+      <quick-replies><reply>Individual pricing</reply><reply>Organization pricing</reply><reply>Creator pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>INDIVIDUAL PRICING</pattern>
+    <template>Individual commission pricing: Single – $199 | EP (3 songs) – $349 | LP (6 songs) – $549 | Full Album (8 songs) – $849 (additional songs beyond 8 are $99 each). All packages include up to 3 revision rounds and full commercial rights.
+      <nav-card label="Individual Commissions" href="/services#individual" description="Birthdays, anniversaries, weddings &amp; more"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>ORGANIZATION PRICING</pattern>
+    <template>Organization commission pricing: Single – $299 | EP (3 songs) – $449 | LP (6 songs) – $649 | Full Album (8 songs) – $899 (additional songs beyond 8 are $99 each). Designed for churches, nonprofits, schools, and businesses.
+      <nav-card label="Organization Commissions" href="/services#organization" description="Churches, nonprofits, schools &amp; businesses"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CREATOR PRICING</pattern>
+    <template>Content creator commission pricing: Single – $199 | EP (3 songs) – $349 | LP (6 songs) – $549 | Full Album (8 songs) – $849 (additional songs beyond 8 are $99 each). Built for YouTubers, podcasters, and social creators.
+      <nav-card label="Creator Commissions" href="/services#creator" description="YouTubers, podcasters &amp; social creators"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CONTENT CREATOR PRICING</pattern>
+    <template>Content creator commission pricing: Single – $199 | EP (3 songs) – $349 | LP (6 songs) – $549 | Full Album (8 songs) – $849 (additional songs beyond 8 are $99 each). Built for YouTubers, podcasters, and social creators.
+      <nav-card label="Creator Commissions" href="/services#creator" description="YouTubers, podcasters &amp; social creators"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH FOR A SINGLE SONG</pattern>
+    <template>A single commissioned track starts at $199 for individuals and content creators, or $299 for organizations. All include up to 3 revision rounds, broadcast-ready audio files, and full commercial rights.
+      <quick-replies><reply>How do I commission one?</reply><reply>What is the process?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH FOR ONE SONG</pattern>
+    <template>A single commissioned track starts at $199 for individuals and content creators, or $299 for organizations. Ready to get started?
+      <quick-replies><reply>Start a commission</reply><reply>What does the process look like?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS A SINGLE</pattern>
+    <template>A single song commission is $199 for individuals and creators, or $299 for organizations. That includes up to 3 revisions and full commercial rights.
+      <quick-replies><reply>Commission a song now</reply><reply>Tell me about the process</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS AN EP</pattern>
+    <template>An EP (3 songs) is $349 for individuals and creators, or $449 for organizations. Includes up to 3 revision rounds per song and full commercial rights on all tracks.</template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS A FULL ALBUM</pattern>
+    <template>A Full Album (8 songs) is $849 for individuals and creators, or $899 for organizations. Additional songs beyond 8 are $99 each. All include 3 revision rounds per song and full commercial rights.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS INCLUDED IN THE PRICE</pattern>
+    <template>Every commission includes: original lyrics and full production, up to 3 rounds of revisions, broadcast-ready WAV and MP3 masters, full commercial rights, and PRO registration. Stems are available upon request.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS INCLUDED</pattern>
+    <template>Every commission includes original lyrics and production, up to 3 revision rounds, broadcast-ready audio files (WAV + MP3), full commercial rights, and PRO registration on your behalf. Anything specific you'd like to know more about?
+      <quick-replies><reply>What about revisions?</reply><reply>What about royalties?</reply><reply>What format are the files?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>* DISCOUNT *</pattern>
+    <template>We don't currently offer standard discounts, but our pricing is designed to be accessible for the quality delivered. If you have a specific budget or a large multi-song project, feel free to reach out and we can discuss options.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU OFFER PAYMENT PLANS</pattern>
+    <template>Payment plan options can be discussed during your commission inquiry. Reach out via our contact form and we'll be happy to work something out.
+      <nav-card label="Start Your Inquiry" href="/contact"/>
+    </template>
+  </category>
+
+</aiml>

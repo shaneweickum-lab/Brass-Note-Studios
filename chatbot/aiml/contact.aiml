@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>CONTACT</pattern>
+    <template>You can reach the Brass Note Studios team through our Contact page. We respond to all inquiries within 1 business day.
+      <nav-card label="Contact Us" href="/contact" description="We respond within 1 business day"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I CONTACT YOU</pattern>
+    <template>The best way to reach us is through our contact form. Fill in your details and we will get back to you within 1 business day.
+      <nav-card label="Contact Form" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I WANT TO TALK TO SOMEONE</pattern>
+    <template>Of course! Submit your inquiry through our contact form and we'll schedule a call to talk through your project in detail.
+      <nav-card label="Contact Us" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I TALK TO A REAL PERSON</pattern>
+    <template>Absolutely. Send us your inquiry and we'll schedule a discovery call — a one-on-one conversation about your vision and what we can create together.
+      <nav-card label="Start Your Inquiry" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR EMAIL</pattern>
+    <template>You can reach us via the contact form on our website. We respond to all inquiries within 1 business day.
+      <nav-card label="Contact Form" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I GET STARTED</pattern>
+    <template>Getting started is easy: fill out our commission inquiry form, share a bit about your project, and we'll reach out to schedule a discovery call. From there, we handle everything.
+      <nav-card label="Start Here" href="/contact"/>
+      <lead-capture/>
+      <quick-replies><reply>What information do you need?</reply><reply>How long does it take?</reply><reply>What does it cost?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM READY TO START</pattern>
+    <template>Excellent! Let's do this. Our commission form is the first step — fill in your details and we'll reach out to schedule your discovery call.
+      <nav-card label="Commission Form" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>READY TO START</pattern>
+    <template>Let's begin! Our commission form is the first step — it takes just a few minutes and sets the whole process in motion.
+      <nav-card label="Commission Form" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+</aiml>

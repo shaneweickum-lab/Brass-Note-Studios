@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>REVISIONS</pattern>
+    <template>Every commission includes up to 3 rounds of revisions at no extra charge. This covers lyric changes, structural edits, tempo adjustments, and style refinements. Additional revision rounds beyond the 3 included are available at $49 per round.</template>
+  </category>
+
+  <category>
+    <pattern>REVISION POLICY</pattern>
+    <template>Our revision policy: every commission includes 3 rounds of revisions at no extra charge. Additional rounds are $49 each. Major directional changes after production has begun may be quoted separately.</template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY REVISIONS</pattern>
+    <template>Every commission includes up to 3 rounds of revisions at no extra cost. If you need more after that, additional rounds are available at $49 each.</template>
+  </category>
+
+  <category>
+    <pattern>CAN I MAKE CHANGES</pattern>
+    <template>Absolutely. We include 3 revision rounds with every commission — you can request lyric changes, structural edits, tempo adjustments, and more. If you need additional rounds beyond those 3, they're available at $49 each.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I DO NOT LIKE THE SONG</pattern>
+    <template>That is what revisions are for. You get 3 rounds of changes included, so we can refine the song until it truly reflects your vision. If you have a very specific direction, sharing reference tracks or detailed notes during your inquiry helps us nail it faster.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I WANT CHANGES</pattern>
+    <template>No problem — that is the revision process. Every commission includes 3 rounds of changes. You review our draft, send your feedback, and we revise. We keep going until you love it (within those 3 rounds).</template>
+  </category>
+
+  <category>
+    <pattern>EXTRA REVISIONS</pattern>
+    <template>If you need more than the 3 included revision rounds, additional rounds are $49 each. Just let us know and we'll keep refining until it's perfect.</template>
+  </category>
+
+  <category>
+    <pattern>HOW DO REVISIONS WORK</pattern>
+    <template>After we deliver the first draft, you review it and send detailed feedback. We incorporate your notes and deliver a revised version. This cycle repeats up to 3 times at no extra cost. After that, additional rounds are $49 each.</template>
+  </category>
+
+</aiml>

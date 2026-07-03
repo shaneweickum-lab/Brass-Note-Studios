@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>ABOUT THE STUDIO</pattern>
+    <template>Brass Note Studios is a bespoke custom songwriting and production atelier. We write, arrange, and produce original compositions for personal milestones, brand identities, and organizations that understand the power of sound. Our founders bring 30+ years of combined experience as musicians and songwriters.
+      <nav-card label="The Studio" href="/about" description="Learn our full story"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHO IS BRASS NOTE STUDIOS</pattern>
+    <template>Brass Note Studios is an atelier for original commissioned music — led by Shane and DeJanae Weickum, musicians and songwriters with 30+ years of combined experience. We use Suno AI as part of our production workflow to deliver broadcast-quality originals at accessible price points.
+      <nav-card label="Our Story" href="/about" description="Meet the founders"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BRASS NOTE STUDIOS</pattern>
+    <template>Brass Note Studios is a bespoke custom songwriting and production atelier. We write, arrange, and produce original compositions — for personal milestones, brand identities, and organizations that understand the power of sound.
+      <nav-card label="Learn More" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE STUDIO</pattern>
+    <template>Brass Note Studios is founded on the belief that every story deserves its own soundtrack. We're a remote atelier serving clients worldwide — crafting original songs for weddings, anniversaries, nonprofits, creators, and brands. Our founders bring 30+ years of experience as musicians and songwriters.
+      <nav-card label="The Studio" href="/about" description="Our full story"/>
+      <quick-replies><reply>Who are the founders?</reply><reply>How do commissions work?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHO ARE THE FOUNDERS</pattern>
+    <template>Brass Note Studios was founded by Shane and DeJanae Weickum — musicians and songwriters with deep roots in production and sound engineering. Shane brings over a decade of sound production and engineering experience, and together they have 30+ years as musicians and songwriters.</template>
+  </category>
+
+  <category>
+    <pattern>DO YOU USE AI</pattern>
+    <template>Yes — and we're proud of it. We leverage Suno AI as part of our production workflow, which allows us to deliver broadcast-quality original compositions at accessible price points without sacrificing artistic intention. Every song begins with real human creativity: your story, our lyrics, our arrangement direction.</template>
+  </category>
+
+  <category>
+    <pattern>DO YOU USE SUNO</pattern>
+    <template>Yes. Suno AI is part of our production toolkit. It allows us to produce rich, broadcast-quality arrangements efficiently while keeping your commission accessible. The artistry — lyrics, structure, emotional arc — is entirely human-crafted around your story.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT AI DO YOU USE</pattern>
+    <template>We use Suno AI as our primary production engine. It generates the musical arrangement and audio output based on the creative direction we set. All songwriting, lyric crafting, and artistic decisions are made by our team around your story.</template>
+  </category>
+
+  <category>
+    <pattern>WHERE ARE YOU LOCATED</pattern>
+    <template>Brass Note Studios operates remotely, which means we can serve clients anywhere in the world. All collaboration happens online — discovery calls, draft reviews, and final delivery.</template>
+  </category>
+
+  <category>
+    <pattern>ARE YOU REAL MUSICIANS</pattern>
+    <template>Absolutely. Our founders are musicians and songwriters with over 30 years of combined experience performing, writing, and producing music. AI is a tool in our workflow — not a replacement for musical knowledge and human artistry.</template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG HAVE YOU BEEN IN BUSINESS</pattern>
+    <template>Brass Note Studios is newly launched, though our founders bring 30+ years of combined experience as musicians and songwriters, plus over a decade in sound production and engineering.</template>
+  </category>
+
+  <category>
+    <pattern>* EXPERIENCE *</pattern>
+    <template>Our founders bring 30+ years of combined experience as musicians and songwriters, and over a decade in sound production and engineering. That depth of knowledge guides every commission — from lyric craft to final mix.</template>
+  </category>
+
+</aiml>

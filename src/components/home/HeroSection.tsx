@@ -8,7 +8,7 @@ const HERO_MOBILE = "/images/IMG_5104.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero-section" className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
       {/* Mobile background */}
       <Image

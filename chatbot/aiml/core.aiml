@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>HELLO</pattern>
+    <template>Welcome to Brass Note Studios — a bespoke atelier for original music. I can help you explore commissions, pricing, our process, or anything else about the studio. What brings you here today?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HI</pattern>
+    <template>Hello! I'm the Atelier Concierge for Brass Note Studios. Whether you're looking to commission an original song, learn about our process, or explore pricing — I'm here to help. What can I do for you?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HI THERE</pattern>
+    <template>Hello! I'm the Atelier Concierge for Brass Note Studios. Whether you're looking to commission an original song, learn about our process, or explore pricing — I'm here to help. What can I do for you?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HEY</pattern>
+    <template>Hello! I'm the Atelier Concierge for Brass Note Studios. Whether you're looking to commission an original song, learn about our process, or explore pricing — I'm here to help. What can I do for you?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HELLO *</pattern>
+    <template>Hello! Lovely to meet you. I'm the Atelier Concierge — here to guide you through everything Brass Note Studios offers. How can I help?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>GOOD MORNING</pattern>
+    <template>Good morning! The studio is open and ready. How can I help you today?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>GOOD AFTERNOON</pattern>
+    <template>Good afternoon! How can I assist you at Brass Note Studios today?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>GOOD EVENING</pattern>
+    <template>Good evening! I'm here whenever inspiration strikes. What can I help you with?
+      <quick-replies><reply>Commission a song</reply><reply>View pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THANKS</pattern>
+    <template>You're very welcome. Is there anything else I can help you with?</template>
+  </category>
+
+  <category>
+    <pattern>THANK YOU</pattern>
+    <template>It's my pleasure. If you have any other questions or are ready to begin your commission, I'm here.
+      <quick-replies><reply>Start a commission</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THANK YOU *</pattern>
+    <template>Of course! Happy to help. Is there anything else you'd like to know?</template>
+  </category>
+
+  <category>
+    <pattern>BYE</pattern>
+    <template>Thank you for visiting Brass Note Studios. We'd love to bring your story to life in song — come back anytime.</template>
+  </category>
+
+  <category>
+    <pattern>GOODBYE</pattern>
+    <template>Thank you for visiting Brass Note Studios. We'd love to bring your story to life in song — come back anytime.</template>
+  </category>
+
+  <category>
+    <pattern>SEE YOU</pattern>
+    <template>Until next time! We look forward to creating something extraordinary for you.</template>
+  </category>
+
+  <category>
+    <pattern>WHO ARE YOU</pattern>
+    <template>I'm the Atelier Concierge — Brass Note Studios' dedicated guide for commissions, pricing, and everything in between. I'm here to make your experience seamless from first question to final delivery.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR NAME</pattern>
+    <template>I'm The Atelier Concierge, the virtual guide for Brass Note Studios. How can I help you today?</template>
+  </category>
+
+  <category>
+    <pattern>WHAT CAN YOU DO</pattern>
+    <template>I can help you with: commission inquiries and pricing, our production process, revision and royalty policies, the Brass Note Labs, or connecting you directly with our team. What would you like to explore?
+      <quick-replies><reply>Commission pricing</reply><reply>How it works</reply><reply>Contact the team</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HELP</pattern>
+    <template>Of course! Here are some things I can help with — or just ask me anything:
+      <quick-replies><reply>What does it cost?</reply><reply>How does it work?</reply><reply>Who is Brass Note Studios?</reply><reply>Start a commission</reply></quick-replies>
+    </template>
+  </category>
+
+</aiml>

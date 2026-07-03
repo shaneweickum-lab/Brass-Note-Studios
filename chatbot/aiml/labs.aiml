@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>LABS</pattern>
+    <template>Brass Note Labs is our experimental arm — a space where we explore AI-assisted composition, sound architecture, and next-generation production techniques. Visit our Labs page to see what we're working on.
+      <nav-card label="Brass Note Labs" href="/labs" description="Explore our experimental work"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS LABS</pattern>
+    <template>Brass Note Labs is our R&amp;D space — where we experiment with AI-assisted composition, generative sound design, and new production methodologies. It's where the future of the studio is being built.
+      <nav-card label="Visit Labs" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT LABS</pattern>
+    <template>Brass Note Labs is our experimental arm. We're developing tools and workflows for generative music at scale, interactive sonic branding, and AI-human co-composition. It's accessible at brassnotestudios.com/labs.
+      <nav-card label="Brass Note Labs" href="/labs" description="Our experimental arm"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BRASS NOTE LABS</pattern>
+    <template>Brass Note Labs is the studio's experimental division — focused on generative music, AI-human co-composition, and interactive sonic branding. Think of it as where we push the boundaries of what's possible in music production.
+      <nav-card label="Explore Labs" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I ACCESS LABS</pattern>
+    <template>You can explore Brass Note Labs at brassnotestudios.com/labs. It's also linked in our main navigation under "Labs."
+      <nav-card label="Brass Note Labs" href="/labs"/>
+    </template>
+  </category>
+
+</aiml>

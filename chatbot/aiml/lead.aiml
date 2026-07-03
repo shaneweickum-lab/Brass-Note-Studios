@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>MY NAME IS *</pattern>
+    <template>Lovely to meet you, <star/>. What brings you to Brass Note Studios today?
+      <quick-replies><reply>Commission a song</reply><reply>Learn about pricing</reply><reply>How does it work?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM *</pattern>
+    <template>Wonderful. How can I help you, <star/>?
+      <quick-replies><reply>Commission a song</reply><reply>Learn about pricing</reply><reply>About the studio</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>NOTIFY ME</pattern>
+    <template>I'd be happy to pass along your details to our team. Let's get you connected.
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SEND ME UPDATES</pattern>
+    <template>Of course! Let's get your contact information so we can reach out.
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I WANT MORE INFORMATION</pattern>
+    <template>I'd love to get you the details you need. Let me connect you with our team directly.
+      <lead-capture/>
+      <nav-card label="Commission Inquiry" href="/contact" description="Start your project"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>GET IN TOUCH</pattern>
+    <template>Let's make that connection. Fill out our short inquiry form and we'll reach out within 1 business day.
+      <nav-card label="Contact Form" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU CONTACT ME</pattern>
+    <template>Absolutely — we'd love to. Share your details through our contact form and we'll be in touch within 1 business day.
+      <nav-card label="Contact Form" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+</aiml>
