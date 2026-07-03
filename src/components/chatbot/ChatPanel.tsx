@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { X, Send, ClipboardList } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 import ChatMessage from "./ChatMessage";
 import LeadCapture from "./LeadCapture";
 import TypingIndicator from "./TypingIndicator";
@@ -36,7 +37,7 @@ function getGreeting(pageContext?: string): Message {
     return {
       id: "greeting",
       role: "bot",
-      text: "You're on the commission form — I'm here to help. I can walk you through each section, explain what any field means, or guide you through the whole thing step by step. What would you like to do?",
+      text: "You're on the commission form — I'm here to help. I can walk you through each section, explain what any field means, or guide you through the whole thing step by step.",
       quickReplies: [
         "Walk me through the form",
         "What do I put for the story?",
@@ -49,7 +50,7 @@ function getGreeting(pageContext?: string): Message {
     return {
       id: "greeting",
       role: "bot",
-      text: "Welcome to our pricing page. I can help you choose the right commission type and package, explain what's included, or take you straight to the form. What would you like to know?",
+      text: "Welcome to our pricing page. I can help you choose the right commission type and package, explain what's included, or take you straight to the form.",
       quickReplies: [
         "Individual pricing",
         "Organization pricing",
@@ -96,16 +97,14 @@ export default function ChatPanel({
   onTopicConsumed,
 }: Props) {
   const router = useRouter();
-  const [messages, setMessages] = useState<Message[]>([
-    getGreeting(pageContext),
-  ]);
+  const [messages, setMessages] = useState<Message[]>([getGreeting(pageContext)]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const [sessionId] = useState(() => Math.random().toString(36).slice(2));
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Handle pending topics from parent (proactive or "I'm not sure" triggers)
+  // Handle pending topics (proactive / "I'm not sure" triggers)
   useEffect(() => {
     if (!pendingTopic) return;
     onTopicConsumed?.();
@@ -116,14 +115,10 @@ export default function ChatPanel({
     } else if (pendingTopic === "form_help") {
       msg = { ...FORM_HELP_MSG, id: Date.now().toString() };
     } else if (pendingTopic === "form_walk") {
-      // Directly trigger form walk
       sendToApi("", true);
       return;
     }
-
-    if (msg) {
-      setMessages((prev) => [...prev, msg!]);
-    }
+    if (msg) setMessages((prev) => [...prev, msg!]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingTopic]);
 
@@ -131,8 +126,10 @@ export default function ChatPanel({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
 
+  // Focus input on open — delayed so mobile keyboard doesn't fight the sheet animation
   useEffect(() => {
-    inputRef.current?.focus();
+    const t = setTimeout(() => inputRef.current?.focus(), 350);
+    return () => clearTimeout(t);
   }, []);
 
   const sendToApi = useCallback(
@@ -143,11 +140,7 @@ export default function ChatPanel({
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: text || "[form walk]",
-            sessionId,
-            formWalk,
-          }),
+          body: JSON.stringify({ message: text || "[form walk]", sessionId, formWalk }),
         });
         const data = (await res.json()) as {
           text: string;
@@ -165,7 +158,6 @@ export default function ChatPanel({
         };
         setMessages((prev) => [...prev, botMsg]);
 
-        // Auto-navigate if instructed
         if (data.navigationCard?.autoNavigate && data.navigationCard.href) {
           setTimeout(() => {
             router.push(data.navigationCard!.href);
@@ -191,23 +183,17 @@ export default function ChatPanel({
   const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim()) return;
-      const userMsg: Message = {
-        id: Date.now().toString(),
-        role: "user",
-        text: text.trim(),
-      };
-      setMessages((prev) => [...prev, userMsg]);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now().toString(), role: "user", text: text.trim() },
+      ]);
       setInput("");
       await sendToApi(text.trim());
     },
     [sendToApi]
   );
 
-  async function handleLeadSubmit(data: {
-    name: string;
-    email: string;
-    interest?: string;
-  }) {
+  async function handleLeadSubmit(data: { name: string; email: string; interest?: string }) {
     await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -224,40 +210,49 @@ export default function ChatPanel({
 
   return (
     <div className="flex flex-col h-full">
+      {/* Drag handle — mobile only */}
+      <div className="md:hidden flex justify-center pt-3 pb-1 flex-shrink-0">
+        <div className="w-10 h-1 rounded-full bg-text-muted/30" />
+      </div>
+
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-border-subtle bg-surface flex-shrink-0">
-        <div>
-          <p className="font-display text-text-base text-sm font-medium">
-            Atelier Concierge
-          </p>
-          <p className="text-text-muted text-[10px] font-body tracking-[0.15em] uppercase mt-0.5">
-            Brass Note Studios
-          </p>
+      <div className="flex items-center justify-between px-5 py-3.5 md:py-4 border-b border-border-subtle bg-surface flex-shrink-0">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center flex-shrink-0">
+            <span className="text-gold text-[10px] font-display font-medium">B</span>
+          </div>
+          <div>
+            <p className="font-display text-text-base text-sm font-medium leading-tight">
+              Atelier Concierge
+            </p>
+            <p className="text-text-muted text-[10px] font-body tracking-[0.15em] uppercase">
+              Brass Note Studios
+            </p>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          {/* Quick form walk button */}
+        <div className="flex items-center gap-1">
           {pageContext === "/contact" && (
             <button
               onClick={() => sendToApi("", true)}
               title="Walk me through the form"
-              className="text-gold/60 hover:text-gold p-1.5 transition-colors"
+              className="text-gold/60 hover:text-gold p-2.5 transition-colors rounded-sm touch-none"
               aria-label="Walk me through the form"
             >
-              <ClipboardList className="w-4 h-4" />
+              <ClipboardList className="w-5 h-5" />
             </button>
           )}
           <button
             onClick={onClose}
-            className="text-text-muted hover:text-text-base p-1.5 transition-colors"
+            className="text-text-muted hover:text-text-base p-2.5 transition-colors rounded-sm touch-none"
             aria-label="Close chat"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 min-h-0">
+      <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 min-h-0">
         {messages.map((msg) => (
           <div key={msg.id}>
             <ChatMessage
@@ -268,7 +263,7 @@ export default function ChatPanel({
               onQuickReply={sendMessage}
             />
             {msg.showLeadCapture && (
-              <div className="pl-8">
+              <div className="pl-9">
                 <LeadCapture onSubmit={handleLeadSubmit} />
               </div>
             )}
@@ -278,21 +273,43 @@ export default function ChatPanel({
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <div className="flex-shrink-0 border-t border-border-subtle px-4 py-3 flex items-center gap-2">
+      {/* Input row — pb accounts for iOS home bar */}
+      <div
+        className={cn(
+          "flex-shrink-0 border-t border-border-subtle bg-background",
+          "px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))]",
+          "flex items-center gap-2"
+        )}
+      >
         <input
           ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask about commissions, pricing, the form…"
-          className="flex-1 bg-background border border-border-subtle text-text-base text-sm font-body px-3 py-2.5 placeholder-text-muted/50 focus:outline-none focus:border-gold/50 transition-colors min-w-0"
+          placeholder="Ask about commissions, pricing…"
+          inputMode="text"
+          enterKeyHint="send"
+          className={cn(
+            "flex-1 min-w-0 bg-surface border border-border-subtle",
+            "text-text-base text-sm font-body",
+            "px-4 py-3 md:py-2.5",
+            "placeholder-text-muted/50",
+            "focus:outline-none focus:border-gold/50 transition-colors",
+            "rounded-sm"
+          )}
         />
         <button
           onClick={() => sendMessage(input)}
           disabled={!input.trim() || typing}
-          className="flex-shrink-0 border border-gold/40 text-gold p-2.5 hover:bg-gold/8 hover:border-gold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
           aria-label="Send message"
+          className={cn(
+            "flex-shrink-0 border border-gold/40 text-gold",
+            "w-11 h-11 flex items-center justify-center",
+            "hover:bg-gold/8 hover:border-gold active:scale-95",
+            "transition-all duration-200",
+            "disabled:opacity-40 disabled:cursor-not-allowed",
+            "rounded-sm touch-none"
+          )}
         >
           <Send className="w-4 h-4" />
         </button>

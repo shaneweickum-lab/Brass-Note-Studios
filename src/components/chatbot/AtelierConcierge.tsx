@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import ChatBubble from "./ChatBubble";
 import ChatPanel from "./ChatPanel";
 
@@ -10,7 +11,6 @@ export default function AtelierConcierge() {
   const [bubbleVisible, setBubbleVisible] = useState(true);
   const [pendingTopic, setPendingTopic] = useState<string | null>(null);
   const pathname = usePathname();
-  const heroRef = useRef<Element | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const proactiveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasOpenedRef = useRef(false);
@@ -21,7 +21,7 @@ export default function AtelierConcierge() {
     if (topic) setPendingTopic(topic);
   }, []);
 
-  // Expose global open function for use by form "I'm Not Sure" buttons etc.
+  // Expose global open function for "I'm Not Sure" buttons etc.
   useEffect(() => {
     (window as Window & { __openAtelierChat?: (topic?: string) => void }).__openAtelierChat = openChat;
     return () => {
@@ -29,11 +29,21 @@ export default function AtelierConcierge() {
     };
   }, [openChat]);
 
+  // Lock body scroll on mobile when open
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile && open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   // Hero IntersectionObserver — hide bubble while hero is in view (desktop only)
   useEffect(() => {
     const hero = document.getElementById("hero-section");
     if (!hero) return;
-    heroRef.current = hero;
 
     const isMobile = () => window.innerWidth < 768;
 
@@ -54,60 +64,63 @@ export default function AtelierConcierge() {
     };
   }, []);
 
-  // Proactive popup on /contact after 25 seconds of inactivity
+  // Proactive popup on /contact after 25 s of inactivity
   useEffect(() => {
-    if (proactiveTimerRef.current) {
-      clearTimeout(proactiveTimerRef.current);
-      proactiveTimerRef.current = null;
-    }
-
+    if (proactiveTimerRef.current) clearTimeout(proactiveTimerRef.current);
     if (pathname === "/contact" && !hasOpenedRef.current) {
       proactiveTimerRef.current = setTimeout(() => {
-        if (!hasOpenedRef.current) {
-          openChat("contact_proactive");
-        }
+        if (!hasOpenedRef.current) openChat("contact_proactive");
       }, 25000);
     }
-
-    return () => {
-      if (proactiveTimerRef.current) clearTimeout(proactiveTimerRef.current);
-    };
+    return () => { if (proactiveTimerRef.current) clearTimeout(proactiveTimerRef.current); };
   }, [pathname, openChat]);
 
-  // Reset "has opened" flag on page change so proactive can fire on next /contact visit
-  useEffect(() => {
-    hasOpenedRef.current = open;
-  }, [open]);
+  useEffect(() => { hasOpenedRef.current = open; }, [open]);
+
+  const closeChat = useCallback(() => setOpen(false), []);
 
   return (
     <>
+      {/* Mobile backdrop */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-black/50 md:hidden transition-opacity duration-300",
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}
+        onClick={closeChat}
+        aria-hidden
+      />
+
       <ChatBubble
         open={open}
-        onClick={() => {
-          setOpen((v) => !v);
-          hasOpenedRef.current = true;
-        }}
+        onClick={() => { setOpen((v) => !v); hasOpenedRef.current = true; }}
         visible={bubbleVisible || open}
       />
 
+      {/* Chat panel — bottom sheet on mobile, corner widget on desktop */}
       <div
-        className={[
-          "fixed bottom-24 right-6 z-40",
-          "w-[calc(100vw-3rem)] max-w-[400px]",
-          "h-[560px] max-h-[calc(100vh-7rem)]",
-          "bg-background border border-border-subtle shadow-2xl shadow-black/60",
-          "flex flex-col overflow-hidden",
-          "transition-all duration-300 origin-bottom-right",
+        className={cn(
+          "fixed z-50 flex flex-col overflow-hidden bg-background",
+          "transition-all duration-300 ease-out",
+          // Mobile: full-width bottom sheet that slides up
+          "inset-x-0 bottom-0 rounded-t-2xl border-t border-border-subtle",
+          "h-[92dvh] max-h-[92dvh]",
+          // Desktop: corner floating widget
+          "md:inset-auto md:bottom-24 md:right-6 md:rounded-none md:border",
+          "md:w-[400px] md:h-[560px] md:max-h-[calc(100vh-7rem)]",
+          "md:shadow-2xl md:shadow-black/60 md:origin-bottom-right",
+          // Open / closed states
           open
-            ? "opacity-100 scale-100 pointer-events-auto"
-            : "opacity-0 scale-95 pointer-events-none",
-        ].join(" ")}
+            ? "translate-y-0 md:scale-100 md:opacity-100 pointer-events-auto shadow-2xl"
+            : "translate-y-full md:translate-y-0 md:scale-95 md:opacity-0 pointer-events-none"
+        )}
         role="dialog"
         aria-label="Atelier Concierge chat"
         aria-hidden={!open}
+        aria-modal={open}
       >
         <ChatPanel
-          onClose={() => setOpen(false)}
+          onClose={closeChat}
           pageContext={pathname}
           pendingTopic={pendingTopic}
           onTopicConsumed={() => setPendingTopic(null)}
