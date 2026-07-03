@@ -9,7 +9,7 @@ const cards = [
     name: "Individual Commissions",
     tagline: "Birthdays, Anniversaries, Weddings & More",
     description: "Custom songs for life's most meaningful moments — written from your story and produced for you alone.",
-    startingAt: "From $149",
+    startingAt: "From $199",
   },
   {
     id: "organization",
@@ -17,7 +17,7 @@ const cards = [
     name: "Organization Commissions",
     tagline: "Churches, Nonprofits, Schools & Businesses",
     description: "Original anthems built around your mission, community, and identity. Your sound. Completely unique.",
-    startingAt: "From $199",
+    startingAt: "From $299",
   },
   {
     id: "creator",
@@ -25,7 +25,7 @@ const cards = [
     name: "Content Creator Commissions",
     tagline: "YouTubers, Podcasters & Social Creators",
     description: "Original music at creator-friendly rates — music-only tracks or your words set to a full production.",
-    startingAt: "From $149",
+    startingAt: "From $199",
   },
 ];
 
