@@ -59,6 +59,30 @@ function getGreeting(pageContext?: string): Message {
       ],
     };
   }
+  if (pageContext === "/music") {
+    return {
+      id: "greeting",
+      role: "bot",
+      text: "Welcome to the portfolio. Every song here was written and produced for a real person, milestone, or brand. Ask me about our work, tell me what kind of music you have in mind, or get started on your own commission.",
+      quickReplies: ["Start a commission", "What genres do you work in?", "How does it work?"],
+    };
+  }
+  if (pageContext === "/about") {
+    return {
+      id: "greeting",
+      role: "bot",
+      text: "You're reading about the studio. Feel free to ask anything about our story, our process, or what makes a Brass Note Studios commission different. Or if you're ready, I can take you straight to the form.",
+      quickReplies: ["How does the process work?", "Commission a song", "View pricing"],
+    };
+  }
+  if (pageContext === "/") {
+    return {
+      id: "greeting",
+      role: "bot",
+      text: "Welcome to Brass Note Studios — a bespoke atelier for original music. I'm the Atelier Concierge, here to help you discover our commissions, hear our portfolio, or start creating something personal. What brings you here today?",
+      quickReplies: ["Commission a song", "Hear our work", "About the studio"],
+    };
+  }
   return {
     id: "greeting",
     role: "bot",
@@ -121,6 +145,17 @@ export default function ChatPanel({
     if (msg) setMessages((prev) => [...prev, msg!]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingTopic]);
+
+  // If the user navigates to a different page before starting a conversation,
+  // update the greeting to match the new page.
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 1 && prev[0].id === "greeting") {
+        return [getGreeting(pageContext)];
+      }
+      return prev;
+    });
+  }, [pageContext]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

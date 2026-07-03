@@ -48,8 +48,17 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
+    title: "Brass Note Studios",
+    description:
+      "Custom songs written and produced for life's meaningful moments, brands, and organizations. Professional quality, personal touch.",
     siteName: "Brass Note Studios",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brass Note Studios",
+    description:
+      "Custom songs written and produced for life's meaningful moments, brands, and organizations. Professional quality, personal touch.",
   },
 };
 
