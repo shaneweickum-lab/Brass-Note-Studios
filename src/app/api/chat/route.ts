@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { appendFileSync, mkdirSync } from "fs";
+import path from "path";
 import { AimlEngine } from "../../../../chatbot/engine/AimlEngine";
 import { ConversationContext } from "../../../../chatbot/engine/ConversationContext";
 import { chatbotConfig } from "../../../../chatbot/config";
@@ -9,6 +11,23 @@ let engine: AimlEngine | null = null;
 function getEngine(): AimlEngine {
   if (!engine) engine = new AimlEngine();
   return engine;
+}
+
+function logQuestion(sessionId: string, message: string, isFallback: boolean) {
+  const entry = {
+    ts: new Date().toISOString(),
+    sessionId,
+    message,
+    isFallback,
+  };
+  console.log("[question-log]", JSON.stringify(entry));
+  try {
+    const logDir = path.join(process.cwd(), "chatbot", "logs");
+    mkdirSync(logDir, { recursive: true });
+    appendFileSync(path.join(logDir, "questions.jsonl"), JSON.stringify(entry) + "\n");
+  } catch {
+    // read-only in serverless — console.log above is the fallback
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -46,9 +65,11 @@ export async function POST(req: NextRequest) {
     // __FORM_WALK__ template signals form walk trigger via AIML pattern
     if (response.text === "__FORM_WALK__") {
       const fwResponse = eng.startFormWalk(context);
+      logQuestion(sessionId, message, false);
       return NextResponse.json({ ...fwResponse, sessionId });
     }
 
+    logQuestion(sessionId, message, response.isFallback ?? false);
     return NextResponse.json({ ...response, sessionId });
   } catch (err) {
     console.error("[chat/route]", err);

@@ -13,6 +13,7 @@ interface AimlRule {
   leadCapture?: boolean;
   quickReplies?: string[];
   that?: string;
+  source?: string;
 }
 
 interface ParsedTemplate {
@@ -27,6 +28,7 @@ export interface EngineResponse {
   navigationCard?: NavigationCard;
   leadCapture?: boolean;
   quickReplies?: string[];
+  isFallback?: boolean;
 }
 
 export class AimlEngine {
@@ -61,13 +63,14 @@ export class AimlEngine {
   private loadFile(filePath: string) {
     try {
       const xml = readFileSync(filePath, "utf-8");
-      this.rules.push(...this.parseCategories(xml));
+      const source = path.basename(filePath);
+      this.rules.push(...this.parseCategories(xml, source));
     } catch {
       // skip unreadable files
     }
   }
 
-  private parseCategories(xml: string): AimlRule[] {
+  private parseCategories(xml: string, source?: string): AimlRule[] {
     const rules: AimlRule[] = [];
     const catRegex = /<category>([\s\S]*?)<\/category>/g;
     let catMatch: RegExpExecArray | null;
@@ -96,6 +99,7 @@ export class AimlEngine {
         leadCapture: parsed.leadCapture,
         quickReplies: parsed.quickReplies,
         that,
+        source,
       });
     }
     return rules;
@@ -212,6 +216,7 @@ export class AimlEngine {
       navigationCard: matched.navigationCard,
       leadCapture: matched.leadCapture,
       quickReplies: matched.quickReplies,
+      isFallback: matched.source === "fallback.aiml",
     };
 
     context.addTurn("bot", final.text);
