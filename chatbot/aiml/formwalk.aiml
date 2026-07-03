@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>HELP ME FILL OUT THE FORM</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>WALK ME THROUGH THE FORM</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>HELP ME WITH THE FORM</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT KNOW WHAT TO PUT</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>I AM NOT SURE WHAT TO PUT</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>HELP ME FILL THIS OUT</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU HELP ME WITH THE FORM</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I FILL OUT THE FORM</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>I NEED HELP WITH THE FORM</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>GUIDE ME THROUGH THE COMMISSION</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>WALK ME THROUGH</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>HELP ME COMMISSION A SONG</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>WHAT SECTIONS ARE ON THE FORM</pattern>
+    <template>The commission form has four sections: About You (your name, email, and who the song is for), Service and Package (commission type and package size), The Song (story or lyrics, length, genre), and Vocals (vocal type and style). Want me to walk you through it step by step?
+      <quick-replies><reply>Yes, walk me through it</reply><reply>I'll fill it out myself</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>YES WALK ME THROUGH IT</pattern>
+    <template>__FORM_WALK__</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE FORM LIKE</pattern>
+    <template>The commission form covers four areas: your contact details, the type and size of commission you need, the story or lyrics for your song, and your preferred vocals (type and style). I can walk you through each section, or you can jump straight to the form.
+      <quick-replies><reply>Walk me through it</reply><reply>Take me to the form</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TAKE ME TO THE FORM</pattern>
+    <template>Of course — head straight to the commission form here.
+      <nav-card label="Commission Form" href="/contact" description="Fill in your project details" auto-navigate="true"/>
+    </template>
+  </category>
+
+</aiml>

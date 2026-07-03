@@ -1,3 +1,5 @@
+import type { FormWalkState } from "./FormWalkEngine";
+
 export interface Turn {
   role: "user" | "bot";
   text: string;
@@ -7,6 +9,7 @@ export class ConversationContext {
   private history: Turn[] = [];
   private variables: Map<string, string> = new Map();
   private maxTurns: number;
+  private formWalk: FormWalkState = { active: false, step: null, data: {} };
 
   constructor(maxTurns = 20) {
     this.maxTurns = maxTurns;
@@ -45,8 +48,17 @@ export class ConversationContext {
     return [...this.history];
   }
 
+  getFormWalk(): FormWalkState {
+    return this.formWalk;
+  }
+
+  setFormWalk(state: FormWalkState) {
+    this.formWalk = state;
+  }
+
   reset() {
     this.history = [];
     this.variables.clear();
+    this.formWalk = { active: false, step: null, data: {} };
   }
 }

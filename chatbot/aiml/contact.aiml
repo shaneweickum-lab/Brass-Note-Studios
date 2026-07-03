@@ -49,17 +49,101 @@
 
   <category>
     <pattern>I AM READY TO START</pattern>
-    <template>Excellent! Let's do this. Our commission form is the first step — fill in your details and we'll reach out to schedule your discovery call.
-      <nav-card label="Commission Form" href="/contact"/>
-      <lead-capture/>
+    <template>Excellent! Let's do this. I can walk you through the form step by step, or take you straight there.
+      <nav-card label="Commission Form" href="/contact" auto-navigate="true"/>
+      <quick-replies><reply>Walk me through it</reply><reply>Take me to the form</reply></quick-replies>
     </template>
   </category>
 
   <category>
     <pattern>READY TO START</pattern>
-    <template>Let's begin! Our commission form is the first step — it takes just a few minutes and sets the whole process in motion.
+    <template>Let's begin! Want me to walk you through the form, or would you prefer to jump straight in?
       <nav-card label="Commission Form" href="/contact"/>
-      <lead-capture/>
+      <quick-replies><reply>Walk me through it</reply><reply>Take me straight there</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TAKE ME STRAIGHT THERE</pattern>
+    <template>Heading to the commission form now.
+      <nav-card label="Commission Form" href="/contact" auto-navigate="true"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES THE FORM ASK FOR</pattern>
+    <template>The commission form has four sections: About You (name, email, who the song is for), Service and Package (commission type and size), The Song (story/lyrics, length, genre), and Vocals (type and style). I can walk you through it or explain any section in detail.
+      <quick-replies><reply>Walk me through it</reply><reply>What is commission type?</reply><reply>What do I put in the story field?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS COMMISSION TYPE</pattern>
+    <template>The commission type determines the pricing tier and intended use: Individual Commissions are for personal milestones (weddings, birthdays, anniversaries), Organization Commissions are for churches, nonprofits, schools, and businesses, and Content Creator Commissions are for YouTubers, podcasters, and social media creators. Which sounds most like you?
+      <quick-replies><reply>Individual Commission</reply><reply>Organization Commission</reply><reply>Content Creator Commission</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO I PUT IN THE STORY FIELD</pattern>
+    <template>The story field is the heart of your commission — share as much or as little as you like. You might write about who the song is for, the occasion or milestone, a specific memory or moment you want captured, how you want the song to feel, or even paste your own poem or draft lyrics. There's no wrong answer — the more you share, the better we can bring your vision to life.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO I PUT IN STORY</pattern>
+    <template>The story field is where you tell us everything you want the song to capture — who it's for, the occasion, a meaningful memory, the emotional tone. Paste your own lyrics or a poem if you have one. The more you share, the better.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT PACKAGE SHOULD I CHOOSE</pattern>
+    <template>The right package depends on how many songs you need: Single (1 song) is perfect for a specific occasion like a wedding or birthday. EP (3 songs) works well for a series of related pieces. LP (6 songs) suits organizations building a full sonic identity. Full Album (8+ songs) is for comprehensive projects. What's your project?
+      <quick-replies><reply>Just one song</reply><reply>A small collection</reply><reply>A full project</reply><reply>I am not sure</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HELP ME CHOOSE A PACKAGE</pattern>
+    <template>Let's figure out the right package for you. How many songs are you thinking about — just one, a small collection, or something larger?
+      <quick-replies><reply>Single — one perfect song</reply><reply>EP — 3 songs</reply><reply>LP — 6 songs</reply><reply>Full Album — 8+ songs</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT COMMISSION TYPE IS RIGHT FOR ME</pattern>
+    <template>Tell me a bit about your project and I'll point you in the right direction. Is this for a personal occasion (wedding, birthday, anniversary), a church or nonprofit, a business or brand, or content creation (YouTube, podcast, social media)?
+      <quick-replies><reply>Personal occasion</reply><reply>Church or nonprofit</reply><reply>Business or brand</reply><reply>Content creation</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>PERSONAL OCCASION</pattern>
+    <template>That's an Individual Commission — designed for personal milestones like weddings, birthdays, anniversaries, memorials, and more. Starting at $199 for a single track.
+      <nav-card label="Individual Commissions" href="/services#individual" description="Starting at $199"/>
+      <quick-replies><reply>Walk me through the form</reply><reply>See individual pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CHURCH OR NONPROFIT</pattern>
+    <template>That's an Organization Commission — built for churches, nonprofits, schools, and mission-driven groups. Starting at $299 for a single track.
+      <nav-card label="Organization Commissions" href="/services#organization" description="Starting at $299"/>
+      <quick-replies><reply>Walk me through the form</reply><reply>See organization pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>BUSINESS OR BRAND</pattern>
+    <template>That's an Organization Commission — covering corporate anthems, brand music, event themes, and more. Starting at $299 for a single track.
+      <nav-card label="Organization Commissions" href="/services#organization" description="Starting at $299"/>
+      <quick-replies><reply>Walk me through the form</reply><reply>See organization pricing</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CONTENT CREATION</pattern>
+    <template>That's a Content Creator Commission — designed for YouTubers, podcasters, Twitch streamers, and social creators. Same pricing as our individual tier: starting at $199 for a single track.
+      <nav-card label="Creator Commissions" href="/services#creator" description="Starting at $199"/>
+      <quick-replies><reply>Walk me through the form</reply><reply>See creator pricing</reply></quick-replies>
     </template>
   </category>
 

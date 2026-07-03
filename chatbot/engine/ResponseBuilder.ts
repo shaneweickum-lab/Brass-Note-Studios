@@ -11,6 +11,7 @@ export interface NavigationCard {
   label: string;
   href: string;
   description?: string;
+  autoNavigate?: boolean;
 }
 
 export class ResponseBuilder {
@@ -32,7 +33,6 @@ export class ResponseBuilder {
       );
     }
 
-    // Replace special tokens
     text = text.replace(/\{botName\}/g, "The Atelier Concierge");
 
     return { text };

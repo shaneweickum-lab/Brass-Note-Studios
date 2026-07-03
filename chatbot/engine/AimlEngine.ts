@@ -2,17 +2,17 @@ import { readFileSync, readdirSync } from "fs";
 import path from "path";
 import { ConversationContext } from "./ConversationContext";
 import { InputNormalizer } from "./InputNormalizer";
-import { ResponseBuilder, RawResponse, NavigationCard } from "./ResponseBuilder";
+import { ResponseBuilder, NavigationCard } from "./ResponseBuilder";
+import { FormWalkEngine } from "./FormWalkEngine";
 
 interface AimlRule {
   pattern: string;
   patternRegex: RegExp;
-  wildcardIndex: number[]; // positions of wildcards for <star/>
   template: string;
   navigationCard?: NavigationCard;
   leadCapture?: boolean;
   quickReplies?: string[];
-  that?: string; // optional <that> context match
+  that?: string;
 }
 
 interface ParsedTemplate {
@@ -33,6 +33,7 @@ export class AimlEngine {
   private rules: AimlRule[] = [];
   private normalizer = new InputNormalizer();
   private builder = new ResponseBuilder();
+  private formWalk = new FormWalkEngine();
   private aimlPath: string;
 
   constructor(aimlPath?: string) {
@@ -45,7 +46,6 @@ export class AimlEngine {
       const files = readdirSync(this.aimlPath).filter((f) =>
         f.endsWith(".aiml")
       );
-      // Load fallback last so specific rules take priority
       const sorted = [
         ...files.filter((f) => f !== "fallback.aiml"),
         ...files.filter((f) => f === "fallback.aiml"),
@@ -54,15 +54,14 @@ export class AimlEngine {
         this.loadFile(path.join(this.aimlPath, file));
       }
     } catch {
-      // aiml directory not ready yet
+      // aiml dir not ready
     }
   }
 
   private loadFile(filePath: string) {
     try {
       const xml = readFileSync(filePath, "utf-8");
-      const categories = this.parseCategories(xml);
-      this.rules.push(...categories);
+      this.rules.push(...this.parseCategories(xml));
     } catch {
       // skip unreadable files
     }
@@ -70,34 +69,28 @@ export class AimlEngine {
 
   private parseCategories(xml: string): AimlRule[] {
     const rules: AimlRule[] = [];
-    // Extract <category>...</category> blocks
     const catRegex = /<category>([\s\S]*?)<\/category>/g;
     let catMatch: RegExpExecArray | null;
 
     while ((catMatch = catRegex.exec(xml)) !== null) {
       const block = catMatch[1];
 
-      // Extract <that> if present
       const thatMatch = /<that>([\s\S]*?)<\/that>/i.exec(block);
       const that = thatMatch ? thatMatch[1].trim() : undefined;
 
-      // Extract <pattern>
       const patternMatch = /<pattern>([\s\S]*?)<\/pattern>/i.exec(block);
       if (!patternMatch) continue;
       const rawPattern = patternMatch[1].trim().toUpperCase();
 
-      // Extract <template>
       const templateMatch = /<template>([\s\S]*?)<\/template>/i.exec(block);
       if (!templateMatch) continue;
-      const rawTemplate = templateMatch[1];
 
-      const parsed = this.parseTemplate(rawTemplate);
-      const { regex, wildcardIndex } = this.patternToRegex(rawPattern);
+      const parsed = this.parseTemplate(templateMatch[1]);
+      const regex = this.patternToRegex(rawPattern);
 
       rules.push({
         pattern: rawPattern,
         patternRegex: regex,
-        wildcardIndex,
         template: parsed.text,
         navigationCard: parsed.navigationCard,
         leadCapture: parsed.leadCapture,
@@ -105,7 +98,6 @@ export class AimlEngine {
         that,
       });
     }
-
     return rules;
   }
 
@@ -115,27 +107,29 @@ export class AimlEngine {
     let leadCapture: boolean | undefined;
     let quickReplies: string[] | undefined;
 
-    // Extract <nav-card label="..." href="..." description="..."/>
+    // <nav-card label="..." href="..." description="..." auto-navigate="true"/>
     const navMatch =
-      /<nav-card\s+label="([^"]+)"\s+href="([^"]+)"(?:\s+description="([^"]*)")?[^/]*\/>/i.exec(
-        text
-      );
+      /<nav-card\s([^>]*?)\/>/i.exec(text);
     if (navMatch) {
+      const attrs = navMatch[1];
+      const getAttr = (name: string) => {
+        const m = new RegExp(`${name}="([^"]*)"`, "i").exec(attrs);
+        return m ? m[1] : undefined;
+      };
       navigationCard = {
-        label: navMatch[1],
-        href: navMatch[2],
-        description: navMatch[3],
+        label: getAttr("label") ?? "",
+        href: getAttr("href") ?? "/",
+        description: getAttr("description"),
+        autoNavigate: getAttr("auto-navigate") === "true",
       };
       text = text.replace(navMatch[0], "").trim();
     }
 
-    // Extract <lead-capture/>
     if (/<lead-capture\s*\/>/i.test(text)) {
       leadCapture = true;
       text = text.replace(/<lead-capture\s*\/>/gi, "").trim();
     }
 
-    // Extract <quick-replies>...</quick-replies>
     const qrMatch = /<quick-replies>([\s\S]*?)<\/quick-replies>/i.exec(text);
     if (qrMatch) {
       quickReplies = qrMatch[1]
@@ -145,58 +139,49 @@ export class AimlEngine {
       text = text.replace(qrMatch[0], "").trim();
     }
 
-    // Strip remaining XML tags (e.g. <br/>, <srai>...)
     text = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-
     return { text, navigationCard, leadCapture, quickReplies };
   }
 
-  private patternToRegex(pattern: string): {
-    regex: RegExp;
-    wildcardIndex: number[];
-  } {
-    const wildcardIndex: number[] = [];
-    let idx = 0;
+  private patternToRegex(pattern: string): RegExp {
     const escaped = pattern
       .split(/(\*|_)/)
-      .map((part) => {
-        if (part === "*" || part === "_") {
-          wildcardIndex.push(idx++);
-          return "(.+)";
-        }
-        idx++;
-        return part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      })
+      .map((part) =>
+        part === "*" || part === "_"
+          ? "(.+)"
+          : part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      )
       .join("");
-    return {
-      regex: new RegExp(`^${escaped}$`, "i"),
-      wildcardIndex,
-    };
+    return new RegExp(`^${escaped}$`, "i");
   }
 
-  process(
-    userInput: string,
-    context: ConversationContext
-  ): EngineResponse {
+  process(userInput: string, context: ConversationContext): EngineResponse {
     const normalized = this.normalizer.normalize(userInput);
     context.addTurn("user", userInput);
 
-    const lastBot = this.normalizer.normalize(context.getLastBotResponse());
+    // Form walk takes priority when active
+    const fw = context.getFormWalk();
+    if (fw.active && fw.step) {
+      const walkResult = this.formWalk.process(userInput, context);
+      if (walkResult) {
+        context.addTurn("bot", walkResult.text);
+        return walkResult;
+      }
+    }
+
+    const lastBot = this.normalizer
+      .normalize(context.getLastBotResponse())
+      .toUpperCase();
     const upper = normalized.toUpperCase();
 
-    // Find matching rule (first match wins; fallback at end)
     let matched: AimlRule | null = null;
     let stars: string[] = [];
 
     for (const rule of this.rules) {
-      // Check <that> constraint
       if (rule.that) {
-        const thatPattern = rule.that.toUpperCase();
-        if (!lastBot.toUpperCase().includes(thatPattern.replace(/\*/g, ""))) {
-          continue;
-        }
+        const tp = rule.that.toUpperCase();
+        if (!lastBot.includes(tp.replace(/\*/g, ""))) continue;
       }
-
       const m = rule.patternRegex.exec(upper);
       if (m) {
         matched = rule;
@@ -206,16 +191,15 @@ export class AimlEngine {
     }
 
     if (!matched) {
-      const fallbackText =
-        "I'm not sure I have an answer for that just yet — but I'd love to connect you with our team. Would you like to start a commission inquiry?";
-      context.addTurn("bot", fallbackText);
+      const text =
+        "That's a great question — I want to make sure you get the right answer. Our team would be happy to help directly. Would you like to start a commission inquiry, or is there something specific I can look up for you?";
+      context.addTurn("bot", text);
       return {
-        text: fallbackText,
-        quickReplies: ["Start a commission", "View pricing", "About the studio"],
+        text,
+        quickReplies: ["Start a commission", "Pricing", "How it works", "Contact the team"],
       };
     }
 
-    // Replace <star/> and <star index="N"/>
     let text = matched.template;
     text = text.replace(/<star\/>/gi, stars[0] ?? "");
     text = text.replace(/<star index="(\d+)"\/>/gi, (_, n: string) => {
@@ -232,5 +216,12 @@ export class AimlEngine {
 
     context.addTurn("bot", final.text);
     return final;
+  }
+
+  startFormWalk(context: ConversationContext): EngineResponse {
+    const result = this.formWalk.start(context);
+    context.addTurn("user", "[form walk triggered]");
+    context.addTurn("bot", result.text);
+    return result;
   }
 }

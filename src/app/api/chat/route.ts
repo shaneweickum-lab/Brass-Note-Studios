@@ -3,7 +3,6 @@ import { AimlEngine } from "../../../../chatbot/engine/AimlEngine";
 import { ConversationContext } from "../../../../chatbot/engine/ConversationContext";
 import { chatbotConfig } from "../../../../chatbot/config";
 
-// Session-level conversation contexts (in-memory; resets on cold start)
 const sessions = new Map<string, ConversationContext>();
 
 let engine: AimlEngine | null = null;
@@ -17,9 +16,10 @@ export async function POST(req: NextRequest) {
     const body = (await req.json()) as {
       message: string;
       sessionId?: string;
+      formWalk?: boolean;
     };
 
-    const { message, sessionId = "default" } = body;
+    const { message, sessionId = "default", formWalk } = body;
 
     if (!message || typeof message !== "string") {
       return NextResponse.json({ error: "Missing message" }, { status: 400 });
@@ -32,8 +32,22 @@ export async function POST(req: NextRequest) {
       );
     }
     const context = sessions.get(sessionId)!;
+    const eng = getEngine();
 
-    const response = getEngine().process(message, context);
+    // Start form walk directly (triggered by UI button, not text pattern)
+    if (formWalk) {
+      const response = eng.startFormWalk(context);
+      return NextResponse.json({ ...response, sessionId });
+    }
+
+    // Normal AIML processing
+    const response = eng.process(message, context);
+
+    // __FORM_WALK__ template signals form walk trigger via AIML pattern
+    if (response.text === "__FORM_WALK__") {
+      const fwResponse = eng.startFormWalk(context);
+      return NextResponse.json({ ...fwResponse, sessionId });
+    }
 
     return NextResponse.json({ ...response, sessionId });
   } catch (err) {

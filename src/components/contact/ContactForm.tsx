@@ -92,6 +92,14 @@ interface ContactFormProps {
   defaultService?: string;
   packageName?: string;
   checkoutUrl?: string;
+  defaultName?: string;
+  defaultEmail?: string;
+  defaultWhoFor?: string;
+  defaultStory?: string;
+  defaultGenre?: string;
+  defaultLength?: string;
+  defaultVocalType?: string;
+  defaultVocalStyle?: string;
 }
 
 function pillBase(selected: boolean) {
@@ -110,10 +118,22 @@ function unsurePill(selected: boolean) {
   }`;
 }
 
+function openConcierge(topic = "form_help") {
+  (window as Window & { __openAtelierChat?: (t?: string) => void }).__openAtelierChat?.(topic);
+}
+
 export default function ContactForm({
   defaultService = "",
   packageName: defaultPackage = "",
   checkoutUrl: propCheckoutUrl = "",
+  defaultName = "",
+  defaultEmail = "",
+  defaultWhoFor = "",
+  defaultStory = "",
+  defaultGenre = "",
+  defaultLength = "",
+  defaultVocalType = "",
+  defaultVocalStyle = "",
 }: ContactFormProps) {
   const [status, setStatus]       = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [countdown, setCountdown] = useState(3);
@@ -166,13 +186,13 @@ export default function ContactForm({
     defaultValues: {
       serviceType:      defaultService,
       packageName:      defaultPackage,
-      whoIsItFor:       "",
-      songLength:       "",
-      vocalType:        "",
-      vocalStyle:       "",
+      whoIsItFor:       defaultWhoFor,
+      songLength:       defaultLength,
+      vocalType:        defaultVocalType,
+      vocalStyle:       defaultVocalStyle,
       songTitle:        "",
-      genreOrReference: "",
-      storyOrLyrics:    "",
+      genreOrReference: defaultGenre,
+      storyOrLyrics:    defaultStory,
       requestedDate:    "",
     },
   });
@@ -183,6 +203,12 @@ export default function ContactForm({
   const vocalStyle  = watch("vocalStyle");
 
   const isMixture = vocalStyle === "Mixture";
+
+  // Pre-fill name/email from chatbot walk (must be after useForm)
+  useEffect(() => {
+    if (defaultName)  setValue("name",  defaultName,  { shouldValidate: false });
+    if (defaultEmail) setValue("email", defaultEmail, { shouldValidate: false });
+  }, [defaultName, defaultEmail, setValue]);
 
   // Countdown + redirect after successful submit
   useEffect(() => {
@@ -484,7 +510,7 @@ export default function ContactForm({
           </div>
           {/* I'm Not Sure */}
           <button type="button"
-            onClick={() => setValue("songLength", UNSURE, { shouldValidate: true })}
+            onClick={() => { setValue("songLength", UNSURE, { shouldValidate: true }); openConcierge("form_help"); }}
             className={unsurePill(songLength === UNSURE) + " mt-2"}
           >
             <HelpCircle className="w-3.5 h-3.5" />
@@ -533,7 +559,7 @@ export default function ContactForm({
               >{opt.label}</button>
             ))}
             <button type="button"
-              onClick={() => setValue("vocalType", UNSURE, { shouldValidate: true })}
+              onClick={() => { setValue("vocalType", UNSURE, { shouldValidate: true }); openConcierge("form_help"); }}
               className={unsurePill(vocalType === UNSURE) + " flex-1 justify-center"}
             >
               <HelpCircle className="w-3.5 h-3.5" />
@@ -568,6 +594,7 @@ export default function ContactForm({
               onClick={() => {
                 setValue("vocalStyle", UNSURE, { shouldValidate: true });
                 setMixStyles([]);
+                openConcierge("form_help");
               }}
               className={unsurePill(vocalStyle === UNSURE)}
             >
