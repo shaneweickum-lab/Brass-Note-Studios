@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-background: #0D0A0B;
+  }
+
   body {
     @apply bg-background text-text-base font-body antialiased;
   }

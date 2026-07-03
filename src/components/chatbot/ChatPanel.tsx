@@ -222,10 +222,15 @@ export default function ChatPanel({
             <span className="text-gold text-[10px] font-display font-medium">B</span>
           </div>
           <div>
-            <p className="font-display text-text-base text-sm font-medium leading-tight">
-              Atelier Concierge
-            </p>
-            <p className="text-text-muted text-[10px] font-body tracking-[0.15em] uppercase">
+            <div className="flex items-center gap-2">
+              <p className="font-display text-text-base text-sm font-medium leading-tight">
+                Atelier Concierge
+              </p>
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-body font-semibold tracking-[0.18em] uppercase bg-gold/15 text-gold border border-gold/35">
+                Beta
+              </span>
+            </div>
+            <p className="text-text-muted text-[10px] font-body tracking-[0.15em] uppercase mt-0.5">
               Brass Note Studios
             </p>
           </div>
@@ -286,7 +291,7 @@ export default function ChatPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask about commissions, pricing…"
+          placeholder="Message…"
           inputMode="text"
           enterKeyHint="send"
           className={cn(
