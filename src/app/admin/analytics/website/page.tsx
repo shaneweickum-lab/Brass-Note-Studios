@@ -6,7 +6,11 @@ export const metadata: Metadata = { title: "Website Analytics" };
 export const dynamic = "force-dynamic";
 
 export default async function WebsiteAnalyticsPage() {
-  const pageViews = await kvGetPageViews();
+  const rawPageViews = await kvGetPageViews();
+  // Exclude admin and API paths (belt-and-suspenders in case any slipped through)
+  const pageViews = rawPageViews.filter(
+    (p) => !p.path.startsWith("/admin") && !p.path.startsWith("/api")
+  );
 
   const totalViews = pageViews.length;
   const uniqueVisitors = new Set(pageViews.map((p) => p.sessionId)).size;

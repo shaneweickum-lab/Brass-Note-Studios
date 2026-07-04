@@ -9,9 +9,16 @@ export async function POST(req: NextRequest) {
       referrer?: string;
     };
 
+    const path = body.path ?? "/";
+
+    // Never track admin or internal API routes
+    if (path.startsWith("/admin") || path.startsWith("/api")) {
+      return NextResponse.json({ ok: true, skipped: true });
+    }
+
     const entry = {
       ts: new Date().toISOString(),
-      path: body.path ?? "/",
+      path,
       sessionId: body.sessionId ?? "anon",
       referrer: body.referrer ?? "",
     };

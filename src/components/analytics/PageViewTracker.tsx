@@ -20,8 +20,8 @@ export default function PageViewTracker() {
   const lastTracked = useRef<string>("");
 
   useEffect(() => {
-    // Skip admin routes and duplicate fires
-    if (pathname.startsWith("/admin")) return;
+    // Skip admin, API routes, and duplicate fires
+    if (pathname.startsWith("/admin") || pathname.startsWith("/api")) return;
     if (pathname === lastTracked.current) return;
     lastTracked.current = pathname;
 
