@@ -1,11 +1,15 @@
-/**
- * Vercel KV (Redis) persistence layer for BNSignal analytics.
- * Falls back gracefully to no-ops when KV env vars aren't configured.
- */
+import { Redis } from "@upstash/redis";
 
-import { kv } from "@vercel/kv";
+const KV_AVAILABLE = Boolean(
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+);
 
-const KV_AVAILABLE = Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+const redis = KV_AVAILABLE
+  ? new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL!,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+    })
+  : null;
 
 const KEYS = {
   pageviews: "bns:pageviews",
@@ -14,8 +18,6 @@ const KEYS = {
 } as const;
 
 const MAX_LIST = 5000;
-
-// ── Types ───────────────────────────────────────────────────────────────────
 
 export interface KVPageView {
   ts: string;
@@ -41,23 +43,21 @@ export interface KVFallback {
   pageContext: string;
 }
 
-// ── Writers ─────────────────────────────────────────────────────────────────
-
 export async function kvTrackPageView(entry: KVPageView): Promise<void> {
-  if (!KV_AVAILABLE) return;
+  if (!redis) return;
   try {
-    await kv.lpush(KEYS.pageviews, entry);
-    await kv.ltrim(KEYS.pageviews, 0, MAX_LIST - 1);
+    await redis.lpush(KEYS.pageviews, entry);
+    await redis.ltrim(KEYS.pageviews, 0, MAX_LIST - 1);
   } catch (e) {
     console.error("[kv:pageview]", e);
   }
 }
 
 export async function kvTrackConversation(entry: KVConversation): Promise<void> {
-  if (!KV_AVAILABLE) return;
+  if (!redis) return;
   try {
-    await kv.lpush(KEYS.conversations, entry);
-    await kv.ltrim(KEYS.conversations, 0, MAX_LIST - 1);
+    await redis.lpush(KEYS.conversations, entry);
+    await redis.ltrim(KEYS.conversations, 0, MAX_LIST - 1);
     if (entry.isFallback) {
       const fallback: KVFallback = {
         ts: entry.ts,
@@ -65,21 +65,18 @@ export async function kvTrackConversation(entry: KVConversation): Promise<void> 
         userMsg: entry.userMsg,
         pageContext: entry.pageContext,
       };
-      await kv.lpush(KEYS.fallbacks, fallback);
-      await kv.ltrim(KEYS.fallbacks, 0, MAX_LIST - 1);
+      await redis.lpush(KEYS.fallbacks, fallback);
+      await redis.ltrim(KEYS.fallbacks, 0, MAX_LIST - 1);
     }
   } catch (e) {
     console.error("[kv:conversation]", e);
   }
 }
 
-// ── Readers ──────────────────────────────────────────────────────────────────
-
 export async function kvGetPageViews(): Promise<KVPageView[]> {
-  if (!KV_AVAILABLE) return [];
+  if (!redis) return [];
   try {
-    const items = await kv.lrange<KVPageView>(KEYS.pageviews, 0, -1);
-    return items ?? [];
+    return (await redis.lrange<KVPageView>(KEYS.pageviews, 0, -1)) ?? [];
   } catch (e) {
     console.error("[kv:read:pageviews]", e);
     return [];
@@ -87,10 +84,9 @@ export async function kvGetPageViews(): Promise<KVPageView[]> {
 }
 
 export async function kvGetConversations(): Promise<KVConversation[]> {
-  if (!KV_AVAILABLE) return [];
+  if (!redis) return [];
   try {
-    const items = await kv.lrange<KVConversation>(KEYS.conversations, 0, -1);
-    return items ?? [];
+    return (await redis.lrange<KVConversation>(KEYS.conversations, 0, -1)) ?? [];
   } catch (e) {
     console.error("[kv:read:conversations]", e);
     return [];
@@ -98,10 +94,9 @@ export async function kvGetConversations(): Promise<KVConversation[]> {
 }
 
 export async function kvGetFallbacks(): Promise<KVFallback[]> {
-  if (!KV_AVAILABLE) return [];
+  if (!redis) return [];
   try {
-    const items = await kv.lrange<KVFallback>(KEYS.fallbacks, 0, -1);
-    return items ?? [];
+    return (await redis.lrange<KVFallback>(KEYS.fallbacks, 0, -1)) ?? [];
   } catch (e) {
     console.error("[kv:read:fallbacks]", e);
     return [];
