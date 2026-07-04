@@ -59,19 +59,127 @@
 
   <category>
     <pattern>THANKS</pattern>
-    <template>You're very welcome. Is there anything else I can help you with?</template>
+    <template>You're very welcome — is there anything else I can help you with today?
+      <quick-replies><reply>Start a commission</reply><reply>View pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
   </category>
 
   <category>
     <pattern>THANK YOU</pattern>
-    <template>It's my pleasure. If you have any other questions or are ready to begin your commission, I'm here.
+    <template>It's our pleasure. If you have other questions or are ready to begin your commission, we're here.
       <quick-replies><reply>Start a commission</reply><reply>No, that's all</reply></quick-replies>
     </template>
   </category>
 
   <category>
     <pattern>THANK YOU *</pattern>
-    <template>Of course! Happy to help. Is there anything else you'd like to know?</template>
+    <template>You're very welcome. Is there anything else I can help you with?</template>
+  </category>
+
+  <category>
+    <pattern>THANKS *</pattern>
+    <template>You're very welcome — is there anything else on your mind?
+      <quick-replies><reply>Start a commission</reply><reply>View pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THANKS A LOT</pattern>
+    <template>It's our pleasure. We're here whenever you need us.
+      <quick-replies><reply>Start a commission</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THANKS SO MUCH</pattern>
+    <template>You're very welcome — glad we could help. Is there anything else I can do for you?
+      <quick-replies><reply>Commission a song</reply><reply>Pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THANK YOU SO MUCH</pattern>
+    <template>It's truly our pleasure. We're here whenever something comes to mind.
+      <quick-replies><reply>Start a commission</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>MANY THANKS</pattern>
+    <template>You're very welcome. Is there anything else I can help with?</template>
+  </category>
+
+  <category>
+    <pattern>APPRECIATE IT</pattern>
+    <template>We appreciate you — is there anything else I can help you with today?
+      <quick-replies><reply>Start a commission</reply><reply>Pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>APPRECIATE THAT</pattern>
+    <template><srai>APPRECIATE IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>I APPRECIATE IT</pattern>
+    <template><srai>APPRECIATE IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>I APPRECIATE THAT</pattern>
+    <template><srai>APPRECIATE IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>THAT HELPS</pattern>
+    <template>Glad to hear it. Is there anything else I can help you with?
+      <quick-replies><reply>Start a commission</reply><reply>Pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THAT WAS HELPFUL</pattern>
+    <template><srai>THAT HELPS</srai></template>
+  </category>
+
+  <category>
+    <pattern>THIS WAS HELPFUL</pattern>
+    <template><srai>THAT HELPS</srai></template>
+  </category>
+
+  <category>
+    <pattern>VERY HELPFUL</pattern>
+    <template>We're glad. Is there anything else you'd like to know?
+      <quick-replies><reply>Start a commission</reply><reply>Pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TY</pattern>
+    <template>You're very welcome — anything else I can help with?
+      <quick-replies><reply>Commission a song</reply><reply>Pricing</reply><reply>No, that's all</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>THX</pattern>
+    <template><srai>TY</srai></template>
+  </category>
+
+  <category>
+    <pattern>NO THAT IS ALL</pattern>
+    <template>We're here whenever you're ready. Come back anytime — we'd love to bring your story to life in song.</template>
+  </category>
+
+  <category>
+    <pattern>NO THANKS</pattern>
+    <template>We're here whenever you need us. Come back anytime.</template>
+  </category>
+
+  <category>
+    <pattern>THAT IS ALL</pattern>
+    <template>We're here whenever something comes to mind. Come back anytime — we'd love to bring your story to life in song.</template>
   </category>
 
   <category>
