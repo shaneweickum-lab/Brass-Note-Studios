@@ -45,13 +45,17 @@ export default async function WebsiteAnalyticsPage() {
           </div>
         </div>
       ) : (
-        <div className="rounded-lg border border-white/10 bg-surface p-8 text-center">
+        <div className="rounded-lg border border-white/10 bg-surface p-8 text-center flex flex-col gap-2">
           <p className="text-text-subtle font-body text-sm">
-            Vercel Analytics data unavailable. Set{" "}
-            <code className="text-gold font-mono text-xs">VERCEL_ACCESS_TOKEN</code>,{" "}
-            <code className="text-gold font-mono text-xs">VERCEL_PROJECT_ID</code>, and{" "}
-            <code className="text-gold font-mono text-xs">VERCEL_TEAM_ID</code> in your environment variables.
+            {vercel.error === "credentials_missing"
+              ? "Environment variables not set — add VERCEL_ACCESS_TOKEN and VERCEL_PROJECT_ID."
+              : vercel.error?.startsWith("api_error")
+              ? `Vercel API returned an error (${vercel.error}). Check that Vercel Analytics is enabled on your project and the token has the right scope. See Vercel function logs for details.`
+              : "No page data returned yet — Vercel Analytics may need a few hours to populate after being enabled."}
           </p>
+          {vercel.error && (
+            <code className="text-gold/60 font-mono text-xs">{vercel.error}</code>
+          )}
         </div>
       )}
     </div>
