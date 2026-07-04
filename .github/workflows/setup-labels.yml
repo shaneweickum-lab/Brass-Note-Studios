@@ -1,0 +1,58 @@
+name: Setup Labels
+
+# Run this once manually from the Actions tab to create all required labels.
+# It is safe to run multiple times — existing labels are updated, not duplicated.
+on:
+  workflow_dispatch:
+
+jobs:
+  create-labels:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Create required labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              {
+                name: "concierge-fix",
+                color: "C9921A",
+                description: "Auto-generated AIML fix document — add 'approved' to implement",
+              },
+              {
+                name: "approved",
+                color: "0E8A16",
+                description: "Triggers automatic implementation via GitHub Action",
+              },
+              {
+                name: "journal-topics",
+                color: "0075CA",
+                description: "Auto-generated Journal post topic suggestions",
+              },
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ...label,
+                });
+                console.log(`Created: ${label.name}`);
+              } catch (err) {
+                if (err.status === 422) {
+                  // Label already exists — update it instead
+                  await github.rest.issues.updateLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ...label,
+                  });
+                  console.log(`Updated: ${label.name}`);
+                } else {
+                  throw err;
+                }
+              }
+            }
