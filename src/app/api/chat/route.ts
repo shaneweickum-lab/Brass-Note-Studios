@@ -4,6 +4,7 @@ import path from "path";
 import { AimlEngine } from "../../../../chatbot/engine/AimlEngine";
 import { ConversationContext } from "../../../../chatbot/engine/ConversationContext";
 import { chatbotConfig } from "../../../../chatbot/config";
+import { kvTrackConversation } from "@/lib/analytics/kv";
 
 const sessions = new Map<string, ConversationContext>();
 
@@ -45,6 +46,7 @@ function logConversation(
   };
   console.log("[conversation]", JSON.stringify(entry));
   appendLog("conversations.jsonl", entry);
+  void kvTrackConversation(entry);
 
   if (isFallback) {
     const fallbackEntry = { ts: entry.ts, sessionId, userMsg, pageContext };

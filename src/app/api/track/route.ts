@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { appendFileSync, mkdirSync } from "fs";
-import path from "path";
-
-const LOG_DIR = path.join(process.cwd(), "chatbot", "logs");
+import { kvTrackPageView } from "@/lib/analytics/kv";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,16 +17,7 @@ export async function POST(req: NextRequest) {
     };
 
     console.log("[page-view]", JSON.stringify(entry));
-
-    try {
-      mkdirSync(LOG_DIR, { recursive: true });
-      appendFileSync(
-        path.join(LOG_DIR, "pageviews.jsonl"),
-        JSON.stringify(entry) + "\n"
-      );
-    } catch {
-      // read-only in serverless — console.log above captures it
-    }
+    await kvTrackPageView(entry);
 
     return NextResponse.json({ ok: true });
   } catch {

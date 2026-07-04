@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { readConversations, readFallbacks } from "@/lib/analytics/readLogs";
+import { kvGetConversations, kvGetFallbacks } from "@/lib/analytics/kv";
 import { aggregateOverview } from "@/lib/analytics/aggregator";
 import StatCard from "@/components/analytics/StatCard";
 import PatternTable from "@/components/analytics/PatternTable";
@@ -9,9 +9,11 @@ import FallbackTable from "@/components/analytics/FallbackTable";
 export const metadata: Metadata = { title: "Concierge Analytics" };
 export const dynamic = "force-dynamic";
 
-export default function ConciergeAnalyticsPage() {
-  const conversations = readConversations();
-  const fallbacks = readFallbacks();
+export default async function ConciergeAnalyticsPage() {
+  const [conversations, fallbacks] = await Promise.all([
+    kvGetConversations(),
+    kvGetFallbacks(),
+  ]);
 
   const totalMessages = conversations.length;
   const fallbackCount = conversations.filter((c) => c.isFallback).length + fallbacks.length;
