@@ -29,6 +29,7 @@ export interface EngineResponse {
   leadCapture?: boolean;
   quickReplies?: string[];
   isFallback?: boolean;
+  matchedPattern?: string;
 }
 
 export class AimlEngine {
@@ -217,6 +218,7 @@ export class AimlEngine {
       leadCapture: matched.leadCapture,
       quickReplies: matched.quickReplies,
       isFallback: matched.source === "fallback.aiml",
+      matchedPattern: matched.pattern,
     };
 
     context.addTurn("bot", final.text);

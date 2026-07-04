@@ -13,20 +13,43 @@ function getEngine(): AimlEngine {
   return engine;
 }
 
-function logQuestion(sessionId: string, message: string, isFallback: boolean) {
+const LOG_DIR = path.join(process.cwd(), "chatbot", "logs");
+
+function ensureLogDir() {
+  try { mkdirSync(LOG_DIR, { recursive: true }); } catch { /* ok */ }
+}
+
+function appendLog(filename: string, entry: unknown) {
+  try {
+    ensureLogDir();
+    appendFileSync(path.join(LOG_DIR, filename), JSON.stringify(entry) + "\n");
+  } catch { /* read-only in serverless — console.log is the fallback */ }
+}
+
+function logConversation(
+  sessionId: string,
+  userMsg: string,
+  botResponse: string,
+  isFallback: boolean,
+  pageContext: string,
+  matchedPattern?: string
+) {
   const entry = {
     ts: new Date().toISOString(),
     sessionId,
-    message,
+    userMsg,
+    botResponse: botResponse.slice(0, 200),
     isFallback,
+    pageContext,
+    matchedPattern,
   };
-  console.log("[question-log]", JSON.stringify(entry));
-  try {
-    const logDir = path.join(process.cwd(), "chatbot", "logs");
-    mkdirSync(logDir, { recursive: true });
-    appendFileSync(path.join(logDir, "questions.jsonl"), JSON.stringify(entry) + "\n");
-  } catch {
-    // read-only in serverless — console.log above is the fallback
+  console.log("[conversation]", JSON.stringify(entry));
+  appendLog("conversations.jsonl", entry);
+
+  if (isFallback) {
+    const fallbackEntry = { ts: entry.ts, sessionId, userMsg, pageContext };
+    console.log("[fallback]", JSON.stringify(fallbackEntry));
+    appendLog("fallbacks.jsonl", fallbackEntry);
   }
 }
 
@@ -36,9 +59,10 @@ export async function POST(req: NextRequest) {
       message: string;
       sessionId?: string;
       formWalk?: boolean;
+      pageContext?: string;
     };
 
-    const { message, sessionId = "default", formWalk } = body;
+    const { message, sessionId = "default", formWalk, pageContext = "/" } = body;
 
     if (!message || typeof message !== "string") {
       return NextResponse.json({ error: "Missing message" }, { status: 400 });
@@ -65,11 +89,18 @@ export async function POST(req: NextRequest) {
     // __FORM_WALK__ template signals form walk trigger via AIML pattern
     if (response.text === "__FORM_WALK__") {
       const fwResponse = eng.startFormWalk(context);
-      logQuestion(sessionId, message, false);
+      logConversation(sessionId, message, fwResponse.text, false, pageContext);
       return NextResponse.json({ ...fwResponse, sessionId });
     }
 
-    logQuestion(sessionId, message, response.isFallback ?? false);
+    logConversation(
+      sessionId,
+      message,
+      response.text,
+      response.isFallback ?? false,
+      pageContext,
+      response.matchedPattern
+    );
     return NextResponse.json({ ...response, sessionId });
   } catch (err) {
     console.error("[chat/route]", err);

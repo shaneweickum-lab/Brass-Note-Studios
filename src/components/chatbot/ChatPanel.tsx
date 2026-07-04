@@ -175,7 +175,7 @@ export default function ChatPanel({
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text || "[form walk]", sessionId, formWalk }),
+          body: JSON.stringify({ message: text || "[form walk]", sessionId, formWalk, pageContext: pageContext ?? "/" }),
         });
         const data = (await res.json()) as {
           text: string;

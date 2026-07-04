@@ -253,4 +253,13 @@
     </template>
   </category>
 
+  <!-- ── Admin navigation (invisible to public) ─────────────────────────── -->
+
+  <category>
+    <pattern>ADMIN</pattern>
+    <template>Navigating to the analytics dashboard.
+      <nav-card auto-navigate="/admin/analytics" label="BNSignal Analytics" description="Studio performance dashboard" />
+    </template>
+  </category>
+
 </aiml>
