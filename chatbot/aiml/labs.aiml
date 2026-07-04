@@ -36,4 +36,31 @@
     </template>
   </category>
 
+  <!-- ── Labs widening patterns ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE LABS PAGE</pattern>
+    <template><srai>WHAT IS LABS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BNLABS</pattern>
+    <template><srai>WHAT IS BRASS NOTE LABS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO THE LABS DO</pattern>
+    <template><srai>WHAT IS LABS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE RESEARCH DIVISION</pattern>
+    <template><srai>WHAT IS BRASS NOTE LABS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO RESEARCH</pattern>
+    <template><srai>WHAT IS BRASS NOTE LABS</srai></template>
+  </category>
+
 </aiml>

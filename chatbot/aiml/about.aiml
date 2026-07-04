@@ -201,4 +201,152 @@
     </template>
   </category>
 
+  <!-- ── Studio identity — "about this studio" variants ─────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THIS STUDIO ABOUT</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE STUDIO ABOUT</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU TELL ME ABOUT THIS STUDIO</pattern>
+    <template><srai>TELL ME ABOUT THE STUDIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BRASS NOTE STUDIOS ABOUT</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE YOU ABOUT</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES THIS STUDIO DO</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THIS PLACE ABOUT</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO YOU MAKE HERE</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT KIND OF STUDIO IS THIS</pattern>
+    <template>We're a bespoke songwriting and production atelier — not a traditional recording studio. We commission original songs for individuals, organizations, and content creators: we write the lyrics, direct the arrangement, and deliver broadcast-ready masters. Think of us as a full-service creative studio rather than a space you book to record in.
+      <nav-card label="Learn More" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A RECORDING STUDIO</pattern>
+    <template>Brass Note Studios isn't a traditional recording studio — we're a bespoke songwriting and production atelier. We write original compositions, arrange and produce them, and deliver broadcast-ready audio files to you. There's no physical space to book; everything is crafted and delivered digitally, anywhere in the world.
+      <nav-card label="About the Studio" href="/about"/>
+    </template>
+  </category>
+
+  <!-- ── What kind of music / music style ───────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT KIND OF MUSIC DO YOU MAKE</pattern>
+    <template>Every piece we produce is a one-of-a-kind commissioned song — written and arranged specifically for the client who ordered it. We work across a wide range of genres: soul, gospel, pop, folk, country, R&amp;B, worship, cinematic, and more. What makes each piece singular is the story behind it — your occasion, your people, your words.
+      <nav-card label="Hear Our Work" href="/music" description="Browse the commissioned portfolio"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT KIND OF MUSIC DO THEY MAKE</pattern>
+    <template><srai>WHAT KIND OF MUSIC DO YOU MAKE</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT MUSIC DO YOU MAKE</pattern>
+    <template><srai>WHAT KIND OF MUSIC DO YOU MAKE</srai></template>
+  </category>
+
+  <!-- ── Music listening / portfolio access ─────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU HAVE SONGS I CAN LISTEN TO</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I LISTEN TO YOUR MUSIC</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I HEAR EXAMPLES</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE A PORTFOLIO</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHERE IS THE MUSIC</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES YOUR MUSIC SOUND LIKE</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE SAMPLES I CAN HEAR</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I LISTEN TO SOMETHING</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <!-- ── Quality and process ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW DO YOU MAKE THE MUSIC SO GOOD</pattern>
+    <template>It starts with genuine musical craft — real songwriters shaping the lyrics and creative arc around your story. We use advanced AI-assisted production tools to bring those creative decisions to life at broadcast quality. The discipline is the same regardless of package size: no templates, no shortcuts, every commission built from scratch.
+      <nav-card label="Our Process" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR QUALITY STANDARD</pattern>
+    <template><srai>IS THE QUALITY GOOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU ENSURE QUALITY</pattern>
+    <template><srai>IS THE QUALITY GOOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU RESEARCH</pattern>
+    <template>Our process begins with a discovery conversation — we learn your story, the occasion, the people involved, and the emotional tone you're after. That research phase is what makes each commission genuinely original; we don't write from templates, we write from what you share with us.
+      <nav-card label="Start Your Commission" href="/contact" description="Tell us your story"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE SCIENCE BEHIND IT</pattern>
+    <template><srai>HOW DOES SUNO WORK</srai></template>
+  </category>
+
 </aiml>

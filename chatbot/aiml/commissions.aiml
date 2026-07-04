@@ -160,6 +160,11 @@
   </category>
 
   <category>
+    <pattern>WHAT IS YOUR PROCESS</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
     <pattern>WHAT HAPPENS AFTER I ORDER</pattern>
     <template><srai>HOW DO COMMISSIONS WORK</srai></template>
   </category>
