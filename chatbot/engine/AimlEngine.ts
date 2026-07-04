@@ -9,6 +9,7 @@ interface AimlRule {
   pattern: string;
   patternRegex: RegExp;
   template: string;
+  srai?: string;
   navigationCard?: NavigationCard;
   leadCapture?: boolean;
   quickReplies?: string[];
@@ -18,6 +19,7 @@ interface AimlRule {
 
 interface ParsedTemplate {
   text: string;
+  srai?: string;
   navigationCard?: NavigationCard;
   leadCapture?: boolean;
   quickReplies?: string[];
@@ -96,6 +98,7 @@ export class AimlEngine {
         pattern: rawPattern,
         patternRegex: regex,
         template: parsed.text,
+        srai: parsed.srai,
         navigationCard: parsed.navigationCard,
         leadCapture: parsed.leadCapture,
         quickReplies: parsed.quickReplies,
@@ -108,9 +111,17 @@ export class AimlEngine {
 
   private parseTemplate(raw: string): ParsedTemplate {
     let text = raw;
+    let srai: string | undefined;
     let navigationCard: NavigationCard | undefined;
     let leadCapture: boolean | undefined;
     let quickReplies: string[] | undefined;
+
+    // <srai>TARGET PATTERN</srai> — extract before stripping tags
+    const sraiMatch = /<srai>([\s\S]*?)<\/srai>/i.exec(text);
+    if (sraiMatch) {
+      srai = sraiMatch[1].trim().toUpperCase();
+      text = text.replace(sraiMatch[0], "").trim();
+    }
 
     // <nav-card label="..." href="..." description="..." auto-navigate="true"/>
     const navMatch =
@@ -145,7 +156,34 @@ export class AimlEngine {
     }
 
     text = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-    return { text, navigationCard, leadCapture, quickReplies };
+    return { text, srai, navigationCard, leadCapture, quickReplies };
+  }
+
+  private resolveSrai(target: string, context: ConversationContext, depth = 0): EngineResponse | null {
+    if (depth > 8) return null; // guard against infinite redirect loops
+    const upper = target.toUpperCase();
+    for (const rule of this.rules) {
+      const m = rule.patternRegex.exec(upper);
+      if (m) {
+        if (rule.srai) {
+          return this.resolveSrai(rule.srai, context, depth + 1);
+        }
+        let text = rule.template;
+        const stars = m.slice(1).map((s) => s?.toLowerCase() ?? "");
+        text = text.replace(/<star\/>/gi, stars[0] ?? "");
+        text = text.replace(/<star index="(\d+)"\/>/gi, (_, n: string) => stars[parseInt(n, 10) - 1] ?? "");
+        const built = this.builder.build(text, context);
+        return {
+          text: built.text,
+          navigationCard: rule.navigationCard,
+          leadCapture: rule.leadCapture,
+          quickReplies: rule.quickReplies,
+          isFallback: rule.source === "fallback.aiml",
+          matchedPattern: rule.pattern,
+        };
+      }
+    }
+    return null;
   }
 
   private patternToRegex(pattern: string): RegExp {
@@ -203,6 +241,15 @@ export class AimlEngine {
         text,
         quickReplies: ["Start a commission", "Pricing", "How it works", "Contact the team"],
       };
+    }
+
+    // Resolve <srai> redirects before building the response
+    if (matched.srai) {
+      const sraiResult = this.resolveSrai(matched.srai, context);
+      if (sraiResult) {
+        context.addTurn("bot", sraiResult.text);
+        return sraiResult;
+      }
     }
 
     let text = matched.template;
