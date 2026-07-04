@@ -103,4 +103,13 @@ export async function kvGetFallbacks(): Promise<KVFallback[]> {
   }
 }
 
+export async function kvClearFallbacks(): Promise<void> {
+  if (!redis) return;
+  try {
+    await redis.del(KEYS.fallbacks);
+  } catch (e) {
+    console.error("[kv:clear:fallbacks]", e);
+  }
+}
+
 export { KV_AVAILABLE };

@@ -1,0 +1,97 @@
+name: Implement Concierge Fix
+
+# Triggers when you add the "approved" label to a "concierge-fix" issue
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  implement:
+    # Only run when the label added is "approved" AND the issue has "concierge-fix"
+    if: |
+      github.event.label.name == 'approved' &&
+      contains(toJson(github.event.issue.labels), 'concierge-fix')
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # push commits
+      issues: write        # comment on and close the issue
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Configure git
+        run: |
+          git config user.name "Brass Note Concierge Bot"
+          git config user.email "bot@brassnotestudios.com"
+
+      - name: Implement fix document
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Write the approved fix document to a temp file so Claude can read it
+          echo "$ISSUE_BODY" > /tmp/fix-document.md
+
+          # Run Claude Code non-interactively to implement the patterns
+          claude --print \
+            --allowedTools "Read,Edit,Write,Bash" \
+            "You are implementing an approved concierge fix document for Brass Note Studios.
+
+          The fix document is at /tmp/fix-document.md — read it now.
+
+          Instructions:
+          1. Read /tmp/fix-document.md carefully
+          2. For each theme in the document, add the suggested AIML <category> blocks to the correct file in chatbot/aiml/
+          3. Do NOT change any existing patterns — only append new ones
+          4. Do NOT change any prices or add any subscription content
+          5. Follow the file guide in the document (pricing.aiml, commissions.aiml, etc.)
+          6. After editing, run: git add chatbot/aiml/ && git commit -m 'feat(concierge): implement fix document from issue #$ISSUE_NUMBER'
+          7. Then run: git push origin main
+
+          Issue title for reference: $ISSUE_TITLE"
+
+      - name: Comment on issue
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '✅ **Implemented.** The AIML patterns from this fix document have been committed to `main` and will be live after the next Vercel deploy (usually ~90 seconds).'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '❌ **Implementation failed.** Check the [Actions log](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details. The issue remains open — fix the error and re-add the `approved` label to retry.'
+            });
