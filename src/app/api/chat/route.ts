@@ -27,7 +27,7 @@ function appendLog(filename: string, entry: unknown) {
   } catch { /* read-only in serverless — console.log is the fallback */ }
 }
 
-function logConversation(
+async function logConversation(
   sessionId: string,
   userMsg: string,
   botResponse: string,
@@ -46,7 +46,7 @@ function logConversation(
   };
   console.log("[conversation]", JSON.stringify(entry));
   appendLog("conversations.jsonl", entry);
-  void kvTrackConversation(entry);
+  await kvTrackConversation(entry);
 
   if (isFallback) {
     const fallbackEntry = { ts: entry.ts, sessionId, userMsg, pageContext };
@@ -91,11 +91,11 @@ export async function POST(req: NextRequest) {
     // __FORM_WALK__ template signals form walk trigger via AIML pattern
     if (response.text === "__FORM_WALK__") {
       const fwResponse = eng.startFormWalk(context);
-      logConversation(sessionId, message, fwResponse.text, false, pageContext);
+      await logConversation(sessionId, message, fwResponse.text, false, pageContext);
       return NextResponse.json({ ...fwResponse, sessionId });
     }
 
-    logConversation(
+    await logConversation(
       sessionId,
       message,
       response.text,
