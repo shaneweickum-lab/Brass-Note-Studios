@@ -70,4 +70,135 @@
     <template>Our founders bring 30+ years of combined experience as musicians and songwriters, and over a decade in sound production and engineering. That depth of knowledge guides every commission — from lyric craft to final mix.</template>
   </category>
 
+  <!-- ── Pattern widening → srai to WHAT IS BRASS NOTE STUDIOS ─────────── -->
+
+  <category>
+    <pattern>WHAT IS THIS</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO YOU DO</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BRASS NOTE</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT BRASS NOTE STUDIOS</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE YOU</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES BRASS NOTE STUDIOS DO</pattern>
+    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME MORE ABOUT THE STUDIO</pattern>
+    <template><srai>TELL ME ABOUT THE STUDIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>* FOUNDERS *</pattern>
+    <template><srai>WHO ARE THE FOUNDERS</srai></template>
+  </category>
+
+  <!-- ── Quality and samples ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS THE QUALITY GOOD</pattern>
+    <template>Every Brass Note Studios commission is produced to broadcast standards — the same quality you'd hear on major streaming platforms. We bring real musical expertise to every lyric, arrangement, and mix, and our three-round revision process ensures the result is exactly what you envisioned. Listen to examples in our portfolio to hear for yourself.
+      <nav-card label="Hear Our Work" href="/music" description="Commissioned portfolio"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WILL IT SOUND PROFESSIONAL</pattern>
+    <template><srai>IS THE QUALITY GOOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>WILL IT SOUND GOOD</pattern>
+    <template><srai>IS THE QUALITY GOOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW GOOD IS THE QUALITY</pattern>
+    <template><srai>IS THE QUALITY GOOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I TRUST THE QUALITY</pattern>
+    <template>Our portfolio speaks to the standard we hold every commission to — broadcast-ready, emotionally intentional, and built around your story. Every package also includes three revision rounds, so we don't deliver until the song is genuinely right.
+      <nav-card label="Listen to Our Work" href="/music" description="Commissioned portfolio"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I KNOW IT WILL BE GOOD</pattern>
+    <template><srai>CAN I TRUST THE QUALITY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I HEAR SAMPLES</pattern>
+    <template>Our commissioned portfolio is available on the Music page — you can listen to a range of styles and occasions to get a sense of the work we produce. Every commission is original and built entirely around its client's story.
+      <nav-card label="Music Portfolio" href="/music" description="Hear commissioned work"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE EXAMPLES</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHERE CAN I HEAR YOUR WORK</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I LISTEN TO YOUR WORK</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <!-- ── Real music / AI transparency ───────────────────────────────────── -->
+
+  <category>
+    <pattern>IS THIS REAL MUSIC</pattern>
+    <template>Your commission begins with genuine human artistry — we write the lyrics, shape the narrative, and direct the arrangement around your story. We use Suno AI as part of our production toolkit, which allows us to deliver rich, broadcast-quality arrangements efficiently. The creativity, intention, and emotional direction are entirely ours.
+      <nav-card label="About Our Process" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THE MUSIC REAL</pattern>
+    <template><srai>IS THIS REAL MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS AI MUSIC</pattern>
+    <template><srai>IS THIS REAL MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS AI GENERATED</pattern>
+    <template><srai>IS THIS REAL MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DOES SUNO WORK</pattern>
+    <template>Suno AI generates rich musical arrangements from creative direction we provide — think of it as an extraordinarily capable instrument in our hands. We write the lyrics, define the structure and emotional arc, and use Suno to bring the production to life at broadcast quality. The artistic vision is always ours; Suno is the means of execution.
+      <nav-card label="Our Approach" href="/about"/>
+    </template>
+  </category>
+
 </aiml>

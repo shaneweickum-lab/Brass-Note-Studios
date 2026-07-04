@@ -147,4 +147,91 @@
     </template>
   </category>
 
+  <!-- ── Response time ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW QUICKLY DO YOU RESPOND</pattern>
+    <template>We respond to all inquiries within one business day. Once your commission is underway, we maintain regular communication throughout the process — you'll always know where your song stands.
+      <nav-card label="Send an Inquiry" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHEN WILL YOU GET BACK TO ME</pattern>
+    <template><srai>HOW QUICKLY DO YOU RESPOND</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW FAST DO YOU RESPOND</pattern>
+    <template><srai>HOW QUICKLY DO YOU RESPOND</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG UNTIL I HEAR BACK</pattern>
+    <template><srai>HOW QUICKLY DO YOU RESPOND</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG DOES IT TAKE TO HEAR BACK</pattern>
+    <template><srai>HOW QUICKLY DO YOU RESPOND</srai></template>
+  </category>
+
+  <!-- ── Speak to a person widening ─────────────────────────────────────── -->
+
+  <category>
+    <pattern>I WANT TO SPEAK TO SOMEONE</pattern>
+    <template><srai>I WANT TO TALK TO SOMEONE</srai></template>
+  </category>
+
+  <category>
+    <pattern>I WANT TO SPEAK TO A HUMAN</pattern>
+    <template><srai>CAN I TALK TO A REAL PERSON</srai></template>
+  </category>
+
+  <category>
+    <pattern>I WANT TO SPEAK TO A PERSON</pattern>
+    <template><srai>CAN I TALK TO A REAL PERSON</srai></template>
+  </category>
+
+  <category>
+    <pattern>SPEAK TO A HUMAN</pattern>
+    <template><srai>CAN I TALK TO A REAL PERSON</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I TALK TO A HUMAN</pattern>
+    <template><srai>CAN I TALK TO A REAL PERSON</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I SCHEDULE A CALL</pattern>
+    <template>Submit your inquiry through our contact form and we'll schedule a discovery call — a focused one-on-one conversation about your vision and what we can create together.
+      <nav-card label="Contact Us" href="/contact" description="Request a call"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I CALL YOU</pattern>
+    <template>We don't list a public phone number, but we schedule discovery calls for every commission inquiry. Reach out through our contact form and we'll set something up within one business day.
+      <nav-card label="Contact Form" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE A PHONE NUMBER</pattern>
+    <template><srai>CAN I CALL YOU</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE AN EMAIL ADDRESS</pattern>
+    <template>The best way to reach us is through our contact form — it routes directly to our team and we respond within one business day.
+      <nav-card label="Contact Form" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR EMAIL ADDRESS</pattern>
+    <template><srai>DO YOU HAVE AN EMAIL ADDRESS</srai></template>
+  </category>
+
 </aiml>

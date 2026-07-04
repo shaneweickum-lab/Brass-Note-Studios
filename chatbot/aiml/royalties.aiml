@@ -76,4 +76,122 @@
     <template>PRO stands for Performing Rights Organization — bodies like ASCAP, BMI, or SESAC that collect royalties when your music is performed or broadcast publicly. We handle registration on your behalf so that your royalties are collected automatically.</template>
   </category>
 
+  <!-- ── Streaming / platform rights ────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I PUT IT ON SPOTIFY</pattern>
+    <template>Your commission includes full commercial rights — Spotify, Apple Music, YouTube Music, and all major streaming platforms are covered. Your 80% royalty share applies to all streaming revenue, and we handle PRO registration so those royalties flow automatically.</template>
+  </category>
+
+  <category>
+    <pattern>CAN I STREAM IT</pattern>
+    <template><srai>CAN I USE THE SONG COMMERCIALLY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I RELEASE IT</pattern>
+    <template><srai>CAN I USE THE SONG COMMERCIALLY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I DISTRIBUTE IT</pattern>
+    <template><srai>CAN I USE THE SONG COMMERCIALLY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I DO WHAT I WANT WITH IT</pattern>
+    <template><srai>CAN I SELL THE SONG</srai></template>
+  </category>
+
+  <!-- ── Royalty widening ────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHO OWNS THE SONG</pattern>
+    <template><srai>WHO OWNS THE RIGHTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHO OWNS MY SONG</pattern>
+    <template><srai>WHO OWNS THE RIGHTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I OWN THE SONG</pattern>
+    <template><srai>DO I OWN THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WILL I OWN THE SONG</pattern>
+    <template><srai>DO I OWN THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS IT MY SONG</pattern>
+    <template><srai>DO I OWN THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHO GETS THE ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH OF THE ROYALTIES DO I KEEP</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE ROYALTY SPLIT</pattern>
+    <template><srai>ROYALTY SPLIT</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DOES THE ROYALTY SPLIT WORK</pattern>
+    <template><srai>HOW DO ROYALTIES WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>STREAMING RIGHTS</pattern>
+    <template><srai>HOW DO ROYALTIES WORK</srai></template>
+  </category>
+
+  <!-- ── Sync and licensing ──────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>SYNC RIGHTS</pattern>
+    <template>Sync licensing — placing your song in film, TV, ads, or video content — is covered under your commercial rights. Your 80% royalty share applies to any sync licensing deals. We handle PRO registration so your royalties flow correctly from every sync placement.</template>
+  </category>
+
+  <category>
+    <pattern>* SYNC *</pattern>
+    <template><srai>SYNC RIGHTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>* LICENSING *</pattern>
+    <template>Your commission includes full commercial rights — streaming, sync licensing, broadcast, social media, and live performance. Your 80% royalty share applies to all of these. We handle PRO registration so your licensing revenue flows automatically.</template>
+  </category>
+
+  <!-- ── PRO and rights orgs ────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS ASCAP</pattern>
+    <template><srai>WHAT IS PRO REGISTRATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BMI</pattern>
+    <template><srai>WHAT IS PRO REGISTRATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU REGISTER WITH ASCAP</pattern>
+    <template><srai>WHAT IS PRO REGISTRATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU REGISTER WITH BMI</pattern>
+    <template><srai>WHAT IS PRO REGISTRATION</srai></template>
+  </category>
+
 </aiml>

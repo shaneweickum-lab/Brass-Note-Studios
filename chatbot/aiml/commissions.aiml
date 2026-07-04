@@ -142,4 +142,419 @@
     </template>
   </category>
 
+  <category>
+    <pattern>WHAT INFORMATION DO YOU NEED FROM ME</pattern>
+    <template><srai>WHAT INFORMATION DO YOU NEED</srai></template>
+  </category>
+
+  <!-- ── Commission process widening ────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW DOES IT WORK</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE PROCESS</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT HAPPENS AFTER I ORDER</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT HAPPENS NEXT</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE STEPS</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WALK ME THROUGH THE PROCESS</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>STEP BY STEP</pattern>
+    <template><srai>HOW DO COMMISSIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO I DO FIRST</pattern>
+    <template><srai>HOW DO I COMMISSION A SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I START</pattern>
+    <template><srai>HOW DO I COMMISSION A SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I ORDER A SONG</pattern>
+    <template><srai>HOW DO I COMMISSION A SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I GET A SONG</pattern>
+    <template><srai>HOW DO I COMMISSION A SONG</srai></template>
+  </category>
+
+  <!-- ── Gifting ─────────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I GIVE THIS AS A GIFT</pattern>
+    <template>A commissioned song makes one of the most meaningful gifts imaginable — something entirely original that no store could offer. You provide the details about the person being celebrated, we craft and produce the song, and you present the finished recording as your gift. We can also keep the process entirely off their radar if you'd like it to be a surprise.
+      <nav-card label="Commission a Gift Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A GOOD GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>GIFT IDEA</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>BUY AS A GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I BUY THIS AS A GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>GIFT SONG</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <!-- ── Surprise gifting ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU KEEP IT A SURPRISE</pattern>
+    <template>Entirely. You supply all the details about the person being celebrated, and we craft the song around what you share — the recipient has no idea it's coming until you present it. It's one of the most intimate surprises you can give.
+    </template>
+  </category>
+
+  <category>
+    <pattern>DOES THE PERSON NEED TO BE INVOLVED</pattern>
+    <template><srai>CAN YOU KEEP IT A SURPRISE</srai></template>
+  </category>
+
+  <category>
+    <pattern>SURPRISE GIFT</pattern>
+    <template><srai>CAN YOU KEEP IT A SURPRISE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN IT BE A SURPRISE</pattern>
+    <template><srai>CAN YOU KEEP IT A SURPRISE</srai></template>
+  </category>
+
+  <!-- ── Deadline and rush ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I NEED IT SOON</pattern>
+    <template>Rush delivery is available for all package sizes — just mention your deadline in your inquiry and we'll confirm studio availability. Our standard turnaround is 2–4 weeks for a single; expedited options can bring that down significantly depending on the timeline.
+      <nav-card label="Start Your Inquiry" href="/contact" description="Mention your deadline in the form"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I HAVE A DEADLINE</pattern>
+    <template><srai>I NEED IT SOON</srai></template>
+  </category>
+
+  <category>
+    <pattern>RUSH ORDER</pattern>
+    <template><srai>DO YOU OFFER EXPEDITED DELIVERY</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW FAST CAN YOU DO IT</pattern>
+    <template><srai>I NEED IT SOON</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU RUSH</pattern>
+    <template><srai>DO YOU OFFER EXPEDITED DELIVERY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO IT FASTER</pattern>
+    <template><srai>DO YOU OFFER EXPEDITED DELIVERY</srai></template>
+  </category>
+
+  <category>
+    <pattern>I NEED THIS FAST</pattern>
+    <template><srai>I NEED IT SOON</srai></template>
+  </category>
+
+  <category>
+    <pattern>I NEED THIS ASAP</pattern>
+    <template><srai>I NEED IT SOON</srai></template>
+  </category>
+
+  <!-- ── File delivery format ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT FORMAT DO I GET</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW ARE THE FILES DELIVERED</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I GET AN MP3</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I GET A WAV</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I RECEIVE THE SONG</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I DOWNLOAD THE SONG</pattern>
+    <template>We deliver your commission as broadcast-ready WAV and MP3 files. Once complete, we send you a secure download link — no special software required. Stems (individual separated tracks) are available as an optional add-on if you need maximum flexibility.</template>
+  </category>
+
+  <!-- ── Social media use ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I USE IT ON SOCIAL MEDIA</pattern>
+    <template>Your commission includes full commercial rights covering all major social media platforms — YouTube, Instagram, TikTok, Facebook, and more. Your 80% royalty share applies to any monetized use as well. We handle PRO registration so your royalties are collected automatically from day one.</template>
+  </category>
+
+  <category>
+    <pattern>CAN I POST IT ON YOUTUBE</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT ON YOUTUBE</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT ON TIKTOK</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT ON INSTAGRAM</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I POST IT ON SOCIAL MEDIA</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>SOCIAL MEDIA</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <!-- ── Language ────────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU WRITE IN ANOTHER LANGUAGE</pattern>
+    <template>Our primary catalog is crafted in English, though we can discuss other languages depending on the project. Reach out through our inquiry form and share your language requirement — we'll let you know what is possible for your commission.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO OTHER LANGUAGES</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO SPANISH</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU WRITE IN SPANISH</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO OTHER LANGUAGES</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <!-- ── Organization and business commissions ──────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU WORK WITH BUSINESSES</pattern>
+    <template><srai>ORGANIZATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN A BUSINESS COMMISSION</pattern>
+    <template><srai>ORGANIZATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN A NONPROFIT COMMISSION</pattern>
+    <template><srai>ORGANIZATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>WE ARE A COMPANY</pattern>
+    <template><srai>ORGANIZATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>WE ARE A BUSINESS</pattern>
+    <template><srai>ORGANIZATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>CORPORATE SONG</pattern>
+    <template><srai>ORGANIZATION</srai></template>
+  </category>
+
+  <!-- ── Jingles ─────────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU DO JINGLES</pattern>
+    <template>Jingles and brand anthems fall under our Organization Commissions — we write catchy, on-brand audio identity pieces built around your business at every touchpoint. Tell us about your brand in the inquiry form and we'll craft the right sound for you.
+      <nav-card label="Organization Commissions" href="/contact?service=organization" description="Brand music and jingles"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU MAKE A JINGLE</pattern>
+    <template><srai>DO YOU DO JINGLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>JINGLE</pattern>
+    <template><srai>DO YOU DO JINGLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>JINGLE FOR MY BUSINESS</pattern>
+    <template><srai>DO YOU DO JINGLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>BRAND MUSIC</pattern>
+    <template><srai>DO YOU DO JINGLES</srai></template>
+  </category>
+
+  <!-- ── Genre widening ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT GENRES</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT STYLES</pattern>
+    <template><srai>WHAT STYLES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO COUNTRY</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO GOSPEL</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO RAP</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO POP</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO RB</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <!-- ── Differentiation ────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW ARE YOU DIFFERENT</pattern>
+    <template>Brass Note Studios is a full-service atelier — not a marketplace or a prompt generator. You work with a dedicated team of songwriters and producers who shape every element of your commission around your story. The result is an original, emotionally intentional piece that could never come from a template or a gig listing alone.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT MAKES YOU DIFFERENT</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY NOT USE FIVERR</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT MAKES YOU SPECIAL</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY CHOOSE YOU</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT</srai></template>
+  </category>
+
+  <!-- ── Worth it ────────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS IT WORTH IT</pattern>
+    <template>A Brass Note Studios commission is a permanent, original piece of art created specifically for you or your organization — something that can be streamed, performed, and treasured for years. Many of our clients say it was the most meaningful gift they have ever given or received. The real question is whether the moment deserves something truly original.
+      <nav-card label="Explore Commissions" href="/services"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS IT WORTH THE PRICE</pattern>
+    <template><srai>IS IT WORTH IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY SHOULD I PAY FOR THIS</pattern>
+    <template><srai>IS IT WORTH IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS IT WORTH IT FOR A GIFT</pattern>
+    <template><srai>IS IT WORTH IT</srai></template>
+  </category>
+
 </aiml>

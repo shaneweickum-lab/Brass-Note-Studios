@@ -41,4 +41,95 @@
     <template>After we deliver the first draft, you review it and send detailed feedback. We incorporate your notes and deliver a revised version. This cycle repeats up to 3 times at no extra cost. After that, additional rounds are $25 each.</template>
   </category>
 
+  <!-- ── Refund policy ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU OFFER REFUNDS</pattern>
+    <template>We don't offer refunds once production is underway — but that's exactly why we include three rounds of revisions at no extra charge. Our goal is to make the song genuinely right for you, and we keep working until it is. If you have concerns at any stage, reach out and we'll address them directly.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR REFUND POLICY</pattern>
+    <template><srai>DO YOU OFFER REFUNDS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I GET A REFUND</pattern>
+    <template><srai>DO YOU OFFER REFUNDS</srai></template>
+  </category>
+
+  <category>
+    <pattern>MONEY BACK GUARANTEE</pattern>
+    <template><srai>DO YOU OFFER REFUNDS</srai></template>
+  </category>
+
+  <category>
+    <pattern>MONEY BACK</pattern>
+    <template><srai>DO YOU OFFER REFUNDS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I AM NOT SATISFIED</pattern>
+    <template>Your satisfaction is why every commission includes three revision rounds — we revise until the song truly reflects your vision. If at any point you're concerned about the direction, reach out directly and we'll make it right.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>How do revisions work?</reply></quick-replies>
+    </template>
+  </category>
+
+  <!-- ── Revision widening ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU DO UNLIMITED REVISIONS</pattern>
+    <template>We include three revision rounds with every commission at no extra charge — that covers the vast majority of refinements. If you need more, additional rounds are available at $25 each. We find that with clear feedback and our discovery process, three rounds is more than enough to get the song exactly right.</template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY ROUNDS OF REVISIONS</pattern>
+    <template><srai>HOW MANY REVISIONS</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY TIMES CAN I MAKE CHANGES</pattern>
+    <template><srai>HOW MANY REVISIONS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I REQUEST CHANGES</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I CHANGE THE LYRICS</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I CHANGE THE GENRE</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I CHANGE THE STYLE</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I WANT SOMETHING DIFFERENT</pattern>
+    <template><srai>WHAT IF I DO NOT LIKE THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I HATE IT</pattern>
+    <template><srai>WHAT IF I DO NOT LIKE THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I AM UNHAPPY</pattern>
+    <template><srai>WHAT IF I DO NOT LIKE THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I DO NOT LIKE IT</pattern>
+    <template><srai>WHAT IF I DO NOT LIKE THE SONG</srai></template>
+  </category>
+
 </aiml>

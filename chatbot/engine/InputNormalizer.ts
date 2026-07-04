@@ -21,6 +21,43 @@ export class InputNormalizer {
     "when's": "when is",
   };
 
+  // Word-level synonyms applied after contraction expansion.
+  // Maps less-common user phrasings to terms that appear in AIML patterns.
+  private readonly synonyms: Record<string, string> = {
+    // Music object synonyms → "song"
+    "tune": "song",
+    "tunes": "songs",
+    "track": "song",
+    "tracks": "songs",
+    "piece": "song",
+    "pieces": "songs",
+    "ditty": "song",
+    "composition": "song",
+    "compositions": "songs",
+    "melody": "song",
+    "melodies": "songs",
+    // Cost synonyms → "cost"
+    "fee": "cost",
+    "fees": "cost",
+    "rate": "cost",
+    "rates": "cost",
+    "expense": "cost",
+    "expenses": "cost",
+    // Revision synonyms
+    "edit": "revision",
+    "edits": "revisions",
+    "modification": "revision",
+    "modifications": "revisions",
+    // Timeline synonyms → "turnaround"
+    "timeline": "turnaround",
+    "timeframe": "turnaround",
+    // Commission synonyms
+    "order": "commission",
+    "orders": "commissions",
+    "purchase": "commission",
+    "purchases": "commissions",
+  };
+
   normalize(input: string): string {
     let text = input.toLowerCase().trim();
 
@@ -34,6 +71,11 @@ export class InputNormalizer {
 
     // Collapse whitespace
     text = text.replace(/\s+/g, " ").trim();
+
+    // Apply word-level synonyms (word boundary matching)
+    for (const [from, to] of Object.entries(this.synonyms)) {
+      text = text.replace(new RegExp(`\\b${from}\\b`, "g"), to);
+    }
 
     return text;
   }

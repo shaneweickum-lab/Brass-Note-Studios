@@ -113,4 +113,90 @@
     </template>
   </category>
 
+  <!-- ── Off-topic / out-of-scope patterns ──────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE WEATHER</pattern>
+    <template>That falls a bit outside what I'm here for — I'm the dedicated concierge for Brass Note Studios, focused on commissions, pricing, and our production process. Is there anything music-related I can help you with?
+      <quick-replies><reply>Commission a song</reply><reply>Pricing</reply><reply>How it works</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE WEATHER IN *</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME A JOKE</pattern>
+    <template>That falls a bit outside what I'm here for — I'm the dedicated concierge for Brass Note Studios, focused on commissions, pricing, and our production process. Is there anything music-related I can help you with?
+      <quick-replies><reply>Commission a song</reply><reply>Pricing</reply><reply>How it works</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME JOKES</pattern>
+    <template><srai>TELL ME A JOKE</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHO IS THE PRESIDENT</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE NEWS</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT TIME IS IT</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DAY IS IT</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT YEAR IS IT</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WRITE ME A POEM</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME A STORY</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>PLAY A GAME</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I COOK *</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT SHOULD I EAT</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE STOCK PRICE *</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO MY HOMEWORK</pattern>
+    <template><srai>WHAT IS THE WEATHER</srai></template>
+  </category>
+
 </aiml>

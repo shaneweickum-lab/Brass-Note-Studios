@@ -386,4 +386,160 @@ Expedited delivery is subject to studio availability — mention your deadline i
     </template>
   </category>
 
+  <!-- ── IS IT EXPENSIVE / affordability ────────────────────────────────── -->
+
+  <category>
+    <pattern>IS IT EXPENSIVE</pattern>
+    <template>Our commissions are priced to be accessible for the quality delivered — a broadcast-ready original song starts at $199 for individuals and creators, or $299 for organizations. We also discuss payment plans on request for larger packages. Which commission type would you like to explore?
+      <quick-replies><reply>Individual</reply><reply>Organization</reply><reply>Content Creator</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS IT AFFORDABLE</pattern>
+    <template><srai>IS IT EXPENSIVE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I AFFORD IT</pattern>
+    <template><srai>IS IT EXPENSIVE</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS EXPENSIVE</pattern>
+    <template><srai>IS IT EXPENSIVE</srai></template>
+  </category>
+
+  <!-- ── Pattern widening → srai to HOW MUCH DOES IT COST ───────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE PRICING LIKE</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR PRICING</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS IT</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH DOES THIS COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES IT COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO YOU CHARGE</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH DO YOU CHARGE</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR FEE</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE YOUR FEES</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH DOES A SONG COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES A SONG COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH FOR A SONG</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS A CUSTOM SONG</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE PRICE OF A SONG</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE YOUR RATES</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE RATE</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH DOES IT RUN</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES A COMMISSION COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS A COMMISSION</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>COST OF A SONG</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>PRICE OF A SONG</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS THE SINGLE</pattern>
+    <template><srai>HOW MUCH IS A SINGLE</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS THE EP</pattern>
+    <template><srai>HOW MUCH IS AN EP</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS THE LP</pattern>
+    <template><srai>HOW MUCH IS AN LP</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH IS THE ALBUM</pattern>
+    <template><srai>HOW MUCH IS A FULL ALBUM</srai></template>
+  </category>
+
 </aiml>

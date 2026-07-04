@@ -3,8 +3,8 @@
 
   <category>
     <pattern>*</pattern>
-    <template>That's a great question — I want to make sure you get the right answer. Our team would be happy to help directly. Would you like to start a commission inquiry, or is there something specific I can look up for you?
-      <quick-replies><reply>Start a commission</reply><reply>Pricing</reply><reply>How it works</reply><reply>Contact the team</reply></quick-replies>
+    <template>I want to make sure I point you in the right direction. Could you rephrase your question, or let me suggest a starting point?
+      <quick-replies><reply>Commission a song</reply><reply>Pricing</reply><reply>How it works</reply><reply>Contact the team</reply></quick-replies>
     </template>
   </category>
 
