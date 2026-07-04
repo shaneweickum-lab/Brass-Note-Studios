@@ -140,3 +140,12 @@ section:target {
   animation: section-pulse 2.4s ease 0.3s both;
   scroll-margin-top: 6rem;
 }
+
+/* Hide scrollbar but keep scroll behavior */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
