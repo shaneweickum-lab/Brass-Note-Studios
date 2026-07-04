@@ -9,6 +9,7 @@ import LabVisualizer from "@/components/music/LabVisualizer";
 import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
 import AtelierConcierge from "@/components/chatbot/AtelierConcierge";
+import { Analytics } from "@vercel/analytics/next";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
@@ -123,6 +124,7 @@ export default function RootLayout({
           <WelcomeOverlay />
           <AtelierConcierge />
         </PlayerProvider>
+        <Analytics />
       </body>
     </html>
   );
