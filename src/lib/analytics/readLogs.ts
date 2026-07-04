@@ -30,6 +30,17 @@ export function readSessions(): SessionEvent[] {
   return readJsonl<SessionEvent>("sessions.jsonl");
 }
 
+export interface PageView {
+  ts: string;
+  path: string;
+  sessionId: string;
+  referrer?: string;
+}
+
+export function readPageViews(): PageView[] {
+  return readJsonl<PageView>("pageviews.jsonl");
+}
+
 export function readLeads(): Lead[] {
   const filePath = path.join(process.cwd(), "chatbot", "logs", "leads.json");
   if (!fs.existsSync(filePath)) return [];

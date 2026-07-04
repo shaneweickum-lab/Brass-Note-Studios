@@ -10,6 +10,7 @@ import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 import ScoreCircuitBackground from "@/components/ui/ScoreCircuitBackground";
 import AtelierConcierge from "@/components/chatbot/AtelierConcierge";
 import { Analytics } from "@vercel/analytics/next";
+import PageViewTracker from "@/components/analytics/PageViewTracker";
 import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
@@ -125,6 +126,7 @@ export default function RootLayout({
           <AtelierConcierge />
         </PlayerProvider>
         <Analytics />
+        <PageViewTracker />
       </body>
     </html>
   );

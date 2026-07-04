@@ -1,99 +1,98 @@
 import type { Metadata } from "next";
-import { readConversations, readSessions } from "@/lib/analytics/readLogs";
+import { readPageViews } from "@/lib/analytics/readLogs";
 import StatCard from "@/components/analytics/StatCard";
 
 export const metadata: Metadata = { title: "Website Analytics" };
 export const dynamic = "force-dynamic";
 
 export default function WebsiteAnalyticsPage() {
-  const conversations = readConversations();
-  const sessions = readSessions();
+  const pageViews = readPageViews();
 
-  // Page engagement derived from concierge context
-  const pageMap = new Map<string, { messages: number; sessions: number }>();
-  for (const c of conversations) {
-    const pg = c.pageContext || "/";
-    if (!pageMap.has(pg)) pageMap.set(pg, { messages: 0, sessions: 0 });
-    pageMap.get(pg)!.messages++;
-  }
-  for (const s of sessions) {
-    const pg = s.pageContext || "/";
-    if (!pageMap.has(pg)) pageMap.set(pg, { messages: 0, sessions: 0 });
-    pageMap.get(pg)!.sessions++;
+  const totalViews = pageViews.length;
+  const uniqueVisitors = new Set(pageViews.map((p) => p.sessionId)).size;
+
+  // By page
+  const pageMap = new Map<string, number>();
+  for (const pv of pageViews) {
+    pageMap.set(pv.path, (pageMap.get(pv.path) ?? 0) + 1);
   }
   const byPage = Array.from(pageMap.entries())
-    .map(([page, { messages, sessions }]) => ({ page, messages, sessions }))
-    .sort((a, b) => b.messages - a.messages);
+    .map(([page, views]) => ({ page, views }))
+    .sort((a, b) => b.views - a.views);
 
-  const totalMessages = conversations.length;
-  const uniquePages = byPage.length;
-  const maxMessages = byPage[0]?.messages ?? 1;
+  // Last 30 days daily
+  const dailyMap = new Map<string, number>();
+  for (const pv of pageViews) {
+    const d = pv.ts.slice(0, 10);
+    dailyMap.set(d, (dailyMap.get(d) ?? 0) + 1);
+  }
+  const daily = Array.from(dailyMap.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .slice(-30);
+
+  const maxViews = byPage[0]?.views ?? 1;
+  const dailyMax = Math.max(...daily.map(([, v]) => v), 1);
 
   return (
     <div className="flex flex-col gap-10">
       <div>
         <h1 className="font-display text-3xl text-text-base mb-1">Website Analytics</h1>
-        <p className="text-text-subtle font-body text-sm">Page engagement via concierge activity</p>
+        <p className="text-text-subtle font-body text-sm">Page views tracked by BNSignal — last 30 days</p>
       </div>
 
-      {/* Vercel dashboard link */}
-      <div className="rounded-lg border border-gold/25 bg-gold/5 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <div className="flex-1">
-          <p className="font-body text-sm text-text-base font-semibold mb-1">Vercel Analytics Dashboard</p>
-          <p className="font-body text-xs text-text-muted">
-            Full traffic data — page views, unique visitors, geography, devices — is available directly in Vercel.
-          </p>
-        </div>
-        <a
-          href="https://vercel.com/dashboard"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold border border-gold/40 rounded px-4 py-2 hover:bg-gold/10 transition-colors"
-        >
-          Open Vercel ↗
-        </a>
-      </div>
-
-      {/* Concierge-derived page stats */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <StatCard label="Concierge Messages" value={totalMessages} />
-        <StatCard label="Pages with Engagement" value={uniquePages} />
-        <StatCard label="Unique Sessions" value={sessions.length || new Set(conversations.map(c => c.sessionId)).size} accent />
+        <StatCard label="Total Page Views" value={totalViews.toLocaleString()} accent />
+        <StatCard label="Unique Visitors" value={uniqueVisitors.toLocaleString()} />
+        <StatCard label="Pages Tracked" value={byPage.length} />
       </div>
 
-      {byPage.length > 0 ? (
+      {/* Daily sparkline */}
+      {daily.length > 0 && (
         <div className="rounded-lg border border-white/10 bg-surface p-6">
-          <h2 className="font-display text-lg text-text-base mb-1">Engagement by Page</h2>
-          <p className="text-text-subtle font-body text-xs mb-6">
-            Which pages visitors were on when they opened the concierge.
-          </p>
-          <div className="flex flex-col gap-3">
-            {byPage.map(({ page, messages, sessions: pgSessions }) => (
-              <div key={page} className="flex items-center gap-3">
-                <span className="font-mono text-xs text-text-muted w-32 shrink-0 truncate">{page}</span>
-                <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-gold/80 to-gold/40 rounded-full"
-                    style={{ width: `${(messages / maxMessages) * 100}%` }}
-                  />
-                </div>
-                <span className="font-body text-xs text-gold w-6 text-right shrink-0">{messages}</span>
-                {pgSessions > 0 && (
-                  <span className="font-body text-xs text-text-subtle w-16 shrink-0">
-                    {pgSessions} session{pgSessions !== 1 ? "s" : ""}
-                  </span>
-                )}
+          <h2 className="font-display text-lg text-text-base mb-4">Daily Views</h2>
+          <div className="flex items-end gap-1 h-20">
+            {daily.map(([date, count]) => (
+              <div key={date} className="flex-1 flex flex-col items-center gap-1 group relative">
+                <div
+                  className="w-full bg-gold/40 hover:bg-gold/70 rounded-t transition-colors"
+                  style={{ height: `${(count / dailyMax) * 100}%`, minHeight: 2 }}
+                />
+                <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-body text-gold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  {count}
+                </span>
               </div>
             ))}
           </div>
-          <p className="text-text-subtle font-body text-xs mt-6">
-            Numbers reflect concierge interactions, not raw page views.
-          </p>
+          <div className="flex justify-between mt-2">
+            <span className="font-body text-[10px] text-text-subtle">{daily[0]?.[0]}</span>
+            <span className="font-body text-[10px] text-text-subtle">{daily[daily.length - 1]?.[0]}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Top pages */}
+      {byPage.length > 0 ? (
+        <div className="rounded-lg border border-white/10 bg-surface p-6">
+          <h2 className="font-display text-lg text-text-base mb-6">Top Pages</h2>
+          <div className="flex flex-col gap-3">
+            {byPage.map(({ page, views }) => (
+              <div key={page} className="flex items-center gap-3">
+                <span className="font-mono text-xs text-text-muted w-36 shrink-0 truncate">{page}</span>
+                <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-gold/80 to-gold/30 rounded-full"
+                    style={{ width: `${(views / maxViews) * 100}%` }}
+                  />
+                </div>
+                <span className="font-body text-xs text-gold w-8 text-right shrink-0">{views}</span>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="rounded-lg border border-white/10 bg-surface p-8 text-center">
           <p className="text-text-subtle font-body text-sm">
-            No concierge engagement data yet. Data populates as visitors use the chat.
+            No page views recorded yet — data populates as visitors browse the site.
           </p>
         </div>
       )}
