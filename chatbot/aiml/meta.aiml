@@ -14,6 +14,16 @@
   </category>
 
   <category>
+    <pattern>* BETA</pattern>
+    <template>That mark simply means I am still being perfected — which, in the spirit of this studio, feels rather fitting. I am a bespoke concierge built entirely by the BNLabs research team, designed from the ground up for Brass Note Studios. No template. No shortcut. Just craft.</template>
+  </category>
+
+  <category>
+    <pattern>BETA *</pattern>
+    <template>That mark simply means I am still being perfected — which, in the spirit of this studio, feels rather fitting. I am a bespoke concierge built entirely by the BNLabs research team, designed from the ground up for Brass Note Studios. No template. No shortcut. Just craft.</template>
+  </category>
+
+  <category>
     <pattern>WHAT DOES BETA MEAN</pattern>
     <template>That mark simply means I am still being perfected — which, in the spirit of this studio, feels rather fitting. I am a bespoke concierge built entirely by the BNLabs research team, designed from the ground up for Brass Note Studios. No template. No shortcut. Just craft.</template>
   </category>
