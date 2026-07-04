@@ -6,9 +6,32 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import GoldDivider from "@/components/ui/GoldDivider";
 
 export const metadata: Metadata = {
-  title: "About — The Story Behind Brass Note Studios",
+  title: "About the Studio",
   description:
-    "Learn about Brass Note Studios — a custom songwriting and production studio dedicated to bringing your stories to life through music.",
+    "Brass Note Studios is a bespoke music atelier where craft, technology, and decades of musicianship converge — giving every story the original song it deserves.",
+  keywords: [
+    "about brass note studios",
+    "bespoke music studio",
+    "custom songwriting studio",
+    "music atelier",
+    "professional music production",
+    "original music studio",
+    "songwriting service",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/about" },
+  openGraph: {
+    title: "About the Studio | Brass Note Studios",
+    description:
+      "A bespoke music atelier where craft, technology, and decades of musicianship converge — giving every story the original song it deserves.",
+    url: "https://brassnotestudios.com/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About the Studio | Brass Note Studios",
+    description:
+      "A bespoke music atelier where craft, technology, and decades of musicianship converge — giving every story the original song it deserves.",
+  },
 };
 
 const values = [

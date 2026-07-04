@@ -8,9 +8,33 @@ import servicesDataRaw from "@/data/services.json";
 import type { ServiceCategory } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing",
+  title: "Commission Pricing & Packages",
   description:
-    "Custom song commissions for individuals, organizations, and content creators. Transparent pricing, flexible packages, and subscription plans for ongoing music needs.",
+    "Bespoke song commissions from $199. Individual, organization, and content creator tiers — each with 3 revision rounds, full commercial rights, and PRO registration included.",
+  keywords: [
+    "custom song pricing",
+    "commission a song cost",
+    "songwriting service price",
+    "music commission packages",
+    "bespoke music pricing",
+    "song commission tiers",
+    "custom song packages",
+    "how much does a custom song cost",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/services" },
+  openGraph: {
+    title: "Commission Pricing & Packages | Brass Note Studios",
+    description:
+      "Bespoke song commissions from $199. Transparent pricing, 3 revision rounds, full commercial rights, and PRO registration on every track.",
+    url: "https://brassnotestudios.com/services",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Commission Pricing & Packages | Brass Note Studios",
+    description:
+      "Bespoke song commissions from $199. Transparent pricing, full commercial rights, and PRO registration included.",
+  },
 };
 
 const iconMap: Record<string, React.ElementType> = { Heart, Mic2, Users, Music };

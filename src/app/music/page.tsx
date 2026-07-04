@@ -8,9 +8,32 @@ import songsData from "@/data/songs.json";
 import type { Song } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Our Work — Commissioned Songs",
+  title: "The Portfolio — Commissioned Songs",
   description:
-    "Browse all commissioned songs written and produced by Brass Note Studios. Each song represents a unique story brought to life through music.",
+    "Every track was composed for a real story. Browse the commissioned work of Brass Note Studios — original songs for weddings, milestones, brands, and content creators.",
+  keywords: [
+    "commissioned songs portfolio",
+    "custom music examples",
+    "original songs bespoke",
+    "custom songwriting portfolio",
+    "music commission examples",
+    "commissioned wedding songs",
+    "branded music examples",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/music" },
+  openGraph: {
+    title: "The Portfolio — Commissioned Songs | Brass Note Studios",
+    description:
+      "Every track was composed for a real story. Browse original songs written and produced for weddings, milestones, brands, and content creators.",
+    url: "https://brassnotestudios.com/music",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Portfolio — Commissioned Songs | Brass Note Studios",
+    description:
+      "Every track was composed for a real story. Browse original commissioned songs for weddings, milestones, and brands.",
+  },
 };
 
 const PILLARS = [

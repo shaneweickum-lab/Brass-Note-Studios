@@ -6,9 +6,33 @@ import ContactFormWrapper from "./ContactFormWrapper";
 import InquiryForm from "@/components/contact/InquiryForm";
 
 export const metadata: Metadata = {
-  title: "Get Your Song — Start Your Project",
+  title: "Commission a Song",
   description:
-    "Ready to commission a custom song? Tell us about your project and we'll get back to you within 1-2 business days.",
+    "Share your story and let the atelier begin. Every Brass Note Studios commission starts here — your occasion, your package, your song. We respond within one business day.",
+  keywords: [
+    "commission a song",
+    "order a custom song",
+    "custom song request",
+    "personalized song order",
+    "bespoke song commission",
+    "start a music commission",
+    "custom song inquiry",
+    "hire a songwriter",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/contact" },
+  openGraph: {
+    title: "Commission a Song | Brass Note Studios",
+    description:
+      "Share your story and let the atelier begin. Your occasion, your package, your song — we respond within one business day.",
+    url: "https://brassnotestudios.com/contact",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Commission a Song | Brass Note Studios",
+    description:
+      "Share your story and let the atelier begin. Your occasion, your package, your song.",
+  },
 };
 
 const expectations = [

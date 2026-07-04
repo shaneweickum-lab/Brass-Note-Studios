@@ -48,8 +48,21 @@ export function generateMetadata({
   const post = getPost(params.slug);
   if (!post) return {};
   return {
-    title: `${post.title} — Brass Note Studios Blog`,
+    title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `https://brassnotestudios.com/blog/${params.slug}` },
+    openGraph: {
+      title: `${post.title} | Brass Note Studios`,
+      description: post.excerpt,
+      type: "article",
+      url: `https://brassnotestudios.com/blog/${params.slug}`,
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | Brass Note Studios`,
+      description: post.excerpt,
+    },
   };
 }
 

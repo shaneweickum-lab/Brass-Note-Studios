@@ -6,9 +6,32 @@ import GoldDivider from "@/components/ui/GoldDivider";
 import LabsBarChart from "@/components/labs/LabsBarChart";
 
 export const metadata: Metadata = {
-  title: "Brass Note Labs — Research & Development",
+  title: "BN Labs — Research & Innovation",
   description:
-    "The research division behind every Brass Note Studios production. Every generation analyzed. Every result documented. Every insight raises the floor.",
+    "The research division of Brass Note Studios. Every generation analyzed, every result documented — the relentless pursuit of musical excellence behind every commission.",
+  keywords: [
+    "bn labs",
+    "brass note labs",
+    "music production research",
+    "AI music research",
+    "music innovation lab",
+    "songwriting research",
+    "music generation analysis",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/labs" },
+  openGraph: {
+    title: "BN Labs — Research & Innovation | Brass Note Studios",
+    description:
+      "The research division of Brass Note Studios. Every generation analyzed, every result documented — the relentless pursuit of musical excellence.",
+    url: "https://brassnotestudios.com/labs",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BN Labs — Research & Innovation | Brass Note Studios",
+    description:
+      "Every generation analyzed, every result documented — the relentless pursuit of musical excellence at Brass Note Studios.",
+  },
 };
 
 // ── Data ─────────────────────────────────────────────────────────────────────

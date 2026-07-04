@@ -9,9 +9,32 @@ import GoldDivider from "@/components/ui/GoldDivider";
 import type { Post } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Blog — Brass Note Studios",
+  title: "The Atelier Journal",
   description:
-    "Insights, stories, and behind-the-scenes content from Brass Note Studios — the craft of custom songwriting and what makes music matter.",
+    "Behind the craft: stories, perspectives, and insights from the Brass Note Studios atelier — on music, songwriting, and the art of capturing life in an original composition.",
+  keywords: [
+    "songwriting blog",
+    "music production insights",
+    "custom song stories",
+    "brass note studios journal",
+    "music atelier blog",
+    "songwriting craft",
+    "original music blog",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/blog" },
+  openGraph: {
+    title: "The Atelier Journal | Brass Note Studios",
+    description:
+      "Behind the craft: stories, perspectives, and insights on music, songwriting, and the art of capturing life in an original composition.",
+    url: "https://brassnotestudios.com/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Atelier Journal | Brass Note Studios",
+    description:
+      "Behind the craft: stories and insights on music, songwriting, and capturing life in an original composition.",
+  },
 };
 
 function getAllPosts(): Post[] {

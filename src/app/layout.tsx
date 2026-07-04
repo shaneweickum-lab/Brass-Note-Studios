@@ -34,12 +34,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://brassnotestudios.com"),
   title: {
-    default: "Brass Note Studios — Custom Songwriting & Production",
+    default: "Brass Note Studios — Bespoke Songwriting & Music Production",
     template: "%s | Brass Note Studios",
   },
   description:
-    "Custom songs written and produced for individuals, organizations, and brands. From personal milestones to brand anthems — every song crafted with heart.",
+    "Commission an original song crafted for your story. Brass Note Studios is a bespoke music atelier serving individuals, organizations, and content creators worldwide.",
+  keywords: [
+    "custom song",
+    "commission a song",
+    "bespoke music production",
+    "custom songwriting service",
+    "personalized song",
+    "original music commission",
+    "custom song gift",
+    "professional songwriting",
+    "commissioned music",
+    "Brass Note Studios",
+  ],
+  robots: { index: true, follow: true },
   icons: {
     icon: [
       { url: "/favicon.ico?v=3", sizes: "32x32", type: "image/x-icon" },
@@ -48,17 +62,18 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
-    title: "Brass Note Studios",
+    title: "Brass Note Studios — Bespoke Songwriting & Music Production",
     description:
-      "Custom songs written and produced for life's meaningful moments, brands, and organizations. Professional quality, personal touch.",
+      "Commission an original song crafted for your story. A bespoke music atelier for individuals, organizations, and content creators.",
     siteName: "Brass Note Studios",
     type: "website",
+    url: "https://brassnotestudios.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brass Note Studios",
+    title: "Brass Note Studios — Bespoke Songwriting & Music Production",
     description:
-      "Custom songs written and produced for life's meaningful moments, brands, and organizations. Professional quality, personal touch.",
+      "Commission an original song crafted for your story. A bespoke music atelier for individuals, organizations, and content creators.",
   },
 };
 
@@ -69,9 +84,35 @@ export default function RootLayout({
 }) {
   const songs = songsData.songs as Song[];
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Brass Note Studios",
+    url: "https://brassnotestudios.com",
+    logo: "https://brassnotestudios.com/favicon.png",
+    description:
+      "Bespoke songwriting and music production studio offering commissioned original songs for individuals, organizations, and content creators.",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      url: "https://brassnotestudios.com/contact",
+    },
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Brass Note Studios",
+    url: "https://brassnotestudios.com",
+  };
+
   return (
     <html lang="en" className={`${cormorant.variable} ${cormorantSC.variable} ${inter.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
+        />
         <ScoreCircuitBackground />
         <PlayerProvider initialSongs={songs}>
           <Navbar />

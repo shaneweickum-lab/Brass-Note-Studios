@@ -13,9 +13,34 @@ import testimonialsData from "@/data/testimonials.json";
 import type { Song, Testimonial } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Brass Note Studios — Custom Songwriting & Production",
+  title: "Brass Note Studios — Bespoke Songwriting & Music Production",
   description:
-    "Custom songs written and produced for life's meaningful moments, brands, and organizations. Professional quality, personal touch.",
+    "Every commission begins with your story. Brass Note Studios writes and produces original songs for life's defining moments — weddings, milestones, brands, and beyond.",
+  keywords: [
+    "custom song",
+    "commission a song",
+    "bespoke music",
+    "custom wedding song",
+    "personalized song gift",
+    "original music composition",
+    "custom songwriting",
+    "music commission",
+    "custom song for special occasion",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com" },
+  openGraph: {
+    title: "Brass Note Studios — Bespoke Songwriting & Music Production",
+    description:
+      "Every commission begins with your story. Original songs written and produced for life's defining moments — weddings, milestones, brands, and beyond.",
+    url: "https://brassnotestudios.com",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brass Note Studios — Bespoke Songwriting & Music Production",
+    description:
+      "Every commission begins with your story. Original songs written and produced for life's defining moments.",
+  },
 };
 
 export default function HomePage() {

@@ -4,9 +4,32 @@ import FloatingParticles from "@/components/ui/FloatingParticles";
 import MethodPageClient from "@/components/method/MethodPageClient";
 
 export const metadata: Metadata = {
-  title: "The Brass Note Method — Brass Note Studios",
+  title: "The Brass Note Method",
   description:
-    "Thirty years of musicianship, reverse engineered into a 10-layer AI prompting framework. The system behind every Brass Note Studios production.",
+    "Three decades of musicianship, reverse-engineered into a 10-layer AI prompting framework. The systematic approach behind every Brass Note Studios original composition.",
+  keywords: [
+    "brass note method",
+    "AI music production framework",
+    "songwriting methodology",
+    "music production system",
+    "AI songwriting process",
+    "bespoke music framework",
+    "professional music composition method",
+  ],
+  alternates: { canonical: "https://brassnotestudios.com/method" },
+  openGraph: {
+    title: "The Brass Note Method | Brass Note Studios",
+    description:
+      "Three decades of musicianship, reverse-engineered into a 10-layer AI prompting framework — the systematic approach behind every original composition.",
+    url: "https://brassnotestudios.com/method",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Brass Note Method | Brass Note Studios",
+    description:
+      "Three decades of musicianship in a 10-layer AI prompting framework — the approach behind every original composition.",
+  },
 };
 
 const STAT_PILLS = [
