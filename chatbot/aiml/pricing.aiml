@@ -32,6 +32,26 @@
   </category>
 
   <category>
+    <pattern>WHAT ARE * PRICES</pattern>
+    <template><srai>WHAT ARE YOUR PRICES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS * PRICE</pattern>
+    <template><srai>WHAT IS THE PRICE</srai></template>
+  </category>
+
+  <category>
+    <pattern>* CURRENT PRICES</pattern>
+    <template><srai>WHAT ARE YOUR PRICES</srai></template>
+  </category>
+
+  <category>
+    <pattern>* CURRENT PRICING</pattern>
+    <template><srai>WHAT ARE YOUR PRICES</srai></template>
+  </category>
+
+  <category>
     <pattern>HOW MUCH</pattern>
     <template>It depends on the commission type. Which applies to you?
       <quick-replies><reply>Individual</reply><reply>Organization</reply><reply>Content Creator</reply></quick-replies>

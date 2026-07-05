@@ -37,8 +37,48 @@
   </category>
 
   <category>
-    <pattern>* ROYALT *</pattern>
+    <pattern>* ROYALTIES *</pattern>
     <template>Our royalty split is 80% to you, 20% to Brass Note Studios — standard for bespoke production houses. You receive full commercial rights: streaming, sync, broadcast, social, and live performance. We handle PRO registration on your behalf.</template>
+  </category>
+
+  <category>
+    <pattern>* ROYALTY *</pattern>
+    <template><srai>ROYALTY</srai></template>
+  </category>
+
+  <category>
+    <pattern>ARE THERE ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>ARE THERE ANY ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>ARE THERE ROYALTIES INVOLVED</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THERE A ROYALTY</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO ROYALTIES APPLY</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WILL I OWE ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I HAVE TO SHARE ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
   </category>
 
   <category>
@@ -117,17 +157,17 @@
 
   <category>
     <pattern>DO I OWN THE SONG</pattern>
-    <template><srai>DO I OWN THE SONG</srai></template>
+    <template><srai>WHO OWNS THE RIGHTS</srai></template>
   </category>
 
   <category>
     <pattern>WILL I OWN THE SONG</pattern>
-    <template><srai>DO I OWN THE SONG</srai></template>
+    <template><srai>WHO OWNS THE RIGHTS</srai></template>
   </category>
 
   <category>
     <pattern>IS IT MY SONG</pattern>
-    <template><srai>DO I OWN THE SONG</srai></template>
+    <template><srai>WHO OWNS THE RIGHTS</srai></template>
   </category>
 
   <category>
