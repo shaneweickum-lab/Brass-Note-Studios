@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AdminNav from "@/components/analytics/AdminNav";
+import PwaRegister from "@/components/analytics/PwaRegister";
 
 export const metadata: Metadata = {
   title: { default: "BNSignal", template: "%s | BNSignal" },
   robots: { index: false, follow: false },
+  manifest: "/manifest.json",
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -59,6 +61,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
         {children}
       </main>
+      <PwaRegister />
     </div>
   );
 }

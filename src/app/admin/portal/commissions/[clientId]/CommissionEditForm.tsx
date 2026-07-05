@@ -1,0 +1,104 @@
+"use client";
+
+import type { Commission, PackageType } from "@/types/commission";
+
+interface Props {
+  commission: Commission;
+  action: (formData: FormData) => Promise<void>;
+}
+
+const PACKAGE_OPTIONS: { value: PackageType; label: string }[] = [
+  { value: "single",       label: "Single"       },
+  { value: "ep",           label: "EP"           },
+  { value: "lp",           label: "LP"           },
+  { value: "album",        label: "Album"        },
+  { value: "organization", label: "Organization" },
+];
+
+const inputClass =
+  "w-full bg-background border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base focus:outline-none focus:border-gold/50 transition-colors";
+
+export default function CommissionEditForm({ commission, action }: Props) {
+  return (
+    <form action={action} className="space-y-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {/* Client Name */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Client Name</label>
+          <input
+            name="clientName"
+            type="text"
+            required
+            defaultValue={commission.clientName}
+            className={inputClass}
+          />
+        </div>
+
+        {/* Email */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Email</label>
+          <input
+            name="email"
+            type="email"
+            required
+            defaultValue={commission.email}
+            className={inputClass}
+          />
+        </div>
+
+        {/* Package Type */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Package Type</label>
+          <select
+            name="packageType"
+            defaultValue={commission.packageType}
+            className={inputClass}
+          >
+            {PACKAGE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Total Songs */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Total Songs</label>
+          <input
+            name="totalSongs"
+            type="number"
+            min={1}
+            max={20}
+            defaultValue={commission.totalSongs}
+            className={inputClass}
+          />
+        </div>
+      </div>
+
+      {/* Notes */}
+      <div className="space-y-1.5">
+        <label className="block font-body text-sm text-text-muted">Notes</label>
+        <textarea
+          name="notes"
+          rows={4}
+          defaultValue={commission.notes}
+          className={`${inputClass} resize-none`}
+          placeholder="Internal notes about this commission…"
+        />
+      </div>
+
+      <div className="flex items-center gap-4 pt-1">
+        <button
+          type="submit"
+          className="px-5 py-2 bg-gold text-background font-body text-sm font-medium rounded hover:bg-gold-light transition-colors"
+        >
+          Save Changes
+        </button>
+        <span className="font-body text-xs text-text-subtle">
+          Last updated: {new Date(commission.updatedAt).toLocaleString()}
+        </span>
+      </div>
+    </form>
+  );
+}

@@ -7,6 +7,7 @@ import DailyLineChart from "@/components/analytics/DailyLineChart";
 import PageBarChart from "@/components/analytics/PageBarChart";
 import PatternTable from "@/components/analytics/PatternTable";
 import FallbackTable from "@/components/analytics/FallbackTable";
+import PwaInstallButton from "@/components/analytics/PwaInstallButton";
 
 export const metadata: Metadata = { title: "Overview" };
 export const dynamic = "force-dynamic";
@@ -26,9 +27,12 @@ export default async function AnalyticsOverviewPage() {
 
   return (
     <div className="flex flex-col gap-10">
-      <div>
-        <h1 className="font-display text-3xl text-text-base mb-1">Overview</h1>
-        <p className="text-text-subtle font-body text-sm">BNSignal — Brass Note Studios analytics</p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="font-display text-3xl text-text-base mb-1">Overview</h1>
+          <p className="text-text-subtle font-body text-sm">BNSignal — Brass Note Studios analytics</p>
+        </div>
+        <PwaInstallButton />
       </div>
 
       {!KV_AVAILABLE && (

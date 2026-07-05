@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText } from "lucide-react";
+import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText, Briefcase } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/admin/analytics",                       label: "Overview",   Icon: LayoutDashboard },
-  { href: "/admin/analytics/website",               label: "Website",    Icon: Globe },
-  { href: "/admin/analytics/concierge",             label: "Benny",      Icon: Bot },
-  { href: "/admin/analytics/journey",               label: "Journey",    Icon: GitMerge },
-  { href: "/admin/analytics/raw",                   label: "Raw Logs",   Icon: ScrollText },
+  { href: "/admin/portal",                          label: "Portal",     Icon: Briefcase,       matchPrefix: true },
+  { href: "/admin/analytics",                       label: "Overview",   Icon: LayoutDashboard, matchPrefix: false },
+  { href: "/admin/analytics/website",               label: "Website",    Icon: Globe,           matchPrefix: false },
+  { href: "/admin/analytics/concierge",             label: "Benny",      Icon: Bot,             matchPrefix: false },
+  { href: "/admin/analytics/journey",               label: "Journey",    Icon: GitMerge,        matchPrefix: false },
+  { href: "/admin/analytics/raw",                   label: "Raw Logs",   Icon: ScrollText,      matchPrefix: false },
 ];
 
 export default function AdminNav() {
@@ -22,8 +23,8 @@ export default function AdminNav() {
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 sm:hidden" />
 
       <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hide pr-6 sm:pr-0">
-        {NAV_ITEMS.map(({ href, label, Icon }) => {
-          const active = pathname === href;
+        {NAV_ITEMS.map(({ href, label, Icon, matchPrefix }) => {
+          const active = matchPrefix ? pathname.startsWith(href) : pathname === href;
           return (
             <Link
               key={href}
