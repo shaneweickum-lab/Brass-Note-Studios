@@ -370,4 +370,16 @@
     <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
   </category>
 
+  <!-- ── Natural royalty question variants ─────────────────────────────── -->
+
+  <category>
+    <pattern>DO I HAVE TO PAY ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I OWE ROYALTIES</pattern>
+    <template><srai>WHAT ARE THE ROYALTIES</srai></template>
+  </category>
+
 </aiml>

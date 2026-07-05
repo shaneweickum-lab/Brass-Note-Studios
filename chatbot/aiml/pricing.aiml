@@ -818,4 +818,67 @@ Expedited delivery is subject to studio availability — mention your deadline i
     <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
   </category>
 
+  <!-- ── Discount patterns (fixing broken * DISCOUNT * wildcard) ────────── -->
+  <!-- * DISCOUNT * requires words BEFORE and AFTER — misses most real queries -->
+
+  <category>
+    <pattern>DO YOU OFFER DISCOUNTS</pattern>
+    <template>We don't currently offer standard discounts, but our pricing is designed to be accessible for the quality delivered. If you have a specific budget or a large multi-song project, feel free to reach out and we can discuss options.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU OFFER A DISCOUNT</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THERE A DISCOUNT</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE DISCOUNTS</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE A DISCOUNT</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I GET A DISCOUNT</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>ANY DISCOUNTS</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>STUDENT DISCOUNT</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>NONPROFIT DISCOUNT</pattern>
+    <template><srai>DO YOU OFFER DISCOUNTS</srai></template>
+  </category>
+
+  <!-- ── Normalized cost forms (fee→cost, rate→cost via InputNormalizer) ── -->
+  <!-- "what are your fees" → normalizes to "WHAT ARE YOUR COST" — no pattern existed -->
+
+  <category>
+    <pattern>WHAT ARE YOUR COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR COST</pattern>
+    <template><srai>HOW MUCH DOES IT COST</srai></template>
+  </category>
+
 </aiml>

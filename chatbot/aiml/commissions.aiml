@@ -1312,4 +1312,35 @@
     <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
   </category>
 
+  <!-- ── Turnaround: normalized from "timeline"/"timeframe" → "turnaround" ── -->
+  <!-- "TURNAROUND TIME" exact pattern misses "what is the turnaround" etc. -->
+
+  <category>
+    <pattern>WHAT IS THE TURNAROUND</pattern>
+    <template><srai>TURNAROUND TIME</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR TURNAROUND</pattern>
+    <template><srai>TURNAROUND TIME</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG IS THE TURNAROUND</pattern>
+    <template><srai>TURNAROUND TIME</srai></template>
+  </category>
+
+  <!-- ── Order synonym: "order" → "commission" via InputNormalizer ─────── -->
+  <!-- Patterns using "ORDER" are never matched; input arrives as "COMMISSION" -->
+
+  <category>
+    <pattern>CAN I COMMISSION MORE SONGS LATER</pattern>
+    <template><srai>CAN I ORDER MORE SONGS LATER</srai></template>
+  </category>
+
+  <category>
+    <pattern>RUSH COMMISSION</pattern>
+    <template><srai>DO YOU OFFER EXPEDITED DELIVERY</srai></template>
+  </category>
+
 </aiml>

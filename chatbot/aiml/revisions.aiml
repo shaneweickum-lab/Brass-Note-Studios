@@ -255,4 +255,80 @@
     <template><srai>WHAT IF IT DOES NOT MATCH THE MOMENT</srai></template>
   </category>
 
+  <!-- ── Wildcard: catch general revision questions ─────────────────────── -->
+
+  <category>
+    <pattern>TELL ME ABOUT REVISIONS</pattern>
+    <template><srai>REVISIONS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE REVISION POLICY</pattern>
+    <template><srai>REVISION POLICY</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY REVISIONS DO I GET</pattern>
+    <template><srai>HOW MANY REVISIONS</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I SUBMIT A REVISION</pattern>
+    <template><srai>HOW DO REVISIONS WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I GIVE FEEDBACK ON A REVISION</pattern>
+    <template><srai>HOW DO REVISIONS WORK</srai></template>
+  </category>
+
+  <!-- ── REVISIONS variants for CHANGES patterns (Type C) ─────────────── -->
+
+  <category>
+    <pattern>CAN I MAKE REVISIONS</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I REQUEST REVISIONS</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I WANT REVISIONS</pattern>
+    <template><srai>WHAT IF I WANT CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I REVISE THE LYRICS</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I REVISE THE GENRE</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I REVISE THE STYLE</pattern>
+    <template><srai>CAN I MAKE CHANGES</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY TIMES CAN I MAKE REVISIONS</pattern>
+    <template><srai>HOW MANY REVISIONS</srai></template>
+  </category>
+
+  <!-- ── Wildcard catch-all: * REVISIONS and REVISIONS * ───────────────── -->
+
+  <category>
+    <pattern>REVISIONS *</pattern>
+    <template><srai>REVISION POLICY</srai></template>
+  </category>
+
+  <category>
+    <pattern>* REVISIONS</pattern>
+    <template><srai>REVISIONS</srai></template>
+  </category>
+
 </aiml>

@@ -224,4 +224,16 @@
     </template>
   </category>
 
+  <!-- ── Labs navigation shorthands ────────────────────────────────────── -->
+
+  <category>
+    <pattern>SHOW ME THE LABS</pattern>
+    <template><srai>LABS</srai></template>
+  </category>
+
+  <category>
+    <pattern>SHOW ME LABS</pattern>
+    <template><srai>LABS</srai></template>
+  </category>
+
 </aiml>

@@ -93,11 +93,6 @@
   </category>
 
   <category>
-    <pattern>WHAT ARE YOU</pattern>
-    <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
-  </category>
-
-  <category>
     <pattern>WHAT DOES BRASS NOTE STUDIOS DO</pattern>
     <template><srai>WHAT IS BRASS NOTE STUDIOS</srai></template>
   </category>
@@ -942,6 +937,13 @@
   <category>
     <pattern>DO YOU ACCEPT INTERNATIONAL CLIENTS</pattern>
     <template><srai>DO YOU WORK WITH INTERNATIONAL CLIENTS</srai></template>
+  </category>
+
+  <!-- ── "About this studio" shorthand ─────────────────────────────────── -->
+
+  <category>
+    <pattern>ABOUT THIS STUDIO</pattern>
+    <template><srai>ABOUT THE STUDIO</srai></template>
   </category>
 
   <!-- ── Currency and international payments ────────────────────────────────── -->
