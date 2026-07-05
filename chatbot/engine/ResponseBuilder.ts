@@ -33,7 +33,7 @@ export class ResponseBuilder {
       );
     }
 
-    text = text.replace(/\{botName\}/g, "The Atelier Concierge");
+    text = text.replace(/\{botName\}/g, "Benny");
 
     return { text };
   }

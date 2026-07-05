@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     if (resend) {
       try {
         await resend.emails.send({
-          from: "Atelier Concierge <concierge@brassnotestudios.com>",
+          from: "Benny · BNAI <concierge@brassnotestudios.com>",
           to: chatbotConfig.LEAD_EMAIL,
           subject: `New Commission Inquiry — ${name}`,
           html: `
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
                 </tr>
               </table>
               <p style="margin-top: 24px; color: #666; font-size: 12px;">
-                Sent by the Brass Note Studios Atelier Concierge
+                Sent by Benny (BNAI) · Brass Note Studios
               </p>
             </div>
           `,

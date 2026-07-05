@@ -115,7 +115,7 @@ export default function AtelierConcierge() {
             : "translate-y-full md:translate-y-0 md:scale-95 md:opacity-0 pointer-events-none"
         )}
         role="dialog"
-        aria-label="Atelier Concierge chat"
+        aria-label="BNAI chat"
         aria-hidden={!open}
         aria-modal={open}
       >

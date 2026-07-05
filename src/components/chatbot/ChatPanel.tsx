@@ -79,14 +79,14 @@ function getGreeting(pageContext?: string): Message {
     return {
       id: "greeting",
       role: "bot",
-      text: "Welcome to Brass Note Studios — a bespoke atelier for original music. I'm the Atelier Concierge, here to help you discover our commissions, hear our portfolio, or start creating something personal. What brings you here today?",
+      text: "Welcome to Brass Note Studios — a bespoke atelier for original music. I'm Benny, here to help you discover our commissions, hear our portfolio, or start creating something personal. What brings you here today?",
       quickReplies: ["Commission a song", "Hear our work", "About the studio"],
     };
   }
   return {
     id: "greeting",
     role: "bot",
-    text: "Welcome to Brass Note Studios — a bespoke atelier for original music. I'm the Atelier Concierge, here to help you explore commissions, pricing, and everything in between. What brings you here today?",
+    text: "Welcome to Brass Note Studios — a bespoke atelier for original music. I'm Benny, here to help you explore commissions, pricing, and everything in between. What brings you here today?",
     quickReplies: ["Commission a song", "View pricing", "About the studio"],
   };
 }
@@ -259,14 +259,14 @@ export default function ChatPanel({
           <div>
             <div className="flex items-center gap-2">
               <p className="font-display text-text-base text-sm font-medium leading-tight">
-                Atelier Concierge
+                Benny
               </p>
               <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-body font-semibold tracking-[0.18em] uppercase bg-gold/15 text-gold border border-gold/35">
                 Beta
               </span>
             </div>
             <p className="text-text-muted text-[10px] font-body tracking-[0.15em] uppercase mt-0.5">
-              Brass Note Studios
+              BNAI · Brass Note Studios
             </p>
           </div>
         </div>

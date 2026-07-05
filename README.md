@@ -103,9 +103,9 @@ A single `<audio>` element lives inside `PlayerProvider` (mounted in `src/app/la
 
 ---
 
-## Atelier Concierge (Chatbot)
+## Benny (BNAI) (Chatbot)
 
-The site includes a custom AIML 2.0 chatbot called **The Atelier Concierge**, accessible as a floating chat panel sitewide. It is a zero-dependency TypeScript implementation — no AIML library is used.
+The site includes a custom AIML 2.0 chatbot called **The Benny (BNAI)**, accessible as a floating chat panel sitewide. It is a zero-dependency TypeScript implementation — no AIML library is used.
 
 ### Engine Files
 
@@ -443,7 +443,7 @@ src/
 │       └── vercel.ts                 # Vercel analytics helper
 ├── middleware.ts                     # HTTP Basic Auth for /admin/* routes
 └── types/index.ts                    # Song, ServiceTier, Testimonial interfaces
-chatbot/                              # (see Atelier Concierge section above)
+chatbot/                              # (see Benny (BNAI) section above)
 src/data/
 ├── songs.json                        # Primary song catalog — edit to add tracks
 ├── services.json

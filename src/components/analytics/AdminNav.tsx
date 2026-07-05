@@ -7,7 +7,7 @@ import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText } from "lucide-react"
 const NAV_ITEMS = [
   { href: "/admin/analytics",                       label: "Overview",   Icon: LayoutDashboard },
   { href: "/admin/analytics/website",               label: "Website",    Icon: Globe },
-  { href: "/admin/analytics/concierge",             label: "Concierge",  Icon: Bot },
+  { href: "/admin/analytics/concierge",             label: "Benny",      Icon: Bot },
   { href: "/admin/analytics/journey",               label: "Journey",    Icon: GitMerge },
   { href: "/admin/analytics/raw",                   label: "Raw Logs",   Icon: ScrollText },
 ];
