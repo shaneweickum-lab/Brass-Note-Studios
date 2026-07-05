@@ -748,4 +748,97 @@
     <template><srai>CAN I HEAR SAMPLES</srai></template>
   </category>
 
+  <!-- ── Success rate / track record ──────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS YOUR SUCCESS RATE</pattern>
+    <template>Every commission we've delivered has been produced to broadcast standards, and our revision process means we stay in the work until the song is genuinely right. We're a small, reputation-driven studio — every project matters personally to us, which is a different kind of assurance than any statistic. Listening to our portfolio is the most honest answer we can offer.
+      <nav-card label="Hear Our Work" href="/music" description="Listen before you commit"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE A TRACK RECORD</pattern>
+    <template><srai>WHAT IS YOUR SUCCESS RATE</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY COMMISSIONS HAVE YOU DONE</pattern>
+    <template><srai>WHAT IS YOUR SUCCESS RATE</srai></template>
+  </category>
+
+  <!-- ── "Have you worked with people like me" ─────────────────────────── -->
+
+  <category>
+    <pattern>HAVE YOU DONE THIS FOR PEOPLE LIKE ME</pattern>
+    <template>Our clients include people who've never commissioned anything in their lives, seasoned music fans, people shopping for a loved one's milestone, business owners building a brand sound, and church leaders looking for an original anthem. The common thread isn't background — it's a moment that deserves more than what a store can offer. Whoever you are, the process starts the same: you bring the story, we build the song.
+      <nav-card label="Commission a Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU WORK WITH REGULAR PEOPLE</pattern>
+    <template><srai>HAVE YOU DONE THIS FOR PEOPLE LIKE ME</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU WORK WITH EVERYDAY PEOPLE</pattern>
+    <template><srai>HAVE YOU DONE THIS FOR PEOPLE LIKE ME</srai></template>
+  </category>
+
+  <!-- ── Confidence in the work ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>ARE YOU CONFIDENT IN YOUR WORK</pattern>
+    <template>Genuinely. Every piece passes through our five-stage production pipeline and is evaluated across six documented quality dimensions before it reaches you. We include three revision rounds not as a safety net but because the work continues until it's right — we wouldn't deliver something we weren't confident in.
+      <nav-card label="Our Production Standard" href="/labs" description="See how we measure quality"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW CONFIDENT ARE YOU</pattern>
+    <template><srai>ARE YOU CONFIDENT IN YOUR WORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU STAND BEHIND YOUR WORK</pattern>
+    <template><srai>ARE YOU CONFIDENT IN YOUR WORK</srai></template>
+  </category>
+
+  <!-- ── Comparison: Udio / other AI music generators ───────────────────── -->
+
+  <category>
+    <pattern>HOW IS THIS DIFFERENT FROM UDIO</pattern>
+    <template>Udio, like Suno, is a generative audio platform — a tool that produces music from prompts. What we offer isn't a different tool; it's the expertise and craft behind it. Thirty years of musicianship, original lyrics written around your specific story, and the Brass Note Method translate into something a direct AI generation simply can't produce: a song that's genuinely about someone.
+      <nav-card label="Our Method" href="/method" description="Thirty years of craft, systematized"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ABOUT UDIO</pattern>
+    <template><srai>HOW IS THIS DIFFERENT FROM UDIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY NOT JUST USE UDIO</pattern>
+    <template><srai>HOW IS THIS DIFFERENT FROM UDIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW ARE YOU DIFFERENT FROM OTHER AI MUSIC TOOLS</pattern>
+    <template>Other AI music tools give you access to the generation. What we bring is thirty years of musicianship, original lyrics written around your specific story, and a documented production framework built to direct the AI toward exactly the right emotional result. The tool is one part of the equation — the songwriting is what makes the commission yours.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW IS THIS DIFFERENT FROM AI SONG GENERATORS</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT FROM OTHER AI MUSIC TOOLS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY SHOULD I CHOOSE YOU OVER OTHER AI MUSIC SERVICES</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT FROM OTHER AI MUSIC TOOLS</srai></template>
+  </category>
+
 </aiml>

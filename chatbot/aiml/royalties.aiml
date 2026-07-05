@@ -194,4 +194,140 @@
     <template><srai>WHAT IS PRO REGISTRATION</srai></template>
   </category>
 
+  <!-- ── Commercial / advertising use ──────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I USE IT IN A COMMERCIAL</pattern>
+    <template>Your commission includes full commercial rights, which covers broadcast advertising — TV commercials, radio spots, and sponsored content are all within scope. Your 80% royalty share applies to any commercial placement, and PRO registration ensures your licensing revenue flows properly from every use.</template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A TV COMMERCIAL</pattern>
+    <template><srai>CAN I USE IT IN A COMMERCIAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A RADIO AD</pattern>
+    <template><srai>CAN I USE IT IN A COMMERCIAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN AN AD</pattern>
+    <template><srai>CAN I USE IT IN A COMMERCIAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT FOR ADVERTISING</pattern>
+    <template><srai>CAN I USE IT IN A COMMERCIAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT FOR A MARKETING CAMPAIGN</pattern>
+    <template><srai>CAN I USE IT IN A COMMERCIAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT FOR MARKETING</pattern>
+    <template><srai>CAN I USE IT IN A COMMERCIAL</srai></template>
+  </category>
+
+  <!-- ── Film / TV / documentary sync ──────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I USE IT IN A FILM</pattern>
+    <template>Sync licensing for film, TV, and documentary projects is fully covered under your commercial rights. You can place your commissioned song in any visual media production, your 80% royalty share applies to all sync revenue, and we handle PRO registration so your placement earnings are captured automatically.</template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A MOVIE</pattern>
+    <template><srai>CAN I USE IT IN A FILM</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A DOCUMENTARY</pattern>
+    <template><srai>CAN I USE IT IN A FILM</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A VIDEO</pattern>
+    <template><srai>CAN I USE IT IN A FILM</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A TV SHOW</pattern>
+    <template><srai>CAN I USE IT IN A FILM</srai></template>
+  </category>
+
+  <!-- ── App / software / game use ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I PUT IT IN MY APP</pattern>
+    <template>Using your commissioned song inside an app, game, or software product is covered under your commercial rights. If the song will be a central feature of the product rather than incidental background use, note that in your inquiry so the licensing terms are documented clearly from the start.
+      <nav-card label="Start Your Inquiry" href="/contact" description="Mention your intended use in the form"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN MY APP</pattern>
+    <template><srai>CAN I PUT IT IN MY APP</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN SOFTWARE</pattern>
+    <template><srai>CAN I PUT IT IN MY APP</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT IN A GAME</pattern>
+    <template><srai>CAN I PUT IT IN MY APP</srai></template>
+  </category>
+
+  <!-- ── Resale / transfer ──────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I RESELL IT</pattern>
+    <template>Reselling or transferring a commissioned song to a third party isn't covered under the standard commercial rights — those entitle you to use the song, not to pass it on. If you're an agency or B2B client sourcing music on behalf of clients, reach out and we can discuss terms for that kind of arrangement.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I RESELL YOUR SONGS</pattern>
+    <template><srai>CAN I RESELL IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I RESELL THE SONG</pattern>
+    <template><srai>CAN I RESELL IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I TRANSFER THE RIGHTS</pattern>
+    <template><srai>CAN I RESELL IT</srai></template>
+  </category>
+
+  <!-- ── Streaming platform shortcuts ──────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I PUT IT ON APPLE MUSIC</pattern>
+    <template><srai>CAN I PUT IT ON SPOTIFY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I RELEASE IT AS A SINGLE</pattern>
+    <template><srai>CAN I PUT IT ON SPOTIFY</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I RELEASE IT ON STREAMING PLATFORMS</pattern>
+    <template><srai>CAN I PUT IT ON SPOTIFY</srai></template>
+  </category>
+
+  <!-- ── Social platform specifics ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I USE IT ON FACEBOOK</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
 </aiml>

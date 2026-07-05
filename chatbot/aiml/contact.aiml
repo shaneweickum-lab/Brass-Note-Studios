@@ -451,4 +451,47 @@
     </template>
   </category>
 
+  <!-- ── How much information is needed ────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU NEED A LOT OF INFORMATION FROM ME</pattern>
+    <template>Not at the inquiry stage — a few sentences about the occasion, the person, and the feeling you're after is enough to open the conversation. The discovery call is where we ask the follow-up questions and build out the full picture together. You don't need a detailed brief before you reach out.
+      <nav-card label="Start Here" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH DO I NEED TO SHARE</pattern>
+    <template><srai>DO YOU NEED A LOT OF INFORMATION FROM ME</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU NEED A LOT FROM ME</pattern>
+    <template><srai>DO YOU NEED A LOT OF INFORMATION FROM ME</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MUCH INFORMATION DO YOU NEED FROM ME</pattern>
+    <template><srai>DO YOU NEED A LOT OF INFORMATION FROM ME</srai></template>
+  </category>
+
+  <!-- ── "Bad at explaining" reassurance ───────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF I AM BAD AT EXPLAINING WHAT I WANT</pattern>
+    <template>Most of our clients feel that way at the start, and it hasn't stopped a single commission from arriving at exactly the right place. The discovery call is specifically designed to draw out what matters — we ask the questions, you respond naturally, and we translate that into creative direction. Articulating it clearly is our job, not yours.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I AM NOT GOOD AT EXPLAINING</pattern>
+    <template><srai>WHAT IF I AM BAD AT EXPLAINING WHAT I WANT</srai></template>
+  </category>
+
+  <category>
+    <pattern>I AM BAD AT EXPLAINING WHAT I WANT</pattern>
+    <template><srai>WHAT IF I AM BAD AT EXPLAINING WHAT I WANT</srai></template>
+  </category>
+
 </aiml>

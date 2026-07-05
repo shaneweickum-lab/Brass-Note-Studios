@@ -685,4 +685,117 @@ Expedited delivery is subject to studio availability — mention your deadline i
     <template><srai>IS THERE A SUBSCRIPTION</srai></template>
   </category>
 
+  <!-- ── Price negotiation ──────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I NEGOTIATE THE PRICE</pattern>
+    <template>Our pricing reflects the quality, craft, and time invested in each commission — it isn't structured for traditional negotiation. That said, if you have a specific budget or a multi-song project in mind, reach out and we'll talk through what's possible. We'd rather find a way to work together than lose a commission to a number.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THE PRICE NEGOTIABLE</pattern>
+    <template><srai>CAN I NEGOTIATE THE PRICE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN WE NEGOTIATE</pattern>
+    <template><srai>CAN I NEGOTIATE THE PRICE</srai></template>
+  </category>
+
+  <!-- ── "I can't afford it" ────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I CANNOT AFFORD IT</pattern>
+    <template>Our single-song commission starts at $199 — and for most occasions, one perfectly crafted song is genuinely all you need. If that's still a stretch right now, payment plans are something we can discuss for larger packages; reach out through the contact form and we'll see what's workable. Our pricing is built to be as accessible as possible for the quality delivered.
+      <nav-card label="Get in Touch" href="/contact" description="Ask about payment options"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I CANNOT AFFORD IT</pattern>
+    <template><srai>I CANNOT AFFORD IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>THIS IS OUT OF MY BUDGET</pattern>
+    <template><srai>I CANNOT AFFORD IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>IT IS TOO EXPENSIVE</pattern>
+    <template><srai>I CANNOT AFFORD IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I CANNOT AFFORD THE FULL PRICE</pattern>
+    <template><srai>I CANNOT AFFORD IT</srai></template>
+  </category>
+
+  <!-- ── Installments / financing ───────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I PAY IN INSTALLMENTS</pattern>
+    <template>Installment arrangements for larger packages are something we can discuss — reach out through the contact form with the scope of your project and your preferred timeline. For single-song commissions, payment is made in full at checkout; larger projects give us more room to find a structure that works for you.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU OFFER FINANCING</pattern>
+    <template><srai>CAN I PAY IN INSTALLMENTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I PAY MONTHLY</pattern>
+    <template><srai>CAN I PAY IN INSTALLMENTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I PAY LATER</pattern>
+    <template>Payment is collected before production begins — standard for bespoke creative work. For larger packages we can sometimes discuss payment structures that fit your situation. Reach out via the contact form and share your project details.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <!-- ── Volume / bulk / corporate pricing ─────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU OFFER VOLUME PRICING</pattern>
+    <template>Volume and multi-project pricing isn't listed on our public page, but it's something we discuss directly with agencies, organizations, and B2B clients with ongoing music needs. Reach out through our contact form with your scope and intended volume and we'll put together a proposal that fits.
+      <nav-card label="Get in Touch" href="/contact" description="Share your volume and use case"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO BULK ORDERS</pattern>
+    <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
+  </category>
+
+  <category>
+    <pattern>BULK PRICING</pattern>
+    <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
+  </category>
+
+  <category>
+    <pattern>CORPORATE PRICING</pattern>
+    <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU OFFER CORPORATE PRICING</pattern>
+    <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE VOLUME DISCOUNTS</pattern>
+    <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO BULK DISCOUNTS</pattern>
+    <template><srai>DO YOU OFFER VOLUME PRICING</srai></template>
+  </category>
+
 </aiml>

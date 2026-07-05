@@ -1022,4 +1022,294 @@
     <template><srai>CAN I PROVIDE A REFERENCE TRACK</srai></template>
   </category>
 
+  <!-- ── Occasion: Retirement ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>RETIREMENT SONG</pattern>
+    <template>A retirement commission is one of the most meaningful milestones we get to mark in music — decades of dedication, relationships built, and a new chapter beginning. We write original lyrics around the person's career, their story, and what this moment means, and produce a full arrangement to honor it properly. Starting at $199.
+      <nav-card label="Commission a Retirement Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>RETIREMENT GIFT</pattern>
+    <template><srai>RETIREMENT SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I GET A RETIREMENT SONG</pattern>
+    <template><srai>RETIREMENT SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR RETIREMENT</pattern>
+    <template><srai>RETIREMENT SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR SOMEONE RETIRING</pattern>
+    <template><srai>RETIREMENT SONG</srai></template>
+  </category>
+
+  <!-- ── Occasion: Mother's Day ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>MOTHERS DAY SONG</pattern>
+    <template>A Mother's Day commission turns one of the year's most significant days into something she'll keep long after it's passed. We write original lyrics around who she is, what she's meant to you, and the specific memories that make her irreplaceable — then produce a full arrangement to match. Starting at $199.
+      <nav-card label="Commission a Mother's Day Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR MOTHERS DAY</pattern>
+    <template><srai>MOTHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>MOTHERS DAY GIFT</pattern>
+    <template><srai>MOTHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A GOOD MOTHERS DAY GIFT</pattern>
+    <template><srai>MOTHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR MY MOM</pattern>
+    <template><srai>MOTHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR MY MOTHER</pattern>
+    <template><srai>MOTHERS DAY SONG</srai></template>
+  </category>
+
+  <!-- ── Occasion: Father's Day ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>FATHERS DAY SONG</pattern>
+    <template>A Father's Day commission gives you a way to say what's often hardest to say out loud. We write original lyrics around who he is to you — his influence, his presence, and the moments that defined the relationship — then produce a full arrangement to honor it. Starting at $199.
+      <nav-card label="Commission a Father's Day Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR FATHERS DAY</pattern>
+    <template><srai>FATHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>FATHERS DAY GIFT</pattern>
+    <template><srai>FATHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A GOOD FATHERS DAY GIFT</pattern>
+    <template><srai>FATHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR MY DAD</pattern>
+    <template><srai>FATHERS DAY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>SONG FOR MY FATHER</pattern>
+    <template><srai>FATHERS DAY SONG</srai></template>
+  </category>
+
+  <!-- ── Occasion: Friend ────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>SONG FOR A FRIEND</pattern>
+    <template>A commissioned song for a friend is one of the rarest gifts imaginable — entirely original, written around who they are and what your friendship means. We craft the lyrics from what you share with us and produce a full arrangement to match. Starting at $199.
+      <nav-card label="Commission a Song for a Friend" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>FRIEND SONG</pattern>
+    <template><srai>SONG FOR A FRIEND</srai></template>
+  </category>
+
+  <!-- ── Gift: occasion-specific "is this a good gift" ─────────────────── -->
+
+  <category>
+    <pattern>IS THIS A GOOD ANNIVERSARY GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A GOOD BIRTHDAY GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A GOOD RETIREMENT GIFT</pattern>
+    <template><srai>CAN I GIVE THIS AS A GIFT</srai></template>
+  </category>
+
+  <!-- ── Gift: name inclusion in lyrics ────────────────────────────────── -->
+
+  <category>
+    <pattern>WILL THE SONG MENTION THEIR NAME</pattern>
+    <template>We can absolutely include the recipient's name — it's one of the details that makes a commissioned song feel unmistakably personal. Just note it in the brief and let us know you'd like it woven in; we'll place it naturally so it feels earned rather than dropped in.
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU INCLUDE THEIR NAME IN THE SONG</pattern>
+    <template><srai>WILL THE SONG MENTION THEIR NAME</srai></template>
+  </category>
+
+  <category>
+    <pattern>WILL THEIR NAME BE IN THE SONG</pattern>
+    <template><srai>WILL THE SONG MENTION THEIR NAME</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU MENTION THEIR NAME</pattern>
+    <template><srai>WILL THE SONG MENTION THEIR NAME</srai></template>
+  </category>
+
+  <!-- ── Gift: writing the brief for someone else ──────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU HELP ME WRITE THE BRIEF</pattern>
+    <template>The brief doesn't need to be polished — just honest. Start with three things: who the song is for, the occasion, and one memory or feeling you want it to carry. The discovery call is where we ask the follow-up questions and fill in everything else together. You don't need it figured out before you reach out.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I DESCRIBE THEM FOR THE BRIEF</pattern>
+    <template><srai>CAN YOU HELP ME WRITE THE BRIEF</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO I WRITE IN THE BRIEF</pattern>
+    <template><srai>CAN YOU HELP ME WRITE THE BRIEF</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I WRITE THE BRIEF</pattern>
+    <template><srai>CAN YOU HELP ME WRITE THE BRIEF</srai></template>
+  </category>
+
+  <!-- ── Timeline: how far in advance ────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW FAR IN ADVANCE SHOULD I ORDER</pattern>
+    <template>For most occasions, ordering 4–6 weeks ahead gives comfortable room for our standard 2–4 week turnaround plus a round or two of revisions. For especially important dates — a wedding, a milestone anniversary, a retirement ceremony — we'd recommend reaching out as early as possible. Mention your date in the inquiry and we'll confirm availability.
+      <nav-card label="Start Your Inquiry" href="/contact" description="Mention your date in the form"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHEN SHOULD I ORDER</pattern>
+    <template><srai>HOW FAR IN ADVANCE SHOULD I ORDER</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW EARLY SHOULD I ORDER</pattern>
+    <template><srai>HOW FAR IN ADVANCE SHOULD I ORDER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE LATEST I CAN ORDER</pattern>
+    <template>With our standard 2–4 week turnaround for a single track, submitting your inquiry at least four weeks before the occasion leaves room for revisions as well. If your date is closer than that, rush delivery options are available — mention your deadline in the inquiry and we'll confirm whether we can accommodate it.
+      <nav-card label="Start Your Inquiry" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE LATEST I CAN ORDER FOR A WEDDING</pattern>
+    <template><srai>WHAT IS THE LATEST I CAN ORDER</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW FAR IN ADVANCE FOR A WEDDING</pattern>
+    <template><srai>HOW FAR IN ADVANCE SHOULD I ORDER</srai></template>
+  </category>
+
+  <!-- ── Gift recipient anxiety: will it be right for them ──────────────── -->
+
+  <category>
+    <pattern>HOW DO I KNOW THE SONG WILL BE RIGHT FOR THEM</pattern>
+    <template>The more you share about the person — their taste, the artists they love, the memories that shaped your relationship — the more precisely we can tailor the song to resonate with them specifically. The discovery call draws all of that out. And if the first draft needs refinement, the three revision rounds give us the space to get it exactly right before the moment arrives.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>Can I provide a reference track?</reply></quick-replies>
+    </template>
+  </category>
+
+  <!-- ── "What if it makes them cry" ──────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF THEY CRY WHEN THEY HEAR IT</pattern>
+    <template>That's often the most meaningful response a gift can produce — and it's exactly what we aim for when the brief calls for it. A song written specifically around someone's story reaches people in ways that ordinary gifts simply can't. If that kind of emotional impact is what you're after, tell us what you want the moment to feel like and we'll write toward it.
+      <nav-card label="Commission Your Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF IT MAKES THEM CRY</pattern>
+    <template><srai>WHAT IF THEY CRY WHEN THEY HEAR IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THE SONG MAKES THEM CRY</pattern>
+    <template><srai>WHAT IF THEY CRY WHEN THEY HEAR IT</srai></template>
+  </category>
+
+  <!-- ── File delivery — email / download specifics ─────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU EMAIL IT</pattern>
+    <template><srai>HOW DO I DOWNLOAD THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WILL YOU EMAIL IT</pattern>
+    <template><srai>HOW DO I DOWNLOAD THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU SEND IT BY EMAIL</pattern>
+    <template><srai>HOW DO I DOWNLOAD THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW IS IT DELIVERED</pattern>
+    <template><srai>HOW DO I DOWNLOAD THE SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT AUDIO FORMAT</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT AUDIO FORMAT DO I GET</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>MP3 OR WAV</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WAV OR MP3</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I GET BOTH MP3 AND WAV</pattern>
+    <template><srai>WHAT FORMAT ARE THE FILES</srai></template>
+  </category>
+
 </aiml>

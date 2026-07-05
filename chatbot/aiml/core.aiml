@@ -307,4 +307,72 @@
     <template><srai>WHAT IS THE WEATHER</srai></template>
   </category>
 
+  <!-- ── Emotional support: nervousness ─────────────────────────────────── -->
+
+  <category>
+    <pattern>I AM NERVOUS ABOUT THIS</pattern>
+    <template>That's entirely understandable — commissioning something personal for the first time, especially for someone you love, comes with a lot riding on it. The process is built to take as much of that weight off you as possible: we guide the brief, ask the questions, and keep refining until it's right. You don't need to have it figured out before you begin.
+      <nav-card label="Start the Conversation" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM NERVOUS</pattern>
+    <template><srai>I AM NERVOUS ABOUT THIS</srai></template>
+  </category>
+
+  <category>
+    <pattern>THIS MAKES ME NERVOUS</pattern>
+    <template><srai>I AM NERVOUS ABOUT THIS</srai></template>
+  </category>
+
+  <category>
+    <pattern>I FEEL NERVOUS</pattern>
+    <template><srai>I AM NERVOUS ABOUT THIS</srai></template>
+  </category>
+
+  <!-- ── Emotional support: overwhelm ───────────────────────────────────── -->
+
+  <category>
+    <pattern>THIS IS OVERWHELMING</pattern>
+    <template>We hear that. Starting something new — especially something as personal as a commissioned song — can feel like a lot before you know where to begin. The simplest first step is just two or three sentences: who the song is for, and why it matters. We take it from there.
+      <nav-card label="Ask a Question First" href="/contact#questions"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IT FEELS OVERWHELMING</pattern>
+    <template><srai>THIS IS OVERWHELMING</srai></template>
+  </category>
+
+  <category>
+    <pattern>I FEEL OVERWHELMED</pattern>
+    <template><srai>THIS IS OVERWHELMING</srai></template>
+  </category>
+
+  <!-- ── Emotional support: excitement ──────────────────────────────────── -->
+
+  <category>
+    <pattern>I AM EXCITED</pattern>
+    <template>That's a wonderful place to start. Share what you're envisioning in the inquiry form — even a rough idea — and we'll take that energy and put it to work. We're looking forward to creating something extraordinary for you.
+      <nav-card label="Start Your Commission" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM SO EXCITED</pattern>
+    <template><srai>I AM EXCITED</srai></template>
+  </category>
+
+  <category>
+    <pattern>THIS IS EXCITING</pattern>
+    <template><srai>I AM EXCITED</srai></template>
+  </category>
+
+  <category>
+    <pattern>I CANNOT WAIT</pattern>
+    <template><srai>I AM EXCITED</srai></template>
+  </category>
+
 </aiml>

@@ -208,4 +208,51 @@
     <template><srai>WHAT IF IT SOUNDS TOTALLY DIFFERENT FROM WHAT I WANTED</srai></template>
   </category>
 
+  <!-- ── Satisfaction guarantee ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU HAVE A SATISFACTION GUARANTEE</pattern>
+    <template>Our guarantee is built into the process: every commission includes three rounds of revisions at no extra charge, and we don't consider a commission complete until the song genuinely reflects your vision. We don't offer refunds once production is underway, but we stay in the work with you — through feedback, through revisions — until it's right.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>What if I still don't like it?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THERE A GUARANTEE</pattern>
+    <template><srai>DO YOU HAVE A SATISFACTION GUARANTEE</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR GUARANTEE</pattern>
+    <template><srai>DO YOU HAVE A SATISFACTION GUARANTEE</srai></template>
+  </category>
+
+  <!-- ── Return policy ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS YOUR RETURN POLICY</pattern>
+    <template>Because every commission is written and produced entirely from scratch for you, there's no standard return mechanism — the work is yours the moment it's delivered. What we offer in its place is a thorough revision process: three rounds of changes at no extra cost, so we address any concerns before final delivery rather than after.
+      <quick-replies><reply>How do revisions work?</reply><reply>What if I'm not satisfied?</reply></quick-replies>
+    </template>
+  </category>
+
+  <!-- ── Moment-match anxiety ────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF IT DOES NOT MATCH THE MOMENT</pattern>
+    <template>This is precisely what the revision process is designed to prevent. Before production begins, the discovery call lets us understand not just the occasion but the specific emotional register you need the song to hit — the energy you're after, the feeling you want to leave people with. If the first draft doesn't land quite right, we refine it; three revision rounds are included and we use them purposefully.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>What is a discovery call?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF IT IS NOT RIGHT FOR THE OCCASION</pattern>
+    <template><srai>WHAT IF IT DOES NOT MATCH THE MOMENT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THE SONG DOES NOT FIT</pattern>
+    <template><srai>WHAT IF IT DOES NOT MATCH THE MOMENT</srai></template>
+  </category>
+
 </aiml>
