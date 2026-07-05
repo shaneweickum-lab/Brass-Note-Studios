@@ -494,4 +494,258 @@
     </template>
   </category>
 
+  <!-- ── Skeptic / Comparison patterns ─────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHY NOT JUST USE SUNO MYSELF</pattern>
+    <template>Using Suno on your own is a real option — but it gives you the tool without the songwriting. What we bring is thirty years of musical knowledge, original lyrics written around your specific story, and the Brass Note Method: a proprietary three-tier production framework built from systematic reverse engineering. The difference isn't access to the tool; it's everything we put into directing it.
+      <nav-card label="Our Method" href="/method" description="Thirty years of craft, systematized"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW IS THIS DIFFERENT FROM USING SUNO MYSELF</pattern>
+    <template><srai>WHY NOT JUST USE SUNO MYSELF</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I JUST USE SUNO</pattern>
+    <template><srai>WHY NOT JUST USE SUNO MYSELF</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY NOT JUST DO IT MYSELF</pattern>
+    <template><srai>WHY NOT JUST USE SUNO MYSELF</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I TELL IT IS AI MUSIC</pattern>
+    <template>Our productions consistently pass the listening test — portfolio pieces have earned praise from listeners who never suspected AI was involved. What determines that is the quality of the writing and production direction, not the tool. Hear for yourself on our Music page; the work speaks more clearly than any description of it.
+      <nav-card label="Listen for Yourself" href="/music" description="Commissioned portfolio"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WILL IT SOUND LIKE AI MUSIC</pattern>
+    <template><srai>CAN I TELL IT IS AI MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN PEOPLE TELL IT IS AI</pattern>
+    <template><srai>CAN I TELL IT IS AI MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>WILL PEOPLE KNOW IT IS AI</pattern>
+    <template><srai>CAN I TELL IT IS AI MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS AI MUSIC REAL ART</pattern>
+    <template>The songwriting — the story, the lyric, the emotional arc — is entirely human-made. The production is AI-assisted, the same way a photographer uses a camera they didn't build. What makes music meaningful has never been the instrument; it's always been what the person wielding it chose to say. Our commissions are built on that foundation.
+      <nav-card label="About the Studio" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS AI MUSIC LEGITIMATE</pattern>
+    <template><srai>IS AI MUSIC REAL ART</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW IS THIS DIFFERENT FROM HIRING A REAL SONGWRITER</pattern>
+    <template>A traditional custom songwriter typically charges $500–$5,000 or more for a single song, with timelines that can stretch months. We deliver original, professionally produced compositions starting at $199 with a 2–4 week turnaround — because AI handles the production side, freeing us to focus entirely on the writing. The craft is still human; the cost is finally accessible.
+      <nav-card label="View Pricing" href="/services" description="Starting at $199"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHY NOT HIRE A REAL SONGWRITER</pattern>
+    <template><srai>HOW IS THIS DIFFERENT FROM HIRING A REAL SONGWRITER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY NOT JUST BUY STOCK MUSIC</pattern>
+    <template>Stock music is made for no one in particular — it fills space. A Brass Note Studios commission is made for one person: you. Every lyric, every structural choice, every musical detail is shaped around your occasion, the people involved, and what you want the song to mean. Nothing from our catalog belongs to anyone else's story.
+      <nav-card label="Commission Your Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT MAKES THIS BETTER THAN STOCK MUSIC</pattern>
+    <template><srai>WHY NOT JUST BUY STOCK MUSIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS JUST PROMPT ENGINEERING</pattern>
+    <template>Prompt engineering is one part of what we do — but it's the smallest part. The real work is the songwriting: shaping the narrative, writing the lyrics, defining the emotional arc. The Brass Note Method then translates all of that into production-level direction. That translation requires actual musicianship — knowing how arrangements behave, how tension builds, what a lyric needs to land.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THIS JUST PROMPTING</pattern>
+    <template><srai>IS THIS JUST PROMPT ENGINEERING</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS JUST AI PROMPTING</pattern>
+    <template><srai>IS THIS JUST PROMPT ENGINEERING</srai></template>
+  </category>
+
+  <!-- ── What is Suno AI ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS SUNO AI</pattern>
+    <template>Suno AI is a generative music platform that creates full musical arrangements — vocals, production, and mix — from creative direction we provide. We use it as the production engine behind every commission, guided by the Brass Note Method to produce broadcast-quality results precisely matched to your story.
+      <nav-card label="Our Approach" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS SUNO</pattern>
+    <template><srai>WHAT IS SUNO AI</srai></template>
+  </category>
+
+  <!-- ── Suno version ────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT VERSION OF SUNO DO YOU USE</pattern>
+    <template>We produce on Suno v5.5 — the version on which the Brass Note Method was developed and thoroughly stress-tested. Our production framework is calibrated specifically to its capabilities, which is one reason our outputs are as consistent as they are.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT SUNO VERSION DO YOU USE</pattern>
+    <template><srai>WHAT VERSION OF SUNO DO YOU USE</srai></template>
+  </category>
+
+  <!-- ── Suno reliability and downtime ──────────────────────────────────── -->
+
+  <category>
+    <pattern>IS SUNO RELIABLE</pattern>
+    <template>Suno AI is a well-established, production-grade platform we've used across dozens of songs and multiple full albums. Our five-stage production pipeline is built for variability — we run multiple generations per project and select only what passes our documented quality standards, so any platform inconsistency never reaches your delivery.
+      <nav-card label="Our Production Pipeline" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF SUNO GOES DOWN</pattern>
+    <template>Suno AI is a mature platform and extended outages are rare. In the unlikely event that platform availability affects your commission timeline, we communicate proactively and adjust delivery windows accordingly — your commission and payment are never at risk from a platform issue.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF SUNO STOPS WORKING</pattern>
+    <template><srai>WHAT IF SUNO GOES DOWN</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THE AI CHANGES</pattern>
+    <template>Our production framework is built around what Suno can do reliably right now — and our ongoing research at Brass Note Labs means we adapt as the technology evolves. If Suno updates in a way that changes production dynamics, we test and document the new behavior before applying it to client commissions.
+      <nav-card label="Brass Note Labs" href="/labs"/>
+    </template>
+  </category>
+
+  <!-- ── Why Suno / comparison to other AI tools ───────────────────────── -->
+
+  <category>
+    <pattern>IS SUNO THE BEST AI MUSIC TOOL</pattern>
+    <template>We chose Suno because it gives us a degree of creative control that most generative audio platforms simply don't offer — precise enough to execute the Brass Note Method at the level our clients expect. Whether it's objectively the "best" is subjective; it's the right tool for the way we work.
+      <nav-card label="Why Suno AI" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHY SUNO AND NOT SOMETHING ELSE</pattern>
+    <template><srai>IS SUNO THE BEST AI MUSIC TOOL</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY DO YOU USE SUNO INSTEAD OF OTHER TOOLS</pattern>
+    <template><srai>IS SUNO THE BEST AI MUSIC TOOL</srai></template>
+  </category>
+
+  <!-- ── Genre limits ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU DO CLASSICAL</pattern>
+    <template>Traditional classical orchestral composition sits outside our current production scope — our workflow is best suited to song-format genres: pop, soul, gospel, folk, country, R&amp;B, worship, cinematic, and more. If you have something orchestral-adjacent in mind, reach out and we'll be honest about how close we can get.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO CLASSICAL MUSIC</pattern>
+    <template><srai>CAN YOU DO CLASSICAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO HEAVY METAL</pattern>
+    <template>Heavier genres are within reach — Suno can produce distorted, high-energy arrangements with a strong production character. Share your vision in your commission inquiry and we'll let you know exactly what's achievable within our framework.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO METAL</pattern>
+    <template><srai>CAN YOU DO HEAVY METAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT GENRES CAN YOU NOT DO</pattern>
+    <template>We work across pop, R&amp;B, soul, gospel, country, folk, worship, cinematic, and much more. The area that's hardest to achieve reliably is complex, purely orchestral classical music — our production workflow is built around song-format and vocal-forward arrangements. If your vision sits on the edge of what's possible, ask and we'll be upfront about what we can deliver.
+      <nav-card label="Contact Us" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT GENRES DO YOU NOT DO</pattern>
+    <template><srai>WHAT GENRES CAN YOU NOT DO</srai></template>
+  </category>
+
+  <!-- ── Agency / B2B / white-label ─────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU WORK WITH AGENCIES</pattern>
+    <template>We work with agencies under our Organization Commission tier — if you're sourcing music on behalf of clients, reach out through the contact form and we can discuss the scope, volume, and terms that fit your workflow.
+      <nav-card label="Organization Commissions" href="/services#organization"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO B2B</pattern>
+    <template><srai>DO YOU WORK WITH AGENCIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO B TO B</pattern>
+    <template><srai>DO YOU WORK WITH AGENCIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I WHITE LABEL THIS</pattern>
+    <template>White-label arrangements are something we can discuss for agency and B2B clients. Reach out with your use case and intended scope and we'll talk through what's possible and what terms would apply.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <!-- ── Hear samples before committing ────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I HEAR EXAMPLES BEFORE I COMMIT</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I LISTEN BEFORE I BUY</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I LISTEN TO SOMETHING BEFORE I BUY</pattern>
+    <template><srai>CAN I HEAR SAMPLES</srai></template>
+  </category>
+
 </aiml>

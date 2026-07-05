@@ -336,4 +336,119 @@
     <template><srai>I AM NOT READY YET</srai></template>
   </category>
 
+  <!-- ── First-timer reassurance ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I HAVE NEVER COMMISSIONED MUSIC BEFORE</pattern>
+    <template>Most of our clients haven't either, and the process is designed for exactly that. The inquiry form walks you through what we need, and the discovery call is specifically built to draw out everything that matters — even when you're not sure how to articulate it yet. You bring the story; we handle every musical decision from there.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM NEW TO THIS</pattern>
+    <template><srai>I HAVE NEVER COMMISSIONED MUSIC BEFORE</srai></template>
+  </category>
+
+  <category>
+    <pattern>I HAVE NEVER DONE ANYTHING LIKE THIS</pattern>
+    <template><srai>I HAVE NEVER COMMISSIONED MUSIC BEFORE</srai></template>
+  </category>
+
+  <!-- ── "I don't know what to say" ────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I DO NOT KNOW WHAT TO SAY</pattern>
+    <template>Start with the most basic details — who the song is for, and why it matters. Even two or three sentences is enough to open the conversation. The discovery call is where we ask the follow-up questions and fill in everything else. There's no expectation of a polished brief at the inquiry stage.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT KNOW HOW TO DESCRIBE WHAT I WANT</pattern>
+    <template><srai>I DO NOT KNOW WHAT TO SAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>I AM STRUGGLING TO DESCRIBE IT</pattern>
+    <template><srai>I DO NOT KNOW WHAT TO SAY</srai></template>
+  </category>
+
+  <!-- ── Non-musician reassurance ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I AM NOT MUSICAL</pattern>
+    <template>You don't need to be. You bring the story — the people, the occasion, the feeling. We handle every musical decision: genre, structure, tempo, instrumentation, emotional arc. Several of our most meaningful commissions came from clients who know nothing about music but knew exactly what they wanted the song to mean.
+      <nav-card label="Commission Your Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT KNOW ANYTHING ABOUT MUSIC</pattern>
+    <template><srai>I AM NOT MUSICAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>I AM NOT A MUSIC PERSON</pattern>
+    <template><srai>I AM NOT MUSICAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I NEED TO KNOW ABOUT MUSIC TO COMMISSION</pattern>
+    <template><srai>I AM NOT MUSICAL</srai></template>
+  </category>
+
+  <!-- ── "My description won't be good enough" ─────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF MY DESCRIPTION IS NOT GOOD ENOUGH</pattern>
+    <template>A short paragraph about the person, the moment, and how you want it to feel is genuinely enough for us to begin. If we need more, we'll ask during the discovery call. The form is a starting point, not a final brief — we build the rest of the picture together before production begins.
+      <nav-card label="Start Here" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I DO NOT DESCRIBE IT WELL ENOUGH</pattern>
+    <template><srai>WHAT IF MY DESCRIPTION IS NOT GOOD ENOUGH</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I DO NOT HAVE ENOUGH TO SAY</pattern>
+    <template><srai>WHAT IF MY DESCRIPTION IS NOT GOOD ENOUGH</srai></template>
+  </category>
+
+  <!-- ── Wrong information / form anxiety ──────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF I GIVE YOU WRONG INFORMATION</pattern>
+    <template>Nothing you share in the form is locked in. The discovery call is specifically for clarifying, expanding, and correcting anything from the initial submission — think of the form as a first impression, not a contract. We work through the details together before production begins.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I PUT THE WRONG THING</pattern>
+    <template><srai>WHAT IF I GIVE YOU WRONG INFORMATION</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I CHANGE MY ANSWER AFTER SUBMITTING</pattern>
+    <template><srai>WHAT IF I GIVE YOU WRONG INFORMATION</srai></template>
+  </category>
+
+  <!-- ── Fence-sitter / hesitation ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I AM AFRAID TO COMMIT</pattern>
+    <template>You don't need to be — reaching out doesn't commit you to anything. The inquiry form is just a conversation starter, and payment only happens when you're fully ready and we've agreed on the scope together. If the commission isn't the right fit, we'll tell you honestly.
+      <nav-card label="Ask a Question First" href="/contact#questions"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM ON THE FENCE</pattern>
+    <template>That's a reasonable place to be. A good place to start is listening to our portfolio, reading the testimonials, and asking any questions you have — there's no pressure or obligation in any of it. We'd rather you feel confident before you begin than rushed into something.
+      <nav-card label="Hear Our Work" href="/music"/>
+    </template>
+  </category>
+
 </aiml>

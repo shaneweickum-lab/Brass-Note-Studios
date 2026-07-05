@@ -834,4 +834,192 @@
     <template><srai>CAN I JUST ASK A QUESTION WITHOUT COMMITTING</srai></template>
   </category>
 
+  <!-- ── Secret/surprise gifting process ───────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW DO I ORDER A GIFT WITHOUT THEM KNOWING</pattern>
+    <template>Everything is handled through you — the person you're gifting never needs to be involved. You share what we need to know about them in the inquiry form, we collaborate entirely with you, and you present the finished song however you choose when the moment is right. Nothing in our process reaches them unless you decide to share it.
+      <nav-card label="Commission a Gift Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I KEEP THE COMMISSION PRIVATE</pattern>
+    <template><srai>HOW DO I ORDER A GIFT WITHOUT THEM KNOWING</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THEY FIND OUT IT IS A SURPRISE</pattern>
+    <template>Once the song is delivered to you, it belongs to the moment you choose for it — and that moment is entirely within your control. We don't communicate with the recipient at any point, and nothing about the commission appears anywhere except in your inbox. The surprise is yours to protect.
+    </template>
+  </category>
+
+  <!-- ── Gift presentation ──────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW DO I PRESENT THE SONG AS A GIFT</pattern>
+    <template>The song arrives as a downloadable audio file, which gives you complete flexibility in how you share it. Many clients play it at a dinner or gathering; some send it as a private link with a handwritten note; others print the lyrics alongside it. The moment you choose to reveal it is what makes it unforgettable — the song does the rest.
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I GIVE THE SONG AS A GIFT</pattern>
+    <template><srai>HOW DO I PRESENT THE SONG AS A GIFT</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I DELIVER THE SONG AS A GIFT</pattern>
+    <template><srai>HOW DO I PRESENT THE SONG AS A GIFT</srai></template>
+  </category>
+
+  <!-- ── Emotional first-person occasion triggers ───────────────────────────── -->
+
+  <category>
+    <pattern>MY MOM PASSED AWAY</pattern>
+    <template>We're so sorry for your loss. Memorial commissions are among the most meaningful pieces we create — a song written from the memories and moments you share with us, shaped entirely around the person and the love that remains. When you're ready, we're here.
+      <nav-card label="Commission a Memorial Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SOMEONE I LOVE PASSED AWAY</pattern>
+    <template><srai>MY MOM PASSED AWAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>MY * PASSED AWAY</pattern>
+    <template><srai>MY MOM PASSED AWAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>MY * DIED</pattern>
+    <template><srai>MY MOM PASSED AWAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>SOMEONE CLOSE TO ME DIED</pattern>
+    <template><srai>MY MOM PASSED AWAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>WE ARE HAVING A BABY</pattern>
+    <template>Congratulations — what a beautiful moment to mark with music. A birth or baby shower commission gives the whole family something to keep forever: a gentle, personal piece written for the child and the people welcoming them into the world. Starting at $199.
+      <nav-card label="Commission a Baby Song" href="/contact"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM PREGNANT</pattern>
+    <template><srai>WE ARE HAVING A BABY</srai></template>
+  </category>
+
+  <category>
+    <pattern>WE ARE EXPECTING</pattern>
+    <template><srai>WE ARE HAVING A BABY</srai></template>
+  </category>
+
+  <category>
+    <pattern>I JUST GOT ENGAGED</pattern>
+    <template>Congratulations — what a moment to mark with something lasting. We can write a song that captures the proposal itself, or something to carry into the wedding. Either way, it starts at $199 and begins with your story.
+      <nav-card label="Commission an Engagement Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WE JUST GOT ENGAGED</pattern>
+    <template><srai>I JUST GOT ENGAGED</srai></template>
+  </category>
+
+  <category>
+    <pattern>I RECENTLY GOT ENGAGED</pattern>
+    <template><srai>I JUST GOT ENGAGED</srai></template>
+  </category>
+
+  <!-- ── Hard to shop for / unique gift ────────────────────────────────────── -->
+
+  <category>
+    <pattern>THEY ARE HARD TO SHOP FOR</pattern>
+    <template>A commissioned song is genuinely different from anything a store offers — it's original, it's about them specifically, and it exists solely because you thought of them in that particular way. There's nothing to compare it to, and nothing to return.
+      <nav-card label="Commission a Gift Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT KNOW WHAT TO GET THEM</pattern>
+    <template><srai>THEY ARE HARD TO SHOP FOR</srai></template>
+  </category>
+
+  <category>
+    <pattern>THEY ARE DIFFICULT TO SHOP FOR</pattern>
+    <template><srai>THEY ARE HARD TO SHOP FOR</srai></template>
+  </category>
+
+  <category>
+    <pattern>I NEED A UNIQUE GIFT</pattern>
+    <template><srai>THEY ARE HARD TO SHOP FOR</srai></template>
+  </category>
+
+  <!-- ── Wedding ceremony surprise ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I SURPRISE MY PARTNER AT THE WEDDING</pattern>
+    <template>That's one of the most meaningful commissions we take on. We produce the song entirely with you, keeping the recipient completely in the dark, and you play it at the ceremony, reception, or wherever the moment calls for it. Many say it becomes the part of the day that no one forgets.
+      <nav-card label="Start a Wedding Commission" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WEDDING SURPRISE</pattern>
+    <template><srai>CAN I SURPRISE MY PARTNER AT THE WEDDING</srai></template>
+  </category>
+
+  <category>
+    <pattern>SURPRISE SONG AT THE WEDDING</pattern>
+    <template><srai>CAN I SURPRISE MY PARTNER AT THE WEDDING</srai></template>
+  </category>
+
+  <!-- ── Emotional writing ──────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU WRITE SOMETHING EMOTIONAL</pattern>
+    <template>Emotion is at the center of every commission we take on. Whether you want something that moves people to tears, lifts a room, or holds a quiet and personal feeling — we shape the lyric, the structure, and the arrangement around the specific emotional response you're after. Tell us what you want the song to do, and we'll build it to do exactly that.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I WANT A TEARJERKER</pattern>
+    <template><srai>CAN YOU WRITE SOMETHING EMOTIONAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>I WANT SOMETHING THAT WILL MAKE THEM CRY</pattern>
+    <template><srai>CAN YOU WRITE SOMETHING EMOTIONAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>I WANT A SONG THAT MAKES PEOPLE CRY</pattern>
+    <template><srai>CAN YOU WRITE SOMETHING EMOTIONAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU WRITE A SAD SONG</pattern>
+    <template><srai>CAN YOU WRITE SOMETHING EMOTIONAL</srai></template>
+  </category>
+
+  <!-- ── Matching a specific sound ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU MATCH A VERY SPECIFIC SOUND</pattern>
+    <template><srai>CAN I PROVIDE A REFERENCE TRACK</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU MATCH A SPECIFIC SOUND</pattern>
+    <template><srai>CAN I PROVIDE A REFERENCE TRACK</srai></template>
+  </category>
+
 </aiml>

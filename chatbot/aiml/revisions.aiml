@@ -132,4 +132,80 @@
     <template><srai>WHAT IF I DO NOT LIKE THE SONG</srai></template>
   </category>
 
+  <!-- ── Gift recipient / third-party anxiety ──────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF MY PARTNER DOES NOT LIKE IT</pattern>
+    <template>That's a completely natural concern when the song is a surprise gift. Share specific details about their taste when you submit — favorite styles, artists they love, songs that move them — and we'll build toward something that resonates. If the first draft still feels off, the revision rounds let you refine it before the moment arrives.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>Can I provide a reference track?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THEY DO NOT LIKE THE SONG</pattern>
+    <template><srai>WHAT IF MY PARTNER DOES NOT LIKE IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THE RECIPIENT DOES NOT LIKE IT</pattern>
+    <template><srai>WHAT IF MY PARTNER DOES NOT LIKE IT</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THEY HATE THE SONG</pattern>
+    <template><srai>WHAT IF MY PARTNER DOES NOT LIKE IT</srai></template>
+  </category>
+
+  <!-- ── First draft anxiety ────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF THE FIRST DRAFT IS COMPLETELY WRONG</pattern>
+    <template>That's what revision rounds are for. If the first draft misses the mark entirely, treat your feedback as a reset rather than a refinement — tell us specifically what didn't work and what you needed instead, and we'll approach the second draft with fresh direction. The discovery call before production helps minimize that risk, but if it happens, we'll address it directly.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>What is a discovery call?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THE FIRST VERSION IS NOT RIGHT</pattern>
+    <template><srai>WHAT IF THE FIRST DRAFT IS COMPLETELY WRONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF THE FIRST DRAFT IS OFF</pattern>
+    <template><srai>WHAT IF THE FIRST DRAFT IS COMPLETELY WRONG</srai></template>
+  </category>
+
+  <!-- ── Major direction change ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF I CHANGE MY MIND COMPLETELY</pattern>
+    <template>Major directional changes after production has begun may require a separate conversation depending on how far along we are — but we'll always work through it with you directly rather than deliver something that doesn't fit. If you're still working out the vision, the discovery call is the right place to get there before the writing starts.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF I COMPLETELY CHANGE MY MIND</pattern>
+    <template><srai>WHAT IF I CHANGE MY MIND COMPLETELY</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF MY STORY CHANGES</pattern>
+    <template><srai>WHAT IF I CHANGE MY MIND COMPLETELY</srai></template>
+  </category>
+
+  <!-- ── "Will it sound different from what I imagined?" ───────────────────── -->
+
+  <category>
+    <pattern>WHAT IF IT SOUNDS TOTALLY DIFFERENT FROM WHAT I WANTED</pattern>
+    <template>That's exactly why we include three revision rounds and why the discovery call matters. The more clearly you describe the emotional target and share reference tracks upfront, the closer our first draft lands. If there's still a gap, we address it in revisions — and we don't stop until the song is genuinely right.
+      <quick-replies><reply>How many revisions do I get?</reply><reply>Can I provide a reference track?</reply></quick-replies>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF IT IS NOT WHAT I EXPECTED</pattern>
+    <template><srai>WHAT IF IT SOUNDS TOTALLY DIFFERENT FROM WHAT I WANTED</srai></template>
+  </category>
+
 </aiml>
