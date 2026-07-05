@@ -841,4 +841,212 @@
     <template><srai>HOW ARE YOU DIFFERENT FROM OTHER AI MUSIC TOOLS</srai></template>
   </category>
 
+  <category>
+    <pattern>WHAT ABOUT OTHER AI MUSIC TOOLS</pattern>
+    <template><srai>HOW ARE YOU DIFFERENT FROM OTHER AI MUSIC TOOLS</srai></template>
+  </category>
+
+  <!-- ── Suno: why specifically ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHY SUNO SPECIFICALLY</pattern>
+    <template><srai>IS SUNO THE BEST AI MUSIC TOOL</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHY DO YOU USE SUNO SPECIFICALLY</pattern>
+    <template><srai>IS SUNO THE BEST AI MUSIC TOOL</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS SUNO V5 BETTER</pattern>
+    <template><srai>WHAT VERSION OF SUNO DO YOU USE</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS SUNO VERSION 5 BETTER</pattern>
+    <template><srai>WHAT VERSION OF SUNO DO YOU USE</srai></template>
+  </category>
+
+  <!-- ── Suno: complete shutdown scenario ──────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF SUNO SHUTS DOWN</pattern>
+    <template>If Suno were to shut down, we would adapt our workflow to the best available alternative — any outstanding commissions would be completed using whatever platform best serves the work. Your commission agreement is with Brass Note Studios, not with Suno; your payment, your rights, and our obligation to you remain unaffected by changes in the tools we use.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF SUNO CHANGES OR SHUTS DOWN</pattern>
+    <template><srai>WHAT IF SUNO SHUTS DOWN</srai></template>
+  </category>
+
+  <!-- ── Technical issues (general) ────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF THERE IS A TECHNICAL ISSUE</pattern>
+    <template><srai>WHAT IF SUNO GOES DOWN</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF SOMETHING GOES WRONG TECHNICALLY</pattern>
+    <template><srai>WHAT IF SUNO GOES DOWN</srai></template>
+  </category>
+
+  <!-- ── Studio continuity ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF BRASS NOTE STUDIOS CLOSES</pattern>
+    <template>Your song is yours from the moment of delivery — the commercial rights, the PRO registration, and the audio files are all in your name and don't depend on us remaining in operation. We'd recommend keeping your own copies of all delivered files, since they belong entirely to you and can be stored and distributed independently of the studio.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF YOU GO OUT OF BUSINESS</pattern>
+    <template><srai>WHAT IF BRASS NOTE STUDIOS CLOSES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IF YOU SHUT DOWN</pattern>
+    <template><srai>WHAT IF BRASS NOTE STUDIOS CLOSES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT HAPPENS TO MY SONG IF YOU CLOSE</pattern>
+    <template><srai>WHAT IF BRASS NOTE STUDIOS CLOSES</srai></template>
+  </category>
+
+  <!-- ── International clients ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU WORK WITH INTERNATIONAL CLIENTS</pattern>
+    <template>We work with clients from anywhere in the world — our studio is entirely remote and we've served clients across multiple countries. Everything happens online: discovery calls, draft reviews, and final delivery. There's no geographic limitation on who we work with.
+      <nav-card label="Start Your Commission" href="/contact" description="We work with clients worldwide"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU WORK OUTSIDE THE US</pattern>
+    <template><srai>DO YOU WORK WITH INTERNATIONAL CLIENTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU WORK GLOBALLY</pattern>
+    <template><srai>DO YOU WORK WITH INTERNATIONAL CLIENTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I COMMISSION FROM OUTSIDE THE US</pattern>
+    <template><srai>DO YOU WORK WITH INTERNATIONAL CLIENTS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU ACCEPT INTERNATIONAL CLIENTS</pattern>
+    <template><srai>DO YOU WORK WITH INTERNATIONAL CLIENTS</srai></template>
+  </category>
+
+  <!-- ── Currency and international payments ────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT CURRENCY DO YOU CHARGE IN</pattern>
+    <template>All commissions are priced and invoiced in US dollars. Payment is processed securely through SamCart, which accepts major international credit and debit cards — currency conversion is handled automatically on your end, with no separate steps required.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT CURRENCY DO YOU USE</pattern>
+    <template><srai>WHAT CURRENCY DO YOU CHARGE IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU TAKE INTERNATIONAL PAYMENTS</pattern>
+    <template><srai>WHAT CURRENCY DO YOU CHARGE IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU ACCEPT INTERNATIONAL PAYMENT</pattern>
+    <template><srai>WHAT CURRENCY DO YOU CHARGE IN</srai></template>
+  </category>
+
+  <!-- ── Physical product / shipping ───────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS THERE A PHYSICAL PRODUCT</pattern>
+    <template>Everything we deliver is digital — broadcast-ready WAV and MP3 files sent via a secure download link. There's nothing physical to ship, which means your commission reaches you anywhere in the world as soon as it's ready.
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU SHIP ANYTHING</pattern>
+    <template><srai>IS THERE A PHYSICAL PRODUCT</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU SHIP PHYSICAL PRODUCTS</pattern>
+    <template><srai>IS THERE A PHYSICAL PRODUCT</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE A PHYSICAL PRODUCT</pattern>
+    <template><srai>IS THERE A PHYSICAL PRODUCT</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THERE ANYTHING PHYSICAL</pattern>
+    <template><srai>IS THERE A PHYSICAL PRODUCT</srai></template>
+  </category>
+
+  <!-- ── Genre gaps: jazz, hip hop, soul ────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU DO JAZZ</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO JAZZ</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO HIP HOP</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO HIP HOP</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO SOUL</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO SOUL MUSIC</pattern>
+    <template><srai>WHAT GENRES DO YOU WORK IN</srai></template>
+  </category>
+
+  <!-- ── Language: foreign language / non-English ──────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU DO FOREIGN LANGUAGE SONGS</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO NON ENGLISH SONGS</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO NON ENGLISH</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO SONGS IN OTHER LANGUAGES</pattern>
+    <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
+  </category>
+
 </aiml>
