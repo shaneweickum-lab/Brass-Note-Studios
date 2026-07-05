@@ -63,4 +63,165 @@
     <template><srai>WHAT IS BRASS NOTE LABS</srai></template>
   </category>
 
+  <!-- ── Production pipeline ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE PRODUCTION PIPELINE</pattern>
+    <template>Every track commissioned through Brass Note Studios passes through a five-stage pipeline before delivery: Brief (documented creative direction), Architecture (building the multi-layer production plan), Generation (running controlled Suno AI productions), Analysis (evaluating every generation across six quality metrics), and Integration (folding insights back into the framework). Every song. No exceptions.
+      <nav-card label="See the Pipeline" href="/labs" description="The five-stage process"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE FIVE STAGES</pattern>
+    <template><srai>WHAT IS THE PRODUCTION PIPELINE</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE FIVE STAGE PIPELINE</pattern>
+    <template><srai>WHAT IS THE PRODUCTION PIPELINE</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DOES THE PIPELINE WORK</pattern>
+    <template><srai>WHAT IS THE PRODUCTION PIPELINE</srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE PIPELINE</pattern>
+    <template><srai>WHAT IS THE PRODUCTION PIPELINE</srai></template>
+  </category>
+
+  <!-- ── Metrics ────────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT METRICS DO YOU TRACK</pattern>
+    <template>Brass Note Labs evaluates every generation across six documented dimensions: Emotional Resonance (does it produce the intended feeling in an uninvested listener), Vocal Integrity (consistency and clarity throughout), Tonal Balance (natural frequency distribution), Structural Fidelity (does the arrangement follow the intended arc), Repeatability (can the configuration produce consistent results), and Brief Alignment (does the final track match the original creative direction).
+      <nav-card label="See What We Measure" href="/labs" description="Our six evaluation dimensions"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT DO YOU MEASURE</pattern>
+    <template><srai>WHAT METRICS DO YOU TRACK</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU EVALUATE THE MUSIC</pattern>
+    <template><srai>WHAT METRICS DO YOU TRACK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS EMOTIONAL RESONANCE</pattern>
+    <template>Emotional Resonance is one of the six dimensions we evaluate at Brass Note Labs — it asks whether the track produces the intended emotional response in a listener who has no context for the brief. If someone unfamiliar with your story hears it and feels the right thing, the production is working.
+      <nav-card label="Our Evaluation Metrics" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS VOCAL INTEGRITY</pattern>
+    <template>Vocal Integrity is a metric we use at Brass Note Labs to evaluate whether the vocal performance maintains consistency, clarity, and intentionality throughout the full duration of a track. A technically competent arrangement that loses its vocal thread midway through fails this standard.
+      <nav-card label="Our Evaluation Metrics" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS STRUCTURAL FIDELITY</pattern>
+    <template>Structural Fidelity measures whether the arrangement follows the intended arc — building, resolving, and landing where the brief specified. A song can sound polished and still fail this test if it doesn't follow the emotional structure we designed for it.
+      <nav-card label="Our Evaluation Metrics" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS REPEATABILITY</pattern>
+    <template>Repeatability is a core standard at Brass Note Labs: if a result cannot be reliably reproduced across multiple generations, it's an accident, not a technique. Every method in our production framework has been stress-tested across multiple generations and genres before being adopted as a standard.
+      <nav-card label="Our Research Findings" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BRIEF ALIGNMENT</pattern>
+    <template>Brief Alignment is our final evaluation check — does the delivered track match the original creative brief, not just in genre and style, but in emotional intent and outcome. A track that sounds good but misses the emotional target fails brief alignment.
+      <nav-card label="Our Evaluation Metrics" href="/labs"/>
+    </template>
+  </category>
+
+  <!-- ── Coined terms ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS SYNTAX FATIGUE</pattern>
+    <template>Syntax Fatigue is a term coined by Brass Note Labs from direct observation in production. It describes what happens when a generative audio AI's lyrical input is overloaded with syntax symbols placed too close together — without giving the model adequate processing space between instructions. The result: the output deviates completely from the intended prompt, vocals become random, structure collapses, and explicitly excluded elements may appear. It's a documented production failure mode, not a theory.
+      <nav-card label="Read the Full Definition" href="/labs#coined-terms" description="Coined by Brass Note Labs · 2026"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS LYRICAL BYPASS</pattern>
+    <template>Lyrical Bypass is a term coined by Brass Note Labs. It occurs during a state of Syntax Fatigue — or when lyrical input exceeds the model's processing capacity — and the model abandons the written lyrics entirely. It doesn't produce a degraded version of the intended lyric; it generates vocal content autonomously, ignoring the written words and all dynamic instructions. The output may sound musically coherent while being completely disconnected from what was directed.
+      <nav-card label="Read the Full Definition" href="/labs#coined-terms" description="Coined by Brass Note Labs · 2026"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS LYRICAL BYPASS IN SUNO</pattern>
+    <template><srai>WHAT IS LYRICAL BYPASS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE COINED TERMS</pattern>
+    <template>Brass Note Labs has coined two terms from direct production observation: Syntax Fatigue — when overloaded AI input causes the model to produce chaotic, off-brief output — and Lyrical Bypass — when the model abandons the written lyrics entirely and generates autonomous vocal content. Both were observed, confirmed through repeated testing, and documented exclusively on Suno AI.
+      <nav-card label="Coined Terms from the Lab" href="/labs#coined-terms"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT TERMS DID YOU COIN</pattern>
+    <template><srai>WHAT ARE THE COINED TERMS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU PUBLISH YOUR RESEARCH</pattern>
+    <template>Our research findings and coined terminology are published on the Labs page — available to anyone who wants to understand the depth behind the production process. We document everything: the framework, the metrics, and the phenomena we've observed and named.
+      <nav-card label="Brass Note Labs" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I SEE THE RESEARCH</pattern>
+    <template><srai>DO YOU PUBLISH YOUR RESEARCH</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHERE CAN I READ THE RESEARCH</pattern>
+    <template><srai>DO YOU PUBLISH YOUR RESEARCH</srai></template>
+  </category>
+
+  <!-- ── Why Labs matters / differentiation ────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT MAKES YOUR AI MUSIC DIFFERENT</pattern>
+    <template>Most AI music production is intuition-driven: try something, listen, adjust. Brass Note Labs treats every generation as a data point — documenting what works, why it works, and whether it can be reproduced. That systematic approach is what makes our output improve with every commission, not just our instincts.
+      <nav-card label="Brass Note Labs" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHY IS YOUR AI MUSIC BETTER</pattern>
+    <template><srai>WHAT MAKES YOUR AI MUSIC DIFFERENT</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW IS LABS DIFFERENT FROM OTHER AI TOOLS</pattern>
+    <template>Other AI music tools generate on demand. Brass Note Labs generates, analyzes, documents, and integrates the findings back into every future production. The difference is the accumulation of documented, tested knowledge — not just experience, but evidence.
+      <nav-card label="Our Research Division" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS REVERSE ENGINEERING YOUR WORK</pattern>
+    <template>Reverse engineering is at the core of how Brass Note Labs operates — after every production, we analyze what made it work: which configurations produced emotional resonance, which structural choices served the brief, and why. Those findings get documented and built back into the production framework, systematically raising the floor on every future commission.
+      <nav-card label="Our Method" href="/labs"/>
+    </template>
+  </category>
+
 </aiml>

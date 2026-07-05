@@ -562,4 +562,276 @@
     <template><srai>IS IT WORTH IT</srai></template>
   </category>
 
+
+  <!-- ── Own lyrics ─────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I SUPPLY MY OWN LYRICS</pattern>
+    <template>Your words are welcome here. Submit your lyrics in the story/lyrics field of the commission form and we'll set them to a full production in your chosen style — your voice, your words, our craft.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I WROTE THE LYRICS</pattern>
+    <template><srai>CAN I SUPPLY MY OWN LYRICS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE MY OWN WORDS</pattern>
+    <template><srai>CAN I SUPPLY MY OWN LYRICS</srai></template>
+  </category>
+
+  <category>
+    <pattern>I WANT TO USE MY OWN LYRICS</pattern>
+    <template><srai>CAN I SUPPLY MY OWN LYRICS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I PROVIDE MY OWN LYRICS</pattern>
+    <template><srai>CAN I SUPPLY MY OWN LYRICS</srai></template>
+  </category>
+
+  <!-- ── Instrumentals ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I GET JUST INSTRUMENTAL</pattern>
+    <template>Our Content Creator tier offers music-only tracks — full instrumental productions built to match your brand's vibe without vocals. Creator commissions start at $199, and the track comes with full usage rights across all platforms.
+      <nav-card label="Creator Commissions" href="/services#creator"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU DO INSTRUMENTALS</pattern>
+    <template><srai>CAN I GET JUST INSTRUMENTAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>MUSIC WITHOUT LYRICS</pattern>
+    <template><srai>CAN I GET JUST INSTRUMENTAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>MUSIC ONLY</pattern>
+    <template><srai>CAN I GET JUST INSTRUMENTAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I GET A TRACK WITHOUT LYRICS</pattern>
+    <template><srai>CAN I GET JUST INSTRUMENTAL</srai></template>
+  </category>
+
+  <!-- ── Reference tracks ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I PROVIDE A REFERENCE TRACK</pattern>
+    <template>Reference tracks are a great starting point — share them in your inquiry form and we'll use them to understand your target sound, energy, and emotional tone. They help us get oriented before a single note is written.</template>
+  </category>
+
+  <category>
+    <pattern>CAN I SHARE A REFERENCE</pattern>
+    <template><srai>CAN I PROVIDE A REFERENCE TRACK</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU TAKE REFERENCE SONGS</pattern>
+    <template><srai>CAN I PROVIDE A REFERENCE TRACK</srai></template>
+  </category>
+
+  <!-- ── Portfolio and privacy ──────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WILL MY SONG BE ADDED TO THE PORTFOLIO</pattern>
+    <template>Your privacy is fully respected. Commissions are only added to our portfolio with your explicit permission — if you'd prefer to keep it between us, simply say so in your inquiry and we'll honor that throughout the process.</template>
+  </category>
+
+  <category>
+    <pattern>CAN MY COMMISSION BE KEPT PRIVATE</pattern>
+    <template><srai>WILL MY SONG BE ADDED TO THE PORTFOLIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>I WANT PRIVACY</pattern>
+    <template><srai>WILL MY SONG BE ADDED TO THE PORTFOLIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT WANT IT PUBLIC</pattern>
+    <template><srai>WILL MY SONG BE ADDED TO THE PORTFOLIO</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I KEEP IT PRIVATE</pattern>
+    <template><srai>WILL MY SONG BE ADDED TO THE PORTFOLIO</srai></template>
+  </category>
+
+  <!-- ── Discovery call ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS A DISCOVERY CALL</pattern>
+    <template>A discovery call is a brief one-on-one conversation where we hear about your project in depth — the story behind the song, the emotional tone you're after, and any specific details that should shape the writing. It's included with every commission at no extra charge.</template>
+  </category>
+
+  <!-- ── Proposal and engagement ────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I COMMISSION A SONG FOR A PROPOSAL</pattern>
+    <template>A proposal commission is one of the most intimate pieces we create. We write original lyrics around your love story and the moment you're planning, so the music is as personal as the question itself. Starting at $199.
+      <nav-card label="Commission Your Proposal Song" href="/contact?service=individual"/>
+      <lead-capture/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>ENGAGEMENT SONG</pattern>
+    <template><srai>CAN I COMMISSION A SONG FOR A PROPOSAL</srai></template>
+  </category>
+
+  <category>
+    <pattern>PROPOSAL SONG</pattern>
+    <template><srai>CAN I COMMISSION A SONG FOR A PROPOSAL</srai></template>
+  </category>
+
+  <!-- ── Memorial ───────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I COMMISSION A MEMORIAL SONG</pattern>
+    <template>Memorial commissions are among the most meaningful work we do. We craft a song that honors the person and the love that remains, written from the memories and moments you share with us. Starting at $199.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>SONG IN MEMORY OF SOMEONE</pattern>
+    <template><srai>CAN I COMMISSION A MEMORIAL SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>FUNERAL SONG</pattern>
+    <template><srai>CAN I COMMISSION A MEMORIAL SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>IN MEMORY OF</pattern>
+    <template><srai>CAN I COMMISSION A MEMORIAL SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>TRIBUTE SONG</pattern>
+    <template><srai>CAN I COMMISSION A MEMORIAL SONG</srai></template>
+  </category>
+
+  <!-- ── Graduation ─────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>GRADUATION SONG</pattern>
+    <template>A graduation commission is a wonderful way to mark the milestone. We write an original song celebrating the journey and the achievement — something the graduate will return to for years. Starting at $199.
+      <nav-card label="Commission a Graduation Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I GET A GRADUATION SONG</pattern>
+    <template><srai>GRADUATION SONG</srai></template>
+  </category>
+
+  <!-- ── Baby and lullaby ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>BABY SONG</pattern>
+    <template>A birth or baby shower commission is a gift the whole family will treasure. We can write a gentle, personal piece that speaks to the child and the people welcoming them into the world. Starting at $199.
+      <nav-card label="Commission a Baby Song" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I GET A SONG FOR A BABY</pattern>
+    <template><srai>BABY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>BABY SHOWER SONG</pattern>
+    <template><srai>BABY SONG</srai></template>
+  </category>
+
+  <category>
+    <pattern>LULLABY</pattern>
+    <template><srai>BABY SONG</srai></template>
+  </category>
+
+  <!-- ── Podcast, Twitch, streaming ────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I USE IT ON MY PODCAST</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT ON TWITCH</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE IT FOR STREAMING</pattern>
+    <template><srai>CAN I USE IT ON SOCIAL MEDIA</srai></template>
+  </category>
+
+  <!-- ── Individual vs Creator ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE DIFFERENCE BETWEEN INDIVIDUAL AND CREATOR</pattern>
+    <template>The commission type reflects your intended use. Individual Commissions are for personal occasions — weddings, birthdays, memorials — and the song is yours to keep. Creator Commissions are designed for channel branding, intro music, and social content, and come with full usage rights across all platforms. Pricing starts at $199 for both.</template>
+  </category>
+
+  <category>
+    <pattern>INDIVIDUAL VS CREATOR</pattern>
+    <template><srai>WHAT IS THE DIFFERENCE BETWEEN INDIVIDUAL AND CREATOR</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO INDIVIDUAL AND CREATOR DIFFER</pattern>
+    <template><srai>WHAT IS THE DIFFERENCE BETWEEN INDIVIDUAL AND CREATOR</srai></template>
+  </category>
+
+  <!-- ── Creator tier eligibility ───────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO I HAVE TO BE A CONTENT CREATOR TO ORDER THE CREATOR TIER</pattern>
+    <template>The Content Creator tier is designed for anyone producing digital content — YouTube, podcasts, social media, Twitch — who needs original music for their channel or brand. You don't need a large audience; if you're creating content, this tier fits.</template>
+  </category>
+
+  <category>
+    <pattern>CAN ANYONE ORDER CREATOR COMMISSION</pattern>
+    <template><srai>DO I HAVE TO BE A CONTENT CREATOR TO ORDER THE CREATOR TIER</srai></template>
+  </category>
+
+  <!-- ── No commitment ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I JUST ASK A QUESTION WITHOUT COMMITTING</pattern>
+    <template>There's no obligation in reaching out. The inquiry form is for anyone with a question, whether you're ready to order or just curious about what's possible — ask away, no strings attached.
+      <nav-card label="Get in Touch" href="/contact" description="No commitment required"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I JUST HAVE A QUESTION</pattern>
+    <template><srai>CAN I JUST ASK A QUESTION WITHOUT COMMITTING</srai></template>
+  </category>
+
+  <category>
+    <pattern>I AM JUST LOOKING</pattern>
+    <template><srai>CAN I JUST ASK A QUESTION WITHOUT COMMITTING</srai></template>
+  </category>
+
+  <category>
+    <pattern>NOT READY TO COMMIT</pattern>
+    <template><srai>CAN I JUST ASK A QUESTION WITHOUT COMMITTING</srai></template>
+  </category>
+
+  <category>
+    <pattern>NO COMMITMENT</pattern>
+    <template><srai>CAN I JUST ASK A QUESTION WITHOUT COMMITTING</srai></template>
+  </category>
+
 </aiml>

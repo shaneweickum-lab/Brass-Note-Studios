@@ -71,4 +71,46 @@
     </template>
   </category>
 
+  <!-- ── Blog / Journal wideners ──────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE ATELIER JOURNAL</pattern>
+    <template>The Atelier Journal is our studio blog — where we write about the stories behind our commissions, music production, the Brass Note Method, and the philosophy of bespoke songwriting. It's where process becomes reading.
+      <nav-card label="The Atelier Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE A BLOG</pattern>
+    <template>Yes — the Atelier Journal is where we share stories, studio updates, and insights into commissioned music production.
+      <nav-card label="The Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHERE IS YOUR BLOG</pattern>
+    <template>Our Journal lives at brassnotestudios.com/blog — stories, process notes, and studio updates.
+      <nav-card label="The Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHERE IS THE JOURNAL</pattern>
+    <template>The Atelier Journal is at brassnotestudios.com/blog.
+      <nav-card label="The Atelier Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU POST ABOUT YOUR PROCESS</pattern>
+    <template>We write about the studio process, commissioned song stories, and insights from production in the Atelier Journal — available on our Blog page.
+      <nav-card label="The Atelier Journal" href="/blog"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU WRITE ABOUT YOUR WORK</pattern>
+    <template><srai>DO YOU POST ABOUT YOUR PROCESS</srai></template>
+  </category>
+
 </aiml>

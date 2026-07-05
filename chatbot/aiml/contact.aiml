@@ -234,4 +234,106 @@
     <template><srai>DO YOU HAVE AN EMAIL ADDRESS</srai></template>
   </category>
 
+
+  <!-- ── Not sure what I want ──────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I AM NOT SURE WHAT I WANT</pattern>
+    <template>That's a perfectly fine place to start a conversation. Use the inquiry form to share a bit about the occasion and the person, and we'll help you figure out the right approach — no commitment required.
+      <nav-card label="Get in Touch" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT KNOW WHAT I WANT</pattern>
+    <template><srai>I AM NOT SURE WHAT I WANT</srai></template>
+  </category>
+
+  <category>
+    <pattern>I DO NOT KNOW WHERE TO START</pattern>
+    <template><srai>I AM NOT SURE WHAT I WANT</srai></template>
+  </category>
+
+  <!-- ── Help figuring out what I want ─────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN YOU HELP ME FIGURE OUT WHAT I WANT</pattern>
+    <template>Yes, that's part of what the discovery process is for. Share the occasion, the person, and the feeling you're after, and we'll guide you toward the right type of commission and package.</template>
+  </category>
+
+  <!-- ── No need to be ready ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO I HAVE TO BE READY TO ORDER TO REACH OUT</pattern>
+    <template>Not at all — many of our best commissions start with someone who just has a feeling or a moment in mind. The inquiry form has a space for questions, and we'll talk through the rest together.
+      <nav-card label="Ask a Question" href="/contact#questions"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO I NEED TO KNOW EXACTLY WHAT I WANT</pattern>
+    <template><srai>DO I HAVE TO BE READY TO ORDER TO REACH OUT</srai></template>
+  </category>
+
+  <!-- ── No obligation ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS THERE ANY OBLIGATION WHEN I REACH OUT</pattern>
+    <template>No obligation at all — reaching out is just a conversation. Payment only happens when you're ready and we've agreed on the scope together.
+      <nav-card label="Start the Conversation" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>AM I COMMITTING TO ANYTHING</pattern>
+    <template><srai>IS THERE ANY OBLIGATION WHEN I REACH OUT</srai></template>
+  </category>
+
+  <!-- ── After form submission ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT HAPPENS AFTER I FILL OUT THE FORM</pattern>
+    <template>Once you submit the form, we review your project details and reach out within 1–2 business days to schedule a discovery call or confirm next steps. Production doesn't begin until you're ready.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT HAPPENS AFTER I SUBMIT</pattern>
+    <template><srai>WHAT HAPPENS AFTER I FILL OUT THE FORM</srai></template>
+  </category>
+
+  <!-- ── How we contact you ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW WILL YOU CONTACT ME</pattern>
+    <template>We respond via email to the address you provide in the inquiry form. All communication from that point is handled directly by our team — no auto-responders, just a real conversation.</template>
+  </category>
+
+  <!-- ── Just a question ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IF I JUST WANT TO ASK A QUESTION</pattern>
+    <template>Our contact page has a dedicated section for exactly that — no commission required, no pressure. Use it whenever you're ready.
+      <nav-card label="Ask a Question" href="/contact#questions"/>
+    </template>
+  </category>
+
+  <!-- ── Not ready yet ─────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>I AM NOT READY YET</pattern>
+    <template>No rush at all — when you're ready, we'll be here. Feel free to explore our portfolio in the meantime to get a sense of what's possible.
+      <nav-card label="Explore the Portfolio" href="/music"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM STILL THINKING</pattern>
+    <template><srai>I AM NOT READY YET</srai></template>
+  </category>
+
+  <category>
+    <pattern>MAYBE LATER</pattern>
+    <template><srai>I AM NOT READY YET</srai></template>
+  </category>
+
 </aiml>

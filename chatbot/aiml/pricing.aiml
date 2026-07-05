@@ -542,4 +542,147 @@ Expedited delivery is subject to studio availability — mention your deadline i
     <template><srai>HOW MUCH IS A FULL ALBUM</srai></template>
   </category>
 
+  <!-- ── Payment methods and timing ────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW DO I PAY</pattern>
+    <template>We accept all major credit and debit cards, processed securely through SamCart at checkout. Payment is completed before production begins — standard practice for custom creative work — so the process is secure and completely straightforward.
+      <nav-card label="View Services &amp; Pricing" href="/services" description="Browse packages and proceed to checkout"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT PAYMENT METHODS DO YOU ACCEPT</pattern>
+    <template><srai>HOW DO I PAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU TAKE CREDIT CARDS</pattern>
+    <template><srai>HOW DO I PAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU ACCEPT PAYPAL</pattern>
+    <template><srai>HOW DO I PAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHEN DO I PAY</pattern>
+    <template>Payment is made at checkout before production begins. This is standard for bespoke creative work — it allows us to dedicate full attention to your commission from the moment your order is placed.
+      <nav-card label="View Services &amp; Pricing" href="/services"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO I PAY UPFRONT</pattern>
+    <template><srai>WHEN DO I PAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO I PAY BEFORE OR AFTER</pattern>
+    <template><srai>WHEN DO I PAY</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THERE A DEPOSIT</pattern>
+    <template>For single-song commissions, payment is made in full at checkout — there's no separate deposit step. For larger packages like an EP, LP, or full album, reach out via our inquiry form and we can discuss payment options that fit the scope of the project.
+      <nav-card label="Contact Us" href="/contact" description="Inquire about larger projects"/>
+    </template>
+  </category>
+
+  <!-- ── SamCart / checkout ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS SAMCART</pattern>
+    <template>SamCart is the secure payment platform we use for all commissions. It's a standard credit card checkout — no account required, just your card details and a few clicks. Your payment information is handled entirely by SamCart's secure infrastructure.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE CHECKOUT</pattern>
+    <template><srai>WHAT IS SAMCART</srai></template>
+  </category>
+
+  <!-- ── EP and LP definitions ──────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS AN EP</pattern>
+    <template>EP stands for Extended Play — a short-form collection of original songs. Our EP packages include 3–4 original commissioned songs, perfect for a small themed collection, a milestone gift set, or an introductory body of work for a brand or organization.
+      <nav-card label="View Pricing" href="/services" description="See all package options"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES EP MEAN</pattern>
+    <template><srai>WHAT IS AN EP</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY SONGS IN AN EP</pattern>
+    <template><srai>WHAT IS AN EP</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS AN LP</pattern>
+    <template>LP stands for Long Play — a fuller body of original commissioned work. Our LP packages include 5–7 original songs, suited for organizations building a musical identity, individuals marking a significant chapter, or creators developing a themed release.
+      <nav-card label="View Pricing" href="/services" description="See all package options"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES LP MEAN</pattern>
+    <template><srai>WHAT IS AN LP</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY SONGS IN AN LP</pattern>
+    <template><srai>WHAT IS AN LP</srai></template>
+  </category>
+
+  <!-- ── Minimum order / entry price ───────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE CHEAPEST OPTION</pattern>
+    <template>Our starting price is $199 for a single-song commission for individuals or content creators, and $299 for organizations. There's no minimum quantity beyond one song — so you can start with exactly what you need and build from there.
+      <nav-card label="View Services" href="/services" description="Browse all packages"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE MINIMUM ORDER</pattern>
+    <template><srai>WHAT IS THE CHEAPEST OPTION</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THERE A MINIMUM</pattern>
+    <template><srai>WHAT IS THE CHEAPEST OPTION</srai></template>
+  </category>
+
+  <!-- ── Adding more songs later ────────────────────────────────────────── -->
+
+  <category>
+    <pattern>CAN I ORDER MORE SONGS LATER</pattern>
+    <template>You can commission additional songs at any time — each new order is treated as a fresh commission and priced accordingly. There's no requirement to buy a package upfront if you'd rather start with one song and return when you're ready for more.
+      <nav-card label="View Services" href="/services" description="Browse all packages"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I ADD SONGS AFTER</pattern>
+    <template><srai>CAN I ORDER MORE SONGS LATER</srai></template>
+  </category>
+
+  <!-- ── Subscription ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS THERE A SUBSCRIPTION</pattern>
+    <template>Subscription plans are something we're actively developing, but they aren't available just yet. For now, all commissions are priced per project — so you only pay for what you order. Stay close to the site; we'll be announcing subscription options when they go live.
+      <nav-card label="View Current Pricing" href="/services"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU OFFER SUBSCRIPTION PLANS</pattern>
+    <template><srai>IS THERE A SUBSCRIPTION</srai></template>
+  </category>
+
 </aiml>

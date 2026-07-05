@@ -349,4 +349,149 @@
     <template><srai>HOW DOES SUNO WORK</srai></template>
   </category>
 
+  <!-- ── Terminology: atelier and bespoke ──────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS AN ATELIER</pattern>
+    <template>Atelier is the French word for a craftsman's workshop — a place where bespoke work is made by hand, to order, for a single client. We use it deliberately: Brass Note Studios isn't a template service or a factory; every commission is shaped by skilled hands around one person's story.
+      <nav-card label="About the Studio" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES ATELIER MEAN</pattern>
+    <template><srai>WHAT IS AN ATELIER</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS BESPOKE</pattern>
+    <template>Bespoke means made specifically for one person — not pulled from a shelf, not adapted from a template. Every commission we write begins completely from scratch, shaped entirely around the client, the occasion, and the story they bring us. Nothing leaves our studio as a one-size-fits-all product.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT DOES BESPOKE MEAN</pattern>
+    <template><srai>WHAT IS BESPOKE</srai></template>
+  </category>
+
+  <!-- ── Trust and legitimacy ───────────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS THIS LEGIT</pattern>
+    <template>That's a fair question to ask. Our portfolio is available to listen to on the Music page, our founders bring 30+ years of combined experience as musicians and songwriters, and every commission represents real work delivered to real clients. We're a small studio that takes its reputation seriously.
+      <nav-card label="Hear Our Work" href="/music" description="Commissioned portfolio"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>IS THIS LEGITIMATE</pattern>
+    <template><srai>IS THIS LEGIT</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A REAL SERVICE</pattern>
+    <template><srai>IS THIS LEGIT</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I TRUST YOU</pattern>
+    <template><srai>IS THIS LEGIT</srai></template>
+  </category>
+
+  <!-- ── Spotify and albums ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU HAVE MUSIC ON SPOTIFY</pattern>
+    <template>We do — several studio-quality albums produced using Suno AI are available on Spotify. They're a testament to what's possible when real musical knowledge guides the production process. You can also listen to commissioned work right here on our Music page.
+      <nav-card label="Music Portfolio" href="/music" description="Listen to our work"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>ARE YOU ON SPOTIFY</pattern>
+    <template><srai>DO YOU HAVE MUSIC ON SPOTIFY</srai></template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE ALBUMS</pattern>
+    <template><srai>DO YOU HAVE MUSIC ON SPOTIFY</srai></template>
+  </category>
+
+  <!-- ── Individual founder profiles ───────────────────────────────────── -->
+
+  <category>
+    <pattern>WHO IS SHANE WEICKUM</pattern>
+    <template>Shane Weickum co-founded Brass Note Studios alongside DeJanae. He brings over a decade of experience in sound production and engineering and 30+ years as a musician and songwriter — and he oversees the creative and production direction of every commission.
+      <nav-card label="About the Studio" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHO IS SHANE</pattern>
+    <template><srai>WHO IS SHANE WEICKUM</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHO IS THE OWNER</pattern>
+    <template><srai>WHO IS SHANE WEICKUM</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHO IS DEJANAE WEICKUM</pattern>
+    <template>DeJanae Weickum co-founded Brass Note Studios alongside Shane. She's a musician and songwriter whose artistry and perspective shape the studio's creative voice. Together they bring 30+ years of combined experience in music and performance.
+      <nav-card label="About the Studio" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHO IS DEJANAE</pattern>
+    <template><srai>WHO IS DEJANAE WEICKUM</srai></template>
+  </category>
+
+  <!-- ── Team size ───────────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>IS IT JUST ONE PERSON</pattern>
+    <template>Brass Note Studios was co-founded by Shane and DeJanae Weickum, so every commission benefits from two experienced musicians and songwriters. We're a small, dedicated studio — which means your project gets genuine personal attention, not a production line.
+      <nav-card label="Meet the Founders" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW MANY PEOPLE WORK THERE</pattern>
+    <template><srai>IS IT JUST ONE PERSON</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THIS A TEAM</pattern>
+    <template><srai>IS IT JUST ONE PERSON</srai></template>
+  </category>
+
+  <!-- ── Testimonials and reviews ───────────────────────────────────────── -->
+
+  <category>
+    <pattern>DO YOU HAVE TESTIMONIALS</pattern>
+    <template>Client testimonials are featured on our home page — we encourage you to read them alongside the portfolio. The work itself is often the strongest proof of what we deliver, and you're welcome to listen before committing to anything.
+      <nav-card label="Visit the Home Page" href="/" description="Testimonials and studio overview"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DO YOU HAVE REVIEWS</pattern>
+    <template><srai>DO YOU HAVE TESTIMONIALS</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I READ REVIEWS</pattern>
+    <template><srai>DO YOU HAVE TESTIMONIALS</srai></template>
+  </category>
+
+  <!-- ── Social media ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>ARE YOU ON SOCIAL MEDIA</pattern>
+    <template>Our social presence is linked from the site — the best way to stay connected is to explore the pages here and reach out via our contact form if you'd like to get in touch directly. We'd love to hear from you.
+      <nav-card label="Contact Us" href="/contact" description="Reach out directly"/>
+    </template>
+  </category>
+
 </aiml>

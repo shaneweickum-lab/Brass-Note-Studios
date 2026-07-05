@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <!-- ── What the Method Is ────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE BRASS NOTE METHOD</pattern>
+    <template>The Brass Note Method is a three-tier proprietary framework for AI music production using Suno AI — built from thirty years of musicianship and reverse-engineered from the prompts behind our strongest outputs. It operates at the architectural level (how a track is structured), the micro-performance level (how every syllable and breath is rendered), and the neural level (how to bypass the model's training associations to produce output the community considers impossible). Every commissioned track is built with it.
+      <nav-card label="Explore the Method" href="/method" description="Three tiers. Every commission."/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE BRASS NOTE METHOD</pattern>
+    <template><srai>WHAT IS THE BRASS NOTE METHOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR METHOD</pattern>
+    <template><srai>WHAT IS THE BRASS NOTE METHOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR PROCESS</pattern>
+    <template><srai>WHAT IS THE BRASS NOTE METHOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU MAKE YOUR MUSIC</pattern>
+    <template><srai>WHAT IS THE BRASS NOTE METHOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU CREATE YOUR MUSIC</pattern>
+    <template><srai>WHAT IS THE BRASS NOTE METHOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR PROMPTING METHOD</pattern>
+    <template>Our prompting methodology is the Brass Note Method — a three-tier framework we developed through systematic reverse engineering of Suno AI. It covers track architecture (Tier 1), micro-performance symbols (Tier 2), and a neural bypass technique for producing purely vocal output (Tier 3). The full system is proprietary and taught inside Brass Syntax Academy.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU PROMPT SUNO</pattern>
+    <template><srai>WHAT IS YOUR PROMPTING METHOD</srai></template>
+  </category>
+
+  <!-- ── Origin / Development ──────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHERE DID THE METHOD COME FROM</pattern>
+    <template>The Brass Note Method came from thirty years of musicianship and a deliberate process of reverse engineering — pulling apart the prompts behind our strongest songs and asking what they all had in common. After thirty songs, two albums, and more generations than we can count, the same answer appeared every time: ten layers. That consistent pattern became the foundation of the framework.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW WAS THE METHOD DEVELOPED</pattern>
+    <template><srai>WHERE DID THE METHOD COME FROM</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG DID IT TAKE TO DEVELOP THE METHOD</pattern>
+    <template>The Brass Note Method is the product of thirty years of musicianship distilled into a systematic framework — but the structured research phase happened across thirty songs, two albums, and extensive generation testing on Suno v5.5. It wasn't built in a week; it was discovered through consistent results that kept pointing to the same architecture.
+      <nav-card label="Explore the Method" href="/method"/>
+    </template>
+  </category>
+
+  <!-- ── The Three Tiers ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW MANY TIERS DOES THE METHOD HAVE</pattern>
+    <template>The Brass Note Method operates across three tiers simultaneously: Tier 1 governs the macro-level architecture of the track (the Ten-Layer Framework), Tier 2 governs micro-level vocal performance through undocumented lyrical syntax, and Tier 3 operates at the neural level — bypassing the model's training associations to produce purely vocal output. Every commission uses all three.
+      <nav-card label="Explore the Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE THREE TIERS</pattern>
+    <template><srai>HOW MANY TIERS DOES THE METHOD HAVE</srai></template>
+  </category>
+
+  <!-- ── Tier 1: Ten Layers ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE TEN LAYER FRAMEWORK</pattern>
+    <template>The Ten-Layer Framework is Tier 1 of the Brass Note Method — ten architectural decisions that shape every track before a lyric is written. The layers are: Genre, Sub-Genre, Vocal Character, Tempo, Time Signature, Tension Arc, Vocal Mood, Negative Prompting, Weirdness, and Constraint. Each layer builds on the previous one, and the absence of any single layer creates a gap the model will fill on its own terms.
+      <nav-card label="See the Ten Layers" href="/method#tier1" description="The architectural foundation"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE 10 LAYER FRAMEWORK</pattern>
+    <template><srai>WHAT IS THE TEN LAYER FRAMEWORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE TEN LAYERS</pattern>
+    <template><srai>WHAT IS THE TEN LAYER FRAMEWORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE 10 LAYERS</pattern>
+    <template><srai>WHAT IS THE TEN LAYER FRAMEWORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS TIER ONE OF THE METHOD</pattern>
+    <template><srai>WHAT IS THE TEN LAYER FRAMEWORK</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS TIER 1 OF THE METHOD</pattern>
+    <template><srai>WHAT IS THE TEN LAYER FRAMEWORK</srai></template>
+  </category>
+
+  <!-- ── Tier 2: Symbols ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT ARE THE 8 UNDOCUMENTED SYMBOLS</pattern>
+    <template>Tier 2 of the Brass Note Method involves eight symbols that control vocal performance at the micro level — things like pauses, breath, whisper delivery, and syllabic rendering that standard Suno prompting cannot touch. Two of the symbols are public: "..." (pause/rest in delivery) and "(( ))" (hushed, intimate vocal treatment). The remaining six are proprietary and taught exclusively inside Brass Syntax Academy.
+      <nav-card label="The Lyrical Syntax" href="/method#tier2" description="Eight symbols. Eight repeatable results."/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE UNDOCUMENTED SYMBOLS</pattern>
+    <template><srai>WHAT ARE THE 8 UNDOCUMENTED SYMBOLS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE LYRICAL SYNTAX</pattern>
+    <template>The Lyrical Syntax is Tier 2 of the Brass Note Method — a set of eight symbols discovered through systematic stress testing of Suno v5.5's lyrical processing engine. Each symbol controls a specific element of vocal performance: pauses, breath, emotional color, syllabic rendering, and more. Two symbols are public; six are proprietary to Brass Syntax Academy.
+      <nav-card label="Tier 2: Lyrical Syntax" href="/method#tier2"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS TIER TWO OF THE METHOD</pattern>
+    <template><srai>WHAT IS THE LYRICAL SYNTAX</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS TIER 2 OF THE METHOD</pattern>
+    <template><srai>WHAT IS THE LYRICAL SYNTAX</srai></template>
+  </category>
+
+  <!-- ── Tier 3: Neural Bypass ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE NEURAL BYPASS</pattern>
+    <template>Neural Bypass is Tier 3 of the Brass Note Method — a technique for bypassing Suno's instrumental training associations by replacing instrument names with phonetic descriptions of what those instruments sound like. When the model's only pathway is vocal, it produces vocal. This is how we achieve full vocal symphonies, eight-part a cappella arrangements with zero instrument bleed, and beatbox percussion with audible breath — consistently, through prompting alone.
+      <nav-card label="Tier 3: Neural Bypass" href="/method#tier3"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS PHONETIC INSTRUMENT DESCRIPTION</pattern>
+    <template>Phonetic Instrument Description is the core technique of Tier 3 — replacing instrument names with acoustic descriptions of what those instruments sound like. When a prompt contains an instrument name, the model's training routes directly to that instrument regardless of what else the prompt says. Removing the trigger word and describing the sound instead forces the model to render the role vocally. It requires actual musicianship — knowing what instruments do, the space they occupy, the physical sound they produce.
+      <nav-card label="Tier 3: Neural Bypass" href="/method#tier3"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS TIER THREE OF THE METHOD</pattern>
+    <template><srai>WHAT IS THE NEURAL BYPASS</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS TIER 3 OF THE METHOD</pattern>
+    <template><srai>WHAT IS THE NEURAL BYPASS</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO YOU GET VOCALS ONLY</pattern>
+    <template>Getting purely vocal output from Suno is one of the most documented challenges in the AI music community — the standard approach of writing "vocals only" or "no instruments" reliably fails. Tier 3 of the Brass Note Method addresses this by replacing instrument names with phonetic descriptions of what those instruments sound like, removing the trigger words the model routes to. The result is vocal output that's consistent across nearly every generation.
+      <nav-card label="The Neural Bypass Technique" href="/method#tier3"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO VOCALS ONLY TRACKS</pattern>
+    <template><srai>HOW DO YOU GET VOCALS ONLY</srai></template>
+  </category>
+
+  <!-- ── Case Studies ───────────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT ARE THE CASE STUDIES</pattern>
+    <template>The Brass Note Method page documents two case studies — both producing results the Suno AI community considers unreliable or impossible through standard prompting. Case Study 01 is "The A Cappella Breakthrough": an eight-part a cappella arrangement with zero instrument bleed, produced through prompting alone on Suno v5.5. Case Study 02 is "The Vocal Symphony": eleven distinct instrument roles — bass, guitar, percussion, and more — all rendered entirely by human voices.
+      <nav-card label="See the Case Studies" href="/method#casestudies"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE CASE STUDIES</pattern>
+    <template><srai>WHAT ARE THE CASE STUDIES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE ACAPPELLA BREAKTHROUGH</pattern>
+    <template>"The A Cappella Breakthrough" is Case Study 01 on our Method page. Using the Brass Note Method on Suno v5.5, we produced a complete eight-part a cappella arrangement — male tenor lead, female quartet, vocal bass, vocal percussion, mouth clicks — with zero instrument bleed. No external tools, no post-processing, no stem separation. Clean through prompting alone, consistently across multiple generations. The Suno community's own documentation confirms this is considered unreliable through standard approaches.
+      <nav-card label="See Case Study 01" href="/method#casestudies"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE A CAPPELLA BREAKTHROUGH</pattern>
+    <template><srai>WHAT IS THE ACAPPELLA BREAKTHROUGH</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN YOU DO ACAPPELLA</pattern>
+    <template>Yes — and with zero instrument bleed, which the Suno community considers very difficult to achieve reliably. Our Method page documents how we produced an eight-part a cappella arrangement through prompting alone on Suno v5.5 — no post-processing, no stem separation tools. It's one of the documented results of Tier 3 of the Brass Note Method.
+      <nav-card label="The A Cappella Case Study" href="/method#casestudies"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE VOCAL SYMPHONY</pattern>
+    <template>"The Vocal Symphony" is Case Study 02 on our Method page. Using Tier 3 of the Brass Note Method, we produced a complete vocal symphony where eleven distinct instrument roles — bass, rhythm guitar, lead guitar, crash cymbal, snare, hi-hat, wah effects — were each rendered entirely by human voices. Audible breath and lip sounds throughout confirm physically human performance rather than synthesized approximation. Consistent output across nearly every generation on Suno v5.5.
+      <nav-card label="See Case Study 02" href="/method#casestudies"/>
+    </template>
+  </category>
+
+  <!-- ── Brass Syntax Academy / Masterclass ────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS BRASS SYNTAX ACADEMY</pattern>
+    <template>Brass Syntax Academy is the Brass Note Method masterclass — where the full framework is taught in detail. It covers the specific parameters for all ten layers, the complete eight-symbol lyrical syntax reference, and the phonetic instrument description library used in Tier 3. There are three learning paths: Songwriting Track, Production Track, and the Full Method Track. The Academy is not yet open — you can join the waitlist on our Method page.
+      <nav-card label="Join the Waitlist" href="/method#waitlist" description="Founding member pricing when enrollment opens"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE MASTERCLASS</pattern>
+    <template><srai>WHAT IS BRASS SYNTAX ACADEMY</srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE MASTERCLASS</pattern>
+    <template><srai>WHAT IS BRASS SYNTAX ACADEMY</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THE MASTERCLASS OPEN</pattern>
+    <template>Brass Syntax Academy is not yet open for enrollment. You can join the waitlist on our Method page to receive founding member pricing when it opens.
+      <nav-card label="Join the Waitlist" href="/method#waitlist"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHEN DOES THE MASTERCLASS OPEN</pattern>
+    <template>We haven't announced an opening date for Brass Syntax Academy yet. Joining the waitlist on our Method page is the best way to be first to know — and to receive founding member pricing when enrollment opens.
+      <nav-card label="Join the Waitlist" href="/method#waitlist"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I LEARN THE METHOD</pattern>
+    <template>Yes — through Brass Syntax Academy, our upcoming masterclass. It teaches all three tiers of the Brass Note Method in full: the Ten-Layer Framework, the complete eight-symbol lyrical syntax, and the phonetic instrument description technique. The Academy is not yet open, but you can join the waitlist on our Method page to get founding member pricing at launch.
+      <nav-card label="Join the Waitlist" href="/method#waitlist"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HOW CAN I LEARN THE METHOD</pattern>
+    <template><srai>CAN I LEARN THE METHOD</srai></template>
+  </category>
+
+  <category>
+    <pattern>IS THE METHOD AVAILABLE TO THE PUBLIC</pattern>
+    <template>The framework overview is public — you can read about all three tiers on our Method page. The full application methodology, the complete eight-symbol syntax, and the phonetic instrument description library are proprietary and taught inside Brass Syntax Academy. The masterclass is not yet open, but the waitlist is.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>CAN I USE THE METHOD MYSELF</pattern>
+    <template><srai>IS THE METHOD AVAILABLE TO THE PUBLIC</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW DO I JOIN THE WAITLIST</pattern>
+    <template>You can join the Brass Syntax Academy waitlist directly on our Method page — scroll to the bottom of the page and enter your email. Waitlist members will receive founding member pricing when enrollment opens.
+      <nav-card label="Join the Waitlist" href="/method#waitlist"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE WAITLIST</pattern>
+    <template>The Brass Syntax Academy waitlist is for people interested in learning the Brass Note Method when the masterclass opens. Joining guarantees founding member pricing — and early access when enrollment goes live. You can sign up on our Method page.
+      <nav-card label="Join the Waitlist" href="/method#waitlist"/>
+    </template>
+  </category>
+
+  <!-- ── Method page navigation wideners ──────────────────────────────── -->
+
+  <category>
+    <pattern>METHOD</pattern>
+    <template>The Brass Note Method is our three-tier proprietary framework for AI music production — covering track architecture, lyrical syntax, and a neural bypass technique for producing purely vocal output. The full overview is on our Method page.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS ON THE METHOD PAGE</pattern>
+    <template>The Method page covers all three tiers of the Brass Note Method: the Ten-Layer Framework, the undocumented lyrical syntax symbols, and the neural bypass technique. It also includes two documented case studies and information about Brass Syntax Academy — where the full framework is taught.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHERE IS THE METHOD PAGE</pattern>
+    <template>Our Method page is at brassnotestudios.com/method — it covers all three tiers of the Brass Note Method and the Brass Syntax Academy masterclass.
+      <nav-card label="The Brass Note Method" href="/method"/>
+    </template>
+  </category>
+
+</aiml>
