@@ -6,6 +6,7 @@ import { MessageSquare } from "lucide-react";
 import { createServiceClient } from "@/lib/supabase/server";
 import type { DbMessage, DbClient } from "@/lib/supabase/types";
 import PushNotificationToggle from "@/components/admin/PushNotificationToggle";
+import DiagnosticsPanel from "@/components/admin/DiagnosticsPanel";
 
 export const metadata: Metadata = { title: "Messages" };
 
@@ -91,6 +92,7 @@ export default async function AdminMessagesPage() {
       </div>
 
       <PushNotificationToggle />
+      <DiagnosticsPanel />
 
       <div className="bg-surface border border-white/10 rounded-lg overflow-hidden">
         {threads.length === 0 ? (

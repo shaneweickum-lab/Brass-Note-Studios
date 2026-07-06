@@ -267,6 +267,11 @@ export default function PushNotificationToggle() {
             <p className="font-body text-sm text-text-base font-medium">Notifications active</p>
             <p className="font-body text-xs text-text-subtle mt-0.5">
               You&rsquo;ll be alerted when a client sends a message.
+              {/iPhone|iPad|iPod/i.test(
+                typeof navigator !== "undefined" ? navigator.userAgent : ""
+              ) && (
+                <> Make sure BNSignal is open from your Home Screen (not Safari) to receive alerts.</>
+              )}
             </p>
           </div>
           <button
@@ -277,16 +282,20 @@ export default function PushNotificationToggle() {
             {busy ? "…" : "Turn off"}
           </button>
         </div>
-        <div className="flex items-center gap-2 pt-0.5">
+        <div className="flex items-start gap-2 pt-0.5">
           <button
             onClick={sendTest}
             disabled={testResult === "sending"}
-            className="font-body text-xs text-gold/70 hover:text-gold underline underline-offset-2 transition-colors disabled:opacity-40"
+            className="font-body text-xs text-gold/70 hover:text-gold underline underline-offset-2 transition-colors disabled:opacity-40 shrink-0"
           >
-            {testResult === "sending" ? "Sending…" : testResult === "ok" ? "✓ Notification sent!" : "Send test notification"}
+            {testResult === "sending"
+              ? "Sending…"
+              : testResult === "ok"
+              ? "✓ Sent — check your device"
+              : "Send test notification"}
           </button>
           {testResult === "fail" && testError && (
-            <span className="font-mono text-[11px] text-red-400">{testError}</span>
+            <span className="font-mono text-[11px] text-red-400 leading-relaxed">{testError}</span>
           )}
         </div>
       </div>

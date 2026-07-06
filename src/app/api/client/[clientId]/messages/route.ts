@@ -97,7 +97,7 @@ export async function POST(req: NextRequest, context: RouteContext): Promise<Res
 
     const message = await createMessage(permanentId, "client", clean);
 
-    // Fire-and-forget push notification to admin device(s)
+    // Fire-and-forget push notification to admin device(s) — result is intentionally discarded
     void sendAdminPushNotifications({
       title: "New message — Brass Note Studios",
       body: `${client.clientName}: ${clean.slice(0, 100)}${clean.length > 100 ? "…" : ""}`,
