@@ -273,6 +273,15 @@ export default async function CommissionTrackerPage({ params }: PageProps) {
           </div>
         </header>
 
+        {/* Atelier notice */}
+        <div className="flex items-start gap-3 px-4 py-3 border border-gold/15 rounded-sm bg-gold/[0.04]">
+          <div className="w-0.5 self-stretch bg-gold/30 rounded-full shrink-0 mt-0.5" />
+          <p className="font-body text-xs text-text-subtle leading-relaxed">
+            <span className="text-gold/70 font-medium tracking-wide">Studio Notice&ensp;&mdash;&ensp;</span>
+            This portal is currently being refined. Certain features, layouts, and details are subject to change as we perfect the experience for you.
+          </p>
+        </div>
+
         {/* Commission sections — one per commission (usually just one) */}
         {multipleCommissions ? (
           <div className="space-y-14">
