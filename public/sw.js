@@ -21,8 +21,6 @@ self.addEventListener("push", (event) => {
   const title = data.title ?? "Brass Note Studios";
   const options = {
     body: data.body ?? "You have a new client message.",
-    icon: "/images/bns-icon-192.png",
-    badge: "/images/bns-icon-192.png",
     data: { url: data.url ?? "/admin/portal" },
     tag: "bns-client-message",
     renotify: true,
