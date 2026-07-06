@@ -2,8 +2,13 @@ export const dynamic = "force-dynamic";
 
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { generateClientId, kvCreateCommission, kvGetCommission } from "@/lib/commissions/kv";
-import type { Commission, Song, PackageType } from "@/types/commission";
+import {
+  generateClientId,
+  generateSongIds,
+  kvCreateCommission,
+  kvGetCommission,
+} from "@/lib/commissions/kv";
+import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
 import { PACKAGE_DELIVERY_DAYS } from "@/types/commission";
 import CreateCommissionForm from "./CreateCommissionForm";
 
@@ -12,6 +17,7 @@ async function createCommission(formData: FormData) {
 
   const clientName = (formData.get("clientName") as string | null)?.trim();
   const email = (formData.get("email") as string | null)?.trim();
+  const clientType = (formData.get("clientType") as ClientType) || "individual";
   const packageType = formData.get("packageType") as PackageType;
   const totalSongsRaw = parseInt((formData.get("totalSongs") as string) || "1", 10);
   const totalSongs = isNaN(totalSongsRaw) || totalSongsRaw < 1 ? 1 : totalSongsRaw;
@@ -22,9 +28,10 @@ async function createCommission(formData: FormData) {
     throw new Error("Missing required fields");
   }
 
+  const now = new Date().toISOString();
+
   let clientId: string;
   if (customId) {
-    // Check for collision before using the custom ID
     const existing = await kvGetCommission(customId);
     if (existing) {
       const encoded = encodeURIComponent(`Client ID "${customId}" is already in use. Choose a different ID or leave blank to auto-generate.`);
@@ -32,10 +39,8 @@ async function createCommission(formData: FormData) {
     }
     clientId = customId;
   } else {
-    clientId = await generateClientId();
+    clientId = await generateClientId(now, clientType, packageType);
   }
-
-  const now = new Date().toISOString();
 
   // Auto-calculate projected delivery from intake date + package type default
   const intakeDate = new Date(now);
@@ -47,6 +52,7 @@ async function createCommission(formData: FormData) {
     clientId,
     clientName,
     email,
+    clientType,
     packageType,
     totalSongs,
     notes,
@@ -55,8 +61,11 @@ async function createCommission(formData: FormData) {
     updatedAt: now,
   };
 
-  const songs: Song[] = Array.from({ length: totalSongs }, (_, i) => ({
-    songId: `${clientId}-song-${i + 1}`,
+  // Allocate consecutive global song IDs: {clientId}-{GGGG}
+  const songIds = await generateSongIds(clientId, totalSongs);
+
+  const songs: Song[] = songIds.map((songId, i) => ({
+    songId,
     clientId,
     title: "",
     trackNumber: i + 1,

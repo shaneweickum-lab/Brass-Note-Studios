@@ -1,12 +1,18 @@
 "use client";
 
-import type { Commission, PackageType } from "@/types/commission";
+import type { Commission, PackageType, ClientType } from "@/types/commission";
 import { PACKAGE_TIMELINE_RANGES } from "@/types/commission";
 
 interface Props {
   commission: Commission;
   action: (formData: FormData) => Promise<void>;
 }
+
+const CLIENT_TYPE_OPTIONS: { value: ClientType; label: string }[] = [
+  { value: "individual",      label: "Individual (Tier 1)"       },
+  { value: "organization",    label: "Organization (Tier 2)"     },
+  { value: "content-creator", label: "Content Creator (Tier 3)"  },
+];
 
 const PACKAGE_OPTIONS: { value: PackageType; label: string }[] = [
   { value: "single",       label: "Single"       },
@@ -45,6 +51,22 @@ export default function CommissionEditForm({ commission, action }: Props) {
             defaultValue={commission.email}
             className={inputClass}
           />
+        </div>
+
+        {/* Client Type */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Client Type</label>
+          <select
+            name="clientType"
+            defaultValue={commission.clientType ?? "individual"}
+            className={inputClass}
+          >
+            {CLIENT_TYPE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Package Type */}

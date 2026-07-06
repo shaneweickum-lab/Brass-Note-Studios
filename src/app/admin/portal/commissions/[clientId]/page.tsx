@@ -8,8 +8,9 @@ import {
   kvGetSongs,
   kvUpdateCommission,
   kvAddSong,
+  generateSongId,
 } from "@/lib/commissions/kv";
-import type { Commission, Song, PackageType } from "@/types/commission";
+import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
 import { STAGE_LABELS } from "@/types/commission";
 import { stageStyle } from "@/lib/portal/stageStyle";
 import ClientIdCopy from "./ClientIdCopy";
@@ -41,6 +42,7 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
       clientId,
       clientName: ((formData.get("clientName") as string) || "").trim(),
       email: ((formData.get("email") as string) || "").trim(),
+      clientType: (formData.get("clientType") as ClientType) || commission!.clientType || "individual",
       packageType: formData.get("packageType") as PackageType,
       totalSongs: parseInt((formData.get("totalSongs") as string) || "1", 10),
       notes: ((formData.get("notes") as string) || "").trim(),
@@ -57,10 +59,10 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
   async function addSong() {
     "use server";
     const now = new Date().toISOString();
-    // Use current song count + 1 as track number; append timestamp to ensure unique song ID
     const trackNumber = songs.length + 1;
+    const songId = await generateSongId(clientId);
     const newSong: Song = {
-      songId: `${clientId}-song-${trackNumber}-${Date.now()}`,
+      songId,
       clientId,
       title: "",
       trackNumber,

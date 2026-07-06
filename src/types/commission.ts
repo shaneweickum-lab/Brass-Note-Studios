@@ -1,5 +1,7 @@
 export type PackageType = "single" | "ep" | "lp" | "album" | "organization";
 
+export type ClientType = "individual" | "organization" | "content-creator";
+
 export type ProductionStage =
   | "intake"
   | "writing"
@@ -12,6 +14,7 @@ export interface Commission {
   clientId: string;
   clientName: string;
   email: string;
+  clientType: ClientType;
   packageType: PackageType;
   totalSongs: number;
   createdAt: string;
@@ -81,6 +84,28 @@ export const STAGE_CLIENT_DESCRIPTIONS: Record<ProductionStage, string> = {
   review: "Your song is in our internal quality review. Almost there.",
   revision: "Your revision is being worked on.",
   delivered: "Your song has been delivered. We hope it moves you.",
+};
+
+export const CLIENT_TYPE_LABELS: Record<ClientType, string> = {
+  individual: "Individual",
+  organization: "Organization",
+  "content-creator": "Content Creator",
+};
+
+// Single digit appended to client ID after the date segment
+export const CLIENT_TYPE_CODES: Record<ClientType, string> = {
+  individual: "1",
+  organization: "2",
+  "content-creator": "3",
+};
+
+// Two-digit package tier codes appended after the client type code
+export const PACKAGE_TIER_CODES: Record<PackageType, string> = {
+  single: "01",
+  ep: "02",
+  lp: "03",
+  album: "04",
+  organization: "04",
 };
 
 export const PACKAGE_DEFAULT_SONGS: Record<PackageType, number> = {

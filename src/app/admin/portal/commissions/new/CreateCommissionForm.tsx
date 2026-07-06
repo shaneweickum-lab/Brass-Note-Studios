@@ -1,8 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import type { PackageType } from "@/types/commission";
+import type { PackageType, ClientType } from "@/types/commission";
 import { PACKAGE_DEFAULT_SONGS } from "@/types/commission";
+
+const CLIENT_TYPE_OPTIONS: { value: ClientType; label: string; description: string }[] = [
+  { value: "individual",      label: "Individual",      description: "Tier 1" },
+  { value: "organization",    label: "Organization",    description: "Tier 2" },
+  { value: "content-creator", label: "Content Creator", description: "Tier 3" },
+];
 
 const PACKAGE_OPTIONS: { value: PackageType; label: string; description: string }[] = [
   { value: "single", label: "Single",       description: "1 song" },
@@ -56,6 +62,28 @@ export default function CreateCommissionForm({ action, error, defaultClientId }:
         />
         <p className="font-body text-xs text-text-subtle">
           Use any format that matches your spreadsheets or CRM — no restrictions.
+        </p>
+      </div>
+
+      {/* Client Type */}
+      <div className="space-y-1.5">
+        <label htmlFor="clientType" className="block font-body text-sm text-text-muted">
+          Client Type
+        </label>
+        <select
+          id="clientType"
+          name="clientType"
+          className="w-full bg-surface border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base focus:outline-none focus:border-gold/50 transition-colors"
+          defaultValue="individual"
+        >
+          {CLIENT_TYPE_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label} — {opt.description}
+            </option>
+          ))}
+        </select>
+        <p className="font-body text-xs text-text-subtle">
+          Baked into the Client ID — Individual (1), Organization (2), Content Creator (3).
         </p>
       </div>
 

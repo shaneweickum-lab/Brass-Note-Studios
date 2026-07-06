@@ -1,5 +1,6 @@
 import { Redis } from "@upstash/redis";
-import type { Commission, Song } from "@/types/commission";
+import type { Commission, Song, ClientType, PackageType } from "@/types/commission";
+import { CLIENT_TYPE_CODES, PACKAGE_TIER_CODES } from "@/types/commission";
 
 const KV_AVAILABLE = Boolean(
   process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
@@ -15,7 +16,7 @@ const redis = KV_AVAILABLE
 // ── Key helpers ────────────────────────────────────────────────────────────────
 
 const KEY = {
-  seq: "bns:commission:seq",
+  songSeq: "bns:song:seq",
   index: "bns:commissions",
   commission: (id: string) => `commission:${id}`,
   songs: (id: string) => `commission:${id}:songs`,
@@ -25,11 +26,60 @@ const KEY = {
 
 // ── ID generation ──────────────────────────────────────────────────────────────
 
-export async function generateClientId(): Promise<string> {
+/**
+ * Generates a client ID in the format BNS{MMDDYY}{T}{PP}
+ * e.g. BNS011526101 = 01/15/26, Individual (1), Single (01)
+ * If the base ID already exists (same date + type + package), appends B/C/D...
+ */
+export async function generateClientId(
+  intakeDate: string,
+  clientType: ClientType,
+  packageType: PackageType
+): Promise<string> {
   if (!redis) throw new Error("Redis not available");
-  const seq = await redis.incr(KEY.seq);
-  const year = new Date().getFullYear();
-  return `BNS-${year}-${String(seq).padStart(4, "0")}`;
+  const d = new Date(intakeDate);
+  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(d.getUTCDate()).padStart(2, "0");
+  const yy = String(d.getUTCFullYear()).slice(2);
+  const base = `BNS${mm}${dd}${yy}${CLIENT_TYPE_CODES[clientType]}${PACKAGE_TIER_CODES[packageType]}`;
+
+  const exists = await redis.get(KEY.commission(base));
+  if (!exists) return base;
+
+  for (const suffix of ["B", "C", "D", "E", "F", "G", "H"]) {
+    const candidate = `${base}${suffix}`;
+    const taken = await redis.get(KEY.commission(candidate));
+    if (!taken) return candidate;
+  }
+
+  // Extremely unlikely — fall back to base + timestamp suffix
+  return `${base}-${Date.now().toString(36).slice(-3).toUpperCase()}`;
+}
+
+/**
+ * Allocates `count` consecutive global song IDs and returns them as
+ * formatted strings: {clientId}-{GGGG}
+ */
+export async function generateSongIds(
+  clientId: string,
+  count: number
+): Promise<string[]> {
+  if (!redis) throw new Error("Redis not available");
+  if (count <= 0) return [];
+  const endSeq = await redis.incrby(KEY.songSeq, count);
+  const startSeq = endSeq - count + 1;
+  return Array.from({ length: count }, (_, i) =>
+    `${clientId}-${String(startSeq + i).padStart(4, "0")}`
+  );
+}
+
+/**
+ * Allocates a single global song ID: {clientId}-{GGGG}
+ */
+export async function generateSongId(clientId: string): Promise<string> {
+  if (!redis) throw new Error("Redis not available");
+  const seq = await redis.incr(KEY.songSeq);
+  return `${clientId}-${String(seq).padStart(4, "0")}`;
 }
 
 // ── Commission CRUD ────────────────────────────────────────────────────────────
