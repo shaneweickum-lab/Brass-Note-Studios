@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ADMIN_COOKIE, isValidSessionToken } from "@/lib/adminSession";
+import { ADMIN_COOKIE, isValidSessionTokenEdge } from "@/lib/adminSession";
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (!pathname.startsWith("/admin")) return NextResponse.next();
@@ -15,9 +15,9 @@ export function middleware(req: NextRequest) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
-  // Validate session cookie
+  // Validate session cookie (async Web Crypto — Edge Runtime compatible)
   const token = req.cookies.get(ADMIN_COOKIE)?.value ?? "";
-  if (isValidSessionToken(token)) {
+  if (await isValidSessionTokenEdge(token)) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }
 

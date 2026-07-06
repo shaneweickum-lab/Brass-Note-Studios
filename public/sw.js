@@ -1,13 +1,48 @@
-// BNS Admin PWA — minimal service worker
-// Satisfies the PWA installability requirement (fetch handler required).
-// Admin portal is always online-only; no caching strategy needed.
-// NOTE: Do NOT call e.respondWith() — that would intercept WebSocket upgrades
-// (e.g. Supabase Realtime wss://) and cause fetch errors. Returning without
-// calling e.respondWith() lets the browser handle all requests normally.
+// BNS Admin PWA — service worker
+// NOTE: Do NOT call e.respondWith() in the fetch handler — that would
+// intercept Supabase Realtime WebSocket upgrades (wss://) and cause errors.
 
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (e) => e.waitUntil(self.clients.claim()));
 self.addEventListener("fetch", () => {
-  // Presence of this listener satisfies PWA installability.
-  // No caching, no interception — all requests fall through to the network.
+  // Satisfies PWA installability. No caching — all requests hit the network.
+});
+
+// ── Push notifications ────────────────────────────────────────────────────
+
+self.addEventListener("push", (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = { body: event.data ? event.data.text() : "" };
+  }
+
+  const title = data.title ?? "Brass Note Studios";
+  const options = {
+    body: data.body ?? "You have a new client message.",
+    icon: "/images/bns-icon-192.png",
+    badge: "/images/bns-icon-192.png",
+    data: { url: data.url ?? "/admin/portal" },
+    tag: "bns-client-message",
+    renotify: true,
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const url = event.notification.data?.url ?? "/admin/portal";
+
+  event.waitUntil(
+    clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if ("focus" in client) return client.focus();
+        }
+        if (clients.openWindow) return clients.openWindow(url);
+      })
+  );
 });

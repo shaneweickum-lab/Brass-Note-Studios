@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ADMIN_COOKIE, COOKIE_MAX_AGE, computeSessionToken } from "@/lib/adminSession";
+import { ADMIN_COOKIE, COOKIE_MAX_AGE } from "@/lib/adminSession";
+import { computeSessionToken } from "@/lib/adminAuth";
 
 export async function POST(req: NextRequest) {
   let body: { username?: string; password?: string } = {};

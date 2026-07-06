@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rateLimit";
 import { kvGetClient, getMessages, createMessage } from "@/lib/supabase/queries";
 import { createServiceClient } from "@/lib/supabase/server";
+import { sendAdminPushNotifications } from "@/lib/webpush";
 
 interface RouteContext {
   params: Promise<{ clientId: string }>; // clientId = permanentId
@@ -95,6 +96,13 @@ export async function POST(req: NextRequest, context: RouteContext): Promise<Res
     }
 
     const message = await createMessage(permanentId, "client", clean);
+
+    // Fire-and-forget push notification to admin device(s)
+    void sendAdminPushNotifications({
+      title: "New message — Brass Note Studios",
+      body: `${client.clientName}: ${clean.slice(0, 100)}${clean.length > 100 ? "…" : ""}`,
+      url: "/admin/portal/messages",
+    });
 
     return NextResponse.json(
       { id: message.id, sender: message.sender, body: message.body, createdAt: message.createdAt },
