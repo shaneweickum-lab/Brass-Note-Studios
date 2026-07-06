@@ -32,6 +32,8 @@ import { PACKAGE_TIMELINE_RANGES } from "@/types/commission";
 import StageTracker from "@/components/client/StageTracker";
 import RevisionCard from "@/components/client/RevisionCard";
 import SongCard from "@/components/client/SongCard";
+import MessageThread from "@/components/client/MessageThread";
+import { getMessages } from "@/lib/supabase/queries";
 
 interface PageProps {
   params: Promise<{ clientId: string }>; // clientId = permanentId
@@ -223,6 +225,13 @@ export default async function CommissionTrackerPage({ params }: PageProps) {
   }
 
   const multipleCommissions = data.commissions.length > 1;
+  const messages = await getMessages(permanentId);
+  const initialMessages = messages.map((m) => ({
+    id: m.id,
+    sender: m.sender,
+    body: m.body,
+    createdAt: m.createdAt,
+  }));
 
   return (
     <main className="min-h-screen bg-background px-6 py-12 sm:py-16">
@@ -277,6 +286,9 @@ export default async function CommissionTrackerPage({ params }: PageProps) {
         ) : (
           <CommissionSection view={data.commissions[0]} />
         )}
+
+        {/* Messaging */}
+        <MessageThread permanentId={permanentId} initialMessages={initialMessages} />
 
         {/* Footer */}
         <footer className="pt-4 border-t border-white/8">

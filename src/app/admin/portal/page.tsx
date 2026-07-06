@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { kvGetAllCommissions } from "@/lib/supabase/queries";
+import { kvGetAllCommissions, getUnreadClientMessageCount } from "@/lib/supabase/queries";
 import StatCard from "@/components/analytics/StatCard";
 import type { Commission } from "@/types/commission";
 
@@ -20,7 +20,10 @@ function isThisMonth(iso: string): boolean {
 }
 
 export default async function AdminPortalPage() {
-  const commissions = await kvGetAllCommissions();
+  const [commissions, unreadMessages] = await Promise.all([
+    kvGetAllCommissions(),
+    getUnreadClientMessageCount(),
+  ]);
 
   const sorted = [...commissions].sort(
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
@@ -51,11 +54,12 @@ export default async function AdminPortalPage() {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard label="Active Commissions" value={active.length} accent />
         <StatCard label="In Production" value={inProduction.length} />
         <StatCard label="Awaiting Revision" value={inRevision.length} />
-        <StatCard label="Delivered This Month" value={deliveredThisMonth.length} accent />
+        <StatCard label="Delivered This Month" value={deliveredThisMonth.length} />
+        <StatCard label="Unread Messages" value={unreadMessages} accent={unreadMessages > 0} />
       </div>
 
       {/* Recent Commissions */}

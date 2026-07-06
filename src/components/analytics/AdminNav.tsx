@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText, Briefcase } from "lucide-react";
+import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText, Briefcase, MessageSquare } from "lucide-react";
+import UnreadMessageBadge from "@/components/admin/UnreadMessageBadge";
 
 const NAV_ITEMS = [
-  { href: "/admin/portal",                          label: "Portal",     Icon: Briefcase,       matchPrefix: true },
-  { href: "/admin/analytics",                       label: "Overview",   Icon: LayoutDashboard, matchPrefix: false },
-  { href: "/admin/analytics/website",               label: "Website",    Icon: Globe,           matchPrefix: false },
-  { href: "/admin/analytics/concierge",             label: "Benny",      Icon: Bot,             matchPrefix: false },
-  { href: "/admin/analytics/journey",               label: "Journey",    Icon: GitMerge,        matchPrefix: false },
-  { href: "/admin/analytics/raw",                   label: "Raw Logs",   Icon: ScrollText,      matchPrefix: false },
+  { href: "/admin/portal",                          label: "Portal",     Icon: Briefcase,       matchPrefix: true,  badge: false },
+  { href: "/admin/portal/messages",                 label: "Messages",   Icon: MessageSquare,   matchPrefix: true,  badge: true  },
+  { href: "/admin/analytics",                       label: "Overview",   Icon: LayoutDashboard, matchPrefix: false, badge: false },
+  { href: "/admin/analytics/website",               label: "Website",    Icon: Globe,           matchPrefix: false, badge: false },
+  { href: "/admin/analytics/concierge",             label: "Benny",      Icon: Bot,             matchPrefix: false, badge: false },
+  { href: "/admin/analytics/journey",               label: "Journey",    Icon: GitMerge,        matchPrefix: false, badge: false },
+  { href: "/admin/analytics/raw",                   label: "Raw Logs",   Icon: ScrollText,      matchPrefix: false, badge: false },
 ];
 
 export default function AdminNav() {
@@ -23,8 +25,11 @@ export default function AdminNav() {
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 sm:hidden" />
 
       <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hide pr-6 sm:pr-0">
-        {NAV_ITEMS.map(({ href, label, Icon, matchPrefix }) => {
-          const active = matchPrefix ? pathname.startsWith(href) : pathname === href;
+        {NAV_ITEMS.map(({ href, label, Icon, matchPrefix, badge }) => {
+          // Portal prefix match must not swallow the /messages sub-route highlight
+          const active = href === "/admin/portal"
+            ? pathname === "/admin/portal" || (pathname.startsWith("/admin/portal") && !pathname.startsWith("/admin/portal/messages"))
+            : matchPrefix ? pathname.startsWith(href) : pathname === href;
           return (
             <Link
               key={href}
@@ -40,6 +45,7 @@ export default function AdminNav() {
             >
               <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
               {label}
+              {badge && <UnreadMessageBadge />}
             </Link>
           );
         })}
