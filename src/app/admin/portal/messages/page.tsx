@@ -7,6 +7,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import type { DbMessage, DbClient } from "@/lib/supabase/types";
 import PushNotificationToggle from "@/components/admin/PushNotificationToggle";
 import DiagnosticsPanel from "@/components/admin/DiagnosticsPanel";
+import AdminMessagesRealtimeRefresher from "@/components/admin/AdminMessagesRealtimeRefresher";
 
 export const metadata: Metadata = { title: "Messages" };
 
@@ -91,6 +92,7 @@ export default async function AdminMessagesPage() {
         </p>
       </div>
 
+      <AdminMessagesRealtimeRefresher />
       <PushNotificationToggle />
       <DiagnosticsPanel />
 
