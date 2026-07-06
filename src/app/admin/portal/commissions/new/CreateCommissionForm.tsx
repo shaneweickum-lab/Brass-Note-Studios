@@ -4,10 +4,6 @@ import { useState } from "react";
 import type { PackageType } from "@/types/commission";
 import { PACKAGE_DEFAULT_SONGS } from "@/types/commission";
 
-interface Props {
-  action: (formData: FormData) => Promise<void>;
-}
-
 const PACKAGE_OPTIONS: { value: PackageType; label: string; description: string }[] = [
   { value: "single", label: "Single",       description: "1 song" },
   { value: "ep",     label: "EP",           description: "3 songs" },
@@ -16,7 +12,13 @@ const PACKAGE_OPTIONS: { value: PackageType; label: string; description: string 
   { value: "organization", label: "Organization", description: "Custom" },
 ];
 
-export default function CreateCommissionForm({ action }: Props) {
+interface Props {
+  action: (formData: FormData) => Promise<void>;
+  error?: string;
+  defaultClientId?: string;
+}
+
+export default function CreateCommissionForm({ action, error, defaultClientId }: Props) {
   const [packageType, setPackageType] = useState<PackageType>("single");
   const [totalSongs, setTotalSongs] = useState<number>(PACKAGE_DEFAULT_SONGS["single"]);
 
@@ -28,6 +30,35 @@ export default function CreateCommissionForm({ action }: Props) {
 
   return (
     <form action={action} className="space-y-5">
+      {/* Error banner */}
+      {error && (
+        <div className="rounded border border-red-500/30 bg-red-500/10 px-4 py-3 font-body text-sm text-red-400">
+          {error}
+        </div>
+      )}
+
+      {/* Client ID — optional override */}
+      <div className="space-y-1.5">
+        <label htmlFor="clientId" className="block font-body text-sm text-text-muted">
+          Client ID
+          <span className="ml-2 font-body text-xs text-text-subtle">
+            optional — leave blank to auto-generate
+          </span>
+        </label>
+        <input
+          id="clientId"
+          name="clientId"
+          type="text"
+          autoComplete="off"
+          defaultValue={defaultClientId}
+          className="w-full bg-surface border border-white/10 rounded px-3 py-2 font-mono text-sm text-gold placeholder:text-text-subtle placeholder:font-body focus:outline-none focus:border-gold/50 transition-colors"
+          placeholder="BNS-2026-0001 or your own format"
+        />
+        <p className="font-body text-xs text-text-subtle">
+          Use any format that matches your spreadsheets or CRM — no restrictions.
+        </p>
+      </div>
+
       {/* Client Name */}
       <div className="space-y-1.5">
         <label htmlFor="clientName" className="block font-body text-sm text-text-muted">

@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { generateClientId, kvCreateCommission } from "@/lib/commissions/kv";
+import { generateClientId, kvCreateCommission, kvGetCommission } from "@/lib/commissions/kv";
 import type { Commission, Song, PackageType } from "@/types/commission";
 import CreateCommissionForm from "./CreateCommissionForm";
 
@@ -15,12 +15,25 @@ async function createCommission(formData: FormData) {
   const totalSongsRaw = parseInt((formData.get("totalSongs") as string) || "1", 10);
   const totalSongs = isNaN(totalSongsRaw) || totalSongsRaw < 1 ? 1 : totalSongsRaw;
   const notes = ((formData.get("notes") as string | null) || "").trim();
+  const customId = ((formData.get("clientId") as string | null) || "").trim();
 
   if (!clientName || !email || !packageType) {
     throw new Error("Missing required fields");
   }
 
-  const clientId = await generateClientId();
+  let clientId: string;
+  if (customId) {
+    // Check for collision before using the custom ID
+    const existing = await kvGetCommission(customId);
+    if (existing) {
+      const encoded = encodeURIComponent(`Client ID "${customId}" is already in use. Choose a different ID or leave blank to auto-generate.`);
+      redirect(`/admin/portal/commissions/new?error=${encoded}&id=${encodeURIComponent(customId)}`);
+    }
+    clientId = customId;
+  } else {
+    clientId = await generateClientId();
+  }
+
   const now = new Date().toISOString();
 
   const commission: Commission = {
@@ -55,7 +68,15 @@ async function createCommission(formData: FormData) {
   redirect(`/admin/portal/commissions/${clientId}?created=true`);
 }
 
-export default function NewCommissionPage() {
+interface PageProps {
+  searchParams: Promise<{ error?: string; id?: string }>;
+}
+
+export default async function NewCommissionPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const error = params.error ? decodeURIComponent(params.error) : undefined;
+  const defaultClientId = params.id ? decodeURIComponent(params.id) : undefined;
+
   return (
     <div className="max-w-lg space-y-8">
       {/* Header */}
@@ -74,7 +95,11 @@ export default function NewCommissionPage() {
 
       {/* Form card */}
       <div className="bg-surface border border-white/10 rounded-lg px-5 py-5">
-        <CreateCommissionForm action={createCommission} />
+        <CreateCommissionForm
+          action={createCommission}
+          error={error}
+          defaultClientId={defaultClientId}
+        />
       </div>
     </div>
   );
