@@ -68,8 +68,14 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right: Commission CTA — centered within bar height */}
-          <div className="hidden md:flex items-center self-center">
+          {/* Right: secondary utility link + Commission CTA */}
+          <div className="hidden md:flex items-center gap-5 self-center">
+            <Link
+              href="/client"
+              className="font-body text-[10px] font-normal tracking-[0.18em] uppercase text-text-subtle hover:text-text-muted transition-colors"
+            >
+              Track My Commission
+            </Link>
             <Link
               href="/contact"
               className="btn-gold-glow font-body text-[11px] font-normal tracking-[0.2em] uppercase border border-gold/50 text-gold hover:bg-gold/8 hover:border-gold px-5 py-2.5 transition-all duration-200"
@@ -114,6 +120,13 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            <Link
+              href="/client"
+              onClick={() => setOpen(false)}
+              className="font-body text-[10px] font-normal tracking-[0.2em] uppercase text-text-subtle hover:text-text-muted py-1.5 transition-colors"
+            >
+              Track My Commission
+            </Link>
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
