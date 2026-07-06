@@ -8,7 +8,8 @@ import {
   kvGetSongs,
   kvUpdateCommission,
   kvAddSong,
-  generateSongId,
+  kvAllocateSongId,
+  computeCommissionStage,
 } from "@/lib/commissions/kv";
 import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
 import { STAGE_LABELS } from "@/types/commission";
@@ -22,12 +23,13 @@ interface PageProps {
 }
 
 export default async function CommissionDetailPage({ params, searchParams }: PageProps) {
-  const { clientId } = await params;
+  // Note: in the admin portal, the [clientId] URL param holds the fullCommissionId
+  const { clientId: fullCommissionId } = await params;
   const { created } = await searchParams;
 
   const [commission, songs] = await Promise.all([
-    kvGetCommission(clientId),
-    kvGetSongs(clientId),
+    kvGetCommission(fullCommissionId),
+    kvGetSongs(fullCommissionId),
   ]);
 
   if (!commission) notFound();
@@ -39,19 +41,21 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
     const now = new Date().toISOString();
     const projectedDeliveryRaw = ((formData.get("projectedDelivery") as string) || "").trim();
     const updated: Commission = {
-      clientId,
+      permanentId: commission!.permanentId,
+      fullCommissionId,
       clientName: ((formData.get("clientName") as string) || "").trim(),
       email: ((formData.get("email") as string) || "").trim(),
       clientType: (formData.get("clientType") as ClientType) || commission!.clientType || "individual",
       packageType: formData.get("packageType") as PackageType,
       totalSongs: parseInt((formData.get("totalSongs") as string) || "1", 10),
+      currentStage: commission!.currentStage,
       notes: ((formData.get("notes") as string) || "").trim(),
       projectedDelivery: projectedDeliveryRaw || undefined,
       createdAt: commission!.createdAt,
       updatedAt: now,
     };
     await kvUpdateCommission(updated);
-    revalidatePath(`/admin/portal/commissions/${clientId}`);
+    revalidatePath(`/admin/portal/commissions/${fullCommissionId}`);
     revalidatePath("/admin/portal");
     revalidatePath("/admin/portal/commissions");
   }
@@ -60,10 +64,10 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
     "use server";
     const now = new Date().toISOString();
     const trackNumber = songs.length + 1;
-    const songId = await generateSongId(clientId);
+    const songId = await kvAllocateSongId();
     const newSong: Song = {
       songId,
-      clientId,
+      commissionId: fullCommissionId,
       title: "",
       trackNumber,
       productionStage: "intake",
@@ -77,8 +81,14 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
       updatedAt: now,
     };
     await kvAddSong(newSong);
-    await kvUpdateCommission({ ...commission!, updatedAt: now });
-    revalidatePath(`/admin/portal/commissions/${clientId}`);
+    const updatedSongs = [...songs, newSong];
+    await kvUpdateCommission({
+      ...commission!,
+      totalSongs: updatedSongs.length,
+      currentStage: computeCommissionStage(updatedSongs),
+      updatedAt: now,
+    });
+    revalidatePath(`/admin/portal/commissions/${fullCommissionId}`);
     revalidatePath("/admin/portal");
   }
 
@@ -86,7 +96,6 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
 
   return (
     <div className="space-y-8">
-      {/* Back link */}
       <Link
         href="/admin/portal"
         className="inline-flex items-center gap-1.5 text-text-subtle font-body text-sm hover:text-text-muted transition-colors"
@@ -94,26 +103,48 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
         ← Portal
       </Link>
 
-      {/* Success banner */}
+      {/* Created banner */}
       {created === "true" && (
-        <div className="border border-gold/30 bg-gold/5 rounded-lg px-5 py-4">
-          <p className="font-body text-sm text-gold font-medium mb-2">
-            Commission created — share this Client ID with your client
+        <div className="border border-gold/30 bg-gold/5 rounded-lg px-5 py-5 space-y-4">
+          <p className="font-body text-sm text-gold font-medium">
+            Commission created — share the Portal Login ID with your client
           </p>
-          <ClientIdCopy clientId={clientId} />
+          <div className="grid sm:grid-cols-2 gap-4">
+            <ClientIdCopy
+              id={commission.permanentId}
+              label="Client Portal Login ID"
+            />
+            <ClientIdCopy
+              id={commission.fullCommissionId}
+              label="Full Commission Tracking Number"
+              muted
+            />
+          </div>
         </div>
       )}
 
-      {/* Page header */}
+      {/* Page header — always show both IDs */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h1 className="font-display text-3xl text-text-base">{commission.clientName}</h1>
           <p className="text-text-muted font-body text-sm mt-1 capitalize">
-            {commission.packageType} &middot; {commission.totalSongs} song
-            {commission.totalSongs !== 1 ? "s" : ""}
+            {commission.clientType} &middot; {commission.packageType} &middot;{" "}
+            {commission.totalSongs} song{commission.totalSongs !== 1 ? "s" : ""}
           </p>
         </div>
-        <ClientIdCopy clientId={clientId} compact />
+        <div className="flex flex-col gap-2 items-end">
+          <ClientIdCopy
+            id={commission.permanentId}
+            label="Portal Login ID"
+            compact
+          />
+          <ClientIdCopy
+            id={commission.fullCommissionId}
+            label="Commission ID"
+            compact
+            muted
+          />
+        </div>
       </div>
 
       {/* Commission Details card */}
@@ -159,10 +190,12 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
                 className="px-5 py-4 flex items-center justify-between gap-4"
               >
                 <div className="min-w-0">
-                  {/* Badges row */}
                   <div className="flex flex-wrap items-center gap-1.5 mb-1">
                     <span className="font-body text-xs text-text-subtle">
                       Track {song.trackNumber}
+                    </span>
+                    <span className="font-mono text-xs text-text-subtle/60">
+                      #{song.songId}
                     </span>
                     <span
                       className={`inline-flex items-center px-2 py-0.5 rounded border text-xs font-body ${stageStyle(song.productionStage)}`}
@@ -179,22 +212,16 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
                       </span>
                     )}
                   </div>
-                  {/* Title */}
                   <p className="font-body text-sm text-text-base truncate">
-                    {song.title ? (
-                      song.title
-                    ) : (
-                      <span className="text-text-subtle italic">Untitled</span>
-                    )}
+                    {song.title || <span className="text-text-subtle italic">Untitled</span>}
                   </p>
-                  {/* Revisions */}
                   <p className="font-body text-xs text-text-subtle mt-0.5">
                     {song.revisionsRemaining} revision
                     {song.revisionsRemaining !== 1 ? "s" : ""} remaining
                   </p>
                 </div>
                 <Link
-                  href={`/admin/portal/commissions/${clientId}/songs/${song.songId}`}
+                  href={`/admin/portal/commissions/${fullCommissionId}/songs/${song.songId}`}
                   className="shrink-0 px-3 py-1.5 border border-white/10 text-text-muted font-body text-xs rounded hover:border-gold/40 hover:text-gold transition-colors"
                 >
                   Edit

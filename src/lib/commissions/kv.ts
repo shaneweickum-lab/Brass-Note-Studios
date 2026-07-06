@@ -1,6 +1,6 @@
 import { Redis } from "@upstash/redis";
-import type { Commission, Song, ClientType, PackageType } from "@/types/commission";
-import { CLIENT_TYPE_CODES, PACKAGE_TIER_CODES } from "@/types/commission";
+import type { Client, Commission, Song, ClientType, PackageType } from "@/types/commission";
+import { CLIENT_TYPE_CODES, PACKAGE_TIER_CODES, STAGE_ORDER } from "@/types/commission";
 
 const KV_AVAILABLE = Boolean(
   process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
@@ -16,70 +16,116 @@ const redis = KV_AVAILABLE
 // ── Key helpers ────────────────────────────────────────────────────────────────
 
 const KEY = {
-  songSeq: "bns:song:seq",
-  index: "bns:commissions",
-  commission: (id: string) => `commission:${id}`,
-  songs: (id: string) => `commission:${id}:songs`,
-  song: (clientId: string, songId: string) =>
-    `commission:${clientId}:song:${songId}`,
+  clientCounter:     "counter:clients",
+  songCounter:       "counter:songs",
+  clientIndex:       "index:clients",
+  commissionIndex:   "index:commissions",
+  emailToClient:     (email: string) => `index:email:${email.toLowerCase()}`,
+  client:            (permanentId: string) => `client:${permanentId}`,
+  clientCommissions: (permanentId: string) => `client:${permanentId}:commissions`,
+  commission:        (fullId: string) => `commission:${fullId}`,
+  commissionSongs:   (fullId: string) => `commission:${fullId}:songs`,
+  song:              (fullId: string, songId: string) => `commission:${fullId}:song:${songId}`,
 } as const;
 
-// ── ID generation ──────────────────────────────────────────────────────────────
+// ── ID construction ────────────────────────────────────────────────────────────
+
+function pad(n: number, width: number): string {
+  return String(n).padStart(width, "0");
+}
+
+function buildPermanentId(date: string, seq: number): string {
+  const d = new Date(date);
+  const mm = pad(d.getUTCMonth() + 1, 2);
+  const dd = pad(d.getUTCDate(), 2);
+  const yy = String(d.getUTCFullYear()).slice(2);
+  return `BNS${mm}${dd}${yy}C${pad(seq, 4)}`;
+}
+
+// BNS011526C0001-101-0001
+function buildFullCommissionId(
+  permanentId: string,
+  clientType: ClientType,
+  packageType: PackageType,
+  firstSongSeq: number
+): string {
+  const typeCode = CLIENT_TYPE_CODES[clientType];
+  const pkgCode = PACKAGE_TIER_CODES[packageType];
+  return `${permanentId}-${typeCode}${pkgCode}-${pad(firstSongSeq, 4)}`;
+}
+
+// ── Client CRUD ────────────────────────────────────────────────────────────────
 
 /**
- * Generates a client ID in the format BNS{MMDDYY}{T}{PP}
- * e.g. BNS011526101 = 01/15/26, Individual (1), Single (01)
- * If the base ID already exists (same date + type + package), appends B/C/D...
+ * Returns an existing client matched by email, or creates a new one.
+ * This is the returning-client detection mechanism.
  */
-export async function generateClientId(
-  intakeDate: string,
-  clientType: ClientType,
-  packageType: PackageType
-): Promise<string> {
+export async function kvGetOrCreateClient(
+  clientName: string,
+  email: string,
+  date: string
+): Promise<{ client: Client; isNew: boolean }> {
   if (!redis) throw new Error("Redis not available");
-  const d = new Date(intakeDate);
-  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
-  const dd = String(d.getUTCDate()).padStart(2, "0");
-  const yy = String(d.getUTCFullYear()).slice(2);
-  const base = `BNS${mm}${dd}${yy}${CLIENT_TYPE_CODES[clientType]}${PACKAGE_TIER_CODES[packageType]}`;
 
-  const exists = await redis.get(KEY.commission(base));
-  if (!exists) return base;
-
-  for (const suffix of ["B", "C", "D", "E", "F", "G", "H"]) {
-    const candidate = `${base}${suffix}`;
-    const taken = await redis.get(KEY.commission(candidate));
-    if (!taken) return candidate;
+  const existingId = await redis.get<string>(KEY.emailToClient(email));
+  if (existingId) {
+    const client = await redis.get<Client>(KEY.client(existingId));
+    if (client) return { client, isNew: false };
   }
 
-  // Extremely unlikely — fall back to base + timestamp suffix
-  return `${base}-${Date.now().toString(36).slice(-3).toUpperCase()}`;
+  const seq = await redis.incr(KEY.clientCounter);
+  const permanentId = buildPermanentId(date, seq);
+  const newClient: Client = { permanentId, clientName, email, createdAt: date };
+
+  const pipeline = redis.pipeline();
+  pipeline.set(KEY.client(permanentId), JSON.stringify(newClient));
+  pipeline.set(KEY.emailToClient(email), permanentId);
+  pipeline.lpush(KEY.clientIndex, permanentId);
+  await pipeline.exec();
+
+  return { client: newClient, isNew: true };
 }
 
+export async function kvGetClient(permanentId: string): Promise<Client | null> {
+  if (!redis) return null;
+  try {
+    return await redis.get<Client>(KEY.client(permanentId));
+  } catch (e) {
+    console.error("[kv:client:get]", e);
+    return null;
+  }
+}
+
+// ── Commission ID allocation ───────────────────────────────────────────────────
+
 /**
- * Allocates `count` consecutive global song IDs and returns them as
- * formatted strings: {clientId}-{GGGG}
+ * Allocates `totalSongs` consecutive global song IDs and derives the
+ * fullCommissionId (anchored to the first song's global seq).
+ * Returns both the fullCommissionId and the array of song IDs.
  */
-export async function generateSongIds(
-  clientId: string,
-  count: number
-): Promise<string[]> {
+export async function kvAllocateCommissionIds(
+  permanentId: string,
+  clientType: ClientType,
+  packageType: PackageType,
+  totalSongs: number
+): Promise<{ fullCommissionId: string; songIds: string[] }> {
   if (!redis) throw new Error("Redis not available");
-  if (count <= 0) return [];
-  const endSeq = await redis.incrby(KEY.songSeq, count);
+  const count = Math.max(1, totalSongs);
+  const endSeq = await redis.incrby(KEY.songCounter, count);
   const startSeq = endSeq - count + 1;
-  return Array.from({ length: count }, (_, i) =>
-    `${clientId}-${String(startSeq + i).padStart(4, "0")}`
-  );
+  const fullCommissionId = buildFullCommissionId(permanentId, clientType, packageType, startSeq);
+  const songIds = Array.from({ length: count }, (_, i) => pad(startSeq + i, 4));
+  return { fullCommissionId, songIds };
 }
 
 /**
- * Allocates a single global song ID: {clientId}-{GGGG}
+ * Allocates a single global song ID — used when adding a song to
+ * an existing commission. Returns the 4-digit padded song ID.
  */
-export async function generateSongId(clientId: string): Promise<string> {
+export async function kvAllocateSongId(): Promise<string> {
   if (!redis) throw new Error("Redis not available");
-  const seq = await redis.incr(KEY.songSeq);
-  return `${clientId}-${String(seq).padStart(4, "0")}`;
+  const seq = await redis.incr(KEY.songCounter);
+  return pad(seq, 4);
 }
 
 // ── Commission CRUD ────────────────────────────────────────────────────────────
@@ -89,27 +135,26 @@ export async function kvCreateCommission(
   songs: Song[]
 ): Promise<void> {
   if (!redis) throw new Error("Redis not available");
+  const fullId = commission.fullCommissionId;
   const pipeline = redis.pipeline();
-  pipeline.set(KEY.commission(commission.clientId), JSON.stringify(commission));
+  pipeline.set(KEY.commission(fullId), JSON.stringify(commission));
   const songIds = songs.map((s) => s.songId);
-  pipeline.del(KEY.songs(commission.clientId));
+  pipeline.del(KEY.commissionSongs(fullId));
   if (songIds.length > 0) {
-    pipeline.rpush(KEY.songs(commission.clientId), ...songIds);
+    pipeline.rpush(KEY.commissionSongs(fullId), ...songIds);
   }
   for (const song of songs) {
-    pipeline.set(
-      KEY.song(commission.clientId, song.songId),
-      JSON.stringify(song)
-    );
+    pipeline.set(KEY.song(fullId, song.songId), JSON.stringify(song));
   }
-  pipeline.lpush(KEY.index, commission.clientId);
+  pipeline.lpush(KEY.clientCommissions(commission.permanentId), fullId);
+  pipeline.lpush(KEY.commissionIndex, fullId);
   await pipeline.exec();
 }
 
 export async function kvGetAllCommissions(): Promise<Commission[]> {
   if (!redis) return [];
   try {
-    const ids = await redis.lrange<string>(KEY.index, 0, -1);
+    const ids = await redis.lrange<string>(KEY.commissionIndex, 0, -1);
     if (!ids || ids.length === 0) return [];
     const records = await Promise.all(
       ids.map((id) => redis!.get<Commission>(KEY.commission(id)))
@@ -121,37 +166,52 @@ export async function kvGetAllCommissions(): Promise<Commission[]> {
   }
 }
 
+export async function kvGetCommissionsByClient(
+  permanentId: string
+): Promise<Commission[]> {
+  if (!redis) return [];
+  try {
+    const ids = await redis.lrange<string>(KEY.clientCommissions(permanentId), 0, -1);
+    if (!ids || ids.length === 0) return [];
+    const records = await Promise.all(
+      ids.map((id) => redis!.get<Commission>(KEY.commission(id)))
+    );
+    return records.filter((r): r is Commission => r !== null);
+  } catch (e) {
+    console.error("[kv:commissions:getByClient]", e);
+    return [];
+  }
+}
+
 export async function kvGetCommission(
-  clientId: string
+  fullCommissionId: string
 ): Promise<Commission | null> {
   if (!redis) return null;
   try {
-    return await redis.get<Commission>(KEY.commission(clientId));
+    return await redis.get<Commission>(KEY.commission(fullCommissionId));
   } catch (e) {
     console.error("[kv:commissions:get]", e);
     return null;
   }
 }
 
-export async function kvUpdateCommission(
-  commission: Commission
-): Promise<void> {
+export async function kvUpdateCommission(commission: Commission): Promise<void> {
   if (!redis) throw new Error("Redis not available");
   await redis.set(
-    KEY.commission(commission.clientId),
+    KEY.commission(commission.fullCommissionId),
     JSON.stringify(commission)
   );
 }
 
 // ── Song CRUD ──────────────────────────────────────────────────────────────────
 
-export async function kvGetSongs(clientId: string): Promise<Song[]> {
+export async function kvGetSongs(fullCommissionId: string): Promise<Song[]> {
   if (!redis) return [];
   try {
-    const songIds = await redis.lrange<string>(KEY.songs(clientId), 0, -1);
+    const songIds = await redis.lrange<string>(KEY.commissionSongs(fullCommissionId), 0, -1);
     if (!songIds || songIds.length === 0) return [];
     const songs = await Promise.all(
-      songIds.map((sid) => redis!.get<Song>(KEY.song(clientId, sid)))
+      songIds.map((sid) => redis!.get<Song>(KEY.song(fullCommissionId, sid)))
     );
     return songs
       .filter((s): s is Song => s !== null)
@@ -163,12 +223,12 @@ export async function kvGetSongs(clientId: string): Promise<Song[]> {
 }
 
 export async function kvGetSong(
-  clientId: string,
+  fullCommissionId: string,
   songId: string
 ): Promise<Song | null> {
   if (!redis) return null;
   try {
-    return await redis.get<Song>(KEY.song(clientId, songId));
+    return await redis.get<Song>(KEY.song(fullCommissionId, songId));
   } catch (e) {
     console.error("[kv:song:get]", e);
     return null;
@@ -177,13 +237,26 @@ export async function kvGetSong(
 
 export async function kvUpdateSong(song: Song): Promise<void> {
   if (!redis) throw new Error("Redis not available");
-  await redis.set(KEY.song(song.clientId, song.songId), JSON.stringify(song));
+  await redis.set(KEY.song(song.commissionId, song.songId), JSON.stringify(song));
 }
 
 export async function kvAddSong(song: Song): Promise<void> {
   if (!redis) throw new Error("Redis not available");
-  await redis.set(KEY.song(song.clientId, song.songId), JSON.stringify(song));
-  await redis.rpush(KEY.songs(song.clientId), song.songId);
+  await redis.set(KEY.song(song.commissionId, song.songId), JSON.stringify(song));
+  await redis.rpush(KEY.commissionSongs(song.commissionId), song.songId);
+}
+
+// ── Stage helpers ──────────────────────────────────────────────────────────────
+
+/**
+ * Computes the overall commission stage from the current state of all its songs.
+ * Returns the earliest incomplete stage, or "delivered" if all songs are delivered.
+ */
+export function computeCommissionStage(songs: Song[]): ProductionStage {
+  if (songs.length === 0) return "intake";
+  if (songs.every((s) => s.productionStage === "delivered")) return "delivered";
+  const indices = songs.map((s) => STAGE_ORDER.indexOf(s.productionStage));
+  return STAGE_ORDER[Math.min(...indices)];
 }
 
 export { KV_AVAILABLE };

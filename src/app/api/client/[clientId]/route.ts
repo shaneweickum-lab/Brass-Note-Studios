@@ -1,12 +1,16 @@
 export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
-import { kvGetCommission, kvGetSongs } from "@/lib/commissions/kv";
+import {
+  kvGetClient,
+  kvGetCommissionsByClient,
+  kvGetSongs,
+} from "@/lib/commissions/kv";
 import { checkRateLimit } from "@/lib/rateLimit";
-import type { ClientCommission, ClientSong } from "@/types/commission";
+import type { ClientPortalData, ClientCommissionView, ClientSong } from "@/types/commission";
 
 interface RouteContext {
-  params: Promise<{ clientId: string }>;
+  params: Promise<{ clientId: string }>; // clientId = permanentId
 }
 
 export async function GET(req: NextRequest, context: RouteContext): Promise<Response> {
@@ -17,31 +21,45 @@ export async function GET(req: NextRequest, context: RouteContext): Promise<Resp
   }
 
   try {
-    const { clientId } = await context.params;
+    const { clientId: permanentId } = await context.params;
 
-    const commission = await kvGetCommission(clientId);
-    if (!commission) {
+    const client = await kvGetClient(permanentId);
+    if (!client) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    const songs = await kvGetSongs(clientId);
+    const commissions = await kvGetCommissionsByClient(permanentId);
+    if (commissions.length === 0) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
 
-    const clientSongs: ClientSong[] = songs.map((song) => ({
-      songId: song.songId,
-      title: song.title,
-      trackNumber: song.trackNumber,
-      productionStage: song.productionStage,
-      revisionsRemaining: song.revisionsRemaining,
-      lyricsReady: song.lyricsReady,
-      lyrics: song.lyricsReady ? song.lyrics : null,
-    }));
+    const commissionViews: ClientCommissionView[] = await Promise.all(
+      commissions.map(async (commission) => {
+        const songs = await kvGetSongs(commission.fullCommissionId);
+        const clientSongs: ClientSong[] = songs.map((song) => ({
+          songId: song.songId,
+          title: song.title,
+          trackNumber: song.trackNumber,
+          productionStage: song.productionStage,
+          revisionsRemaining: song.revisionsRemaining,
+          lyricsReady: song.lyricsReady,
+          lyrics: song.lyricsReady ? song.lyrics : null,
+        }));
+        return {
+          fullCommissionId: commission.fullCommissionId,
+          packageType: commission.packageType,
+          totalSongs: commission.totalSongs,
+          projectedDelivery: commission.projectedDelivery,
+          songs: clientSongs,
+        };
+      })
+    );
 
-    const response: ClientCommission = {
-      clientId: commission.clientId,
-      clientName: commission.clientName,
-      packageType: commission.packageType,
-      totalSongs: commission.totalSongs,
-      songs: clientSongs,
+    // Never return email, notes, revisionsTotal, revisionsUsed, or admin metadata
+    const response: ClientPortalData = {
+      permanentId: client.permanentId,
+      clientName: client.clientName,
+      commissions: commissionViews,
     };
 
     return NextResponse.json(response);

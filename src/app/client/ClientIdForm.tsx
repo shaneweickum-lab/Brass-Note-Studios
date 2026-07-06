@@ -59,7 +59,7 @@ export default function ClientIdForm() {
           type="text"
           value={value}
           onChange={handleChange}
-          placeholder="BNS-2026-0001"
+          placeholder="BNS011526C0001"
           autoComplete="off"
           spellCheck={false}
           disabled={loading}

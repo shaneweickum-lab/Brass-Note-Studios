@@ -4,27 +4,25 @@ import { useState } from "react";
 import type { PackageType, ClientType } from "@/types/commission";
 import { PACKAGE_DEFAULT_SONGS } from "@/types/commission";
 
-const CLIENT_TYPE_OPTIONS: { value: ClientType; label: string; description: string }[] = [
-  { value: "individual",      label: "Individual",      description: "Tier 1" },
-  { value: "organization",    label: "Organization",    description: "Tier 2" },
-  { value: "content-creator", label: "Content Creator", description: "Tier 3" },
+const CLIENT_TYPE_OPTIONS: { value: ClientType; label: string; code: string }[] = [
+  { value: "individual",      label: "Individual",      code: "Tier 1" },
+  { value: "organization",    label: "Organization",    code: "Tier 2" },
+  { value: "content-creator", label: "Content Creator", code: "Tier 3" },
 ];
 
 const PACKAGE_OPTIONS: { value: PackageType; label: string; description: string }[] = [
-  { value: "single", label: "Single",       description: "1 song" },
-  { value: "ep",     label: "EP",           description: "3 songs" },
-  { value: "lp",     label: "LP",           description: "5 songs" },
-  { value: "album",  label: "Album",        description: "8 songs" },
-  { value: "organization", label: "Organization", description: "Custom" },
+  { value: "single",       label: "Single",       description: "1 song"  },
+  { value: "ep",           label: "EP",           description: "3 songs" },
+  { value: "lp",           label: "LP",           description: "5 songs" },
+  { value: "album",        label: "Album",        description: "8 songs" },
+  { value: "organization", label: "Organization", description: "Custom"  },
 ];
 
 interface Props {
   action: (formData: FormData) => Promise<void>;
-  error?: string;
-  defaultClientId?: string;
 }
 
-export default function CreateCommissionForm({ action, error, defaultClientId }: Props) {
+export default function CreateCommissionForm({ action }: Props) {
   const [packageType, setPackageType] = useState<PackageType>("single");
   const [totalSongs, setTotalSongs] = useState<number>(PACKAGE_DEFAULT_SONGS["single"]);
 
@@ -36,35 +34,6 @@ export default function CreateCommissionForm({ action, error, defaultClientId }:
 
   return (
     <form action={action} className="space-y-5">
-      {/* Error banner */}
-      {error && (
-        <div className="rounded border border-red-500/30 bg-red-500/10 px-4 py-3 font-body text-sm text-red-400">
-          {error}
-        </div>
-      )}
-
-      {/* Client ID — optional override */}
-      <div className="space-y-1.5">
-        <label htmlFor="clientId" className="block font-body text-sm text-text-muted">
-          Client ID
-          <span className="ml-2 font-body text-xs text-text-subtle">
-            optional — leave blank to auto-generate
-          </span>
-        </label>
-        <input
-          id="clientId"
-          name="clientId"
-          type="text"
-          autoComplete="off"
-          defaultValue={defaultClientId}
-          className="w-full bg-surface border border-white/10 rounded px-3 py-2 font-mono text-sm text-gold placeholder:text-text-subtle placeholder:font-body focus:outline-none focus:border-gold/50 transition-colors"
-          placeholder="BNS-2026-0001 or your own format"
-        />
-        <p className="font-body text-xs text-text-subtle">
-          Use any format that matches your spreadsheets or CRM — no restrictions.
-        </p>
-      </div>
-
       {/* Client Type */}
       <div className="space-y-1.5">
         <label htmlFor="clientType" className="block font-body text-sm text-text-muted">
@@ -73,17 +42,17 @@ export default function CreateCommissionForm({ action, error, defaultClientId }:
         <select
           id="clientType"
           name="clientType"
-          className="w-full bg-surface border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base focus:outline-none focus:border-gold/50 transition-colors"
           defaultValue="individual"
+          className="w-full bg-surface border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base focus:outline-none focus:border-gold/50 transition-colors"
         >
           {CLIENT_TYPE_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
-              {opt.label} — {opt.description}
+              {opt.label} — {opt.code}
             </option>
           ))}
         </select>
         <p className="font-body text-xs text-text-subtle">
-          Baked into the Client ID — Individual (1), Organization (2), Content Creator (3).
+          Encoded in the Commission Tracking Number as the tier digit (1 / 2 / 3).
         </p>
       </div>
 
@@ -117,6 +86,9 @@ export default function CreateCommissionForm({ action, error, defaultClientId }:
           className="w-full bg-surface border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base placeholder:text-text-subtle focus:outline-none focus:border-gold/50 transition-colors"
           placeholder="jane@example.com"
         />
+        <p className="font-body text-xs text-text-subtle">
+          Returning clients are matched by email — they keep their existing Portal Login ID.
+        </p>
       </div>
 
       {/* Package Type */}

@@ -5,9 +5,11 @@ import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import {
   kvGetSong,
+  kvGetSongs,
   kvGetCommission,
   kvUpdateSong,
   kvUpdateCommission,
+  computeCommissionStage,
 } from "@/lib/commissions/kv";
 import type { Song, ProductionStage } from "@/types/commission";
 import SongEditForm from "./SongEditForm";
@@ -17,11 +19,12 @@ interface PageProps {
 }
 
 export default async function SongDetailPage({ params }: PageProps) {
-  const { clientId, songId } = await params;
+  // clientId here = fullCommissionId (admin portal param convention)
+  const { clientId: fullCommissionId, songId } = await params;
 
   const [song, commission] = await Promise.all([
-    kvGetSong(clientId, songId),
-    kvGetCommission(clientId),
+    kvGetSong(fullCommissionId, songId),
+    kvGetCommission(fullCommissionId),
   ]);
 
   if (!song || !commission) notFound();
@@ -57,11 +60,18 @@ export default async function SongDetailPage({ params }: PageProps) {
     };
 
     await kvUpdateSong(updated);
-    // Bump commission updatedAt so the dashboard reflects recent activity
-    await kvUpdateCommission({ ...commission!, updatedAt: now });
 
-    revalidatePath(`/admin/portal/commissions/${clientId}/songs/${songId}`);
-    revalidatePath(`/admin/portal/commissions/${clientId}`);
+    // Recompute commission-level stage from all songs after this update
+    const allSongs = await kvGetSongs(fullCommissionId);
+    const mergedSongs = allSongs.map((s) => (s.songId === updated.songId ? updated : s));
+    await kvUpdateCommission({
+      ...commission!,
+      currentStage: computeCommissionStage(mergedSongs),
+      updatedAt: now,
+    });
+
+    revalidatePath(`/admin/portal/commissions/${fullCommissionId}/songs/${songId}`);
+    revalidatePath(`/admin/portal/commissions/${fullCommissionId}`);
     revalidatePath("/admin/portal");
     revalidatePath("/admin/portal/commissions");
   }
@@ -70,25 +80,22 @@ export default async function SongDetailPage({ params }: PageProps) {
 
   return (
     <div className="max-w-2xl space-y-8">
-      {/* Back link */}
       <Link
-        href={`/admin/portal/commissions/${clientId}`}
+        href={`/admin/portal/commissions/${fullCommissionId}`}
         className="inline-flex items-center gap-1.5 text-text-subtle font-body text-sm hover:text-text-muted transition-colors"
       >
         ← {commission.clientName}
       </Link>
 
-      {/* Header */}
       <div>
         <p className="font-body text-xs text-text-subtle uppercase tracking-[0.15em] mb-1">
-          {clientId} &middot; Track {song.trackNumber}
+          {commission.permanentId} &middot; Track {song.trackNumber} &middot; Song #{song.songId}
         </p>
         <h1 className="font-display text-3xl text-text-base">
           {song.title || <span className="text-text-muted italic">Untitled</span>}
         </h1>
       </div>
 
-      {/* Form card */}
       <div className="bg-surface border border-white/10 rounded-lg overflow-hidden">
         <div className="px-5 py-4 border-b border-white/10">
           <h2 className="font-display text-lg text-text-base">Song Details</h2>

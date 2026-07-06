@@ -9,9 +9,9 @@ interface Props {
 }
 
 const CLIENT_TYPE_OPTIONS: { value: ClientType; label: string }[] = [
-  { value: "individual",      label: "Individual (Tier 1)"       },
-  { value: "organization",    label: "Organization (Tier 2)"     },
-  { value: "content-creator", label: "Content Creator (Tier 3)"  },
+  { value: "individual",      label: "Individual (Tier 1)"      },
+  { value: "organization",    label: "Organization (Tier 2)"    },
+  { value: "content-creator", label: "Content Creator (Tier 3)" },
 ];
 
 const PACKAGE_OPTIONS: { value: PackageType; label: string }[] = [
@@ -29,6 +29,34 @@ export default function CommissionEditForm({ commission, action }: Props) {
   return (
     <form action={action} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {/* Client Type */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Client Type</label>
+          <select
+            name="clientType"
+            defaultValue={commission.clientType ?? "individual"}
+            className={inputClass}
+          >
+            {CLIENT_TYPE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Package Type */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">Package Type</label>
+          <select
+            name="packageType"
+            defaultValue={commission.packageType}
+            className={inputClass}
+          >
+            {PACKAGE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+
         {/* Client Name */}
         <div className="space-y-1.5">
           <label className="block font-body text-sm text-text-muted">Client Name</label>
@@ -53,38 +81,6 @@ export default function CommissionEditForm({ commission, action }: Props) {
           />
         </div>
 
-        {/* Client Type */}
-        <div className="space-y-1.5">
-          <label className="block font-body text-sm text-text-muted">Client Type</label>
-          <select
-            name="clientType"
-            defaultValue={commission.clientType ?? "individual"}
-            className={inputClass}
-          >
-            {CLIENT_TYPE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Package Type */}
-        <div className="space-y-1.5">
-          <label className="block font-body text-sm text-text-muted">Package Type</label>
-          <select
-            name="packageType"
-            defaultValue={commission.packageType}
-            className={inputClass}
-          >
-            {PACKAGE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
         {/* Total Songs */}
         <div className="space-y-1.5">
           <label className="block font-body text-sm text-text-muted">Total Songs</label>
@@ -97,27 +93,24 @@ export default function CommissionEditForm({ commission, action }: Props) {
             className={inputClass}
           />
         </div>
-      </div>
 
-      {/* Projected / Expected Delivery */}
-      <div className="space-y-1.5 sm:col-span-2">
-        <label className="block font-body text-sm text-text-muted">
-          {commission.projectedDelivery ? "Expected Delivery Date" : "Projected Delivery Window"}
-          <span className="ml-2 font-body text-xs text-text-subtle">
-            {commission.projectedDelivery
-              ? `typical range: ${PACKAGE_TIMELINE_RANGES[commission.packageType]}`
-              : PACKAGE_TIMELINE_RANGES[commission.packageType]}
-          </span>
-        </label>
-        <input
-          name="projectedDelivery"
-          type="date"
-          defaultValue={commission.projectedDelivery ?? ""}
-          className={inputClass}
-        />
-        <p className="font-body text-xs text-text-subtle">
-          Set a hard date when you have a clear picture — the client sees this as their expected delivery date.
-        </p>
+        {/* Projected / Expected Delivery */}
+        <div className="space-y-1.5">
+          <label className="block font-body text-sm text-text-muted">
+            {commission.projectedDelivery ? "Expected Delivery Date" : "Projected Delivery Window"}
+            <span className="ml-2 font-body text-xs text-text-subtle">
+              {commission.projectedDelivery
+                ? `typical: ${PACKAGE_TIMELINE_RANGES[commission.packageType]}`
+                : PACKAGE_TIMELINE_RANGES[commission.packageType]}
+            </span>
+          </label>
+          <input
+            name="projectedDelivery"
+            type="date"
+            defaultValue={commission.projectedDelivery ?? ""}
+            className={inputClass}
+          />
+        </div>
       </div>
 
       {/* Notes */}

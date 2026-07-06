@@ -1,7 +1,5 @@
 export type PackageType = "single" | "ep" | "lp" | "album" | "organization";
-
 export type ClientType = "individual" | "organization" | "content-creator";
-
 export type ProductionStage =
   | "intake"
   | "writing"
@@ -10,22 +8,32 @@ export type ProductionStage =
   | "revision"
   | "delivered";
 
+// Permanent client record — created once per unique email, never changes
+export interface Client {
+  permanentId: string; // BNS{MMDDYY}C{NNNN}
+  clientName: string;
+  email: string;
+  createdAt: string;
+}
+
 export interface Commission {
-  clientId: string;
+  permanentId: string;      // BNS011526C0001 — client's portal login ID
+  fullCommissionId: string; // BNS011526C0001-101-0001 — internal tracking ID
   clientName: string;
   email: string;
   clientType: ClientType;
   packageType: PackageType;
   totalSongs: number;
+  currentStage: ProductionStage; // overall commission status, updated as songs progress
   createdAt: string;
   updatedAt: string;
   notes: string;
-  projectedDelivery?: string; // YYYY-MM-DD — auto-calculated on create, editable by admin
+  projectedDelivery?: string; // YYYY-MM-DD
 }
 
 export interface Song {
-  songId: string;
-  clientId: string;
+  songId: string;       // 4-digit padded global seq, e.g. "0001"
+  commissionId: string; // fullCommissionId
   title: string;
   trackNumber: number;
   productionStage: ProductionStage;
@@ -50,13 +58,20 @@ export interface ClientSong {
   lyrics: string | null; // only populated when lyricsReady === true
 }
 
-export interface ClientCommission {
-  clientId: string;
-  clientName: string;
+// Client-visible view of one commission
+export interface ClientCommissionView {
+  fullCommissionId: string;
   packageType: PackageType;
   totalSongs: number;
+  projectedDelivery?: string;
   songs: ClientSong[];
-  projectedDelivery?: string; // YYYY-MM-DD
+}
+
+// Full client portal — may include multiple commissions (returning clients)
+export interface ClientPortalData {
+  permanentId: string;
+  clientName: string;
+  commissions: ClientCommissionView[];
 }
 
 export const STAGE_ORDER: ProductionStage[] = [
@@ -92,14 +107,14 @@ export const CLIENT_TYPE_LABELS: Record<ClientType, string> = {
   "content-creator": "Content Creator",
 };
 
-// Single digit appended to client ID after the date segment
+// Single digit appended after the date in the full commission ID
 export const CLIENT_TYPE_CODES: Record<ClientType, string> = {
   individual: "1",
   organization: "2",
   "content-creator": "3",
 };
 
-// Two-digit package tier codes appended after the client type code
+// Two-digit package tier code appended after the client type digit
 export const PACKAGE_TIER_CODES: Record<PackageType, string> = {
   single: "01",
   ep: "02",
