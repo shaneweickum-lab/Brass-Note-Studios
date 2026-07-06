@@ -16,7 +16,7 @@ interface Props {
   permanentId: string;
   clientName: string;
   initialMessages: Message[];
-  onSend: (text: string) => Promise<void>;
+  onSend: (text: string) => Promise<{ id: string; sender: "admin"; body: string; createdAt: string }>;
 }
 
 function formatTime(iso: string): string {
@@ -82,7 +82,13 @@ export default function AdminMessageThread({
     setError(null);
     startTransition(async () => {
       try {
-        await onSend(text);
+        const newMsg = await onSend(text);
+        // Add own message to state immediately — don't wait for real-time
+        setMessages((prev) =>
+          prev.some((m) => m.id === newMsg.id)
+            ? prev
+            : [...prev, { id: newMsg.id, sender: newMsg.sender, body: newMsg.body, createdAt: newMsg.createdAt }]
+        );
         setInput("");
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to send.");

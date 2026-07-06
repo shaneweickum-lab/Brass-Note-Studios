@@ -34,7 +34,8 @@ export default async function AdminMessageThreadPage({ params }: PageProps) {
     const clean = text.replace(/<[^>]*>/g, "").trim();
     if (!clean) throw new Error("Message cannot be empty.");
     if (clean.length > 4000) throw new Error("Message must be 4000 characters or fewer.");
-    await createMessage(permanentId, "admin", clean);
+    const msg = await createMessage(permanentId, "admin", clean);
+    return { id: msg.id, sender: msg.sender as "admin", body: msg.body, createdAt: msg.createdAt };
   }
 
   const initialMessages = messages.map((m) => ({

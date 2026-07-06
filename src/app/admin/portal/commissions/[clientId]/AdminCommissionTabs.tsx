@@ -25,7 +25,7 @@ interface Props {
   unreadCount: number;
   updateCommission: (formData: FormData) => Promise<void>;
   addSong: () => Promise<void>;
-  onSend: (text: string) => Promise<void>;
+  onSend: (text: string) => Promise<{ id: string; sender: "admin"; body: string; createdAt: string }>;
 }
 
 type TabId = "details" | "songs" | "messages";

@@ -93,6 +93,15 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
         return;
       }
 
+      // Add own message to state immediately — don't wait for real-time
+      const newMsg = await res.json().catch(() => null);
+      if (newMsg?.id) {
+        setMessages((prev) =>
+          prev.some((m) => m.id === newMsg.id)
+            ? prev
+            : [...prev, { id: newMsg.id, sender: newMsg.sender, body: newMsg.body, createdAt: newMsg.createdAt }]
+        );
+      }
       setInput("");
     } catch {
       setError("Unable to send. Please check your connection.");

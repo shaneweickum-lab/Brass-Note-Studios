@@ -105,7 +105,8 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
     const clean = text.replace(/<[^>]*>/g, "").trim();
     if (!clean) throw new Error("Message cannot be empty.");
     if (clean.length > 4000) throw new Error("Message must be 4000 characters or fewer.");
-    await createMessage(commission!.permanentId, "admin", clean);
+    const msg = await createMessage(commission!.permanentId, "admin", clean);
+    return { id: msg.id, sender: msg.sender as "admin", body: msg.body, createdAt: msg.createdAt };
   }
 
   // ── Render ──────────────────────────────────────────────────────────────────
