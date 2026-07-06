@@ -16,10 +16,11 @@ function urlBase64ToUint8Array(base64: string): Uint8Array {
 
 type Status =
   | "loading"
-  | "unsupported"   // browser has no Push/Notification API
-  | "ios-browser"   // iOS but not installed as PWA
-  | "denied"        // user blocked notifications in OS Settings
-  | "idle"          // supported, not subscribed
+  | "unsupported"
+  | "ios-browser"   // iOS Safari, not installed as PWA
+  | "no-vapid"      // server VAPID keys not configured
+  | "denied"        // OS notification permission denied
+  | "idle"
   | "subscribed"
   | "error";
 
@@ -29,25 +30,24 @@ export default function PushNotificationToggle() {
   const [status, setStatus] = useState<Status>("loading");
   const [endpoint, setEndpoint] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [testResult, setTestResult] = useState<TestResult>("idle");
   const [testError, setTestError] = useState<string | null>(null);
 
   useEffect(() => {
     async function detect() {
-      // Basic API support check
       if (
         typeof window === "undefined" ||
         !("serviceWorker" in navigator) ||
         !("PushManager" in window) ||
         !("Notification" in window)
       ) {
-        // iOS Safari in regular browser mode: suggest adding to Home Screen
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         setStatus(isIOS ? "ios-browser" : "unsupported");
         return;
       }
 
-      // iOS: push only works when installed as PWA on the Home Screen
+      // iOS: push only works when installed to Home Screen
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
       const isStandalone =
         window.matchMedia("(display-mode: standalone)").matches ||
@@ -62,35 +62,60 @@ export default function PushNotificationToggle() {
         return;
       }
 
+      // Check server VAPID config
+      try {
+        const keyRes = await fetch("/api/admin/push/vapid-public-key");
+        if (!keyRes.ok) {
+          setStatus("no-vapid");
+          return;
+        }
+      } catch {
+        setStatus("no-vapid");
+        return;
+      }
+
+      // Check for existing subscription
       try {
         const reg = await navigator.serviceWorker.getRegistration("/");
         const sub = reg ? await reg.pushManager.getSubscription() : null;
         if (sub) {
           setEndpoint(sub.endpoint);
           setStatus("subscribed");
-        } else {
-          setStatus("idle");
+          return;
         }
       } catch {
-        setStatus("idle");
+        // ignore — fall through to idle
       }
+
+      setStatus("idle");
     }
 
-    detect();
+    detect().catch(() => setStatus("unsupported"));
   }, []);
 
   async function subscribe() {
     setBusy(true);
+    setErrorMsg(null);
     try {
       const keyRes = await fetch("/api/admin/push/vapid-public-key");
-      if (!keyRes.ok) throw new Error("Push not configured on server.");
+      if (!keyRes.ok) {
+        throw new Error("VAPID keys not configured on server. Add VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY to Vercel env vars.");
+      }
       const { publicKey } = (await keyRes.json()) as { publicKey: string };
 
       const permission = await Notification.requestPermission();
       if (permission === "denied") { setStatus("denied"); return; }
-      if (permission !== "granted") return; // dismissed — stay idle
+      if (permission !== "granted") return;
 
-      const reg = await navigator.serviceWorker.ready;
+      // Ensure SW is active
+      await navigator.serviceWorker.register("/sw.js");
+      const reg = await Promise.race([
+        navigator.serviceWorker.ready,
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error("Service worker timed out. Try reloading.")), 8000)
+        ),
+      ]);
+
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicKey) as unknown as BufferSource,
@@ -108,13 +133,15 @@ export default function PushNotificationToggle() {
       });
       if (!saveRes.ok) {
         const data = await saveRes.json().catch(() => ({}));
-        throw new Error((data as { error?: string }).error ?? `Server error ${saveRes.status}`);
+        throw new Error((data as { error?: string }).error ?? `Server error ${saveRes.status} — push_subscriptions table may not exist in Supabase`);
       }
 
       setEndpoint(sub.endpoint);
       setStatus("subscribed");
-    } catch (err) {
-      console.error("[push subscribe]", err);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("[push subscribe]", msg);
+      setErrorMsg(msg);
       setStatus("error");
     } finally {
       setBusy(false);
@@ -158,7 +185,7 @@ export default function PushNotificationToggle() {
       setEndpoint(null);
       setStatus("idle");
     } catch {
-      setStatus("error");
+      // best-effort unsubscribe
     } finally {
       setBusy(false);
     }
@@ -166,20 +193,31 @@ export default function PushNotificationToggle() {
 
   // ── Render ────────────────────────────────────────────────────────────────
 
-  if (status === "loading") return null;
-
-  if (status === "unsupported") return null;
+  if (status === "loading" || status === "unsupported") return null;
 
   if (status === "ios-browser") {
     return (
       <div className="flex items-start gap-3 bg-gold/5 border border-gold/20 rounded-lg px-4 py-3">
         <Bell className="w-4 h-4 text-gold shrink-0 mt-0.5" />
         <div>
-          <p className="font-body text-sm text-text-base font-medium">
-            Enable push notifications
-          </p>
+          <p className="font-body text-sm text-text-base font-medium">Enable push notifications</p>
           <p className="font-body text-xs text-text-subtle mt-0.5">
             Add BNSignal to your Home Screen, then reopen to enable message alerts.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "no-vapid") {
+    return (
+      <div className="flex items-start gap-3 bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3">
+        <BellOff className="w-4 h-4 text-text-subtle shrink-0 mt-0.5" />
+        <div>
+          <p className="font-body text-sm text-text-muted">Push not configured</p>
+          <p className="font-body text-xs text-text-subtle mt-0.5">
+            Add <span className="font-mono text-gold/70">VAPID_PUBLIC_KEY</span> and{" "}
+            <span className="font-mono text-gold/70">VAPID_PRIVATE_KEY</span> to Vercel env vars.
           </p>
         </div>
       </div>
@@ -202,17 +240,20 @@ export default function PushNotificationToggle() {
 
   if (status === "error") {
     return (
-      <div className="flex items-center gap-3 bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3">
-        <BellOff className="w-4 h-4 text-red-400 shrink-0" />
-        <p className="font-body text-xs text-red-400 flex-1">
-          Something went wrong setting up notifications.
-        </p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="font-body text-xs text-text-subtle hover:text-text-muted transition-colors"
-        >
-          Retry
-        </button>
+      <div className="bg-white/[0.03] border border-red-400/20 rounded-lg px-4 py-3 space-y-1.5">
+        <div className="flex items-center gap-3">
+          <BellOff className="w-4 h-4 text-red-400 shrink-0" />
+          <p className="font-body text-sm text-red-400 flex-1 font-medium">Failed to enable notifications</p>
+          <button
+            onClick={() => { setStatus("idle"); setErrorMsg(null); }}
+            className="font-body text-xs text-text-subtle hover:text-text-muted transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+        {errorMsg && (
+          <p className="font-mono text-[11px] text-red-400/80 leading-relaxed pl-7">{errorMsg}</p>
+        )}
       </div>
     );
   }
@@ -223,9 +264,7 @@ export default function PushNotificationToggle() {
         <div className="flex items-center gap-3">
           <BellRing className="w-4 h-4 text-gold shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="font-body text-sm text-text-base font-medium">
-              Notifications active
-            </p>
+            <p className="font-body text-sm text-text-base font-medium">Notifications active</p>
             <p className="font-body text-xs text-text-subtle mt-0.5">
               You&rsquo;ll be alerted when a client sends a message.
             </p>
@@ -238,18 +277,16 @@ export default function PushNotificationToggle() {
             {busy ? "…" : "Turn off"}
           </button>
         </div>
-
-        {/* Test push button */}
         <div className="flex items-center gap-2 pt-0.5">
           <button
             onClick={sendTest}
             disabled={testResult === "sending"}
             className="font-body text-xs text-gold/70 hover:text-gold underline underline-offset-2 transition-colors disabled:opacity-40"
           >
-            {testResult === "sending" ? "Sending…" : testResult === "ok" ? "✓ Sent!" : "Send test notification"}
+            {testResult === "sending" ? "Sending…" : testResult === "ok" ? "✓ Notification sent!" : "Send test notification"}
           </button>
           {testResult === "fail" && testError && (
-            <span className="font-body text-xs text-red-400">{testError}</span>
+            <span className="font-mono text-[11px] text-red-400">{testError}</span>
           )}
         </div>
       </div>
