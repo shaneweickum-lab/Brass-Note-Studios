@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 export default function UnreadMessageBadge() {
+  const instanceId = useId();
   const [count, setCount] = useState<number | null>(null);
 
   async function fetchCount() {
@@ -24,12 +25,12 @@ export default function UnreadMessageBadge() {
 
     // Subscribe to new messages so the badge updates in real time
     const channel = supabaseBrowser
-      .channel("unread-badge")
+      .channel(`unread-badge-${instanceId}`)
       .on("postgres_changes", { event: "*", schema: "public", table: "messages" }, fetchCount)
       .subscribe();
 
     return () => { supabaseBrowser.removeChannel(channel); };
-  }, []);
+  }, [instanceId]);
 
   if (!count) return null;
 
