@@ -10,7 +10,7 @@ import {
   kvAddSong,
   kvAllocateSongId,
   computeCommissionStage,
-} from "@/lib/commissions/kv";
+} from "@/lib/supabase/queries";
 import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
 import { STAGE_LABELS } from "@/types/commission";
 import { stageStyle } from "@/lib/portal/stageStyle";

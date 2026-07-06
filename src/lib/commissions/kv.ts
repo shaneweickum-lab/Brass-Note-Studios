@@ -1,5 +1,5 @@
 import { Redis } from "@upstash/redis";
-import type { Client, Commission, Song, ClientType, PackageType } from "@/types/commission";
+import type { Client, Commission, Song, ClientType, PackageType, ProductionStage } from "@/types/commission";
 import { CLIENT_TYPE_CODES, PACKAGE_TIER_CODES, STAGE_ORDER } from "@/types/commission";
 
 const KV_AVAILABLE = Boolean(

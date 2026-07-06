@@ -10,7 +10,7 @@ import {
   kvUpdateSong,
   kvUpdateCommission,
   computeCommissionStage,
-} from "@/lib/commissions/kv";
+} from "@/lib/supabase/queries";
 import type { Song, ProductionStage } from "@/types/commission";
 import SongEditForm from "./SongEditForm";
 

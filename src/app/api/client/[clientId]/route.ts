@@ -5,7 +5,7 @@ import {
   kvGetClient,
   kvGetCommissionsByClient,
   kvGetSongs,
-} from "@/lib/commissions/kv";
+} from "@/lib/supabase/queries";
 import { checkRateLimit } from "@/lib/rateLimit";
 import type { ClientPortalData, ClientCommissionView, ClientSong } from "@/types/commission";
 

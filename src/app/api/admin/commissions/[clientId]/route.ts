@@ -6,7 +6,7 @@ import {
   kvGetCommission,
   kvGetSongs,
   kvUpdateCommission,
-} from "@/lib/commissions/kv";
+} from "@/lib/supabase/queries";
 import type { Commission } from "@/types/commission";
 
 interface RouteContext {
@@ -45,8 +45,9 @@ export async function PUT(req: NextRequest, context: RouteContext): Promise<Resp
     const updated: Commission = {
       ...existing,
       ...body,
-      // Ensure these fields are never overridden from outside
-      clientId: existing.clientId,
+      // Ensure identity fields are never overridden from outside
+      permanentId: existing.permanentId,
+      fullCommissionId: existing.fullCommissionId,
       createdAt: existing.createdAt,
       updatedAt: new Date().toISOString(),
     };

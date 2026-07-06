@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
 import { checkAdminAuth, UNAUTHORIZED } from "@/lib/adminAuth";
-import { kvGetSong, kvUpdateSong } from "@/lib/commissions/kv";
+import { kvGetSong, kvUpdateSong } from "@/lib/supabase/queries";
 import type { Song } from "@/types/commission";
 
 interface RouteContext {
@@ -43,7 +43,7 @@ export async function PUT(req: NextRequest, context: RouteContext): Promise<Resp
       ...songFields,
       // Lock identity fields
       songId: existing.songId,
-      clientId: existing.clientId,
+      commissionId: existing.commissionId,
       updatedAt: new Date().toISOString(),
     };
 

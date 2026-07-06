@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { kvGetAllCommissions } from "@/lib/commissions/kv";
+import { kvGetAllCommissions } from "@/lib/supabase/queries";
 import StatCard from "@/components/analytics/StatCard";
 import type { Commission } from "@/types/commission";
 

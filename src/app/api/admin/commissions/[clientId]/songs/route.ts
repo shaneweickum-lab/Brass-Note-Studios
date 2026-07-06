@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
 import { checkAdminAuth, UNAUTHORIZED } from "@/lib/adminAuth";
-import { kvGetCommission, kvAddSong } from "@/lib/commissions/kv";
+import { kvGetCommission, kvAddSong, kvAllocateSongId } from "@/lib/supabase/queries";
 import type { Song } from "@/types/commission";
 
 interface RouteContext {
@@ -32,9 +32,10 @@ export async function POST(req: NextRequest, context: RouteContext): Promise<Res
     }
 
     const now = new Date().toISOString();
+    const songId = await kvAllocateSongId();
     const song: Song = {
-      songId: `${clientId}-song-${trackNumber}`,
-      clientId,
+      songId,
+      commissionId: clientId,
       title: "",
       trackNumber,
       productionStage: "intake",

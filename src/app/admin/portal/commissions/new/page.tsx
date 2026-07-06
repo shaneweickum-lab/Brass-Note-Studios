@@ -6,7 +6,7 @@ import {
   kvGetOrCreateClient,
   kvAllocateCommissionIds,
   kvCreateCommission,
-} from "@/lib/commissions/kv";
+} from "@/lib/supabase/queries";
 import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
 import { PACKAGE_DELIVERY_DAYS } from "@/types/commission";
 import CreateCommissionForm from "./CreateCommissionForm";
