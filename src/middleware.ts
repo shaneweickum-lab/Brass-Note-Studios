@@ -1,35 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ADMIN_COOKIE, isValidSessionToken } from "@/lib/adminSession";
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (!pathname.startsWith("/admin")) return NextResponse.next();
 
-  const authHeader = req.headers.get("authorization") ?? "";
-  if (!authHeader.startsWith("Basic ")) return unauthorized();
+  // Forward pathname so the admin layout can detect the login page
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-pathname", pathname);
 
-  const decoded = Buffer.from(authHeader.slice(6), "base64").toString("utf-8");
-  const colonIdx = decoded.indexOf(":");
-  if (colonIdx < 0) return unauthorized();
-
-  const user = decoded.slice(0, colonIdx);
-  const pass = decoded.slice(colonIdx + 1);
-
-  const expectedUser = process.env.ADMIN_USER ?? "";
-  const expectedPass = process.env.ADMIN_PASS ?? "";
-
-  if (!expectedUser || !expectedPass || user !== expectedUser || pass !== expectedPass) {
-    return unauthorized();
+  // Login page is always accessible
+  if (pathname === "/admin/login") {
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
-  return NextResponse.next();
-}
+  // Validate session cookie
+  const token = req.cookies.get(ADMIN_COOKIE)?.value ?? "";
+  if (isValidSessionToken(token)) {
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
 
-function unauthorized() {
-  return new NextResponse("Unauthorized", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="BNSignal"' },
-  });
+  // Not authenticated — redirect to login with return path
+  const loginUrl = req.nextUrl.clone();
+  loginUrl.pathname = "/admin/login";
+  loginUrl.searchParams.set("next", pathname);
+  return NextResponse.redirect(loginUrl);
 }
 
 export const config = {
