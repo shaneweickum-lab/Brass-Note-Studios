@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { generateClientId, kvCreateCommission, kvGetCommission } from "@/lib/commissions/kv";
 import type { Commission, Song, PackageType } from "@/types/commission";
+import { PACKAGE_DELIVERY_DAYS } from "@/types/commission";
 import CreateCommissionForm from "./CreateCommissionForm";
 
 async function createCommission(formData: FormData) {
@@ -36,6 +37,12 @@ async function createCommission(formData: FormData) {
 
   const now = new Date().toISOString();
 
+  // Auto-calculate projected delivery from intake date + package type default
+  const intakeDate = new Date(now);
+  const deliveryDate = new Date(intakeDate);
+  deliveryDate.setDate(deliveryDate.getDate() + PACKAGE_DELIVERY_DAYS[packageType]);
+  const projectedDelivery = deliveryDate.toISOString().split("T")[0];
+
   const commission: Commission = {
     clientId,
     clientName,
@@ -43,6 +50,7 @@ async function createCommission(formData: FormData) {
     packageType,
     totalSongs,
     notes,
+    projectedDelivery,
     createdAt: now,
     updatedAt: now,
   };

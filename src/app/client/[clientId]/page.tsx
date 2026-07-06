@@ -20,9 +20,19 @@ import { notFound } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { kvGetCommission, kvGetSongs } from "@/lib/commissions/kv";
 import type { ClientCommission, ClientSong } from "@/types/commission";
+import { PACKAGE_TIMELINE_RANGES } from "@/types/commission";
 import StageTracker from "@/components/client/StageTracker";
 import RevisionCard from "@/components/client/RevisionCard";
 import SongCard from "@/components/client/SongCard";
+
+function formatDeliveryDate(dateStr: string): string {
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return `${months[month - 1]} ${day}, ${year}`;
+}
 
 interface PageProps {
   params: Promise<{ clientId: string }>;
@@ -58,6 +68,7 @@ async function getClientCommission(clientId: string): Promise<ClientCommission |
     packageType: commission.packageType,
     totalSongs: commission.totalSongs,
     songs: clientSongs,
+    projectedDelivery: commission.projectedDelivery,
   };
 }
 
@@ -140,6 +151,27 @@ export default async function CommissionTrackerPage({ params }: PageProps) {
             <p className="font-mono text-sm text-gold mt-0.5">
               {data.clientId}
             </p>
+          </div>
+
+          {/* Delivery date card */}
+          <div className="bg-surface border border-white/8 rounded-sm px-5 py-4">
+            <p className="font-display text-text-subtle text-[10px] tracking-[0.2em] uppercase mb-1">
+              {data.projectedDelivery ? "Expected Delivery" : "Projected Delivery Window"}
+            </p>
+            {data.projectedDelivery ? (
+              <>
+                <p className="font-display text-text-base text-2xl leading-tight">
+                  {formatDeliveryDate(data.projectedDelivery)}
+                </p>
+                <p className="font-body text-text-subtle text-xs mt-1">
+                  Typical range: {PACKAGE_TIMELINE_RANGES[data.packageType]}
+                </p>
+              </>
+            ) : (
+              <p className="font-display text-gold text-xl leading-tight">
+                {PACKAGE_TIMELINE_RANGES[data.packageType]}
+              </p>
+            )}
           </div>
         </header>
 

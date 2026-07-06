@@ -36,6 +36,7 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
   async function updateCommission(formData: FormData) {
     "use server";
     const now = new Date().toISOString();
+    const projectedDeliveryRaw = ((formData.get("projectedDelivery") as string) || "").trim();
     const updated: Commission = {
       clientId,
       clientName: ((formData.get("clientName") as string) || "").trim(),
@@ -43,6 +44,7 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
       packageType: formData.get("packageType") as PackageType,
       totalSongs: parseInt((formData.get("totalSongs") as string) || "1", 10),
       notes: ((formData.get("notes") as string) || "").trim(),
+      projectedDelivery: projectedDeliveryRaw || undefined,
       createdAt: commission!.createdAt,
       updatedAt: now,
     };

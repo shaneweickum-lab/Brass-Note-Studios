@@ -17,6 +17,7 @@ export interface Commission {
   createdAt: string;
   updatedAt: string;
   notes: string;
+  projectedDelivery?: string; // YYYY-MM-DD — auto-calculated on create, editable by admin
 }
 
 export interface Song {
@@ -52,6 +53,7 @@ export interface ClientCommission {
   packageType: PackageType;
   totalSongs: number;
   songs: ClientSong[];
+  projectedDelivery?: string; // YYYY-MM-DD
 }
 
 export const STAGE_ORDER: ProductionStage[] = [
@@ -87,4 +89,21 @@ export const PACKAGE_DEFAULT_SONGS: Record<PackageType, number> = {
   lp: 5,
   album: 8,
   organization: 1,
+};
+
+export const PACKAGE_TIMELINE_RANGES: Record<PackageType, string> = {
+  single: "10–14 days",
+  ep: "2–3 weeks",
+  lp: "5–7 weeks",
+  album: "Up to 12 weeks",
+  organization: "Custom timeline",
+};
+
+// Default days added to intake date when auto-calculating projected delivery
+export const PACKAGE_DELIVERY_DAYS: Record<PackageType, number> = {
+  single: 14,
+  ep: 21,
+  lp: 49,
+  album: 84,
+  organization: 84,
 };

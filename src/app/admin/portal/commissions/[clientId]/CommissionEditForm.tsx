@@ -1,6 +1,7 @@
 "use client";
 
 import type { Commission, PackageType } from "@/types/commission";
+import { PACKAGE_TIMELINE_RANGES } from "@/types/commission";
 
 interface Props {
   commission: Commission;
@@ -74,6 +75,27 @@ export default function CommissionEditForm({ commission, action }: Props) {
             className={inputClass}
           />
         </div>
+      </div>
+
+      {/* Projected / Expected Delivery */}
+      <div className="space-y-1.5 sm:col-span-2">
+        <label className="block font-body text-sm text-text-muted">
+          {commission.projectedDelivery ? "Expected Delivery Date" : "Projected Delivery Window"}
+          <span className="ml-2 font-body text-xs text-text-subtle">
+            {commission.projectedDelivery
+              ? `typical range: ${PACKAGE_TIMELINE_RANGES[commission.packageType]}`
+              : PACKAGE_TIMELINE_RANGES[commission.packageType]}
+          </span>
+        </label>
+        <input
+          name="projectedDelivery"
+          type="date"
+          defaultValue={commission.projectedDelivery ?? ""}
+          className={inputClass}
+        />
+        <p className="font-body text-xs text-text-subtle">
+          Set a hard date when you have a clear picture — the client sees this as their expected delivery date.
+        </p>
       </div>
 
       {/* Notes */}
