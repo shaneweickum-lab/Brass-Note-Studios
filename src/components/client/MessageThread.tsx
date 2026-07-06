@@ -31,7 +31,7 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Mark admin messages as read on mount
   useEffect(() => {
@@ -66,9 +66,10 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
     return () => { supabaseBrowser.removeChannel(channel); };
   }, [permanentId]);
 
-  // Scroll to bottom when new messages arrive
+  // Scroll message container to bottom when new messages arrive
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = containerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -112,7 +113,7 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
       </div>
 
       {/* Message list */}
-      <div className="px-5 py-4 space-y-3 max-h-80 overflow-y-auto">
+      <div ref={containerRef} className="px-5 py-4 space-y-3 max-h-80 overflow-y-auto">
         {messages.length === 0 ? (
           <p className="font-body text-text-subtle text-sm text-center py-6">
             No messages yet. Send one below.
@@ -142,7 +143,6 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
             </div>
           ))
         )}
-        <div ref={bottomRef} />
       </div>
 
       {/* Compose */}

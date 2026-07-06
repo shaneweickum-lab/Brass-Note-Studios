@@ -38,7 +38,7 @@ export default function AdminMessageThread({
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Real-time subscription
   useEffect(() => {
@@ -68,8 +68,10 @@ export default function AdminMessageThread({
     return () => { supabaseBrowser.removeChannel(channel); };
   }, [permanentId]);
 
+  // Scroll message container to bottom when new messages arrive
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = containerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
   function handleSubmit(e: React.FormEvent) {
@@ -99,7 +101,7 @@ export default function AdminMessageThread({
       </div>
 
       {/* Messages */}
-      <div className="px-5 py-4 space-y-3 min-h-48 max-h-[32rem] overflow-y-auto">
+      <div ref={containerRef} className="px-5 py-4 space-y-3 min-h-48 max-h-[32rem] overflow-y-auto">
         {messages.length === 0 ? (
           <p className="font-body text-text-subtle text-sm text-center py-8">
             No messages yet.
@@ -132,7 +134,6 @@ export default function AdminMessageThread({
             </div>
           ))
         )}
-        <div ref={bottomRef} />
       </div>
 
       {/* Reply */}
