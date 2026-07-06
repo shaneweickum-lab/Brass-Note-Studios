@@ -17,6 +17,7 @@ export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { LogOut } from "lucide-react";
 import { kvGetCommission, kvGetSongs } from "@/lib/commissions/kv";
 import type { ClientCommission, ClientSong } from "@/types/commission";
 import StageTracker from "@/components/client/StageTracker";
@@ -110,9 +111,18 @@ export default async function CommissionTrackerPage({ params }: PageProps) {
         {/* Page header */}
         <header className="space-y-5">
           <div className="space-y-1">
-            <p className="font-display text-gold text-sm tracking-[0.25em] uppercase">
-              Brass Note Studios
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="font-display text-gold text-sm tracking-[0.25em] uppercase">
+                Brass Note Studios
+              </p>
+              <Link
+                href="/client"
+                className="inline-flex items-center gap-1.5 font-body text-xs text-text-subtle hover:text-text-muted transition-colors"
+              >
+                <LogOut className="w-3 h-3" />
+                Exit Portal
+              </Link>
+            </div>
             <div className="flex items-center gap-4 py-2">
               <div className="h-px flex-1 bg-gold/20" />
               <div className="w-1.5 h-1.5 rotate-45 bg-gold/40" />
