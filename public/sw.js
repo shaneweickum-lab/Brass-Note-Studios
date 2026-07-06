@@ -1,4 +1,4 @@
-// BNS Admin PWA — service worker
+// BNS Admin PWA — service worker v2
 // NOTE: Do NOT call e.respondWith() in the fetch handler — that would
 // intercept Supabase Realtime WebSocket upgrades (wss://) and cause errors.
 
@@ -11,22 +11,28 @@ self.addEventListener("fetch", () => {
 // ── Push notifications ────────────────────────────────────────────────────
 
 self.addEventListener("push", (event) => {
-  let data = {};
+  let title = "Brass Note Studios";
+  let body = "You have a new client message.";
+  let url = "/admin/portal";
+
   try {
-    data = event.data ? event.data.json() : {};
+    if (event.data) {
+      const d = event.data.json();
+      if (d.title) title = d.title;
+      if (d.body)  body  = d.body;
+      if (d.url)   url   = d.url;
+    }
   } catch {
-    data = { body: event.data ? event.data.text() : "" };
+    if (event.data) body = event.data.text() || body;
   }
 
-  const title = data.title ?? "Brass Note Studios";
-  const options = {
-    body: data.body ?? "You have a new client message.",
-    data: { url: data.url ?? "/admin/portal" },
-    tag: "bns-client-message",
-    renotify: true,
-  };
-
-  event.waitUntil(self.registration.showNotification(title, options));
+  // Keep options minimal — tag/renotify can silently suppress on some iOS versions
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body,
+      data: { url },
+    })
+  );
 });
 
 self.addEventListener("notificationclick", (event) => {
