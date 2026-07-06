@@ -16,9 +16,10 @@ function formatDate(iso: string): string {
 
 interface Props {
   commissions: Commission[];
+  unreadCounts?: Record<string, number>;
 }
 
-export default function CommissionTable({ commissions }: Props) {
+export default function CommissionTable({ commissions, unreadCounts = {} }: Props) {
   const [query, setQuery] = useState("");
 
   const filtered = query.trim()
@@ -81,12 +82,22 @@ export default function CommissionTable({ commissions }: Props) {
                       </div>
                     </td>
                     <td className="px-5 py-3.5">
-                      <Link
-                        href={`/admin/portal/commissions/${c.fullCommissionId}`}
-                        className="font-body text-sm text-text-base hover:text-gold transition-colors"
-                      >
-                        {c.clientName}
-                      </Link>
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/admin/portal/commissions/${c.fullCommissionId}`}
+                          className="font-body text-sm text-text-base hover:text-gold transition-colors"
+                        >
+                          {c.clientName}
+                        </Link>
+                        {(unreadCounts[c.permanentId] ?? 0) > 0 && (
+                          <Link
+                            href={`/admin/portal/messages/${c.permanentId}`}
+                            className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-gold text-background font-body text-[10px] font-bold hover:bg-gold-light transition-colors"
+                          >
+                            {unreadCounts[c.permanentId]}
+                          </Link>
+                        )}
+                      </div>
                     </td>
                     <td className="px-5 py-3.5">
                       <span className="font-body text-sm text-text-muted capitalize">{c.packageType}</span>

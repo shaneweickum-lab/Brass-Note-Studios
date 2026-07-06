@@ -1,11 +1,14 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { kvGetAllCommissions } from "@/lib/supabase/queries";
+import { kvGetAllCommissions, getUnreadCountsByClient } from "@/lib/supabase/queries";
 import CommissionTable from "./CommissionTable";
 
 export default async function CommissionsPage() {
-  const commissions = await kvGetAllCommissions();
+  const [commissions, unreadCounts] = await Promise.all([
+    kvGetAllCommissions(),
+    getUnreadCountsByClient(),
+  ]);
   const sorted = [...commissions].sort(
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
   );
@@ -28,7 +31,7 @@ export default async function CommissionsPage() {
         </Link>
       </div>
 
-      <CommissionTable commissions={sorted} />
+      <CommissionTable commissions={sorted} unreadCounts={unreadCounts} />
     </div>
   );
 }

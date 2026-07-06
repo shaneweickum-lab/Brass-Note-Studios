@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rateLimit";
 import { kvGetClient, getMessages, createMessage } from "@/lib/supabase/queries";
 import { createServiceClient } from "@/lib/supabase/server";
-import { Resend } from "resend";
 
 interface RouteContext {
   params: Promise<{ clientId: string }>; // clientId = permanentId
@@ -96,19 +95,6 @@ export async function POST(req: NextRequest, context: RouteContext): Promise<Res
     }
 
     const message = await createMessage(permanentId, "client", clean);
-
-    // Email notification — non-blocking
-    if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      resend.emails
-        .send({
-          from: "Brass Note Studios <noreply@brassnote.studio>",
-          to: "dejanae@sowedandrooted.com",
-          subject: `New message from ${client.clientName}`,
-          text: `${client.clientName} (${permanentId}) sent a message:\n\n${clean}\n\nLog in to admin portal to reply.`,
-        })
-        .catch((e) => console.error("[resend]", e));
-    }
 
     return NextResponse.json(
       { id: message.id, sender: message.sender, body: message.body, createdAt: message.createdAt },

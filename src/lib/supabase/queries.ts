@@ -462,6 +462,28 @@ export async function markMessagesRead(
     .eq("is_read", false);
 }
 
+// Returns a map of permanentId → unread client message count for all clients with unread messages
+export async function getUnreadCountsByClient(): Promise<Record<string, number>> {
+  if (!SUPABASE_AVAILABLE) return {};
+  const db = createServiceClient();
+  try {
+    const { data, error } = await db
+      .from("messages")
+      .select("permanent_id")
+      .eq("sender", "client")
+      .eq("is_read", false);
+    if (error) throw error;
+    const counts: Record<string, number> = {};
+    for (const row of data ?? []) {
+      counts[row.permanent_id] = (counts[row.permanent_id] ?? 0) + 1;
+    }
+    return counts;
+  } catch (e) {
+    console.error("[supabase:getUnreadCountsByClient]", e);
+    return {};
+  }
+}
+
 export async function getUnreadClientMessageCount(): Promise<number> {
   if (!SUPABASE_AVAILABLE) return 0;
   const db = createServiceClient();
