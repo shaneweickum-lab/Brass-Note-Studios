@@ -11,6 +11,7 @@ import {
   kvAllocateSongId,
   computeCommissionStage,
   getMessages,
+  createMessage,
 } from "@/lib/supabase/queries";
 import AdminMessageThread from "@/components/admin/AdminMessageThread";
 import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
@@ -68,6 +69,14 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
     revalidatePath(`/admin/portal/commissions/${fullCommissionId}`);
     revalidatePath("/admin/portal");
     revalidatePath("/admin/portal/commissions");
+  }
+
+  async function sendAdminMessage(text: string) {
+    "use server";
+    const clean = text.replace(/<[^>]*>/g, "").trim();
+    if (!clean) throw new Error("Message cannot be empty.");
+    if (clean.length > 4000) throw new Error("Message must be 4000 characters or fewer.");
+    await createMessage(commission!.permanentId, "admin", clean);
   }
 
   async function addSong() {
@@ -247,6 +256,7 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
         permanentId={commission.permanentId}
         clientName={commission.clientName}
         initialMessages={initialMessages}
+        onSend={sendAdminMessage}
       />
     </div>
   );

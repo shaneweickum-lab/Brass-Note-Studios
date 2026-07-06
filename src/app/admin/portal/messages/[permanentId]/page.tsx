@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { kvGetClient, getMessages, markMessagesRead } from "@/lib/supabase/queries";
+import { kvGetClient, getMessages, markMessagesRead, createMessage } from "@/lib/supabase/queries";
 import AdminMessageThread from "@/components/admin/AdminMessageThread";
 
 interface PageProps {
@@ -29,6 +29,14 @@ export default async function AdminMessageThreadPage({ params }: PageProps) {
   // Mark client messages as read on page load
   await markMessagesRead(permanentId, "admin");
 
+  async function sendAdminMessage(text: string) {
+    "use server";
+    const clean = text.replace(/<[^>]*>/g, "").trim();
+    if (!clean) throw new Error("Message cannot be empty.");
+    if (clean.length > 4000) throw new Error("Message must be 4000 characters or fewer.");
+    await createMessage(permanentId, "admin", clean);
+  }
+
   const initialMessages = messages.map((m) => ({
     id: m.id,
     sender: m.sender,
@@ -52,6 +60,7 @@ export default async function AdminMessageThreadPage({ params }: PageProps) {
         permanentId={permanentId}
         clientName={client.clientName}
         initialMessages={initialMessages}
+        onSend={sendAdminMessage}
       />
 
       <div className="bg-surface border border-white/10 rounded-lg px-5 py-3">

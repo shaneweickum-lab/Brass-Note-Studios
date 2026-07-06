@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useTransition } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import type { RealtimePostgresInsertPayload } from "@supabase/supabase-js";
 import type { DbMessage } from "@/lib/supabase/types";
@@ -16,6 +16,7 @@ interface Props {
   permanentId: string;
   clientName: string;
   initialMessages: Message[];
+  onSend: (text: string) => Promise<void>;
 }
 
 function formatTime(iso: string): string {
@@ -31,10 +32,11 @@ export default function AdminMessageThread({
   permanentId,
   clientName,
   initialMessages,
+  onSend,
 }: Props) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
-  const [sending, setSending] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -70,33 +72,20 @@ export default function AdminMessageThread({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const text = input.trim();
-    if (!text || sending) return;
+    if (!text || isPending) return;
 
-    setSending(true);
     setError(null);
-
-    try {
-      const res = await fetch(`/api/admin/messages/${permanentId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setError(data.error ?? "Failed to send.");
-        return;
+    startTransition(async () => {
+      try {
+        await onSend(text);
+        setInput("");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to send.");
       }
-
-      setInput("");
-    } catch {
-      setError("Unable to send. Check your connection.");
-    } finally {
-      setSending(false);
-    }
+    });
   }
 
   return (
@@ -136,7 +125,7 @@ export default function AdminMessageThread({
                 <p className="font-body text-sm text-text-base leading-relaxed whitespace-pre-wrap">
                   {msg.body}
                 </p>
-                <p className="font-body text-[10px] text-text-subtle text-right">
+                <p className="font-body text-[10px] text-text-subtle text-right" suppressHydrationWarning>
                   {formatTime(msg.createdAt)}
                 </p>
               </div>
@@ -161,7 +150,7 @@ export default function AdminMessageThread({
             placeholder="Reply… (Enter to send)"
             rows={3}
             maxLength={4000}
-            disabled={sending}
+            disabled={isPending}
             className="
               flex-1 resize-none px-3 py-2
               bg-background border border-white/10
@@ -173,7 +162,7 @@ export default function AdminMessageThread({
           />
           <button
             type="submit"
-            disabled={sending || !input.trim()}
+            disabled={isPending || !input.trim()}
             className="
               shrink-0 px-5 py-2
               bg-gold text-background
@@ -183,7 +172,7 @@ export default function AdminMessageThread({
               disabled:opacity-40 disabled:cursor-not-allowed
             "
           >
-            {sending ? "…" : "Send"}
+            {isPending ? "…" : "Send"}
           </button>
         </div>
         <p className="font-body text-[10px] text-text-subtle text-right">

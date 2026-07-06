@@ -135,7 +135,7 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
                 <p className="font-body text-sm text-text-base leading-relaxed whitespace-pre-wrap">
                   {msg.body}
                 </p>
-                <p className="font-body text-[10px] text-text-subtle text-right">
+                <p className="font-body text-[10px] text-text-subtle text-right" suppressHydrationWarning>
                   {msg.sender === "admin" ? "Studio · " : ""}{formatTime(msg.createdAt)}
                 </p>
               </div>
