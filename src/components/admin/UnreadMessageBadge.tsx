@@ -1,27 +1,34 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { MessageThreadSummary } from "@/app/api/admin/messages/route";
+import { supabaseBrowser } from "@/lib/supabase/client";
 
 export default function UnreadMessageBadge() {
   const [count, setCount] = useState<number | null>(null);
 
-  useEffect(() => {
-    async function fetchCount() {
-      try {
-        const res = await fetch("/api/admin/messages");
-        if (!res.ok) return;
-        const threads: MessageThreadSummary[] = await res.json();
-        const total = threads.reduce((sum, t) => sum + t.unreadCount, 0);
-        setCount(total);
-      } catch {
-        // silent
-      }
+  async function fetchCount() {
+    try {
+      const { count: n } = await supabaseBrowser
+        .from("messages")
+        .select("*", { count: "exact", head: true })
+        .eq("sender", "client")
+        .eq("is_read", false);
+      setCount(n ?? 0);
+    } catch {
+      // silent
     }
+  }
 
+  useEffect(() => {
     fetchCount();
-    const interval = setInterval(fetchCount, 30_000);
-    return () => clearInterval(interval);
+
+    // Subscribe to new messages so the badge updates in real time
+    const channel = supabaseBrowser
+      .channel("unread-badge")
+      .on("postgres_changes", { event: "*", schema: "public", table: "messages" }, fetchCount)
+      .subscribe();
+
+    return () => { supabaseBrowser.removeChannel(channel); };
   }, []);
 
   if (!count) return null;

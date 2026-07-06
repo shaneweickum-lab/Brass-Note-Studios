@@ -10,7 +10,9 @@ import {
   kvAddSong,
   kvAllocateSongId,
   computeCommissionStage,
+  getMessages,
 } from "@/lib/supabase/queries";
+import AdminMessageThread from "@/components/admin/AdminMessageThread";
 import type { Commission, Song, PackageType, ClientType } from "@/types/commission";
 import { STAGE_LABELS } from "@/types/commission";
 import { stageStyle } from "@/lib/portal/stageStyle";
@@ -31,6 +33,14 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
     kvGetCommission(fullCommissionId),
     kvGetSongs(fullCommissionId),
   ]);
+
+  const rawMessages = commission ? await getMessages(commission.permanentId) : [];
+  const initialMessages = rawMessages.map((m) => ({
+    id: m.id,
+    sender: m.sender,
+    body: m.body,
+    createdAt: m.createdAt,
+  }));
 
   if (!commission) notFound();
 
@@ -231,6 +241,13 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
           )}
         </div>
       </div>
+
+      {/* Messages */}
+      <AdminMessageThread
+        permanentId={commission.permanentId}
+        clientName={commission.clientName}
+        initialMessages={initialMessages}
+      />
     </div>
   );
 }
