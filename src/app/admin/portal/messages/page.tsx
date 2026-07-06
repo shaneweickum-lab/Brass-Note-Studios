@@ -109,6 +109,7 @@ export default async function AdminMessagesPage() {
               <li key={thread.permanentId}>
                 <Link
                   href={`/admin/portal/messages/${thread.permanentId}`}
+                  prefetch={false}
                   className="flex items-start gap-4 px-5 py-4 hover:bg-white/[0.03] transition-colors"
                 >
                   <div className="flex-1 min-w-0">

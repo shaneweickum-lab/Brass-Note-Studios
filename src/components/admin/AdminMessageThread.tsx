@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import type { RealtimePostgresInsertPayload, RealtimeChannel } from "@supabase/supabase-js";
 import type { DbMessage } from "@/lib/supabase/types";
@@ -40,6 +41,24 @@ export default function AdminMessageThread({
   const [error, setError] = useState<string | null>(null);
   const [realtimeStatus, setRealtimeStatus] = useState<"connecting" | "live" | "error">("connecting");
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  // Force a server refresh on mount to bypass stale Next.js router-cache prefetch
+  useEffect(() => {
+    router.refresh();
+  }, [router]);
+
+  // Merge any messages the server sends after a refresh into local state
+  useEffect(() => {
+    setMessages((prev) => {
+      const prevIds = new Set(prev.map((m) => m.id));
+      const fresh = initialMessages.filter((m) => !prevIds.has(m.id));
+      if (fresh.length === 0) return prev;
+      return [...prev, ...fresh].sort(
+        (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+    });
+  }, [initialMessages]);
 
   // Real-time subscription
   useEffect(() => {
