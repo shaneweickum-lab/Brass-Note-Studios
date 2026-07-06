@@ -23,10 +23,14 @@ type Status =
   | "subscribed"
   | "error";
 
+type TestResult = "idle" | "sending" | "ok" | "fail";
+
 export default function PushNotificationToggle() {
   const [status, setStatus] = useState<Status>("loading");
   const [endpoint, setEndpoint] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [testResult, setTestResult] = useState<TestResult>("idle");
+  const [testError, setTestError] = useState<string | null>(null);
 
   useEffect(() => {
     async function detect() {
@@ -97,11 +101,15 @@ export default function PushNotificationToggle() {
         keys: { p256dh: string; auth: string };
       };
 
-      await fetch("/api/admin/push/subscribe", {
+      const saveRes = await fetch("/api/admin/push/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(subJson),
       });
+      if (!saveRes.ok) {
+        const data = await saveRes.json().catch(() => ({}));
+        throw new Error((data as { error?: string }).error ?? `Server error ${saveRes.status}`);
+      }
 
       setEndpoint(sub.endpoint);
       setStatus("subscribed");
@@ -110,6 +118,25 @@ export default function PushNotificationToggle() {
       setStatus("error");
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function sendTest() {
+    setTestResult("sending");
+    setTestError(null);
+    try {
+      const res = await fetch("/api/admin/push/test", { method: "POST" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setTestError((data as { error?: string }).error ?? `Error ${res.status}`);
+        setTestResult("fail");
+      } else {
+        setTestResult("ok");
+        setTimeout(() => setTestResult("idle"), 4000);
+      }
+    } catch {
+      setTestError("Request failed");
+      setTestResult("fail");
     }
   }
 
@@ -192,23 +219,39 @@ export default function PushNotificationToggle() {
 
   if (status === "subscribed") {
     return (
-      <div className="flex items-center gap-3 bg-gold/5 border border-gold/20 rounded-lg px-4 py-3">
-        <BellRing className="w-4 h-4 text-gold shrink-0" />
-        <div className="flex-1 min-w-0">
-          <p className="font-body text-sm text-text-base font-medium">
-            Notifications active
-          </p>
-          <p className="font-body text-xs text-text-subtle mt-0.5">
-            You&rsquo;ll be alerted when a client sends a message.
-          </p>
+      <div className="bg-gold/5 border border-gold/20 rounded-lg px-4 py-3 space-y-2">
+        <div className="flex items-center gap-3">
+          <BellRing className="w-4 h-4 text-gold shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className="font-body text-sm text-text-base font-medium">
+              Notifications active
+            </p>
+            <p className="font-body text-xs text-text-subtle mt-0.5">
+              You&rsquo;ll be alerted when a client sends a message.
+            </p>
+          </div>
+          <button
+            onClick={unsubscribe}
+            disabled={busy || testResult === "sending"}
+            className="shrink-0 font-body text-xs text-text-subtle hover:text-red-400 transition-colors disabled:opacity-40"
+          >
+            {busy ? "…" : "Turn off"}
+          </button>
         </div>
-        <button
-          onClick={unsubscribe}
-          disabled={busy}
-          className="shrink-0 font-body text-xs text-text-subtle hover:text-red-400 transition-colors disabled:opacity-40"
-        >
-          {busy ? "…" : "Turn off"}
-        </button>
+
+        {/* Test push button */}
+        <div className="flex items-center gap-2 pt-0.5">
+          <button
+            onClick={sendTest}
+            disabled={testResult === "sending"}
+            className="font-body text-xs text-gold/70 hover:text-gold underline underline-offset-2 transition-colors disabled:opacity-40"
+          >
+            {testResult === "sending" ? "Sending…" : testResult === "ok" ? "✓ Sent!" : "Send test notification"}
+          </button>
+          {testResult === "fail" && testError && (
+            <span className="font-body text-xs text-red-400">{testError}</span>
+          )}
+        </div>
       </div>
     );
   }

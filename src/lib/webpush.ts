@@ -8,12 +8,16 @@ function ensureVapid(): boolean {
   const pub = process.env.VAPID_PUBLIC_KEY;
   const priv = process.env.VAPID_PRIVATE_KEY;
   const sub = process.env.VAPID_SUBJECT ?? "mailto:admin@brassnote.studio";
-  if (!pub || !priv) return false;
+  if (!pub || !priv) {
+    console.warn("[webpush] VAPID_PUBLIC_KEY or VAPID_PRIVATE_KEY not set — push disabled");
+    return false;
+  }
   try {
     webpush.setVapidDetails(sub, pub, priv);
     vapidReady = true;
     return true;
-  } catch {
+  } catch (err) {
+    console.error("[webpush] Failed to configure VAPID:", err);
     return false;
   }
 }
@@ -26,10 +30,14 @@ export async function sendAdminPushNotifications(payload: {
   if (!ensureVapid()) return;
 
   const db = createServiceClient();
-  const { data: subs } = await db
+  const { data: subs, error: queryErr } = await db
     .from("push_subscriptions")
     .select("endpoint, p256dh, auth");
 
+  if (queryErr) {
+    console.error("[webpush] Failed to query push_subscriptions:", queryErr.message);
+    return;
+  }
   if (!subs?.length) return;
 
   const json = JSON.stringify({
@@ -49,7 +57,11 @@ export async function sendAdminPushNotifications(payload: {
         );
       } catch (err: unknown) {
         const status = (err as { statusCode?: number }).statusCode;
-        if (status === 404 || status === 410) expired.push(sub.endpoint);
+        if (status === 404 || status === 410) {
+          expired.push(sub.endpoint);
+        } else {
+          console.error("[webpush] sendNotification failed:", (err as Error).message ?? err);
+        }
       }
     })
   );
