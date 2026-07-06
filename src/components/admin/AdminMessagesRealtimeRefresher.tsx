@@ -11,6 +11,11 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 export default function AdminMessagesRealtimeRefresher() {
   const router = useRouter();
 
+  // Refresh immediately on mount so navigating back from a thread never shows stale cache
+  useEffect(() => {
+    router.refresh();
+  }, [router]);
+
   // Realtime fast path
   useEffect(() => {
     const channel = supabaseBrowser
