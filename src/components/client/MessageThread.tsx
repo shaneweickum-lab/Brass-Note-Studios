@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import type { RealtimePostgresInsertPayload } from "@supabase/supabase-js";
+import type { RealtimePostgresInsertPayload, RealtimeChannel } from "@supabase/supabase-js";
 import type { DbMessage } from "@/lib/supabase/types";
 
 interface Message {
@@ -31,6 +31,7 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [realtimeStatus, setRealtimeStatus] = useState<"connecting" | "live" | "error">("connecting");
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Mark admin messages as read on mount
@@ -40,7 +41,9 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
 
   // Real-time subscription
   useEffect(() => {
-    const channel = supabaseBrowser
+    let channel: RealtimeChannel;
+
+    channel = supabaseBrowser
       .channel(`messages:client:${permanentId}`)
       .on(
         "postgres_changes",
@@ -61,7 +64,10 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
           });
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        if (status === "SUBSCRIBED") setRealtimeStatus("live");
+        else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") setRealtimeStatus("error");
+      });
 
     return () => { supabaseBrowser.removeChannel(channel); };
   }, [permanentId]);
@@ -112,13 +118,18 @@ export default function MessageThread({ permanentId, initialMessages }: Props) {
 
   return (
     <section className="bg-surface border border-white/8 rounded-sm overflow-hidden">
-      <div className="px-5 py-4 border-b border-white/8">
-        <h3 className="font-display text-text-muted text-sm tracking-widest uppercase">
-          Messages
-        </h3>
-        <p className="font-body text-text-subtle text-xs mt-0.5">
-          Send a message to the studio. We typically respond within 24 hours.
-        </p>
+      <div className="px-5 py-4 border-b border-white/8 flex items-start justify-between gap-3">
+        <div>
+          <h3 className="font-display text-text-muted text-sm tracking-widest uppercase">
+            Messages
+          </h3>
+          <p className="font-body text-text-subtle text-xs mt-0.5">
+            Send a message to the studio. We typically respond within 24 hours.
+          </p>
+        </div>
+        {realtimeStatus === "error" && (
+          <span className="shrink-0 font-body text-[10px] text-amber-400 mt-0.5">⚠ Offline</span>
+        )}
       </div>
 
       {/* Message list */}

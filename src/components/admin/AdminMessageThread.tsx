@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useTransition } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import type { RealtimePostgresInsertPayload } from "@supabase/supabase-js";
+import type { RealtimePostgresInsertPayload, RealtimeChannel } from "@supabase/supabase-js";
 import type { DbMessage } from "@/lib/supabase/types";
 
 interface Message {
@@ -38,11 +38,14 @@ export default function AdminMessageThread({
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [realtimeStatus, setRealtimeStatus] = useState<"connecting" | "live" | "error">("connecting");
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Real-time subscription
   useEffect(() => {
-    const channel = supabaseBrowser
+    let channel: RealtimeChannel;
+
+    channel = supabaseBrowser
       .channel(`messages:admin:${permanentId}`)
       .on(
         "postgres_changes",
@@ -63,7 +66,10 @@ export default function AdminMessageThread({
           });
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        if (status === "SUBSCRIBED") setRealtimeStatus("live");
+        else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") setRealtimeStatus("error");
+      });
 
     return () => { supabaseBrowser.removeChannel(channel); };
   }, [permanentId]);
@@ -98,12 +104,28 @@ export default function AdminMessageThread({
 
   return (
     <div className="bg-surface border border-white/10 rounded-lg overflow-hidden">
-      <div className="px-5 py-4 border-b border-white/10">
-        <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em]">
-          Thread with
-        </p>
-        <p className="font-display text-text-base text-lg">{clientName}</p>
-        <p className="font-mono text-xs text-text-subtle">{permanentId}</p>
+      <div className="px-5 py-4 border-b border-white/10 flex items-start justify-between gap-3">
+        <div>
+          <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em]">
+            Thread with
+          </p>
+          <p className="font-display text-text-base text-lg">{clientName}</p>
+          <p className="font-mono text-xs text-text-subtle">{permanentId}</p>
+        </div>
+        <div className="shrink-0 flex items-center gap-1.5 mt-1">
+          <span className={`w-1.5 h-1.5 rounded-full ${
+            realtimeStatus === "live" ? "bg-emerald-400" :
+            realtimeStatus === "error" ? "bg-red-400" :
+            "bg-text-subtle animate-pulse"
+          }`} />
+          <span className={`font-body text-[10px] ${
+            realtimeStatus === "live" ? "text-emerald-400" :
+            realtimeStatus === "error" ? "text-red-400" :
+            "text-text-subtle"
+          }`}>
+            {realtimeStatus === "live" ? "Live" : realtimeStatus === "error" ? "Disconnected" : "Connecting…"}
+          </span>
+        </div>
       </div>
 
       {/* Messages */}
