@@ -46,25 +46,28 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Write the approved fix document to a temp file so Claude can read it
-          echo "$ISSUE_BODY" > /tmp/fix-document.md
+          printf '%s' "$ISSUE_BODY" > /tmp/fix-document.md
 
-          # Run Claude Code non-interactively to implement the patterns
-          claude --print \
-            --allowedTools "Read,Edit,Write,Bash" \
-            "You are implementing an approved concierge fix document for Brass Note Studios.
+          # Write the prompt to a file to avoid shell quoting/indentation issues
+          cat > /tmp/claude-prompt.txt << EOF
+You are implementing an approved concierge fix document for Brass Note Studios.
 
-          The fix document is at /tmp/fix-document.md — read it now.
+The fix document is at /tmp/fix-document.md — read it now.
 
-          Instructions:
-          1. Read /tmp/fix-document.md carefully
-          2. For each theme in the document, add the suggested AIML <category> blocks to the correct file in chatbot/aiml/
-          3. Do NOT change any existing patterns — only append new ones
-          4. Do NOT change any prices or add any subscription content
-          5. Follow the file guide in the document (pricing.aiml, commissions.aiml, etc.)
-          6. After editing, run: git add chatbot/aiml/ && git commit -m 'feat(concierge): implement fix document from issue #$ISSUE_NUMBER'
-          7. Then run: git push origin HEAD
+Instructions:
+1. Read /tmp/fix-document.md carefully
+2. For each theme in the document, add the suggested AIML <category> blocks to the correct file in chatbot/aiml/
+3. Do NOT change any existing patterns — only append new ones
+4. Do NOT change any prices or add any subscription content
+5. Follow the file guide in the document (pricing.aiml, commissions.aiml, etc.)
+6. After editing, run: git add chatbot/aiml/ && git commit -m 'feat(concierge): implement fix document from issue #${ISSUE_NUMBER}'
+7. Then run: git push origin HEAD
 
-          Issue title for reference: $ISSUE_TITLE"
+Issue title for reference: ${ISSUE_TITLE}
+EOF
+
+          # Run Claude Code non-interactively, passing prompt via stdin
+          claude --print --allowedTools "Read,Edit,Write,Bash" < /tmp/claude-prompt.txt
 
       - name: Comment on issue
         if: success()
