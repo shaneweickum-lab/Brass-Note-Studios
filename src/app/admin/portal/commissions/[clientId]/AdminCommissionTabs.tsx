@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Commission, Song } from "@/types/commission";
-import { STAGE_LABELS } from "@/types/commission";
+import { STAGE_LABELS, formatCommissionId } from "@/types/commission";
 import { stageStyle } from "@/lib/portal/stageStyle";
 import CommissionEditForm from "./CommissionEditForm";
 import ClientIdCopy from "./ClientIdCopy";
@@ -24,6 +24,7 @@ interface Props {
   created?: string;
   unreadCount: number;
   updateCommission: (formData: FormData) => Promise<void>;
+  deleteCommission: () => Promise<void>;
   addSong: () => Promise<void>;
   onSend: (text: string) => Promise<{ id: string; sender: "admin"; body: string; createdAt: string }>;
 }
@@ -44,23 +45,37 @@ export default function AdminCommissionTabs({
   created,
   unreadCount,
   updateCommission,
+  deleteCommission,
   addSong,
   onSend,
 }: Props) {
   const [activeTab, setActiveTab] = useState<TabId>(
-    // If there are unread messages, open the Messages tab by default
     unreadCount > 0 ? "messages" : "details"
   );
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const displayId = formatCommissionId(commission.fullCommissionId, commission.totalSongs);
+
+  async function handleDelete() {
+    setDeleting(true);
+    try {
+      await deleteCommission();
+    } catch {
+      setDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  }
 
   return (
     <div className="space-y-6">
 
       {/* ── Back link ────────────────────────────────────────────────── */}
       <Link
-        href="/admin/portal"
+        href="/admin/portal/commissions"
         className="inline-flex items-center gap-1.5 text-text-subtle font-body text-sm hover:text-text-muted transition-colors"
       >
-        ← Portal
+        ← Commissions
       </Link>
 
       {/* ── Created banner ───────────────────────────────────────────── */}
@@ -71,7 +86,7 @@ export default function AdminCommissionTabs({
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             <ClientIdCopy id={commission.permanentId} label="Client Portal Login ID" />
-            <ClientIdCopy id={commission.fullCommissionId} label="Full Commission Tracking Number" muted />
+            <ClientIdCopy id={displayId} label="Full Commission Tracking Number" muted />
           </div>
         </div>
       )}
@@ -87,7 +102,7 @@ export default function AdminCommissionTabs({
         </div>
         <div className="flex flex-col gap-2 items-end">
           <ClientIdCopy id={commission.permanentId} label="Portal Login ID" compact />
-          <ClientIdCopy id={commission.fullCommissionId} label="Commission ID" compact muted />
+          <ClientIdCopy id={displayId} label="Commission ID" compact muted />
         </div>
       </div>
 
@@ -125,12 +140,64 @@ export default function AdminCommissionTabs({
 
       {/* Details */}
       {activeTab === "details" && (
-        <div className="bg-surface border border-white/10 rounded-lg overflow-hidden">
-          <div className="px-5 py-4 border-b border-white/10">
-            <h2 className="font-display text-lg text-text-base">Commission Details</h2>
+        <div className="space-y-6">
+          <div className="bg-surface border border-white/10 rounded-lg overflow-hidden">
+            <div className="px-5 py-4 border-b border-white/10">
+              <h2 className="font-display text-lg text-text-base">Commission Details</h2>
+            </div>
+            <div className="px-5 py-5">
+              <CommissionEditForm commission={commission} action={updateCommission} />
+            </div>
           </div>
-          <div className="px-5 py-5">
-            <CommissionEditForm commission={commission} action={updateCommission} />
+
+          {/* Danger Zone */}
+          <div className="border border-red-500/20 rounded-lg overflow-hidden">
+            <div className="px-5 py-4 border-b border-red-500/10">
+              <h2 className="font-body text-sm font-semibold text-red-400">Danger Zone</h2>
+            </div>
+            <div className="px-5 py-4">
+              {!showDeleteConfirm ? (
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-body text-sm text-text-muted">Delete this commission</p>
+                    <p className="font-body text-xs text-text-subtle mt-0.5">
+                      Permanently removes the commission and all its songs. The client record is kept.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowDeleteConfirm(true)}
+                    className="shrink-0 px-4 py-2 border border-red-500/40 text-red-400 font-body text-sm rounded hover:bg-red-500/10 transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <p className="font-body text-sm text-red-400">
+                    Are you sure? This will permanently delete{" "}
+                    <span className="font-mono font-semibold">{displayId}</span> and all its songs.
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      disabled={deleting}
+                      className="px-4 py-2 bg-red-500 text-white font-body text-sm rounded hover:bg-red-600 transition-colors disabled:opacity-50"
+                    >
+                      {deleting ? "Deleting…" : "Yes, delete permanently"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowDeleteConfirm(false)}
+                      className="px-4 py-2 border border-white/10 text-text-muted font-body text-sm rounded hover:bg-white/5 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -167,15 +234,9 @@ export default function AdminCommissionTabs({
                 <div key={song.songId} className="px-5 py-4 flex items-center justify-between gap-4">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-1.5 mb-1">
-                      <span className="font-body text-xs text-text-subtle">
-                        Track {song.trackNumber}
-                      </span>
-                      <span className="font-mono text-xs text-text-subtle/60">
-                        #{song.songId}
-                      </span>
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded border text-xs font-body ${stageStyle(song.productionStage)}`}
-                      >
+                      <span className="font-body text-xs text-text-subtle">Track {song.trackNumber}</span>
+                      <span className="font-mono text-xs text-text-subtle/60">#{song.songId}</span>
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded border text-xs font-body ${stageStyle(song.productionStage)}`}>
                         {STAGE_LABELS[song.productionStage]}
                       </span>
                       {song.lyricsReady ? (
@@ -192,8 +253,7 @@ export default function AdminCommissionTabs({
                       {song.title || <span className="text-text-subtle italic">Untitled</span>}
                     </p>
                     <p className="font-body text-xs text-text-subtle mt-0.5">
-                      {song.revisionsRemaining} revision
-                      {song.revisionsRemaining !== 1 ? "s" : ""} remaining
+                      {song.revisionsRemaining} revision{song.revisionsRemaining !== 1 ? "s" : ""} remaining
                     </p>
                   </div>
                   <Link

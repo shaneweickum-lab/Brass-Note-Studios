@@ -6,6 +6,7 @@ import {
   kvGetCommission,
   kvGetSongs,
   kvUpdateCommission,
+  kvDeleteCommission,
 } from "@/lib/supabase/queries";
 import type { Commission } from "@/types/commission";
 
@@ -56,6 +57,24 @@ export async function PUT(req: NextRequest, context: RouteContext): Promise<Resp
     return NextResponse.json(updated);
   } catch (err) {
     console.error("[PUT /api/admin/commissions/[clientId]]", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest, context: RouteContext): Promise<Response> {
+  if (!checkAdminAuth(req)) return UNAUTHORIZED;
+
+  try {
+    const { clientId } = await context.params;
+    const existing = await kvGetCommission(clientId);
+    if (!existing) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    await kvDeleteCommission(clientId);
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("[DELETE /api/admin/commissions/[clientId]]", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

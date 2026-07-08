@@ -21,6 +21,12 @@ async function createCommission(formData: FormData) {
   const totalSongsRaw = parseInt((formData.get("totalSongs") as string) || "1", 10);
   const totalSongs = isNaN(totalSongsRaw) || totalSongsRaw < 1 ? 1 : totalSongsRaw;
   const notes = ((formData.get("notes") as string | null) || "").trim();
+  const phone = ((formData.get("phone") as string | null) || "").trim() || undefined;
+  const songPurpose = ((formData.get("songPurpose") as string | null) || "").trim() || undefined;
+  const songRecipients = ((formData.get("songRecipients") as string | null) || "").trim() || undefined;
+  const songStory = ((formData.get("songStory") as string | null) || "").trim() || undefined;
+  const stylePreferences = ((formData.get("stylePreferences") as string | null) || "").trim() || undefined;
+  const referenceSongs = ((formData.get("referenceSongs") as string | null) || "").trim() || undefined;
 
   if (!clientName || !email || !packageType) {
     throw new Error("Missing required fields");
@@ -57,6 +63,12 @@ async function createCommission(formData: FormData) {
     projectedDelivery,
     createdAt: now,
     updatedAt: now,
+    phone,
+    songPurpose,
+    songRecipients,
+    songStory,
+    stylePreferences,
+    referenceSongs,
   };
 
   const songs: Song[] = songIds.map((songId, i) => ({

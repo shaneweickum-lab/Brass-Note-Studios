@@ -39,6 +39,12 @@ function mapCommission(row: DbCommission): Commission {
     updatedAt: row.updated_at,
     notes: row.notes,
     projectedDelivery: row.projected_delivery ?? undefined,
+    phone: row.phone ?? undefined,
+    songPurpose: row.song_purpose ?? undefined,
+    songRecipients: row.song_recipients ?? undefined,
+    songStory: row.song_story ?? undefined,
+    stylePreferences: row.style_preferences ?? undefined,
+    referenceSongs: row.reference_songs ?? undefined,
   };
 }
 
@@ -202,6 +208,12 @@ export async function kvCreateCommission(
     projected_delivery: commission.projectedDelivery ?? null,
     created_at: commission.createdAt,
     updated_at: commission.updatedAt,
+    phone: commission.phone ?? null,
+    song_purpose: commission.songPurpose ?? null,
+    song_recipients: commission.songRecipients ?? null,
+    song_story: commission.songStory ?? null,
+    style_preferences: commission.stylePreferences ?? null,
+    reference_songs: commission.referenceSongs ?? null,
   });
   if (commError) throw new Error(`Failed to create commission: ${commError.message}`);
 
@@ -294,6 +306,12 @@ export async function kvUpdateCommission(commission: Commission): Promise<void> 
       notes: commission.notes,
       projected_delivery: commission.projectedDelivery ?? null,
       updated_at: commission.updatedAt,
+      phone: commission.phone ?? null,
+      song_purpose: commission.songPurpose ?? null,
+      song_recipients: commission.songRecipients ?? null,
+      song_story: commission.songStory ?? null,
+      style_preferences: commission.stylePreferences ?? null,
+      reference_songs: commission.referenceSongs ?? null,
     })
     .eq("full_commission_id", commission.fullCommissionId);
   if (error) throw new Error(`Failed to update commission: ${error.message}`);
@@ -359,6 +377,15 @@ export async function kvUpdateSong(song: Song): Promise<void> {
     .eq("commission_id", song.commissionId)
     .eq("song_id", song.songId);
   if (error) throw new Error(`Failed to update song: ${error.message}`);
+}
+
+export async function kvDeleteCommission(fullCommissionId: string): Promise<void> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  // Remove songs first to satisfy any FK constraint
+  await db.from("songs").delete().eq("commission_id", fullCommissionId);
+  const { error } = await db.from("commissions").delete().eq("full_commission_id", fullCommissionId);
+  if (error) throw new Error(`Failed to delete commission: ${error.message}`);
 }
 
 export async function kvAddSong(song: Song): Promise<void> {

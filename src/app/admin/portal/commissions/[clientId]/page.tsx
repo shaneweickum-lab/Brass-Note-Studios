@@ -1,11 +1,12 @@
 export const dynamic = "force-dynamic";
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import {
   kvGetCommission,
   kvGetSongs,
   kvUpdateCommission,
+  kvDeleteCommission,
   kvAddSong,
   kvAllocateSongId,
   computeCommissionStage,
@@ -61,11 +62,25 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
       projectedDelivery: projectedDeliveryRaw || undefined,
       createdAt: commission!.createdAt,
       updatedAt: now,
+      phone: ((formData.get("phone") as string) || "").trim() || undefined,
+      songPurpose: ((formData.get("songPurpose") as string) || "").trim() || undefined,
+      songRecipients: ((formData.get("songRecipients") as string) || "").trim() || undefined,
+      songStory: ((formData.get("songStory") as string) || "").trim() || undefined,
+      stylePreferences: ((formData.get("stylePreferences") as string) || "").trim() || undefined,
+      referenceSongs: ((formData.get("referenceSongs") as string) || "").trim() || undefined,
     };
     await kvUpdateCommission(updated);
     revalidatePath(`/admin/portal/commissions/${fullCommissionId}`);
     revalidatePath("/admin/portal");
     revalidatePath("/admin/portal/commissions");
+  }
+
+  async function deleteCommission() {
+    "use server";
+    await kvDeleteCommission(fullCommissionId);
+    revalidatePath("/admin/portal/commissions");
+    revalidatePath("/admin/portal");
+    redirect("/admin/portal/commissions");
   }
 
   async function addSong() {
@@ -120,6 +135,7 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
       created={created}
       unreadCount={unreadCount}
       updateCommission={updateCommission}
+      deleteCommission={deleteCommission}
       addSong={addSong}
       onSend={sendAdminMessage}
     />

@@ -29,6 +29,18 @@ export interface Commission {
   updatedAt: string;
   notes: string;
   projectedDelivery?: string; // YYYY-MM-DD
+  // Intake detail fields (migration 005)
+  phone?: string;
+  songPurpose?: string;
+  songRecipients?: string;
+  songStory?: string;
+  stylePreferences?: string;
+  referenceSongs?: string;
+}
+
+/** Returns fullCommissionId/N when totalSongs > 1, else fullCommissionId unchanged. */
+export function formatCommissionId(fullCommissionId: string, totalSongs: number): string {
+  return totalSongs > 1 ? `${fullCommissionId}/${totalSongs}` : fullCommissionId;
 }
 
 export interface Song {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { Commission } from "@/types/commission";
 import { stageStyle } from "@/lib/portal/stageStyle";
-import { STAGE_LABELS } from "@/types/commission";
+import { STAGE_LABELS, formatCommissionId } from "@/types/commission";
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -77,7 +77,7 @@ export default function CommissionTable({ commissions, unreadCounts = {} }: Prop
                           {c.permanentId}
                         </Link>
                         <span className="font-mono text-xs text-text-subtle/60 block">
-                          {c.fullCommissionId}
+                          {formatCommissionId(c.fullCommissionId, c.totalSongs)}
                         </span>
                       </div>
                     </td>

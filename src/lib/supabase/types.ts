@@ -21,6 +21,13 @@ export interface DbCommission {
   projected_delivery: string | null;
   created_at: string;
   updated_at: string;
+  // Intake detail fields (added in migration 005)
+  phone: string | null;
+  song_purpose: string | null;
+  song_recipients: string | null;
+  song_story: string | null;
+  style_preferences: string | null;
+  reference_songs: string | null;
 }
 
 export interface DbSong {
