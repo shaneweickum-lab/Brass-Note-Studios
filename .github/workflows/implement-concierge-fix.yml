@@ -13,10 +13,11 @@ on:
 
 jobs:
   implement:
-    # Only run when the label added is "approved" AND the issue has "concierge-fix"
+    # Run on manual dispatch, or when "approved" label is added to a "concierge-fix" issue
     if: |
-      github.event.label.name == 'approved' &&
-      contains(toJson(github.event.issue.labels), 'concierge-fix')
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.label.name == 'approved' &&
+       contains(toJson(github.event.issue.labels), 'concierge-fix'))
 
     runs-on: ubuntu-latest
     permissions:
