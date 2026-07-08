@@ -48,6 +48,11 @@
   </category>
 
   <category>
+    <pattern>WHERE DO I BEGIN</pattern>
+    <template><srai>HOW DO I GET STARTED</srai></template>
+  </category>
+
+  <category>
     <pattern>I AM READY TO START</pattern>
     <template>Excellent! Let's do this. I can walk you through the form step by step, or take you straight there.
       <nav-card label="Commission Form" href="/contact" auto-navigate="true"/>
