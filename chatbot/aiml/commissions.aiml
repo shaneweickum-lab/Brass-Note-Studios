@@ -1343,4 +1343,33 @@
     <template><srai>DO YOU OFFER EXPEDITED DELIVERY</srai></template>
   </category>
 
+  <!-- ── How the process works ─────────────────────────────────────────── -->
+
+  <category>
+    <pattern>HOW IT WORKS</pattern>
+    <template>We handle the full creative journey: you share your vision, our composers and producers craft a custom original song, and we deliver polished files ready to use. The process typically takes two to three weeks from start to finish.
+      <nav-card label="How It Works" href="/services"/>
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <!-- ── Delivery timeframe ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE CURRENT DELIVERY TIMEFRAME</pattern>
+    <template>Our standard turnaround is two to three weeks from commission start to final delivery. Rush timelines are available for projects with tighter deadlines—just mention your preferred completion date when you reach out.
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THE DELIVERY TIMEFRAME</pattern>
+    <template><srai>WHAT IS THE CURRENT DELIVERY TIMEFRAME</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW LONG DOES DELIVERY TAKE</pattern>
+    <template><srai>WHAT IS THE CURRENT DELIVERY TIMEFRAME</srai></template>
+  </category>
+
 </aiml>

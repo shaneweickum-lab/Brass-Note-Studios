@@ -382,4 +382,26 @@
     <template><srai>WHAT ARE THE ROYALTIES</srai></template>
   </category>
 
+  <!-- ── Royalties / monetization variations ───────────────────────────── -->
+
+  <category>
+    <pattern>DO I GET ROYALTIES</pattern>
+    <template><srai>ARE THERE ROYALTIES INVOLVED</srai></template>
+  </category>
+
+  <category>
+    <pattern>CAN I MONETIZE MY SONG</pattern>
+    <template><srai>ARE THERE ROYALTIES INVOLVED</srai></template>
+  </category>
+
+  <category>
+    <pattern>ROYALTIES IF I USE FOR MONETIZATION</pattern>
+    <template><srai>ARE THERE ROYALTIES INVOLVED</srai></template>
+  </category>
+
+  <category>
+    <pattern>HOW ABOUT ROYALTIES</pattern>
+    <template><srai>ARE THERE ROYALTIES</srai></template>
+  </category>
+
 </aiml>

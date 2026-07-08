@@ -331,4 +331,23 @@
     <template><srai>REVISIONS</srai></template>
   </category>
 
+  <!-- ── What a revision is ─────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS A REVISION</pattern>
+    <template>A revision is a change or adjustment you request after your first draft delivery—adjusting melody, lyrics, instrumentation, or mood. We include revision rounds in your package so you can refine the song until it feels just right.
+      <nav-card label="View Packages" href="/services"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE REVISIONS</pattern>
+    <template><srai>WHAT IS A REVISION</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT COUNTS AS A REVISION</pattern>
+    <template><srai>WHAT IS A REVISION</srai></template>
+  </category>
+
 </aiml>

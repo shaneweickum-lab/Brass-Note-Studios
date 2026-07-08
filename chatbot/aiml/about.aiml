@@ -1051,4 +1051,25 @@
     <template><srai>CAN YOU WRITE IN ANOTHER LANGUAGE</srai></template>
   </category>
 
+  <!-- ── Genre / music style variations ────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT GENRES DO YOU WORK IN</pattern>
+    <template><srai>WHAT KIND OF MUSIC DO THEY MAKE</srai></template>
+  </category>
+
+  <!-- ── Studio identity ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE STUDIO</pattern>
+    <template>Brass Note Studios is a bespoke songwriting and production atelier. We craft original custom songs for artists, creators, and brands who want fully personalized music that reflects their unique vision.
+      <nav-card label="Learn About Us" href="/about"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE STUDIO</pattern>
+    <template><srai>WHAT IS THE STUDIO</srai></template>
+  </category>
+
 </aiml>

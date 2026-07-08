@@ -881,4 +881,24 @@ Expedited delivery is subject to studio availability — mention your deadline i
     <template><srai>HOW MUCH DOES IT COST</srai></template>
   </category>
 
+  <!-- ── Pricing overview (current prices) ─────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE CURRENT PRICES</pattern>
+    <template>Our pricing depends on the scope of your project—song length, instrumentation, revision rounds, and turnaround time all shape the final cost. We're transparent about fees upfront and work with budgets of all sizes.
+      <nav-card label="View Packages" href="/services"/>
+      <nav-card label="Start Your Commission" href="/contact"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT ARE THE PRICES LIKE</pattern>
+    <template><srai>WHAT IS THE CURRENT PRICES</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS PRICING</pattern>
+    <template><srai>WHAT IS THE CURRENT PRICES</srai></template>
+  </category>
+
 </aiml>

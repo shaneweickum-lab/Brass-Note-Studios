@@ -236,4 +236,18 @@
     <template><srai>LABS</srai></template>
   </category>
 
+  <!-- ── What is the Labs ───────────────────────────────────────────────── -->
+
+  <category>
+    <pattern>WHAT IS THE LABS</pattern>
+    <template>Brass Note Labs is our research and experimentation space where we explore emerging production techniques, generative tools, and AI-assisted workflows. It's where we push the boundaries of bespoke songwriting and test new approaches that eventually shape our main studio practice.
+      <nav-card label="Explore Brass Note Labs" href="/labs"/>
+    </template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT THE LABS</pattern>
+    <template><srai>WHAT IS THE LABS</srai></template>
+  </category>
+
 </aiml>
