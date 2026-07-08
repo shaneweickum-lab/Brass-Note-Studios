@@ -21,7 +21,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.repository.default_branch }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
@@ -62,7 +62,7 @@ jobs:
           4. Do NOT change any prices or add any subscription content
           5. Follow the file guide in the document (pricing.aiml, commissions.aiml, etc.)
           6. After editing, run: git add chatbot/aiml/ && git commit -m 'feat(concierge): implement fix document from issue #$ISSUE_NUMBER'
-          7. Then run: git push origin main
+          7. Then run: git push origin HEAD
 
           Issue title for reference: $ISSUE_TITLE"
 
@@ -75,7 +75,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: '✅ **Implemented.** The AIML patterns from this fix document have been committed to `main` and will be live after the next Vercel deploy (usually ~90 seconds).'
+              body: '✅ **Implemented.** The AIML patterns from this fix document have been committed and will be live after the next Vercel deploy (usually ~90 seconds).'
             });
             await github.rest.issues.update({
               owner: context.repo.owner,
