@@ -38,7 +38,7 @@ jobs:
           node-version: "20"
 
       - name: Install Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
+        run: npm install -g @anthropic-ai/claude-code@latest
 
       - name: Configure git
         run: |
@@ -83,7 +83,7 @@ jobs:
             | sed "s/__ISSUE_TITLE__/${ISSUE_TITLE}/g" \
             > /tmp/claude-prompt.txt
 
-          claude --print --allowedTools "Read,Edit,Write,Bash" < /tmp/claude-prompt.txt
+          ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" claude --print --allowedTools "Read,Edit,Write,Bash" < /tmp/claude-prompt.txt
 
       - name: Comment on issue
         if: success()
