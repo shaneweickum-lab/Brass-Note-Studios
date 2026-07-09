@@ -13,7 +13,7 @@ import {
 } from "@/lib/supabase/queries";
 import type { Song, ProductionStage } from "@/types/commission";
 import SongEditForm from "./SongEditForm";
-import { getSongIndex } from "@/lib/songId";
+import { getSongIndex, fromSequentialIndex } from "@/lib/songId";
 
 interface PageProps {
   params: Promise<{ clientId: string; songId: string }>;
@@ -23,9 +23,10 @@ export default async function SongDetailPage({ params }: PageProps) {
   // clientId here = fullCommissionId (admin portal param convention)
   const { clientId: fullCommissionId, songId } = await params;
 
-  const [song, commission] = await Promise.all([
+  const [song, commission, allSongsForCount] = await Promise.all([
     kvGetSong(fullCommissionId, songId),
     kvGetCommission(fullCommissionId),
+    kvGetSongs(fullCommissionId),
   ]);
 
   if (!song || !commission) notFound();
@@ -89,8 +90,11 @@ export default async function SongDetailPage({ params }: PageProps) {
       </Link>
 
       <div>
-        <p className="font-body text-xs text-text-subtle uppercase tracking-[0.15em] mb-1">
-          {commission.permanentId} &middot; Track {song.trackNumber} &middot; Song #{song.songId} &middot; #{getSongIndex(song.songId)}
+        <p className="font-mono text-xs text-text-subtle/70 uppercase tracking-[0.1em] mb-0.5">
+          {commission.permanentId}-{song.trackNumber}-{String(getSongIndex(song.songId)).padStart(4, "0")}/{allSongsForCount.length}
+        </p>
+        <p className="font-mono text-xs text-gold/70 uppercase tracking-[0.1em] mb-1">
+          {commission.permanentId}-{song.trackNumber}-{fromSequentialIndex(getSongIndex(song.songId))}/{allSongsForCount.length}
         </p>
         <h1 className="font-display text-3xl text-text-base">
           {song.title || <span className="text-text-muted italic">Untitled</span>}
