@@ -13,6 +13,7 @@ import {
 } from "@/lib/supabase/queries";
 import type { Song, ProductionStage } from "@/types/commission";
 import SongEditForm from "./SongEditForm";
+import { getSongIndex } from "@/lib/songId";
 
 interface PageProps {
   params: Promise<{ clientId: string; songId: string }>;
@@ -89,7 +90,7 @@ export default async function SongDetailPage({ params }: PageProps) {
 
       <div>
         <p className="font-body text-xs text-text-subtle uppercase tracking-[0.15em] mb-1">
-          {commission.permanentId} &middot; Track {song.trackNumber} &middot; Song #{song.songId}
+          {commission.permanentId} &middot; Track {song.trackNumber} &middot; Song #{song.songId} &middot; #{getSongIndex(song.songId)}
         </p>
         <h1 className="font-display text-3xl text-text-base">
           {song.title || <span className="text-text-muted italic">Untitled</span>}

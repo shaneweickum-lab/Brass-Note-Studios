@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Commission, Song } from "@/types/commission";
 import { STAGE_LABELS, formatCommissionId } from "@/types/commission";
 import { stageStyle } from "@/lib/portal/stageStyle";
+import { getSongIndex } from "@/lib/songId";
 import CommissionEditForm from "./CommissionEditForm";
 import ClientIdCopy from "./ClientIdCopy";
 import AdminMessageThread from "@/components/admin/AdminMessageThread";
@@ -236,6 +237,7 @@ export default function AdminCommissionTabs({
                     <div className="flex flex-wrap items-center gap-1.5 mb-1">
                       <span className="font-body text-xs text-text-subtle">Track {song.trackNumber}</span>
                       <span className="font-mono text-xs text-text-subtle/60">#{song.songId}</span>
+                      <span className="font-mono text-xs text-gold/70">· #{getSongIndex(song.songId)}</span>
                       <span className={`inline-flex items-center px-2 py-0.5 rounded border text-xs font-body ${stageStyle(song.productionStage)}`}>
                         {STAGE_LABELS[song.productionStage]}
                       </span>
