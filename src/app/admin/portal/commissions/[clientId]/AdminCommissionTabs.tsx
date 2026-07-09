@@ -236,12 +236,11 @@ export default function AdminCommissionTabs({
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-1.5 mb-1">
                       <span className="font-body text-xs text-text-subtle">Track {song.trackNumber}</span>
-                      <span className="font-mono text-xs text-text-subtle/60">
-                        {commission.permanentId}-{song.trackNumber}-{String(getSongIndex(song.songId)).padStart(4, "0")}/{songs.length}
-                      </span>
-                      <span className="font-mono text-xs text-gold/70">
-                        {commission.permanentId}-{song.trackNumber}-{fromSequentialIndex(getSongIndex(song.songId))}/{songs.length}
-                      </span>
+                      <ClientIdCopy
+                        compact
+                        id={`${commission.permanentId}-${song.trackNumber}-${fromSequentialIndex(getSongIndex(song.songId))}/${songs.length}`}
+                        label="Song ID"
+                      />
                       <span className={`inline-flex items-center px-2 py-0.5 rounded border text-xs font-body ${stageStyle(song.productionStage)}`}>
                         {STAGE_LABELS[song.productionStage]}
                       </span>

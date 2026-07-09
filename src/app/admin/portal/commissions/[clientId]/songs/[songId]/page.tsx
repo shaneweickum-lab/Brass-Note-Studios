@@ -14,6 +14,7 @@ import {
 import type { Song, ProductionStage } from "@/types/commission";
 import SongEditForm from "./SongEditForm";
 import { getSongIndex, fromSequentialIndex } from "@/lib/songId";
+import ClientIdCopy from "../../ClientIdCopy";
 
 interface PageProps {
   params: Promise<{ clientId: string; songId: string }>;
@@ -90,12 +91,12 @@ export default async function SongDetailPage({ params }: PageProps) {
       </Link>
 
       <div>
-        <p className="font-mono text-xs text-text-subtle/70 uppercase tracking-[0.1em] mb-0.5">
-          {commission.permanentId}-{song.trackNumber}-{String(getSongIndex(song.songId)).padStart(4, "0")}/{allSongsForCount.length}
-        </p>
-        <p className="font-mono text-xs text-gold/70 uppercase tracking-[0.1em] mb-1">
-          {commission.permanentId}-{song.trackNumber}-{fromSequentialIndex(getSongIndex(song.songId))}/{allSongsForCount.length}
-        </p>
+        <div className="mb-3">
+          <ClientIdCopy
+            id={`${commission.permanentId}-${song.trackNumber}-${fromSequentialIndex(getSongIndex(song.songId))}/${allSongsForCount.length}`}
+            label="Song Reference ID"
+          />
+        </div>
         <h1 className="font-display text-3xl text-text-base">
           {song.title || <span className="text-text-muted italic">Untitled</span>}
         </h1>
