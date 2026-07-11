@@ -3,7 +3,11 @@
 import { useState, useEffect, useId } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
-export default function UnreadMessageBadge() {
+interface Props {
+  dot?: boolean;
+}
+
+export default function UnreadMessageBadge({ dot }: Props) {
   const instanceId = useId();
   const [count, setCount] = useState<number | null>(null);
 
@@ -33,6 +37,12 @@ export default function UnreadMessageBadge() {
   }, [instanceId]);
 
   if (!count) return null;
+
+  if (dot) {
+    return (
+      <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-gold border border-background" />
+    );
+  }
 
   return (
     <span className="ml-1 inline-flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-gold text-background font-body text-[9px] font-bold leading-none">

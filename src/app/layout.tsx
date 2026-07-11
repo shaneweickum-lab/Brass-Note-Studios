@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Cormorant_Garamond, Cormorant_SC, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
@@ -79,12 +80,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: "#0D0A0B",
+};
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const songs = songsData.songs as Song[];
+  // x-pathname is set by middleware only for /admin/* routes
+  const isAdmin = ((await headers()).get("x-pathname") ?? "").startsWith("/admin");
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -115,15 +123,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
         />
-        <ScoreCircuitBackground />
+        {!isAdmin && <ScoreCircuitBackground />}
         <PlayerProvider initialSongs={songs}>
-          <Navbar />
-          <main className="pt-14">{children}</main>
-          <Footer />
-          <PlaylistPlayer />
-          <LabVisualizer />
-          <WelcomeOverlay />
-          <AtelierConcierge />
+          {!isAdmin && <Navbar />}
+          <main className={isAdmin ? "" : "pt-14"}>{children}</main>
+          {!isAdmin && <Footer />}
+          {!isAdmin && <PlaylistPlayer />}
+          {!isAdmin && <LabVisualizer />}
+          {!isAdmin && <WelcomeOverlay />}
+          {!isAdmin && <AtelierConcierge />}
         </PlayerProvider>
         <Analytics />
         <PageViewTracker />

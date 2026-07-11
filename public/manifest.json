@@ -1,12 +1,17 @@
 {
   "name": "BNS Admin",
-  "short_name": "BNS Admin",
+  "short_name": "BNS",
   "description": "Brass Note Studios — Admin Portal",
-  "theme_color": "#C9A84C",
-  "background_color": "#0A0A0A",
+  "theme_color": "#0D0A0B",
+  "background_color": "#0D0A0B",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "portrait",
   "start_url": "/admin/portal",
   "scope": "/admin/",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "icons": [
     {
       "src": "/images/bns-icon-192.png",
