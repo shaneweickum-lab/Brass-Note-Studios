@@ -15,7 +15,7 @@ interface Props {
 }
 
 const input =
-  "w-full bg-background border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base placeholder:text-text-subtle focus:outline-none focus:border-gold/50 transition-colors";
+  "w-full bg-background border border-white/10 rounded px-3 py-2 font-body text-base text-text-base placeholder:text-text-subtle focus:outline-none focus:border-gold/50 transition-colors";
 
 function fmt(n?: number) {
   if (!n) return "—";

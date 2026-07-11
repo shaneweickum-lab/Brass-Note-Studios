@@ -39,7 +39,7 @@ export default function CommissionTable({ commissions, unreadCounts = {} }: Prop
         placeholder="Search by name, Portal Login ID, Commission ID, or email…"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full sm:max-w-sm bg-surface border border-white/10 rounded px-3 py-2 font-body text-sm text-text-base placeholder:text-text-subtle focus:outline-none focus:border-gold/50 transition-colors"
+        className="w-full sm:max-w-sm bg-surface border border-white/10 rounded px-3 py-2 font-body text-base text-text-base placeholder:text-text-subtle focus:outline-none focus:border-gold/50 transition-colors"
       />
 
       <div className="bg-surface border border-white/10 rounded-lg overflow-hidden">
