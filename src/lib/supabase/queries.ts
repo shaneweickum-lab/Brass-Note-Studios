@@ -9,6 +9,7 @@ import type {
   ProductionStage,
 } from "@/types/commission";
 import type { LabsExperiment, Expense, ResultCode, Recurrence, DashboardFinancials } from "@/types/studio";
+import type { LabsOutcomeSlice } from "@/components/analytics/LabsOutcomeChart";
 import { CLIENT_TYPE_CODES, PACKAGE_TIER_CODES, STAGE_ORDER } from "@/types/commission";
 
 export const SUPABASE_AVAILABLE = Boolean(
@@ -847,4 +848,24 @@ export async function kvGetDashboardFinancials(): Promise<DashboardFinancials> {
     console.error("[supabase:kvGetDashboardFinancials]", e);
     return { totalRevenue: 0, revenueThisMonth: 0, totalMonthlyExpenses: 0, netThisMonth: 0, totalLabsExperiments: 0, labsPassRate: 0 };
   }
+}
+
+export async function kvGetLabsResultBreakdown(): Promise<LabsOutcomeSlice[]> {
+  const db = createServiceClient();
+  const { data, error } = await db
+    .from("labs_experiments")
+    .select("result_code")
+    .eq("studio_id", "bns")
+    .not("result_code", "is", null);
+
+  if (error || !data) return [];
+
+  const counts: Partial<Record<ResultCode, number>> = {};
+  for (const row of data) {
+    const code = row.result_code as ResultCode;
+    counts[code] = (counts[code] ?? 0) + 1;
+  }
+
+  const ORDER: ResultCode[] = ["PASS", "FAIL", "PARTIAL", "ANOMALY"];
+  return ORDER.filter((c) => counts[c]).map((code) => ({ code, count: counts[code]! }));
 }

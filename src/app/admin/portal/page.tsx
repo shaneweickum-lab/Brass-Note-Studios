@@ -1,8 +1,11 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { kvGetAllCommissions, getUnreadClientMessageCount, getUnreadCountsByClient, kvGetDashboardFinancials } from "@/lib/supabase/queries";
+import { kvGetAllCommissions, getUnreadClientMessageCount, getUnreadCountsByClient, kvGetDashboardFinancials, kvGetLabsResultBreakdown } from "@/lib/supabase/queries";
 import StatCard from "@/components/analytics/StatCard";
+import RevenueAreaChart from "@/components/analytics/RevenueAreaChart";
+import PipelineDonutChart from "@/components/analytics/PipelineDonutChart";
+import LabsOutcomeChart from "@/components/analytics/LabsOutcomeChart";
 import type { Commission } from "@/types/commission";
 
 function formatDate(iso: string): string {
@@ -20,12 +23,35 @@ function isThisMonth(iso: string): boolean {
 }
 
 export default async function AdminPortalPage() {
-  const [commissions, unreadMessages, unreadCounts, financials] = await Promise.all([
+  const [commissions, unreadMessages, unreadCounts, financials, labsOutcomes] = await Promise.all([
     kvGetAllCommissions(),
     getUnreadClientMessageCount(),
     getUnreadCountsByClient(),
     kvGetDashboardFinancials(),
+    kvGetLabsResultBreakdown(),
   ]);
+
+  // Revenue by month from commissions with payment data
+  const revenueByMonth: Record<string, number> = {};
+  for (const c of commissions) {
+    if (!c.datePurchased || !c.totalPayment) continue;
+    const month = c.datePurchased.slice(0, 7);
+    revenueByMonth[month] = (revenueByMonth[month] ?? 0) + c.totalPayment;
+  }
+  const revenueData = Object.entries(revenueByMonth)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([month, revenue]) => ({ month, revenue }));
+
+  // Pipeline breakdown by stage
+  const stageCounts: Record<string, number> = {};
+  for (const c of commissions) {
+    const s = c.currentStage ?? "intake";
+    stageCounts[s] = (stageCounts[s] ?? 0) + 1;
+  }
+  const stageOrder = ["intake", "production", "revision", "delivered"];
+  const pipelineData = stageOrder
+    .filter((s) => stageCounts[s])
+    .map((stage) => ({ stage, count: stageCounts[stage] }));
 
   const sorted = [...commissions].sort(
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
@@ -94,6 +120,22 @@ export default async function AdminPortalPage() {
             <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Labs Pass Rate</p>
             <p className="font-display text-xl text-emerald-400">{financials.labsPassRate.toFixed(0)}%</p>
           </div>
+        </div>
+      </div>
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 bg-surface border border-white/10 rounded-lg px-5 py-5">
+          <h2 className="font-display text-base text-text-base mb-4">Revenue by Month</h2>
+          <RevenueAreaChart data={revenueData} />
+        </div>
+        <div className="bg-surface border border-white/10 rounded-lg px-5 py-5">
+          <h2 className="font-display text-base text-text-base mb-4">Pipeline</h2>
+          <PipelineDonutChart data={pipelineData} />
+        </div>
+        <div className="bg-surface border border-white/10 rounded-lg px-5 py-5">
+          <h2 className="font-display text-base text-text-base mb-4">Labs Outcomes</h2>
+          <LabsOutcomeChart data={labsOutcomes} />
         </div>
       </div>
 
