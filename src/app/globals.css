@@ -149,3 +149,13 @@ section:target {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Admin portal — no scrollbars for native app feel */
+.admin-shell,
+.admin-shell * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.admin-shell ::-webkit-scrollbar {
+  display: none;
+}

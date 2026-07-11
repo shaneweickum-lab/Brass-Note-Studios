@@ -35,7 +35,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="admin-shell min-h-screen bg-background overflow-x-hidden">
       {/* Sticky header — safe-area-inset-top so content clears the notch in standalone PWA */}
       <header
         className="sticky top-0 z-50 border-b border-white/10 bg-background/95 backdrop-blur"
