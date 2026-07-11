@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { kvGetAllCommissions, getUnreadClientMessageCount, getUnreadCountsByClient } from "@/lib/supabase/queries";
+import { kvGetAllCommissions, getUnreadClientMessageCount, getUnreadCountsByClient, kvGetDashboardFinancials } from "@/lib/supabase/queries";
 import StatCard from "@/components/analytics/StatCard";
 import type { Commission } from "@/types/commission";
 
@@ -20,10 +20,11 @@ function isThisMonth(iso: string): boolean {
 }
 
 export default async function AdminPortalPage() {
-  const [commissions, unreadMessages, unreadCounts] = await Promise.all([
+  const [commissions, unreadMessages, unreadCounts, financials] = await Promise.all([
     kvGetAllCommissions(),
     getUnreadClientMessageCount(),
     getUnreadCountsByClient(),
+    kvGetDashboardFinancials(),
   ]);
 
   const sorted = [...commissions].sort(
@@ -54,13 +55,46 @@ export default async function AdminPortalPage() {
         </Link>
       </div>
 
-      {/* Stat Cards */}
+      {/* Pipeline Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard label="Active Commissions" value={active.length} accent />
         <StatCard label="In Production" value={inProduction.length} />
         <StatCard label="Awaiting Revision" value={inRevision.length} />
         <StatCard label="Delivered This Month" value={deliveredThisMonth.length} />
         <StatCard label="Unread Messages" value={unreadMessages} accent={unreadMessages > 0} />
+      </div>
+
+      {/* Financial KPIs */}
+      <div>
+        <h2 className="font-display text-lg text-text-base mb-3">Financials</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
+            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Total Revenue</p>
+            <p className="font-display text-xl text-gold">${financials.totalRevenue.toFixed(2)}</p>
+          </div>
+          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
+            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">This Month</p>
+            <p className="font-display text-xl text-text-base">${financials.revenueThisMonth.toFixed(2)}</p>
+          </div>
+          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
+            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Monthly Expenses</p>
+            <p className="font-display text-xl text-text-muted">${financials.totalMonthlyExpenses.toFixed(2)}</p>
+          </div>
+          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
+            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Net This Month</p>
+            <p className={`font-display text-xl ${financials.netThisMonth >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+              ${financials.netThisMonth.toFixed(2)}
+            </p>
+          </div>
+          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
+            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Labs Experiments</p>
+            <p className="font-display text-xl text-text-base">{financials.totalLabsExperiments}</p>
+          </div>
+          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
+            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Labs Pass Rate</p>
+            <p className="font-display text-xl text-emerald-400">{financials.labsPassRate.toFixed(0)}%</p>
+          </div>
+        </div>
       </div>
 
       {/* Recent Commissions */}

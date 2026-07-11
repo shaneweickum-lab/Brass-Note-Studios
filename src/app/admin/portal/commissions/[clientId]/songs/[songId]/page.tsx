@@ -49,6 +49,7 @@ export default async function SongDetailPage({ params }: PageProps) {
     const lyricsReadyRaw = formData.get("lyricsReady") === "true";
     const lyricsText = (formData.get("lyrics") as string | null) || null;
 
+    const str = (key: string) => ((formData.get(key) as string) || "").trim() || undefined;
     const updated: Song = {
       ...song!,
       title: ((formData.get("title") as string) || "").trim(),
@@ -60,6 +61,21 @@ export default async function SongDetailPage({ params }: PageProps) {
       lyrics: lyricsReadyRaw ? lyricsText : null,
       notes: ((formData.get("notes") as string) || "").trim(),
       updatedAt: now,
+      genre: str("genre"),
+      subGenre: str("subGenre"),
+      vocalType: str("vocalType"),
+      bpm: str("bpm"),
+      timeSig: str("timeSig"),
+      mood: str("mood"),
+      tensionArc: str("tensionArc"),
+      instruments: str("instruments"),
+      aboutTheSong: str("aboutTheSong"),
+      sunoVersion: str("sunoVersion"),
+      genNumber: parseInt((formData.get("genNumber") as string) || "", 10) || undefined,
+      style: str("style"),
+      genreCode: str("genreCode"),
+      lyricCode: str("lyricCode"),
+      vocalCode: str("vocalCode"),
     };
 
     await kvUpdateSong(updated);

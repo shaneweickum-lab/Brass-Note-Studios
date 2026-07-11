@@ -68,6 +68,11 @@ export default async function CommissionDetailPage({ params, searchParams }: Pag
       songStory: ((formData.get("songStory") as string) || "").trim() || undefined,
       stylePreferences: ((formData.get("stylePreferences") as string) || "").trim() || undefined,
       referenceSongs: ((formData.get("referenceSongs") as string) || "").trim() || undefined,
+      totalPayment: parseFloat((formData.get("totalPayment") as string) || "") || undefined,
+      datePurchased: ((formData.get("datePurchased") as string) || "").trim() || undefined,
+      dateCompleted: ((formData.get("dateCompleted") as string) || "").trim() || undefined,
+      songwriterBuyout: formData.get("songwriterBuyout") === "on",
+      royaltySplit: ((formData.get("royaltySplit") as string) || "80/20").trim(),
     };
     await kvUpdateCommission(updated);
     revalidatePath(`/admin/portal/commissions/${fullCommissionId}`);

@@ -188,6 +188,80 @@ export default function SongEditForm({ song, action }: Props) {
         )}
       </div>
 
+      {/* Production Metadata */}
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 pt-2">
+          <span className="font-body text-xs text-text-subtle uppercase tracking-[0.15em]">Production Metadata</span>
+          <span className="flex-1 h-px bg-white/5" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Genre</label>
+            <input name="genre" type="text" defaultValue={song.genre ?? ""} placeholder="Soul" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Sub-Genre</label>
+            <input name="subGenre" type="text" defaultValue={song.subGenre ?? ""} placeholder="Neo-Soul" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Vocal Type</label>
+            <input name="vocalType" type="text" defaultValue={song.vocalType ?? ""} placeholder="Female" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">BPM</label>
+            <input name="bpm" type="text" defaultValue={song.bpm ?? ""} placeholder="95" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Time Sig</label>
+            <input name="timeSig" type="text" defaultValue={song.timeSig ?? ""} placeholder="4/4" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Mood</label>
+            <input name="mood" type="text" defaultValue={song.mood ?? ""} placeholder="Warm, nostalgic" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Suno Version</label>
+            <input name="sunoVersion" type="text" defaultValue={song.sunoVersion ?? ""} placeholder="v4" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Gen #</label>
+            <input name="genNumber" type="number" min={1} defaultValue={song.genNumber ?? ""} placeholder="1" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Tension Arc</label>
+            <input name="tensionArc" type="text" defaultValue={song.tensionArc ?? ""} placeholder="Build → release" className={inputClass} />
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Instruments / Vocal Elements</label>
+          <input name="instruments" type="text" defaultValue={song.instruments ?? ""} placeholder="Piano, strings, backing vocals" className={inputClass} />
+        </div>
+        <div className="space-y-1.5">
+          <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">About This Song</label>
+          <textarea name="aboutTheSong" rows={3} defaultValue={song.aboutTheSong ?? ""}
+            placeholder="Production context, brief summary, notable choices…"
+            className={`${inputClass} resize-none`} />
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Style Code</label>
+            <input name="style" type="text" defaultValue={song.style ?? ""} placeholder="POP" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Genre Code</label>
+            <input name="genreCode" type="text" defaultValue={song.genreCode ?? ""} placeholder="SO" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Lyric Code</label>
+            <input name="lyricCode" type="text" defaultValue={song.lyricCode ?? ""} placeholder="O" className={inputClass} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-xs text-text-subtle uppercase tracking-[0.1em]">Vocal Code</label>
+            <input name="vocalCode" type="text" defaultValue={song.vocalCode ?? ""} placeholder="F" className={inputClass} />
+          </div>
+        </div>
+      </div>
+
       {/* Internal Notes */}
       <div className="space-y-1.5">
         <div className="flex items-baseline gap-2">

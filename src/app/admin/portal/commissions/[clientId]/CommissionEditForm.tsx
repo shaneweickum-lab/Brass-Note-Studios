@@ -144,6 +144,44 @@ export default function CommissionEditForm({ commission, action }: Props) {
         </div>
       </div>
 
+      {/* ── Financial ────────────────────────────────────────── */}
+      <div className="space-y-4">
+        <SectionHeading>Financial</SectionHeading>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <label className="block font-body text-sm text-text-muted">Total Payment ($)</label>
+            <input name="totalPayment" type="number" min={0} step={0.01}
+              defaultValue={commission.totalPayment ?? ""}
+              placeholder="0.00" className={input} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-sm text-text-muted">Royalty Split</label>
+            <input name="royaltySplit" type="text"
+              defaultValue={commission.royaltySplit ?? "80/20"}
+              placeholder="80/20" className={input} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-sm text-text-muted">Date Purchased</label>
+            <input name="datePurchased" type="date"
+              defaultValue={commission.datePurchased ?? ""} className={input} />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block font-body text-sm text-text-muted">Date Completed</label>
+            <input name="dateCompleted" type="date"
+              defaultValue={commission.dateCompleted ?? ""} className={input} />
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <input name="songwriterBuyout" type="checkbox" id="songwriter-buyout"
+            defaultChecked={commission.songwriterBuyout ?? false}
+            className="w-4 h-4 accent-gold" />
+          <label htmlFor="songwriter-buyout" className="font-body text-sm text-text-muted cursor-pointer">
+            Songwriter Buyout
+            <span className="ml-2 font-normal text-xs text-text-subtle">client owns full publishing rights</span>
+          </label>
+        </div>
+      </div>
+
       {/* ── Internal Notes ───────────────────────────────────── */}
       <div className="space-y-4">
         <SectionHeading>Internal Notes</SectionHeading>

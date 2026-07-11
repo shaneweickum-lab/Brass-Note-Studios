@@ -36,6 +36,12 @@ export interface Commission {
   songStory?: string;
   stylePreferences?: string;
   referenceSongs?: string;
+  // Financial fields (migration 006)
+  totalPayment?: number;
+  datePurchased?: string;  // YYYY-MM-DD
+  dateCompleted?: string;  // YYYY-MM-DD
+  songwriterBuyout?: boolean;
+  royaltySplit?: string;   // e.g. "80/20"
 }
 
 /** Returns fullCommissionId/N when totalSongs > 1, else fullCommissionId unchanged. */
@@ -44,7 +50,7 @@ export function formatCommissionId(fullCommissionId: string, totalSongs: number)
 }
 
 export interface Song {
-  songId: string;       // 4-digit padded global seq, e.g. "0001"
+  songId: string;       // P:Cnnn global seq, e.g. "0:0001"
   commissionId: string; // fullCommissionId
   title: string;
   trackNumber: number;
@@ -57,6 +63,23 @@ export interface Song {
   notes: string;
   createdAt: string;
   updatedAt: string;
+  // Production metadata (migration 006)
+  style?: string;
+  genreCode?: string;
+  lyricCode?: string;
+  vocalCode?: string;
+  songDisplayId?: string;
+  genre?: string;
+  subGenre?: string;
+  vocalType?: string;
+  bpm?: string;
+  timeSig?: string;
+  mood?: string;
+  tensionArc?: string;
+  aboutTheSong?: string;
+  instruments?: string;
+  sunoVersion?: string;
+  genNumber?: number;
 }
 
 // Safe fields returned to the client — no PII or admin metadata

@@ -1,5 +1,5 @@
 import { createServiceClient } from "./server";
-import type { DbClient, DbCommission, DbSong, DbMessage } from "./types";
+import type { DbClient, DbCommission, DbSong, DbMessage, DbLabsExperiment, DbExpense } from "./types";
 import type {
   Client,
   Commission,
@@ -8,6 +8,7 @@ import type {
   PackageType,
   ProductionStage,
 } from "@/types/commission";
+import type { LabsExperiment, Expense, ResultCode, Recurrence, DashboardFinancials } from "@/types/studio";
 import { CLIENT_TYPE_CODES, PACKAGE_TIER_CODES, STAGE_ORDER } from "@/types/commission";
 
 export const SUPABASE_AVAILABLE = Boolean(
@@ -45,6 +46,11 @@ function mapCommission(row: DbCommission): Commission {
     songStory: row.song_story ?? undefined,
     stylePreferences: row.style_preferences ?? undefined,
     referenceSongs: row.reference_songs ?? undefined,
+    totalPayment: row.total_payment ?? undefined,
+    datePurchased: row.date_purchased ?? undefined,
+    dateCompleted: row.date_completed ?? undefined,
+    songwriterBuyout: row.songwriter_buyout ?? undefined,
+    royaltySplit: row.royalty_split ?? undefined,
   };
 }
 
@@ -61,6 +67,67 @@ function mapSong(row: DbSong): Song {
     lyricsReady: row.lyrics_ready,
     lyrics: row.lyrics,
     notes: row.notes,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    style: row.style ?? undefined,
+    genreCode: row.genre_code ?? undefined,
+    lyricCode: row.lyric_code ?? undefined,
+    vocalCode: row.vocal_code ?? undefined,
+    songDisplayId: row.song_display_id ?? undefined,
+    genre: row.genre ?? undefined,
+    subGenre: row.sub_genre ?? undefined,
+    vocalType: row.vocal_type ?? undefined,
+    bpm: row.bpm ?? undefined,
+    timeSig: row.time_sig ?? undefined,
+    mood: row.mood ?? undefined,
+    tensionArc: row.tension_arc ?? undefined,
+    aboutTheSong: row.about_the_song ?? undefined,
+    instruments: row.instruments ?? undefined,
+    sunoVersion: row.suno_version ?? undefined,
+    genNumber: row.gen_number ?? undefined,
+  };
+}
+
+function mapLabsExperiment(row: DbLabsExperiment): LabsExperiment {
+  return {
+    bnlId: row.bnl_id,
+    studioId: row.studio_id,
+    experimentId: row.experiment_id ?? undefined,
+    experimentName: row.experiment_name ?? undefined,
+    labsGlobalNumber: row.labs_global_number ?? undefined,
+    displayNumber: row.display_number ?? undefined,
+    sunoVersion: row.suno_version ?? undefined,
+    weirdnessPct: row.weirdness_pct ?? undefined,
+    constraintPct: row.constraint_pct ?? undefined,
+    stylePrompt: row.style_prompt ?? undefined,
+    lyricPrompt: row.lyric_prompt ?? undefined,
+    tier2SymbolsUsed: row.tier2_symbols_used ?? undefined,
+    tier3Applied: row.tier3_applied,
+    hypothesis: row.hypothesis ?? undefined,
+    expectedResult: row.expected_result ?? undefined,
+    actualResult: row.actual_result ?? undefined,
+    resultCode: (row.result_code as ResultCode) ?? undefined,
+    keyFinding: row.key_finding ?? undefined,
+    integrationStatus: row.integration_status ?? undefined,
+    notes: row.notes ?? undefined,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+}
+
+function mapExpense(row: DbExpense): Expense {
+  return {
+    id: row.id,
+    studioId: row.studio_id,
+    expenseName: row.expense_name,
+    recurrence: row.recurrence as Recurrence,
+    nextDueDate: row.next_due_date ?? undefined,
+    monthlyCost: row.monthly_cost ?? undefined,
+    annualCost: row.annual_cost ?? undefined,
+    category: row.category ?? undefined,
+    autoRenew: row.auto_renew,
+    active: row.active,
+    notes: row.notes ?? undefined,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -312,6 +379,11 @@ export async function kvUpdateCommission(commission: Commission): Promise<void> 
       song_story: commission.songStory ?? null,
       style_preferences: commission.stylePreferences ?? null,
       reference_songs: commission.referenceSongs ?? null,
+      total_payment: commission.totalPayment ?? null,
+      date_purchased: commission.datePurchased ?? null,
+      date_completed: commission.dateCompleted ?? null,
+      songwriter_buyout: commission.songwriterBuyout ?? false,
+      royalty_split: commission.royaltySplit ?? "80/20",
     })
     .eq("full_commission_id", commission.fullCommissionId);
   if (error) throw new Error(`Failed to update commission: ${error.message}`);
@@ -373,6 +445,22 @@ export async function kvUpdateSong(song: Song): Promise<void> {
       lyrics: song.lyrics,
       notes: song.notes,
       updated_at: song.updatedAt,
+      style: song.style ?? null,
+      genre_code: song.genreCode ?? null,
+      lyric_code: song.lyricCode ?? null,
+      vocal_code: song.vocalCode ?? null,
+      song_display_id: song.songDisplayId ?? null,
+      genre: song.genre ?? null,
+      sub_genre: song.subGenre ?? null,
+      vocal_type: song.vocalType ?? null,
+      bpm: song.bpm ?? null,
+      time_sig: song.timeSig ?? null,
+      mood: song.mood ?? null,
+      tension_arc: song.tensionArc ?? null,
+      about_the_song: song.aboutTheSong ?? null,
+      instruments: song.instruments ?? null,
+      suno_version: song.sunoVersion ?? null,
+      gen_number: song.genNumber ?? null,
     })
     .eq("commission_id", song.commissionId)
     .eq("song_id", song.songId);
@@ -525,5 +613,238 @@ export async function getUnreadClientMessageCount(): Promise<number> {
   } catch (e) {
     console.error("[supabase:getUnreadClientMessageCount]", e);
     return 0;
+  }
+}
+
+// ── Labs Experiments CRUD ──────────────────────────────────────────────────────
+
+function buildBnlId(experimentId: string, globalNumber: number, date: string): string {
+  const d = new Date(date);
+  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(d.getUTCDate()).padStart(2, "0");
+  const yy = String(d.getUTCFullYear()).slice(2);
+  return `BNL-${mm}${dd}${yy}-${experimentId}-${String(globalNumber).padStart(3, "0")}`;
+}
+
+export async function kvAllocateLabsId(
+  experimentId: string,
+  date: string
+): Promise<{ bnlId: string; globalNumber: number }> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const globalNumber = await incrementCounter("labs_seq");
+  return { bnlId: buildBnlId(experimentId, globalNumber, date), globalNumber };
+}
+
+export async function kvGetAllLabsExperiments(): Promise<LabsExperiment[]> {
+  if (!SUPABASE_AVAILABLE) return [];
+  const db = createServiceClient();
+  try {
+    const { data, error } = await db
+      .from("labs_experiments")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data as DbLabsExperiment[] ?? []).map(mapLabsExperiment);
+  } catch (e) {
+    console.error("[supabase:kvGetAllLabsExperiments]", e);
+    return [];
+  }
+}
+
+export async function kvGetLabsExperiment(bnlId: string): Promise<LabsExperiment | null> {
+  if (!SUPABASE_AVAILABLE) return null;
+  const db = createServiceClient();
+  try {
+    const { data, error } = await db
+      .from("labs_experiments")
+      .select("*")
+      .eq("bnl_id", bnlId)
+      .maybeSingle<DbLabsExperiment>();
+    if (error) throw error;
+    return data ? mapLabsExperiment(data) : null;
+  } catch (e) {
+    console.error("[supabase:kvGetLabsExperiment]", e);
+    return null;
+  }
+}
+
+export async function kvCreateLabsExperiment(exp: LabsExperiment): Promise<void> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  const { error } = await db.from("labs_experiments").insert({
+    bnl_id: exp.bnlId,
+    studio_id: exp.studioId,
+    experiment_id: exp.experimentId ?? null,
+    experiment_name: exp.experimentName ?? null,
+    labs_global_number: exp.labsGlobalNumber ?? null,
+    display_number: exp.displayNumber ?? null,
+    suno_version: exp.sunoVersion ?? null,
+    weirdness_pct: exp.weirdnessPct ?? null,
+    constraint_pct: exp.constraintPct ?? null,
+    style_prompt: exp.stylePrompt ?? null,
+    lyric_prompt: exp.lyricPrompt ?? null,
+    tier2_symbols_used: exp.tier2SymbolsUsed ?? null,
+    tier3_applied: exp.tier3Applied,
+    hypothesis: exp.hypothesis ?? null,
+    expected_result: exp.expectedResult ?? null,
+    actual_result: exp.actualResult ?? null,
+    result_code: exp.resultCode ?? null,
+    key_finding: exp.keyFinding ?? null,
+    integration_status: exp.integrationStatus ?? null,
+    notes: exp.notes ?? null,
+    created_at: exp.createdAt,
+    updated_at: exp.updatedAt,
+  });
+  if (error) throw new Error(`Failed to create labs experiment: ${error.message}`);
+}
+
+export async function kvUpdateLabsExperiment(exp: LabsExperiment): Promise<void> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  const { error } = await db
+    .from("labs_experiments")
+    .update({
+      experiment_id: exp.experimentId ?? null,
+      experiment_name: exp.experimentName ?? null,
+      suno_version: exp.sunoVersion ?? null,
+      weirdness_pct: exp.weirdnessPct ?? null,
+      constraint_pct: exp.constraintPct ?? null,
+      style_prompt: exp.stylePrompt ?? null,
+      lyric_prompt: exp.lyricPrompt ?? null,
+      tier2_symbols_used: exp.tier2SymbolsUsed ?? null,
+      tier3_applied: exp.tier3Applied,
+      hypothesis: exp.hypothesis ?? null,
+      expected_result: exp.expectedResult ?? null,
+      actual_result: exp.actualResult ?? null,
+      result_code: exp.resultCode ?? null,
+      key_finding: exp.keyFinding ?? null,
+      integration_status: exp.integrationStatus ?? null,
+      notes: exp.notes ?? null,
+      updated_at: exp.updatedAt,
+    })
+    .eq("bnl_id", exp.bnlId);
+  if (error) throw new Error(`Failed to update labs experiment: ${error.message}`);
+}
+
+export async function kvDeleteLabsExperiment(bnlId: string): Promise<void> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  const { error } = await db.from("labs_experiments").delete().eq("bnl_id", bnlId);
+  if (error) throw new Error(`Failed to delete labs experiment: ${error.message}`);
+}
+
+// ── Expenses CRUD ──────────────────────────────────────────────────────────────
+
+export async function kvGetAllExpenses(): Promise<Expense[]> {
+  if (!SUPABASE_AVAILABLE) return [];
+  const db = createServiceClient();
+  try {
+    const { data, error } = await db
+      .from("expenses")
+      .select("*")
+      .order("expense_name", { ascending: true });
+    if (error) throw error;
+    return (data as DbExpense[] ?? []).map(mapExpense);
+  } catch (e) {
+    console.error("[supabase:kvGetAllExpenses]", e);
+    return [];
+  }
+}
+
+export async function kvCreateExpense(
+  exp: Omit<Expense, "id" | "createdAt" | "updatedAt">
+): Promise<Expense> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  const { data, error } = await db
+    .from("expenses")
+    .insert({
+      studio_id: exp.studioId,
+      expense_name: exp.expenseName,
+      recurrence: exp.recurrence,
+      next_due_date: exp.nextDueDate ?? null,
+      monthly_cost: exp.monthlyCost ?? null,
+      annual_cost: exp.annualCost ?? null,
+      category: exp.category ?? null,
+      auto_renew: exp.autoRenew,
+      active: exp.active,
+      notes: exp.notes ?? null,
+    })
+    .select()
+    .single<DbExpense>();
+  if (error) throw new Error(`Failed to create expense: ${error.message}`);
+  return mapExpense(data!);
+}
+
+export async function kvUpdateExpense(exp: Expense): Promise<void> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  const { error } = await db
+    .from("expenses")
+    .update({
+      expense_name: exp.expenseName,
+      recurrence: exp.recurrence,
+      next_due_date: exp.nextDueDate ?? null,
+      monthly_cost: exp.monthlyCost ?? null,
+      annual_cost: exp.annualCost ?? null,
+      category: exp.category ?? null,
+      auto_renew: exp.autoRenew,
+      active: exp.active,
+      notes: exp.notes ?? null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", exp.id);
+  if (error) throw new Error(`Failed to update expense: ${error.message}`);
+}
+
+export async function kvDeleteExpense(id: string): Promise<void> {
+  if (!SUPABASE_AVAILABLE) throw new Error("Supabase not configured");
+  const db = createServiceClient();
+  const { error } = await db.from("expenses").delete().eq("id", id);
+  if (error) throw new Error(`Failed to delete expense: ${error.message}`);
+}
+
+// ── Dashboard financials ───────────────────────────────────────────────────────
+
+export async function kvGetDashboardFinancials(): Promise<DashboardFinancials> {
+  if (!SUPABASE_AVAILABLE) {
+    return { totalRevenue: 0, revenueThisMonth: 0, totalMonthlyExpenses: 0, netThisMonth: 0, totalLabsExperiments: 0, labsPassRate: 0 };
+  }
+  const db = createServiceClient();
+  try {
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
+
+    const [commissionsRes, expensesRes, labsRes] = await Promise.all([
+      db.from("commissions").select("total_payment, date_purchased"),
+      db.from("expenses").select("monthly_cost").eq("active", true),
+      db.from("labs_experiments").select("result_code"),
+    ]);
+
+    const commissions = (commissionsRes.data ?? []) as { total_payment: number | null; date_purchased: string | null }[];
+    const totalRevenue = commissions.reduce((sum, c) => sum + (c.total_payment ?? 0), 0);
+    const revenueThisMonth = commissions
+      .filter((c) => c.date_purchased && c.date_purchased >= monthStart)
+      .reduce((sum, c) => sum + (c.total_payment ?? 0), 0);
+
+    const expenses = (expensesRes.data ?? []) as { monthly_cost: number | null }[];
+    const totalMonthlyExpenses = expenses.reduce((sum, e) => sum + (e.monthly_cost ?? 0), 0);
+
+    const labs = (labsRes.data ?? []) as { result_code: string | null }[];
+    const totalLabsExperiments = labs.length;
+    const passed = labs.filter((l) => l.result_code === "PASS").length;
+    const labsPassRate = totalLabsExperiments > 0 ? Math.round((passed / totalLabsExperiments) * 100) : 0;
+
+    return {
+      totalRevenue,
+      revenueThisMonth,
+      totalMonthlyExpenses,
+      netThisMonth: revenueThisMonth - totalMonthlyExpenses,
+      totalLabsExperiments,
+      labsPassRate,
+    };
+  } catch (e) {
+    console.error("[supabase:kvGetDashboardFinancials]", e);
+    return { totalRevenue: 0, revenueThisMonth: 0, totalMonthlyExpenses: 0, netThisMonth: 0, totalLabsExperiments: 0, labsPassRate: 0 };
   }
 }

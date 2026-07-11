@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText, Briefcase, MessageSquare } from "lucide-react";
+import { LayoutDashboard, Globe, Bot, GitMerge, ScrollText, Briefcase, MessageSquare, FlaskConical, Receipt } from "lucide-react";
 import UnreadMessageBadge from "@/components/admin/UnreadMessageBadge";
 
 const NAV_ITEMS = [
   { href: "/admin/portal",                          label: "Portal",     Icon: Briefcase,       matchPrefix: true,  badge: false },
   { href: "/admin/portal/messages",                 label: "Messages",   Icon: MessageSquare,   matchPrefix: true,  badge: true  },
+  { href: "/admin/portal/labs",                     label: "Labs",       Icon: FlaskConical,    matchPrefix: true,  badge: false },
+  { href: "/admin/portal/expenses",                 label: "Expenses",   Icon: Receipt,         matchPrefix: true,  badge: false },
   { href: "/admin/analytics",                       label: "Overview",   Icon: LayoutDashboard, matchPrefix: false, badge: false },
   { href: "/admin/analytics/website",               label: "Website",    Icon: Globe,           matchPrefix: false, badge: false },
   { href: "/admin/analytics/concierge",             label: "Benny",      Icon: Bot,             matchPrefix: false, badge: false },
@@ -26,9 +28,14 @@ export default function AdminNav() {
 
       <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hide pr-6 sm:pr-0">
         {NAV_ITEMS.map(({ href, label, Icon, matchPrefix, badge }) => {
-          // Portal prefix match must not swallow the /messages sub-route highlight
+          // Portal prefix match must not swallow sub-route highlights
           const active = href === "/admin/portal"
-            ? pathname === "/admin/portal" || (pathname.startsWith("/admin/portal") && !pathname.startsWith("/admin/portal/messages"))
+            ? pathname === "/admin/portal" || (
+                pathname.startsWith("/admin/portal") &&
+                !pathname.startsWith("/admin/portal/messages") &&
+                !pathname.startsWith("/admin/portal/labs") &&
+                !pathname.startsWith("/admin/portal/expenses")
+              )
             : matchPrefix ? pathname.startsWith(href) : pathname === href;
           return (
             <Link
