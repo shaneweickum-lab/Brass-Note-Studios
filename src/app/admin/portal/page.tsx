@@ -65,66 +65,53 @@ export default async function AdminPortalPage() {
   );
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-start justify-between gap-4">
+    <div className="space-y-4 sm:space-y-8">
+      <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-3xl text-text-base">Commission Portal</h1>
-          <p className="text-text-muted font-body text-sm mt-1">
+          <h1 className="font-display text-xl sm:text-3xl text-text-base leading-tight">Commission Portal</h1>
+          <p className="text-text-muted font-body text-xs sm:text-sm mt-0.5 sm:mt-1">
             Manage client commissions and production stages
           </p>
         </div>
         <Link
           href="/admin/portal/commissions/new"
-          className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 bg-gold text-background font-body text-sm font-medium rounded hover:bg-gold-light transition-colors"
+          className="shrink-0 inline-flex items-center gap-1 px-3 py-1.5 sm:px-4 sm:py-2 bg-gold text-background font-body text-xs sm:text-sm font-medium rounded hover:bg-gold-light transition-colors"
         >
-          + New Commission
+          + New
         </Link>
       </div>
 
       {/* Pipeline Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatCard label="Active Commissions" value={active.length} accent />
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
+        <StatCard label="Active" value={active.length} accent />
         <StatCard label="In Production" value={inProduction.length} />
-        <StatCard label="Awaiting Revision" value={inRevision.length} />
-        <StatCard label="Delivered This Month" value={deliveredThisMonth.length} />
-        <StatCard label="Unread Messages" value={unreadMessages} accent={unreadMessages > 0} />
+        <StatCard label="Revision" value={inRevision.length} />
+        <StatCard label="Delivered" value={deliveredThisMonth.length} />
+        <StatCard label="Unread" value={unreadMessages} accent={unreadMessages > 0} />
       </div>
 
       {/* Financial KPIs */}
       <div>
-        <h2 className="font-display text-lg text-text-base mb-3">Financials</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
-            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Total Revenue</p>
-            <p className="font-display text-xl text-gold">${financials.totalRevenue.toFixed(2)}</p>
-          </div>
-          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
-            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">This Month</p>
-            <p className="font-display text-xl text-text-base">${financials.revenueThisMonth.toFixed(2)}</p>
-          </div>
-          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
-            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Monthly Expenses</p>
-            <p className="font-display text-xl text-text-muted">${financials.totalMonthlyExpenses.toFixed(2)}</p>
-          </div>
-          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
-            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Net This Month</p>
-            <p className={`font-display text-xl ${financials.netThisMonth >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-              ${financials.netThisMonth.toFixed(2)}
-            </p>
-          </div>
-          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
-            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Labs Experiments</p>
-            <p className="font-display text-xl text-text-base">{financials.totalLabsExperiments}</p>
-          </div>
-          <div className="bg-surface border border-white/10 rounded-lg px-4 py-4">
-            <p className="font-body text-xs text-text-subtle uppercase tracking-[0.1em] mb-1">Labs Pass Rate</p>
-            <p className="font-display text-xl text-emerald-400">{financials.labsPassRate.toFixed(0)}%</p>
-          </div>
+        <h2 className="font-display text-base sm:text-lg text-text-base mb-2 sm:mb-3">Financials</h2>
+        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
+          {[
+            { label: "Revenue", value: `$${financials.totalRevenue.toFixed(0)}`, cls: "text-gold" },
+            { label: "This Month", value: `$${financials.revenueThisMonth.toFixed(0)}`, cls: "text-text-base" },
+            { label: "Expenses", value: `$${financials.totalMonthlyExpenses.toFixed(0)}`, cls: "text-text-muted" },
+            { label: "Net", value: `$${financials.netThisMonth.toFixed(0)}`, cls: financials.netThisMonth >= 0 ? "text-emerald-400" : "text-red-400" },
+            { label: "Labs", value: String(financials.totalLabsExperiments), cls: "text-text-base" },
+            { label: "Pass Rate", value: `${financials.labsPassRate.toFixed(0)}%`, cls: "text-emerald-400" },
+          ].map(({ label, value, cls }) => (
+            <div key={label} className="bg-surface border border-white/10 rounded-lg px-2.5 py-2.5 sm:px-4 sm:py-4">
+              <p className="font-body text-[9px] sm:text-xs text-text-subtle uppercase tracking-[0.05em] sm:tracking-[0.1em] mb-0.5 sm:mb-1 leading-tight">{label}</p>
+              <p className={`font-display text-base sm:text-xl leading-none ${cls}`}>{value}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Charts — desktop only to keep mobile view tight */}
+      <div className="hidden sm:grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-surface border border-white/10 rounded-lg px-5 py-5">
           <h2 className="font-display text-base text-text-base mb-4">Revenue by Month</h2>
           <RevenueAreaChart data={revenueData} />

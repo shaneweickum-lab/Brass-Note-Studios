@@ -35,7 +35,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Sticky header — safe-area-inset-top so content clears the notch in standalone PWA */}
       <header
         className="sticky top-0 z-50 border-b border-white/10 bg-background/95 backdrop-blur"
@@ -81,7 +81,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
       {/* Content — extra bottom padding on mobile to clear the fixed bottom nav */}
       <main
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10"
+        className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8"
         style={{ paddingBottom: "calc(4.5rem + env(safe-area-inset-bottom))" }}
       >
         {children}
