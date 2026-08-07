@@ -11,8 +11,9 @@ const studioLinks = [
 ];
 
 const collectionLinks = [
-  { href: "/music", label: "Our Work"        },
-  { href: "/labs",  label: "Brass Note Labs" },
+  { href: "/music",  label: "Our Work"        },
+  { href: "/store",  label: "Download Songs"  },
+  { href: "/labs",   label: "Brass Note Labs" },
 ];
 
 export default function Footer() {
