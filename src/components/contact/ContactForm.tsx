@@ -656,7 +656,8 @@ export default function ContactForm({
       {status === "error" && (
         <div className="flex items-center gap-2 text-red-400 text-sm font-body bg-red-400/10 rounded-sm px-4 py-3 border border-red-400/20">
           <AlertCircle className="w-4 h-4 shrink-0" />
-          Something went wrong. Please try again or email directly.
+          Something went wrong. Please try again or email us at{" "}
+          <a href="mailto:support@brassnotestudios.com" className="underline hover:text-red-300">support@brassnotestudios.com</a>.
         </div>
       )}
 

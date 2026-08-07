@@ -86,6 +86,12 @@ export default function Footer() {
               <Link href="/contact" className="text-text-muted/60 hover:text-gold font-body text-xs tracking-wide transition-colors">
                 Commission a Song
               </Link>
+              <a
+                href="mailto:support@brassnotestudios.com"
+                className="text-text-muted/60 hover:text-gold font-body text-xs tracking-wide transition-colors"
+              >
+                support@brassnotestudios.com
+              </a>
             </div>
           </div>
         </div>

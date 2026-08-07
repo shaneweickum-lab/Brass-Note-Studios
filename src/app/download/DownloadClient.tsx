@@ -73,8 +73,8 @@ export default function DownloadClient() {
               <p className="text-text-muted font-body text-xs leading-relaxed">
                 Personal use only. Do not redistribute, re-sell, or use in commercial productions
                 without a commercial license. Contact us at{" "}
-                <a href="mailto:shane@brassnotestudios.com" className="text-gold hover:underline">
-                  shane@brassnotestudios.com
+                <a href="mailto:support@brassnotestudios.com" className="text-gold hover:underline">
+                  support@brassnotestudios.com
                 </a>{" "}
                 for commercial licensing.
               </p>
