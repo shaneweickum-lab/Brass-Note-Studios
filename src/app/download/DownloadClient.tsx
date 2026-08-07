@@ -3,23 +3,29 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Download, Music, ArrowLeft } from "lucide-react";
-import songsData from "@/data/songs.json";
-import type { Song } from "@/types";
 
 export default function DownloadClient() {
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
 
-  if (!sessionId) {
-    return <ErrorState message="No session ID found. Please check your order confirmation email." />;
+  // Stripe Payment Element returns payment_intent after redirect
+  const paymentIntentId = searchParams.get("payment_intent");
+  const redirectStatus   = searchParams.get("redirect_status");
+
+  if (!paymentIntentId || redirectStatus !== "succeeded") {
+    return (
+      <ErrorState message={
+        redirectStatus === "failed"
+          ? "Payment was not completed. Please try again."
+          : "No payment found. Please check your order confirmation email."
+      } />
+    );
   }
 
-  const downloadUrl = `/api/download?session_id=${encodeURIComponent(sessionId)}`;
+  const downloadUrl = `/api/download?payment_intent=${encodeURIComponent(paymentIntentId)}`;
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4 py-16">
       <div className="max-w-md w-full">
-        {/* Card */}
         <div
           className="rounded-lg overflow-hidden"
           style={{
@@ -28,14 +34,12 @@ export default function DownloadClient() {
             boxShadow: "0 0 40px rgba(212,168,67,0.08), 0 24px 60px rgba(0,0,0,0.6)",
           }}
         >
-          {/* Gold top accent */}
           <div
             className="h-[2px]"
             style={{ background: "linear-gradient(90deg, transparent 0%, #D4A843 40%, #0D9488 70%, transparent 100%)" }}
           />
 
           <div className="px-8 py-10 text-center flex flex-col items-center gap-5">
-            {/* Icon */}
             <div
               className="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center"
               style={{ background: "rgba(212,168,67,0.08)" }}
@@ -56,7 +60,6 @@ export default function DownloadClient() {
               </p>
             </div>
 
-            {/* Download button */}
             <a
               href={downloadUrl}
               className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold px-6 py-4 rounded-sm transition-colors duration-200"
@@ -65,14 +68,13 @@ export default function DownloadClient() {
               Download MP3
             </a>
 
-            {/* License note */}
             <div className="w-full bg-white/[0.03] border border-white/[0.06] rounded-sm px-4 py-3 text-left">
               <p className="text-gold font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">
                 License
               </p>
               <p className="text-text-muted font-body text-xs leading-relaxed">
                 Personal use only. Do not redistribute, re-sell, or use in commercial productions
-                without a commercial license. Contact us at{" "}
+                without a commercial license. Contact{" "}
                 <a href="mailto:support@brassnotestudios.com" className="text-gold hover:underline">
                   support@brassnotestudios.com
                 </a>{" "}
@@ -82,14 +84,13 @@ export default function DownloadClient() {
           </div>
         </div>
 
-        {/* Back link */}
         <div className="mt-6 text-center">
           <Link
-            href="/music"
+            href="/store"
             className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-base font-body text-sm transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Music
+            Back to Store
           </Link>
         </div>
       </div>
@@ -103,11 +104,11 @@ function ErrorState({ message }: { message: string }) {
       <div className="max-w-md w-full text-center">
         <p className="text-text-muted font-body text-sm mb-4">{message}</p>
         <Link
-          href="/music"
+          href="/store"
           className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light font-body text-sm transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Music
+          Back to Store
         </Link>
       </div>
     </main>

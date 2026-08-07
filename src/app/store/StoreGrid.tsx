@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Play, Pause, Download } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 import type { Song } from "@/types";
@@ -29,7 +29,7 @@ export default function StoreGrid({ songs }: StoreGridProps) {
 
 function StoreCard({ song, allSongs }: { song: Song; allSongs: Song[] }) {
   const { currentSongId, playerState, play, pause, resume } = usePlayer();
-  const [buyLoading, setBuyLoading] = useState(false);
+  const router = useRouter();
 
   const isCurrentSong = currentSongId === song.id;
   const isPlaying = isCurrentSong && (playerState === "playing" || playerState === "loading");
@@ -44,22 +44,8 @@ function StoreCard({ song, allSongs }: { song: Song; allSongs: Song[] }) {
     }
   };
 
-  const handleBuy = async () => {
-    if (buyLoading) return;
-    setBuyLoading(true);
-    try {
-      const res = await fetch("/api/checkout/song", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ songId: song.id }),
-      });
-      const data = (await res.json()) as { url?: string };
-      if (data.url) window.location.href = data.url;
-    } catch {
-      // silent
-    } finally {
-      setBuyLoading(false);
-    }
+  const handleBuy = () => {
+    router.push(`/checkout/${song.id}`);
   };
 
   return (
@@ -144,11 +130,10 @@ function StoreCard({ song, allSongs }: { song: Song; allSongs: Song[] }) {
         {/* Buy button — full width, prominent */}
         <button
           onClick={handleBuy}
-          disabled={buyLoading}
-          className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold text-sm py-3 rounded-sm transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-1"
+          className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold text-sm py-3 rounded-sm transition-colors duration-200 mt-1"
         >
           <Download className="w-4 h-4" />
-          {buyLoading ? "Loading…" : `Buy MP3 — $${song.downloadPrice!.toFixed(2)}`}
+          Buy MP3 — ${song.downloadPrice!.toFixed(2)}
         </button>
       </div>
     </div>

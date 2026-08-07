@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Play, Pause, Download } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 import { cn } from "@/lib/utils";
@@ -39,7 +39,7 @@ interface TrackCardProps {
 
 export default function TrackCard({ song, allSongs, wide = false }: TrackCardProps) {
   const { currentSongId, playerState, play, pause, resume } = usePlayer();
-  const [buyLoading, setBuyLoading] = useState(false);
+  const router = useRouter();
 
   const isCurrentSong = currentSongId === song.id;
   const isPlaying     = isCurrentSong && (playerState === "playing" || playerState === "loading");
@@ -60,24 +60,8 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
     }
   };
 
-  const handleBuy = async () => {
-    if (buyLoading) return;
-    setBuyLoading(true);
-    try {
-      const res = await fetch("/api/checkout/song", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ songId: song.id }),
-      });
-      const data = (await res.json()) as { url?: string; error?: string };
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch {
-      // silent — user stays on page
-    } finally {
-      setBuyLoading(false);
-    }
+  const handleBuy = () => {
+    router.push(`/checkout/${song.id}`);
   };
 
   // ── Art area (shared between both variants) ─────────────────────────────
@@ -243,11 +227,10 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
         {song.purchasable && song.downloadPrice && (
           <button
             onClick={handleBuy}
-            disabled={buyLoading}
-            className="shrink-0 inline-flex items-center gap-1.5 border border-gold/40 text-gold hover:bg-gold hover:text-background font-body text-[11px] font-semibold px-3 py-1.5 rounded-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="shrink-0 inline-flex items-center gap-1.5 border border-gold/40 text-gold hover:bg-gold hover:text-background font-body text-[11px] font-semibold px-3 py-1.5 rounded-sm transition-all duration-200"
           >
             <Download className="w-3 h-3" />
-            {buyLoading ? "…" : `$${song.downloadPrice.toFixed(2)} MP3`}
+            ${song.downloadPrice.toFixed(2)} MP3
           </button>
         )}
       </div>

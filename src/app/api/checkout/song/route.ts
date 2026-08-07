@@ -24,37 +24,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Song is not available for purchase" }, { status: 400 });
     }
 
-    const origin = req.headers.get("origin") ?? process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            unit_amount: Math.round(song.downloadPrice * 100),
-            product_data: {
-              name: song.title,
-              description: `Personal-use MP3 license — ${song.title} by Brass Note Studios`,
-              metadata: {
-                songId: song.id,
-                downloadFileKey: song.downloadFileKey,
-              },
-            },
-          },
-          quantity: 1,
-        },
-      ],
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(song.downloadPrice * 100),
+      currency: "usd",
       metadata: {
         songId: song.id,
+        songTitle: song.title,
         downloadFileKey: song.downloadFileKey,
       },
-      success_url: `${origin}/download?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/music`,
+      automatic_payment_methods: { enabled: true },
     });
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({
+      clientSecret: paymentIntent.client_secret,
+      song: {
+        id: song.id,
+        title: song.title,
+        clientName: song.clientName,
+        genre: song.genre ?? null,
+        description: song.description ?? null,
+        downloadPrice: song.downloadPrice,
+      },
+    });
   } catch (err) {
     console.error("[checkout/song]", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
