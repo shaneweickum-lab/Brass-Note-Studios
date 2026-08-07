@@ -59,7 +59,10 @@
         "romantic",
         "celebratory"
       ],
-      "coverImage": null
+      "coverImage": null,
+      "purchasable": true,
+      "downloadPrice": 1.99,
+      "downloadFileKey": "songs/Dejanaes Song.mp3"
     },
     {
       "id": "song-003",
@@ -183,7 +186,7 @@
       "coverImage": null,
       "purchasable": true,
       "downloadPrice": 1.99,
-      "downloadFileKey": "songs/A hero’s Journey (limitless).mp3"
+      "downloadFileKey": "songs/A heros Journey.mp3"
     }
   ]
 }
