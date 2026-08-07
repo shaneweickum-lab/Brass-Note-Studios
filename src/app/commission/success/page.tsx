@@ -1,0 +1,73 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { CheckCircle, ArrowLeft, Mail } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Order Confirmed | Brass Note Studios",
+  description: "Your commission payment was received. We'll be in touch within 1–2 business days.",
+};
+
+export default function CommissionSuccessPage() {
+  return (
+    <main className="min-h-screen flex items-center justify-center px-4 py-16">
+      <div className="max-w-md w-full">
+        <div
+          className="rounded-lg overflow-hidden"
+          style={{
+            background: "linear-gradient(160deg, #131d30 0%, #0F172A 60%, #080d18 100%)",
+            border: "1px solid rgba(13,148,136,0.3)",
+            boxShadow: "0 0 40px rgba(13,148,136,0.08), 0 24px 60px rgba(0,0,0,0.6)",
+          }}
+        >
+          <div
+            className="h-[2px]"
+            style={{ background: "linear-gradient(90deg, transparent 0%, #D4A843 40%, #0D9488 70%, transparent 100%)" }}
+          />
+
+          <div className="px-8 py-10 text-center flex flex-col items-center gap-5">
+            <div
+              className="w-16 h-16 rounded-full border border-teal/30 flex items-center justify-center"
+              style={{ background: "rgba(13,148,136,0.08)" }}
+            >
+              <CheckCircle className="w-7 h-7 text-teal" />
+            </div>
+
+            <div>
+              <p className="text-teal font-body text-[10px] uppercase tracking-[0.25em] font-semibold mb-2">
+                Payment Confirmed
+              </p>
+              <h1 className="font-display text-2xl text-text-base leading-tight mb-3">
+                Your Commission is Booked
+              </h1>
+              <p className="text-text-muted font-body text-sm leading-relaxed">
+                We received your order and project details. Expect a follow-up from us
+                within <span className="text-text-base font-semibold">1–2 business days</span> to
+                kick off your song.
+              </p>
+            </div>
+
+            <div className="w-full bg-white/[0.03] border border-white/[0.06] rounded-sm px-4 py-3 text-left flex items-start gap-3">
+              <Mail className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+              <p className="text-text-muted font-body text-xs leading-relaxed">
+                A receipt has been sent to your email. Questions? Reach us at{" "}
+                <a href="mailto:support@brassnotestudios.com" className="text-gold hover:underline">
+                  support@brassnotestudios.com
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-base font-body text-sm transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Services
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+}

@@ -1,15 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Download, Music, ArrowLeft } from "lucide-react";
+import { Download, Music, ArrowLeft, CheckCircle } from "lucide-react";
 
 export default function DownloadClient() {
   const searchParams = useSearchParams();
-
-  // Stripe Payment Element returns payment_intent after redirect
   const paymentIntentId = searchParams.get("payment_intent");
-  const redirectStatus   = searchParams.get("redirect_status");
+  const redirectStatus  = searchParams.get("redirect_status");
+
+  const [dlState, setDlState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [dlError, setDlError] = useState<string | null>(null);
 
   if (!paymentIntentId || redirectStatus !== "succeeded") {
     return (
@@ -21,7 +23,33 @@ export default function DownloadClient() {
     );
   }
 
-  const downloadUrl = `/api/download?payment_intent=${encodeURIComponent(paymentIntentId)}`;
+  const handleDownload = async () => {
+    setDlState("loading");
+    setDlError(null);
+    try {
+      const res = await fetch(`/api/download?payment_intent=${encodeURIComponent(paymentIntentId)}`);
+      const data = await res.json() as { url?: string; error?: string };
+
+      if (!res.ok || !data.url) {
+        setDlError(data.error ?? "Could not generate download link. Please try again.");
+        setDlState("error");
+        return;
+      }
+
+      // Trigger download without navigating away
+      const a = document.createElement("a");
+      a.href = data.url;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      setDlState("done");
+    } catch {
+      setDlError("Something went wrong. Please try again.");
+      setDlState("error");
+    }
+  };
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4 py-16">
@@ -42,9 +70,12 @@ export default function DownloadClient() {
           <div className="px-8 py-10 text-center flex flex-col items-center gap-5">
             <div
               className="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center"
-              style={{ background: "rgba(212,168,67,0.08)" }}
+              style={{ background: dlState === "done" ? "rgba(52,211,153,0.08)" : "rgba(212,168,67,0.08)" }}
             >
-              <Music className="w-7 h-7 text-gold" />
+              {dlState === "done"
+                ? <CheckCircle className="w-7 h-7 text-teal" />
+                : <Music className="w-7 h-7 text-gold" />
+              }
             </div>
 
             <div>
@@ -52,21 +83,29 @@ export default function DownloadClient() {
                 Purchase Complete
               </p>
               <h1 className="font-display text-2xl text-text-base leading-tight mb-3">
-                Your Track is Ready
+                {dlState === "done" ? "Download Started" : "Your Track is Ready"}
               </h1>
               <p className="text-text-muted font-body text-sm leading-relaxed">
-                Thank you for your purchase. Click below to download your personal-use MP3.
-                The link is valid for 24 hours.
+                {dlState === "done"
+                  ? "Your MP3 is downloading. You can click the button again if it didn't start."
+                  : "Click below to download your personal-use MP3. The link is valid for 24 hours."}
               </p>
             </div>
 
-            <a
-              href={downloadUrl}
-              className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold px-6 py-4 rounded-sm transition-colors duration-200"
+            {dlError && (
+              <div className="w-full bg-red-400/10 border border-red-400/20 rounded-sm px-4 py-3">
+                <p className="text-red-400 font-body text-sm">{dlError}</p>
+              </div>
+            )}
+
+            <button
+              onClick={handleDownload}
+              disabled={dlState === "loading"}
+              className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold px-6 py-4 rounded-sm transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <Download className="w-5 h-5" />
-              Download MP3
-            </a>
+              {dlState === "loading" ? "Preparing Download…" : dlState === "done" ? "Download Again" : "Download MP3"}
+            </button>
 
             <div className="w-full bg-white/[0.03] border border-white/[0.06] rounded-sm px-4 py-3 text-left">
               <p className="text-gold font-body text-[10px] uppercase tracking-[0.15em] font-semibold mb-1">

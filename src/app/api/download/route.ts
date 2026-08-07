@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Could not generate download link" }, { status: 500 });
     }
 
-    return NextResponse.redirect(data.signedUrl);
+    return NextResponse.json({ url: data.signedUrl });
   } catch (err) {
     console.error("[download]", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

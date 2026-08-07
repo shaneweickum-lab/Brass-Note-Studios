@@ -141,15 +141,17 @@ export default function ContactForm({
   defaultVocalType = "",
   defaultVocalStyle = "",
 }: ContactFormProps) {
-  const [status, setStatus]       = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [countdown, setCountdown] = useState(3);
+  const [status, setStatus]               = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [countdown, setCountdown]         = useState(3);
+  const [dynamicCheckoutUrl, setDynamicCheckoutUrl] = useState("");
 
   // Cascading category → package selection
   const [selectedCategory, setSelectedCategory] = useState(defaultService);
   const [selectedPackage,  setSelectedPackage]  = useState(defaultPackage);
   const [formCheckoutUrl,  setFormCheckoutUrl]  = useState(propCheckoutUrl);
   const rawCheckoutUrl = propCheckoutUrl || formCheckoutUrl;
-  const effectiveCheckoutUrl = isLiveCheckoutUrl(rawCheckoutUrl) ? rawCheckoutUrl : "";
+  const staticCheckoutUrl = isLiveCheckoutUrl(rawCheckoutUrl) ? rawCheckoutUrl : "";
+  const effectiveCheckoutUrl = staticCheckoutUrl || dynamicCheckoutUrl;
 
   // Mixture sub-style multi-select
   const [mixStyles, setMixStyles] = useState<string[]>([]);
@@ -242,6 +244,31 @@ export default function ContactForm({
         body: JSON.stringify({ ...data, vocalStyle: finalVocalStyle, requestedDate }),
       });
       if (res.ok) {
+        // If a package with a known price is selected, create a Stripe checkout session
+        const packageMeta = selectedCategory && selectedPackage
+          ? PACKAGE_MAP[`${selectedCategory}|${selectedPackage}`]
+          : null;
+        if (packageMeta && !staticCheckoutUrl) {
+          try {
+            const checkoutRes = await fetch("/api/checkout/commission", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                serviceName: selectedCategory,
+                packageName: selectedPackage,
+                customerEmail: data.email,
+                customerName: data.name,
+                songTitle: data.songTitle,
+              }),
+            });
+            if (checkoutRes.ok) {
+              const { url } = await checkoutRes.json() as { url?: string };
+              if (url) setDynamicCheckoutUrl(url);
+            }
+          } catch {
+            // Non-fatal: form submitted successfully even if checkout URL fails
+          }
+        }
         setStatus("success");
         reset();
         setMixStyles([]);
@@ -289,7 +316,7 @@ export default function ContactForm({
           Thank you for reaching out. We'll review your project and get back to you within 1–2 business days.
         </p>
         <button
-          onClick={() => setStatus("idle")}
+          onClick={() => { setStatus("idle"); setDynamicCheckoutUrl(""); setCountdown(3); }}
           className="mt-6 text-gold hover:text-gold-light font-body text-sm underline transition-colors"
         >
           Send another message
