@@ -1,6 +1,7 @@
 "use client";
 
-import { Play, Pause } from "lucide-react";
+import { useState } from "react";
+import { Play, Pause, Download } from "lucide-react";
 import { usePlayer } from "@/hooks/usePlaylist";
 import { cn } from "@/lib/utils";
 import type { Song } from "@/types";
@@ -38,6 +39,7 @@ interface TrackCardProps {
 
 export default function TrackCard({ song, allSongs, wide = false }: TrackCardProps) {
   const { currentSongId, playerState, play, pause, resume } = usePlayer();
+  const [buyLoading, setBuyLoading] = useState(false);
 
   const isCurrentSong = currentSongId === song.id;
   const isPlaying     = isCurrentSong && (playerState === "playing" || playerState === "loading");
@@ -55,6 +57,26 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
       playerState === "playing" ? pause() : resume();
     } else {
       play(song.id, allSongs);
+    }
+  };
+
+  const handleBuy = async () => {
+    if (buyLoading) return;
+    setBuyLoading(true);
+    try {
+      const res = await fetch("/api/checkout/song", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ songId: song.id }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      // silent — user stays on page
+    } finally {
+      setBuyLoading(false);
     }
   };
 
@@ -206,16 +228,28 @@ export default function TrackCard({ song, allSongs, wide = false }: TrackCardPro
       {/* Divider */}
       <div className="h-px bg-white/[0.06] mb-3" />
 
-      {/* Footer: tags only — no Suno link */}
-      <div className="flex gap-1.5 flex-wrap">
-        {song.genre && (
-          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-gold bg-gold/[0.08] border border-gold/[0.25] px-2.5 py-1 rounded-full group-hover:bg-gold/[0.14] group-hover:border-gold/40 transition-colors">
-            {song.genre}
+      {/* Footer: tags + optional buy button */}
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <div className="flex gap-1.5 flex-wrap">
+          {song.genre && (
+            <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-gold bg-gold/[0.08] border border-gold/[0.25] px-2.5 py-1 rounded-full group-hover:bg-gold/[0.14] group-hover:border-gold/40 transition-colors">
+              {song.genre}
+            </span>
+          )}
+          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-teal bg-teal/[0.08] border border-teal/[0.25] px-2.5 py-1 rounded-full group-hover:bg-teal/[0.14] group-hover:border-teal/40 transition-colors">
+            {song.category}
           </span>
+        </div>
+        {song.purchasable && song.downloadPrice && (
+          <button
+            onClick={handleBuy}
+            disabled={buyLoading}
+            className="shrink-0 inline-flex items-center gap-1.5 border border-gold/40 text-gold hover:bg-gold hover:text-background font-body text-[11px] font-semibold px-3 py-1.5 rounded-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            <Download className="w-3 h-3" />
+            {buyLoading ? "…" : `$${song.downloadPrice.toFixed(2)} MP3`}
+          </button>
         )}
-        <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-teal bg-teal/[0.08] border border-teal/[0.25] px-2.5 py-1 rounded-full group-hover:bg-teal/[0.14] group-hover:border-teal/40 transition-colors">
-          {song.category}
-        </span>
       </div>
     </div>
   );

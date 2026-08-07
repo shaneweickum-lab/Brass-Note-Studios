@@ -37,7 +37,10 @@
         "heavy",
         "meaningful"
       ],
-      "coverImage": null
+      "coverImage": null,
+      "purchasable": true,
+      "downloadPrice": 1.99,
+      "downloadFileKey": "songs/Bulletproof.mp3"
     },
     {
       "id": "song-002",
@@ -155,7 +158,10 @@
         "energetic",
         "uplifting"
       ],
-      "coverImage": null
+      "coverImage": null,
+      "purchasable": true,
+      "downloadPrice": 1.99,
+      "downloadFileKey": "songs/Just dance.mp3"
     },
     {
       "id": "song-009",
@@ -174,7 +180,10 @@
         "energetic",
         "powerful"
       ],
-      "coverImage": null
+      "coverImage": null,
+      "purchasable": true,
+      "downloadPrice": 1.99,
+      "downloadFileKey": "songs/A hero’s Journey (limitless).mp3"
     }
   ]
 }

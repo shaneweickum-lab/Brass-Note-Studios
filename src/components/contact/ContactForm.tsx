@@ -6,6 +6,12 @@ import { CheckCircle, AlertCircle, Send, ShoppingCart, ChevronRight, HelpCircle 
 import servicesDataRaw from "@/data/services.json";
 import DeliveryDatePicker, { type DeliveryWindows } from "./DeliveryDatePicker";
 
+// Returns true only for real, non-placeholder Stripe Payment Links
+function isLiveCheckoutUrl(url?: string): boolean {
+  if (!url) return false;
+  return url.startsWith("https://buy.stripe.com/") && !url.includes("REPLACE_");
+}
+
 // Build a flat lookup of all packages keyed by "category|packageName"
 type PackageMeta = { price: string; checkoutUrl?: string; description: string };
 const PACKAGE_MAP: Record<string, PackageMeta> = {};
@@ -142,7 +148,8 @@ export default function ContactForm({
   const [selectedCategory, setSelectedCategory] = useState(defaultService);
   const [selectedPackage,  setSelectedPackage]  = useState(defaultPackage);
   const [formCheckoutUrl,  setFormCheckoutUrl]  = useState(propCheckoutUrl);
-  const effectiveCheckoutUrl = propCheckoutUrl || formCheckoutUrl;
+  const rawCheckoutUrl = propCheckoutUrl || formCheckoutUrl;
+  const effectiveCheckoutUrl = isLiveCheckoutUrl(rawCheckoutUrl) ? rawCheckoutUrl : "";
 
   // Mixture sub-style multi-select
   const [mixStyles, setMixStyles] = useState<string[]>([]);
@@ -414,7 +421,7 @@ export default function ContactForm({
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <p className={`font-body font-semibold text-sm ${isSelected ? "text-gold" : "text-text-base"}`}>{pkg.name}</p>
-                        {pkg.checkoutUrl && (
+                        {isLiveCheckoutUrl(pkg.checkoutUrl) && (
                           <span className="text-[10px] font-body font-semibold uppercase tracking-wide bg-gold/15 text-gold px-1.5 py-0.5 rounded-sm">Order Now</span>
                         )}
                       </div>
@@ -430,7 +437,7 @@ export default function ContactForm({
             {errors.packageName && (
               <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.packageName.message}</p>
             )}
-            {formCheckoutUrl && !propCheckoutUrl && (
+            {isLiveCheckoutUrl(formCheckoutUrl) && !propCheckoutUrl && (
               <p className="mt-2 text-text-subtle font-body text-xs flex items-center gap-1.5">
                 <ShoppingCart className="w-3 h-3 text-gold shrink-0" />
                 After submitting your brief you'll be taken directly to checkout for this package.

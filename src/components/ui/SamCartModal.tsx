@@ -1,21 +1,21 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { X } from "lucide-react";
+import { X, ExternalLink } from "lucide-react";
 
-// ─── SamCart Product Configuration ────────────────────────────────────────────
-// After creating your products in SamCart, paste the checkout page URL for each
-// product below. Find the URL in SamCart: Products → [Product] → Share/Embed.
+// ─── Stripe Payment Link Configuration ────────────────────────────────────────
+// After creating your Payment Links in Stripe Dashboard, paste the URLs below.
+// Find them at dashboard.stripe.com → Payment Links → [Link] → copy the URL.
 //
-// For EMAIL CAPTURE (free opt-in): use the checkout URL of your free product.
-// For PAID CHECKOUT: use the checkout URL of your paid product.
+// For EMAIL CAPTURE: leave as placeholder (modal shows "Coming Soon").
+// For PAID CHECKOUT: paste the full https://buy.stripe.com/... URL.
 // ──────────────────────────────────────────────────────────────────────────────
 export const SAMCART_URLS: Record<string, string> = {
-  // Paste your SamCart checkout URLs here ↓
-  shore:         "PASTE_SAMCART_URL_FOR_SHORE_HERE",
-  weeds:         "PASTE_SAMCART_URL_FOR_WEEDS_HERE",
-  swamp:         "PASTE_SAMCART_URL_FOR_SWAMP_HERE",
-  emailCapture:  "PASTE_SAMCART_URL_FOR_EMAIL_CAPTURE_HERE",
+  // Paste your Stripe Payment Link URLs here ↓
+  shore:        "PASTE_STRIPE_URL_FOR_SHORE_HERE",
+  weeds:        "PASTE_STRIPE_URL_FOR_WEEDS_HERE",
+  swamp:        "PASTE_STRIPE_URL_FOR_SWAMP_HERE",
+  emailCapture: "PASTE_STRIPE_URL_FOR_EMAIL_CAPTURE_HERE",
 };
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -24,7 +24,7 @@ interface SamCartModalProps {
   onClose: () => void;
   title: string;
   subtitle?: string;
-  /** SamCart checkout page URL — renders inside an iframe */
+  /** Stripe Payment Link URL — opens in a new tab */
   checkoutUrl: string;
 }
 
@@ -37,7 +37,6 @@ export default function SamCartModal({
 }: SamCartModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // Close on Escape key
   useEffect(() => {
     if (!isOpen) return;
     const handler = (e: KeyboardEvent) => {
@@ -47,7 +46,6 @@ export default function SamCartModal({
     return () => document.removeEventListener("keydown", handler);
   }, [isOpen, onClose]);
 
-  // Prevent body scroll while modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -61,7 +59,7 @@ export default function SamCartModal({
 
   if (!isOpen) return null;
 
-  const isPlaceholder = checkoutUrl.startsWith("PASTE_");
+  const isPlaceholder = !checkoutUrl || checkoutUrl.startsWith("PASTE_");
 
   return (
     <div
@@ -79,12 +77,11 @@ export default function SamCartModal({
 
       {/* Modal panel */}
       <div
-        className="relative z-10 w-full max-w-xl flex flex-col rounded-lg overflow-hidden"
+        className="relative z-10 w-full max-w-md flex flex-col rounded-lg overflow-hidden"
         style={{
           background: "linear-gradient(180deg, #1A1114 0%, #0D0A0B 100%)",
           border: "1px solid rgba(212,168,67,0.35)",
           boxShadow: "0 0 60px rgba(212,168,67,0.12), 0 24px 80px rgba(0,0,0,0.7)",
-          maxHeight: "90vh",
         }}
       >
         {/* Gold accent top strip */}
@@ -118,10 +115,10 @@ export default function SamCartModal({
         {/* Thin divider */}
         <div className="h-px mx-6 bg-white/5 flex-shrink-0" />
 
-        {/* Checkout iframe / placeholder */}
-        <div className="flex-1 min-h-0 overflow-auto">
+        {/* Content */}
+        <div className="px-6 py-8 flex flex-col items-center text-center gap-5">
           {isPlaceholder ? (
-            <div className="flex flex-col items-center justify-center py-16 px-8 text-center gap-4">
+            <>
               <div
                 className="w-14 h-14 rounded-full border border-gold/30 flex items-center justify-center"
                 style={{ background: "rgba(212,168,67,0.08)" }}
@@ -136,20 +133,32 @@ export default function SamCartModal({
               <a
                 href="#waitlist"
                 onClick={onClose}
-                className="mt-2 inline-flex items-center justify-center font-body font-semibold tracking-wide border border-gold text-gold hover:bg-gold/10 rounded-sm px-6 py-2.5 text-sm transition-colors duration-200"
+                className="inline-flex items-center justify-center font-body font-semibold tracking-wide border border-gold text-gold hover:bg-gold/10 rounded-sm px-6 py-2.5 text-sm transition-colors duration-200"
               >
                 Join the Waitlist
               </a>
-            </div>
+            </>
           ) : (
-            <iframe
-              src={checkoutUrl}
-              title={title}
-              className="w-full"
-              style={{ minHeight: "600px", border: "none", display: "block" }}
-              allow="payment"
-              loading="lazy"
-            />
+            <>
+              <div
+                className="w-14 h-14 rounded-full border border-gold/30 flex items-center justify-center"
+                style={{ background: "rgba(212,168,67,0.08)" }}
+              >
+                <span className="text-gold text-2xl">✦</span>
+              </div>
+              <p className="text-text-muted font-body text-sm leading-relaxed max-w-xs">
+                You&apos;ll be taken to our secure Stripe checkout in a new tab to complete your enrollment.
+              </p>
+              <a
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-background font-body font-semibold px-7 py-3 rounded-sm transition-colors duration-200"
+              >
+                Enroll Now
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </>
           )}
         </div>
 
@@ -157,7 +166,7 @@ export default function SamCartModal({
         {!isPlaceholder && (
           <div className="px-6 py-3 flex-shrink-0 border-t border-white/5">
             <p className="text-text-muted font-body text-[10px] text-center">
-              Secure checkout powered by SamCart. Your payment info never touches our servers.
+              Secure checkout powered by Stripe. Your payment info never touches our servers.
             </p>
           </div>
         )}

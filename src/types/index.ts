@@ -13,6 +13,9 @@ export interface Song {
   category: "Personal Lyrics" | "Song Production" | "Comprehensive Services" | "From the Lab" | "Collaboration";
   mood?: string[];
   coverImage?: string | null;
+  purchasable?: boolean;
+  downloadPrice?: number;
+  downloadFileKey?: string;
 }
 
 export interface Post {
