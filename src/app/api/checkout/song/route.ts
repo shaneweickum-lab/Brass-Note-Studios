@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(song.downloadPrice * 100),
       currency: "usd",
+      statement_descriptor: "BRASS NOTE STUDIOS",
       metadata: {
         songId: song.id,
         songTitle: song.title,

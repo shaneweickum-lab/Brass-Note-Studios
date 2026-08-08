@@ -65,6 +65,7 @@ export async function POST(req: NextRequest) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalCents,
       currency: "usd",
+      statement_descriptor: "BRASS NOTE STUDIOS",
       receipt_email: customerEmail || undefined,
       metadata: {
         serviceName,
