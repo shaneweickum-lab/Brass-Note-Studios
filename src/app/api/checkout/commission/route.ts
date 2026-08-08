@@ -20,9 +20,10 @@ export async function POST(req: NextRequest) {
     customerEmail?: string;
     customerName?: string;
     songTitle?: string;
+    addons?: string[];
   };
 
-  const { serviceName, packageName, customerEmail, customerName, songTitle } = body;
+  const { serviceName, packageName, customerEmail, customerName, songTitle, addons = [] } = body;
 
   if (!serviceName || !packageName) {
     return NextResponse.json({ error: "serviceName and packageName required" }, { status: 400 });
@@ -37,14 +38,32 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Package not found" }, { status: 404 });
   }
 
-  const amountCents = parsePriceCents(pkg.price);
-  if (!amountCents) {
+  const baseCents = parsePriceCents(pkg.price);
+  if (!baseCents) {
     return NextResponse.json({ error: "Invalid package price" }, { status: 500 });
   }
 
+  // Resolve add-on prices from services.json
+  const allAddons = servicesDataRaw.addons as Array<{ name: string; price: string; notes: string; comingSoon?: boolean }>;
+  let addonCents = 0;
+  const resolvedAddons: string[] = [];
+
+  for (const addonName of addons) {
+    const match = allAddons.find((a) => a.name === addonName && a.price && !a.comingSoon);
+    if (match) {
+      const cents = parsePriceCents(match.price);
+      if (cents) {
+        addonCents += cents;
+        resolvedAddons.push(`${addonName} (${match.price})`);
+      }
+    }
+  }
+
+  const totalCents = baseCents + addonCents;
+
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amountCents,
+      amount: totalCents,
       currency: "usd",
       receipt_email: customerEmail || undefined,
       metadata: {
@@ -52,6 +71,7 @@ export async function POST(req: NextRequest) {
         packageName,
         customerName: customerName ?? "",
         songTitle: songTitle ?? "",
+        addons: resolvedAddons.join(", "),
       },
       automatic_payment_methods: { enabled: true },
     });
@@ -65,6 +85,8 @@ export async function POST(req: NextRequest) {
         description: pkg.description,
         included: category.included,
         delivery: category.delivery,
+        addons: resolvedAddons,
+        totalCents,
       },
     });
   } catch (err) {
