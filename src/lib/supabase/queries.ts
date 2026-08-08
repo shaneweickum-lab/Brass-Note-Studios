@@ -894,4 +894,3 @@ export async function getSongPurchases(): Promise<SongPurchaseRow[]> {
   }
   return (data ?? []) as SongPurchaseRow[];
 }
-}
