@@ -232,11 +232,46 @@ export default function ContactForm({
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
-    // Compose final vocal style string for Formspree
     let finalVocalStyle = data.vocalStyle;
     if (isMixture && mixStyles.length > 0) {
       finalVocalStyle = `Mixture: ${mixStyles.join(", ")}`;
     }
+
+    const packageMeta = selectedCategory && selectedPackage
+      ? PACKAGE_MAP[`${selectedCategory}|${selectedPackage}`]
+      : null;
+
+    // Commission with custom checkout: skip Formspree now — notification fires after payment
+    if (packageMeta && !effectiveCheckoutUrl) {
+      try {
+        sessionStorage.setItem("commission_intake", JSON.stringify({
+          name: data.name,
+          email: data.email,
+          serviceType: selectedCategory,
+          packageName: selectedPackage,
+          songTitle: data.songTitle,
+          genreOrReference: data.genreOrReference,
+          whoIsItFor: data.whoIsItFor,
+          storyOrLyrics: data.storyOrLyrics,
+          songLength: data.songLength,
+          vocalType: data.vocalType,
+          vocalStyle: finalVocalStyle,
+          requestedDate,
+        }));
+      } catch {
+        // sessionStorage unavailable — proceed without it
+      }
+      const params = new URLSearchParams({
+        service: selectedCategory,
+        package: selectedPackage,
+        email: data.email,
+        name: data.name,
+      });
+      router.push(`/checkout/commission?${params.toString()}`);
+      return;
+    }
+
+    // All other cases (inquiry-only or legacy Stripe Payment Link): submit to Formspree
     try {
       const res = await fetch("https://formspree.io/f/xkoljkey", {
         method: "POST",
@@ -247,20 +282,6 @@ export default function ContactForm({
         reset();
         setMixStyles([]);
         setRequestedDate("");
-        // If a package with a known price is selected, go to custom branded checkout
-        const packageMeta = selectedCategory && selectedPackage
-          ? PACKAGE_MAP[`${selectedCategory}|${selectedPackage}`]
-          : null;
-        if (packageMeta && !effectiveCheckoutUrl) {
-          const params = new URLSearchParams({
-            service: selectedCategory,
-            package: selectedPackage,
-            email: data.email,
-            name: data.name,
-          });
-          router.push(`/checkout/commission?${params.toString()}`);
-          return;
-        }
         setStatus("success");
       } else {
         setStatus("error");

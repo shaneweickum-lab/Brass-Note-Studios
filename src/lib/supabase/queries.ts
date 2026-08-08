@@ -869,3 +869,29 @@ export async function kvGetLabsResultBreakdown(): Promise<LabsOutcomeSlice[]> {
   const ORDER: ResultCode[] = ["PASS", "FAIL", "PARTIAL", "ANOMALY"];
   return ORDER.filter((c) => counts[c]).map((code) => ({ code, count: counts[code]! }));
 }
+
+export interface SongPurchaseRow {
+  id: string;
+  stripe_session_id: string;
+  song_id: string;
+  customer_email: string | null;
+  amount_total: number;
+  currency: string;
+  download_file_key: string | null;
+  created_at: string;
+}
+
+export async function getSongPurchases(): Promise<SongPurchaseRow[]> {
+  const db = createServiceClient();
+  const { data, error } = await db
+    .from("song_purchases")
+    .select("id, stripe_session_id, song_id, customer_email, amount_total, currency, download_file_key, created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("[supabase:getSongPurchases]", error);
+    return [];
+  }
+  return (data ?? []) as SongPurchaseRow[];
+}
+}

@@ -8,7 +8,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(req: NextRequest) {
   try {
-    const { songId } = (await req.json()) as { songId?: string };
+    const { songId, customerEmail } = (await req.json()) as {
+      songId?: string;
+      customerEmail?: string;
+    };
 
     if (!songId) {
       return NextResponse.json({ error: "songId required" }, { status: 400 });
@@ -28,10 +31,12 @@ export async function POST(req: NextRequest) {
       amount: Math.round(song.downloadPrice * 100),
       currency: "usd",
       statement_descriptor: "BRASS NOTE STUDIOS",
+      receipt_email: customerEmail || undefined,
       metadata: {
         songId: song.id,
         songTitle: song.title,
         downloadFileKey: song.downloadFileKey,
+        customerEmail: customerEmail ?? "",
       },
       automatic_payment_methods: { enabled: true },
     });
